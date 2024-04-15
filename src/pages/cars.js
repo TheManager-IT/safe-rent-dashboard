@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,6 +14,7 @@ const Cars = () => {
   const [cars, setCars] = useState([]);
   const [confirmDeleteId, setConfirmDeleteId] = useState(null); // Ajout de la déclaration de confirmDeleteId
 
+
   useEffect(() => {
     // Récupérer les données des voitures depuis l'API backend
     fetch('http://localhost:3000/v1/api/voiture')
@@ -21,38 +23,41 @@ const Cars = () => {
       .catch(error => console.error('Error fetching cars:', error));
   }, []);
 
-   const handleEdit = (id) => {
+  const handleEdit = (id) => {
     // Logique pour l'édition d'une voiture
     console.log('Edit car with id:', id);
   };
 
   const handleDelete = (id) => {
-    fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
-      method: 'DELETE'
-    })
-    .then(response => {
-      if (response.ok) {
-        // Mettre à jour la liste des voitures après la suppression
-        setCars(prevCars => prevCars.filter(car => car._id !== id));
-      } else {
-        throw new Error('Failed to delete car');
-      }
-    })
-    .catch(error => console.error('Error deleting car:', error));
+    // Demander une confirmation avant la suppression
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
+    if (confirmDelete) {
+      fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          // Mettre à jour la liste des voitures après la suppression
+          setCars(prevCars => prevCars.filter(car => car._id !== id));
+        } else {
+          throw new Error('Failed to delete car');
+        }
+      })
+      .catch(error => console.error('Error deleting car:', error));
+    }
   };
 
-  // Fonction pour afficher l'alerte de confirmation avant la suppression
-  const confirmDelete = (id) => {
-    setConfirmDeleteId(id);
-  };
-
-  // Fonction pour annuler la suppression
-  const cancelDelete = () => {
-    setConfirmDeleteId(null);
+  const handleAddCar = () => {
+    
   };
 
   return (
     <Container>
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
+        <Button variant="contained" color="primary" onClick={handleAddCar}>
+          Ajouter
+        </Button>
+      </div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -80,7 +85,7 @@ const Cars = () => {
                   </Button>
                 </TableCell>
                 <TableCell>
-                  <Button onClick={() => confirmDelete(car._id)} variant="contained" color="secondary">
+                  <Button onClick={() => handleDelete(car._id)} variant="contained" color="secondary">
                     Supprimer
                   </Button>
                 </TableCell>
@@ -89,18 +94,6 @@ const Cars = () => {
           </TableBody>
         </Table>
       </TableContainer>
-       {/* Alerte de confirmation */}
-       {confirmDeleteId && (
-        <div>
-          <p>Voulez-vous vraiment supprimer cette voiture ?</p>
-          <Button onClick={() => handleDelete(confirmDeleteId)} variant="contained" color="secondary">
-            Confirmer
-          </Button>
-          <Button onClick={cancelDelete} variant="contained" color="default">
-            Annuler
-          </Button>
-        </div>
-      )}
     </Container>
   );
 };
