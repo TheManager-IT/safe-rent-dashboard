@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,11 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const Cars = () => {
   const [cars, setCars] = useState([]);
-  const [confirmDeleteId, setConfirmDeleteId] = useState(null); // Ajout de la déclaration de confirmDeleteId
-
+  const [searchTerm, setSearchTerm] = useState('');
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+  const [selectedCarId, setSelectedCarId] = useState(null);
 
   useEffect(() => {
     // Récupérer les données des voitures depuis l'API backend
@@ -24,12 +25,11 @@ const Cars = () => {
   }, []);
 
   const handleEdit = (id) => {
-    // Logique pour l'édition d'une voiture
+    setSelectedCarId(id);
     console.log('Edit car with id:', id);
   };
 
   const handleDelete = (id) => {
-    // Demander une confirmation avant la suppression
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
@@ -37,7 +37,6 @@ const Cars = () => {
       })
       .then(response => {
         if (response.ok) {
-          // Mettre à jour la liste des voitures après la suppression
           setCars(prevCars => prevCars.filter(car => car._id !== id));
         } else {
           throw new Error('Failed to delete car');
@@ -48,31 +47,50 @@ const Cars = () => {
   };
 
   const handleAddCar = () => {
-    
+    // Logique pour ajouter une voiture
   };
+
+  // Fonction de filtrage des voitures en fonction du terme de recherche
+  const filteredCars = cars.filter(car =>
+    car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    car.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    car.model.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <Container>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-        <Button variant="contained" color="primary" onClick={handleAddCar}>
-          Ajouter
-        </Button>
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <div>
+          <input
+            type="text"
+            placeholder="Rechercher par matricule ou modèle..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div>
+          <Link to="/addCar">
+            <Button variant="contained" color="primary" onClick={handleAddCar}>
+              Ajouter
+            </Button>
+          </Link>
+        </div>
       </div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
-              <TableCell>registrationPlate</TableCell>
+              <TableCell>Registration Plate</TableCell>
               <TableCell>Brand</TableCell>
               <TableCell>Model</TableCell>
-              <TableCell>location Price</TableCell>
-              <TableCell>modifier</TableCell>
-              <TableCell>supprimer</TableCell>
+              <TableCell>Location Price</TableCell>
+              <TableCell>Modifier</TableCell>
+              <TableCell>Supprimer</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {cars.map((car) => (
+            {filteredCars.map((car) => (
               <TableRow key={car._id}>
                 <TableCell>{car._id}</TableCell>
                 <TableCell>{car.registrationPlate}</TableCell>
@@ -80,9 +98,11 @@ const Cars = () => {
                 <TableCell>{car.model}</TableCell>
                 <TableCell>{car.locationPrice}</TableCell>
                 <TableCell>
-                  <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">
-                    Modifier
-                  </Button>
+                  <Link to={`/editCar/${car._id}`}>
+                    <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">
+                      Modifier
+                    </Button>
+                  </Link>
                 </TableCell>
                 <TableCell>
                   <Button onClick={() => handleDelete(car._id)} variant="contained" color="secondary">
