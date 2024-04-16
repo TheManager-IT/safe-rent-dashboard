@@ -49,6 +49,7 @@ function AddCarForm() {
             if (!response.ok) throw new Error('Network response was not ok.');
             alert('Car added successfully!');
         } catch (error) {
+            console.log(error);
             alert('Failed to add car: ' + error.message);
         }
     };
