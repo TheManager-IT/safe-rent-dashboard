@@ -24,8 +24,12 @@ const Locations = () => {
 
 
   const filteredLocations = locations.filter(location => {
-    return true; // Fonction vide, retourne toujours true
+    return true; 
   });
+
+  const handleAddLocation = () => {
+    
+  };
   
 
   return (
@@ -39,7 +43,15 @@ const Locations = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
+        <div>
+          <Link to="/addlocationform">
+            <Button variant="contained" color="primary" onClick={handleAddLocation}>
+              Ajouter
+            </Button>
+          </Link>
+        </div>
       </div>
+     
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -50,7 +62,8 @@ const Locations = () => {
              <TableCell>Voiture</TableCell>
               <TableCell>Client</TableCell> 
                <TableCell>Total Price</TableCell> 
-              {/* <TableCell>Actions</TableCell> */}
+               <TableCell>modifier</TableCell>
+                <TableCell>supprimer</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -59,8 +72,8 @@ const Locations = () => {
                 <TableCell>{location._id}</TableCell>
                 <TableCell>{location.StartDateLocation}</TableCell>
                 <TableCell>{location.EndDateLocation}</TableCell>
-                <TableCell>{location.car && location.car.registrationPlate}</TableCell>
-                 <TableCell>{location.client && location.client.name}</TableCell> 
+                <TableCell>{location.voiture }</TableCell>
+                 <TableCell>{location.client}</TableCell> 
                  <TableCell>{location.totalPrice}</TableCell> 
                  <TableCell>
                   <Link to={``}>
@@ -68,6 +81,8 @@ const Locations = () => {
                       Modifier
                     </Button>
                   </Link>
+                </TableCell> 
+                <TableCell>
                   <Button variant="contained" color="secondary">
                     Supprimer
                   </Button>

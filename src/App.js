@@ -7,6 +7,8 @@ import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
 import EditClient from './pages/client/editClient';
 import Locations from './pages/location/Locations';
+import AddLocationForm from './pages/location/addlocationform';
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +21,7 @@ function App() {
           <Route path="/addClient" element={<AddClientForm />} />
           <Route path="/editClient" element={<EditClient />} />
           <Route path="/Locations" element={<Locations />} />
+          <Route path="/addlocationform" element={<AddLocationForm />} />
         </Routes>
       </Router>
     </div>
