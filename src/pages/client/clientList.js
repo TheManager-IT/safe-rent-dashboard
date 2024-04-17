@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
+import {
+  Button,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+} from '@mui/material';
+
+
 const Clients = () => {
   const [clients, setClients] = useState([]);
   const [selectedClientId, setSelectedClientId] = useState(null);
+  const [filterName, setFilterName] = useState('');
+  const [filterPhone, setFilterPhone] = useState('');
+  const [filterEmail, setFilterEmail] = useState('');
+  const [filterCIN, setFilterCIN] = useState('');
+  const [filterAddress, setFilterAddress] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:3000/v1/api/client')
@@ -45,14 +57,76 @@ const Clients = () => {
     // Logic for adding a new client
   };
 
+  const handleFilterNameChange = (event) => {
+    setFilterName(event.target.value);
+  };
+
+  const handleFilterPhoneChange = (event) => {
+    setFilterPhone(event.target.value);
+  };
+
+  const handleFilterEmailChange = (event) => {
+    setFilterEmail(event.target.value);
+  };
+
+  const handleFilterCINChange = (event) => {
+    setFilterCIN(event.target.value);
+  };
+
+  const handleFilterAddressChange = (event) => {
+    setFilterAddress(event.target.value);
+  };
+
+  const filteredClients = clients.filter(client =>
+    client.name.toLowerCase().includes(filterName.toLowerCase()) &&
+    client.firstName.toLowerCase().includes(filterName.toLowerCase()) &&
+    client.phoneNumber.toLowerCase().includes(filterPhone.toLowerCase()) &&
+    client.email.toLowerCase().includes(filterEmail.toLowerCase()) &&
+    client.nationalID.toLowerCase().includes(filterCIN.toLowerCase()) &&
+    client.address.toLowerCase().includes(filterAddress.toLowerCase())
+  );
+
   return (
     <Container>
-      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
-      <Link to="/addClient">
-        <Button variant="contained" color="primary" onClick={handleAddClient}>
-          Ajouter
-        </Button>
-      </Link>  
+      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <OutlinedInput
+          value={filterName}
+          onChange={handleFilterNameChange}
+          placeholder="Nom ou prénom"
+          startAdornment={
+            <InputAdornment position="start">
+              <IconButton>
+              {/* icon search */}
+              </IconButton>
+              
+            </InputAdornment>
+          }
+        />
+        <OutlinedInput
+          value={filterPhone}
+          onChange={handleFilterPhoneChange}
+          placeholder="Numéro de téléphone"
+        />
+        <OutlinedInput
+          value={filterEmail}
+          onChange={handleFilterEmailChange}
+          placeholder="Email"
+        />
+        <OutlinedInput
+          value={filterCIN}
+          onChange={handleFilterCINChange}
+          placeholder="CIN"
+        />
+        <OutlinedInput
+          value={filterAddress}
+          onChange={handleFilterAddressChange}
+          placeholder="Adresse"
+        />
+        <Link to="/addClient">
+          <Button variant="contained" color="primary" onClick={handleAddClient}>
+            Ajouter
+          </Button>
+        </Link> 
       </div>
      
       <TableContainer component={Paper}>
@@ -64,27 +138,28 @@ const Clients = () => {
               <TableCell>Prénom</TableCell>
               <TableCell>Email</TableCell>
               <TableCell>Numéro de Téléphone</TableCell>
-              <TableCell>Modifier</TableCell>
-              <TableCell>Supprimer</TableCell>
+              <TableCell>CIN</TableCell>
+              <TableCell>Adresse</TableCell>
+              <TableCell>Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {clients.map((client) => (
+            {filteredClients.map((client) => (
               <TableRow key={client._id}>
                 <TableCell>{client._id}</TableCell>
                 <TableCell>{client.name}</TableCell>
                 <TableCell>{client.firstName}</TableCell>
                 <TableCell>{client.email}</TableCell>
                 <TableCell>{client.phoneNumber}</TableCell>
+                <TableCell>{client.nationalID}</TableCell>
+                <TableCell>{client.address}</TableCell>
                 <TableCell>
-                <Link to="/editClient">
-                  <Button onClick={() => handleEdit(client._id)} variant="contained" color="primary">
-                    Modifier
-                  </Button>
-                </Link>
-                </TableCell>
-                <TableCell>
-                  <Button onClick={() => handleDelete(client._id)} variant="contained" color="secondary">
+                  <Link to={`/editClient/${client._id}`}>
+                    <Button variant="contained" color="primary" onClick={() => handleEdit(client._id)}>
+                      Modifier
+                    </Button>
+                  </Link>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(client._id)} style={{ marginLeft: '10px' }}>
                     Supprimer
                   </Button>
                 </TableCell>
@@ -96,4 +171,5 @@ const Clients = () => {
     </Container>
   );
 };
-export default Clients;
+
+export default Clients
