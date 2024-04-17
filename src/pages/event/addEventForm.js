@@ -1,12 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, TextField } from '@mui/material';
+import { Button, Container, TextField, MenuItem } from '@mui/material';
+
+const EventType = {
+  OIL_CHANGE: 'Oil Change',
+  TECHNICAL_INSPECTION: 'Technical Inspection',
+  INSURANCE: 'Insurance',
+  BIRTHDAY: 'Birthday',
+  CAR_WASH: 'Car Wash',
+  INTERIOR_CLEANING: 'Interior Cleaning',
+  MAINTENANCE: 'Maintenance',
+  HEADLIGHT_REPLACEMENT: 'Headlight Replacement',
+  OTHER: 'Other'
+};
 
 const AddEventForm = () => {
   const [eventType, setEventType] = useState('');
   const [note, setNote] = useState('');
   const [date, setDate] = useState('');
-  const [car, setCar] = useState('');
+  const [cars, setCars] = useState([]); // Liste des voitures
+  const [selectedCar, setSelectedCar] = useState('');
+
+  useEffect(() => {
+    const fetchCars = async () => {
+      const response = await fetch('http://localhost:3000/v1/api/voiture'); // Assurez-vous que l'URL est correcte
+      const data = await response.json();
+      setCars(data);
+    };
+
+    fetchCars();
+  }, []);
 
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
@@ -21,7 +44,7 @@ const AddEventForm = () => {
   };
 
   const handleCarChange = (event) => {
-    setCar(event.target.value);
+    setSelectedCar(event.target.value);
   };
 
   const handleSubmit = async (event) => {
@@ -32,7 +55,7 @@ const AddEventForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ eventType, note, date, voiture: car }), // Inclure la voiture dans l'objet JSON
+        body: JSON.stringify({ eventType, note, date, voiture: selectedCar }),
       });
       if (!response.ok) {
         throw new Error('Failed to add event');
@@ -48,13 +71,21 @@ const AddEventForm = () => {
     <Container>
       <h2>Ajouter un événement</h2>
       <form onSubmit={handleSubmit}>
+        {/* Input pour le type d'événement */}
         <TextField
+          select // Utiliser select pour la liste déroulante
           label="Type d'événement"
           value={eventType}
           onChange={handleEventTypeChange}
           fullWidth
           margin="normal"
-        />
+        >
+          {Object.values(EventType).map((type) => (
+            <MenuItem key={type} value={type}>
+              {type}
+            </MenuItem>
+          ))}
+        </TextField>
         <TextField
           label="Note"
           value={note}
@@ -73,13 +104,21 @@ const AddEventForm = () => {
             shrink: true,
           }}
         />
+      
         <TextField
+          select
           label="Voiture"
-          value={car}
+          value={selectedCar}
           onChange={handleCarChange}
           fullWidth
           margin="normal"
-        />
+        >
+          {cars.map((car) => (
+            <MenuItem key={car._id} value={car._id}>
+              {car.model} - {car.registrationPlate}
+            </MenuItem>
+          ))}
+        </TextField>
         <Button type="submit" variant="contained" color="primary">
           Ajouter l'événement
         </Button>
@@ -88,6 +127,7 @@ const AddEventForm = () => {
             Annuler
           </Button>
         </Link>
+        {/* Bouton pour soumettre le formulaire */}
       </form>
     </Container>
   );
