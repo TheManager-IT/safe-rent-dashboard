@@ -13,22 +13,48 @@ function AddCarForm() {
         status: ''
     });
 
-    const handleChange = (e) => {
+   /* const handleChange = (e) => {
         const { name, value } = e.target;
         setCar(prevState => ({
             ...prevState,
             [name]: value
         }));
+    };*/
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (name === 'images') {
+            setCar(prevState => ({
+                ...prevState,
+                images: e.target.files
+            }));
+        } else {
+            setCar(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
     };
 
-    const handleImageChange = (e) => {
+   /* const handleImageChange = (e) => {
         console.log(e.target.files);
         const imageFile = e.target.files[0];
         setCar(prevState => ({
             ...prevState,
             images: [imageFile]
         }));
+    };*/
+
+   
+    const handleImageChange = (e) => {
+        const { name, files } = e.target; 
+        const imagesArray = Array.from(files); 
+        setCar(prevState => ({
+            ...prevState,
+            [name]: imagesArray 
+        }));
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -102,7 +128,7 @@ function AddCarForm() {
             <input
                 type="file"
                 accept="image/*"
-                onChange={handleImageChange}
+                onChange={handleChange}
                 
             />
             <br/>

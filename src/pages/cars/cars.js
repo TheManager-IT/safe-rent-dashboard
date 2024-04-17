@@ -85,6 +85,7 @@ const Cars = () => {
               <TableCell>Brand</TableCell>
               <TableCell>Model</TableCell>
               <TableCell>Location Price</TableCell>
+              <TableCell>img</TableCell>
               <TableCell>Modifier</TableCell>
               <TableCell>Supprimer</TableCell>
             </TableRow>
@@ -97,6 +98,7 @@ const Cars = () => {
                 <TableCell>{car.brand}</TableCell>
                 <TableCell>{car.model}</TableCell>
                 <TableCell>{car.locationPrice}</TableCell>
+                <TableCell>{car.images}</TableCell>
                 <TableCell>
                   <Link to={`/editCar/${car._id}`}>
                     <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">
