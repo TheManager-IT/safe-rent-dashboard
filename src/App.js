@@ -17,9 +17,11 @@ function App() {
           <Route path="/car" element={<Cars />} /> 
           <Route path="/addCar" element={<AddCarForm />} /> 
           <Route path="/editCar/:id" element={<EditCarForm />} /> 
+
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />
           <Route path="/editClient" element={<EditClient />} />
+          
           <Route path="/Locations" element={<Locations />} />
           <Route path="/addlocationform" element={<AddLocationForm />} />
         </Routes>
