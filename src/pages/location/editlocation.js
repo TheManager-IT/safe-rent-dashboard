@@ -6,11 +6,11 @@ import { useParams } from 'react-router-dom';
 
 const EditLocation = () => {
   const [location, setLocation] = useState({
-    StartDateLocation: '', 
-    EndDateLocation: '', 
+    StartDateLocation: '',
+    EndDateLocation: '',
     NumberOfDays: 0,
     totalPrice: 0,
-    locationTime: '', 
+    locationTime: '',
     voiture: '',
     client: ''
   });
@@ -34,15 +34,15 @@ const EditLocation = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formattedLocation = {
       ...location,
       locationTime: new Date(`1970-01-01T${location.locationTime}`)
     };
-  
+
     try {
       const response = await fetch(`http://localhost:3000/v1/api/location/update/${id}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },

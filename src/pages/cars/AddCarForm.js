@@ -86,6 +86,7 @@ function AddCarForm() {
       });
   
       alert('Car added successfully!');
+      
     } catch (error) {
       setErrorMessage('Failed to add car: ' + error.message);
     }
@@ -146,6 +147,7 @@ function AddCarForm() {
         name="traveled.mileage"
         value={car.traveled.mileage}
         onChange={handleChange}
+        type="number"
         placeholder="Mileage"
       />
      
