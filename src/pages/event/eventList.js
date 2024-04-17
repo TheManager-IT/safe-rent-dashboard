@@ -33,8 +33,22 @@ const Events = () => {
   };
 
   const handleDelete = (id) => {
-    // Handle delete logic
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cet événement ?");
+    if (confirmDelete) {
+      fetch(`http://localhost:3000/v1/api/evenement/delete/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          setEvents(prevEvents => prevEvents.filter(event => event._id !== id));
+        } else {
+          throw new Error('Failed to delete event');
+        }
+      })
+      .catch(error => console.error('Error deleting event:', error));
+    }
   };
+  
 
   const handleAddEvent = () => {
     // Handle add event logic

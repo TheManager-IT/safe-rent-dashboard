@@ -23,7 +23,7 @@ const AddEventForm = () => {
 
   useEffect(() => {
     const fetchCars = async () => {
-      const response = await fetch('http://localhost:3000/v1/api/voiture'); // Assurez-vous que l'URL est correcte
+      const response = await fetch('http://localhost:3000/v1/api/voiture');
       const data = await response.json();
       setCars(data);
     };
@@ -47,6 +47,13 @@ const AddEventForm = () => {
     setSelectedCar(event.target.value);
   };
 
+  const resetForm = () => {
+    setEventType('');
+    setNote('');
+    setDate('');
+    setSelectedCar('');
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -61,6 +68,7 @@ const AddEventForm = () => {
         throw new Error('Failed to add event');
       }
       alert('Event added successfully!');
+      resetForm();
     } catch (error) {
       console.error('Error adding event:', error);
       alert('Failed to add event: ' + error.message);
@@ -71,9 +79,8 @@ const AddEventForm = () => {
     <Container>
       <h2>Ajouter un événement</h2>
       <form onSubmit={handleSubmit}>
-        {/* Input pour le type d'événement */}
         <TextField
-          select // Utiliser select pour la liste déroulante
+          select
           label="Type d'événement"
           value={eventType}
           onChange={handleEventTypeChange}
@@ -81,9 +88,7 @@ const AddEventForm = () => {
           margin="normal"
         >
           {Object.values(EventType).map((type) => (
-            <MenuItem key={type} value={type}>
-              {type}
-            </MenuItem>
+            <MenuItem key={type} value={type}>{type}</MenuItem>
           ))}
         </TextField>
         <TextField
@@ -100,11 +105,8 @@ const AddEventForm = () => {
           onChange={handleDateChange}
           fullWidth
           margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
+          InputLabelProps={{ shrink: true }}
         />
-      
         <TextField
           select
           label="Voiture"
@@ -127,7 +129,6 @@ const AddEventForm = () => {
             Annuler
           </Button>
         </Link>
-        {/* Bouton pour soumettre le formulaire */}
       </form>
     </Container>
   );
