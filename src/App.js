@@ -20,7 +20,7 @@ function App() {
 
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />
-          <Route path="/editClient" element={<EditClient />} />
+          <Route path="/editClient/:id" element={<EditClient />} />
           
           <Route path="/Locations" element={<Locations />} />
           <Route path="/addlocationform" element={<AddLocationForm />} />

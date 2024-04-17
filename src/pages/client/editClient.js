@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { TextField, Button } from '@mui/material';
+import { useParams } from 'react-router-dom';
 
-const EditClientForm = ({ clientId }) => {
+const EditClientForm = () => {
   const [client, setClient] = useState({
     name: '',
     firstName: '',
     email: '',
-    phoneNumber: '',
+    phoneNumber: ' ',
     address: '',
     contractNumber: '',
     drivingLicense: '',
@@ -13,10 +15,12 @@ const EditClientForm = ({ clientId }) => {
     images: []
   });
 
+  const { id } = useParams();
+
   useEffect(() => {
     const fetchClientData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/v1/api/client/${clientId}`);
+        const response = await fetch(`http://localhost:3000/v1/api/client/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch client data');
         }
@@ -28,7 +32,7 @@ const EditClientForm = ({ clientId }) => {
     };
 
     fetchClientData();
-  }, [clientId]);
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -41,8 +45,8 @@ const EditClientForm = ({ clientId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3000/v1/api/client/update/${clientId}`, {
-        method: 'PUT',
+      const response = await fetch(`http://localhost:3000/v1/api/client/update/${id}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -60,63 +64,56 @@ const EditClientForm = ({ clientId }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
+      <TextField
         name="name"
-        value={client.name}
+        label="Name"
+        value={client.name || ''}
         onChange={handleChange}
-        placeholder="Name"
-        required
       />
-      <input
+      <TextField
         name="firstName"
-        value={client.firstName}
+        label="First Name"
+        value={client.firstName || ''}
         onChange={handleChange}
-        placeholder="First Name"
-        required
       />
-      <input
+      <TextField
         name="email"
-        value={client.email}
+        label="Email"
+        value={client.email || ''}
         onChange={handleChange}
-        placeholder="Email"
-        required
       />
-      <input
+      <TextField
         name="phoneNumber"
-        value={client.phoneNumber}
+        label="Phone Number"
+        value={client.phoneNumber || ''}
         onChange={handleChange}
-        placeholder="Phone Number"
-        required
       />
-      <input
+      <TextField
         name="address"
-        value={client.address}
+        label="Address"
+        value={client.address || ''}
         onChange={handleChange}
-        placeholder="Address"
-        required
       />
-      <input
+      <TextField
         name="contractNumber"
-        value={client.contractNumber}
+        label="Contract Number"
+        value={client.contractNumber || ''}
         onChange={handleChange}
-        placeholder="Contract Number"
-        required
       />
-      <input
+      <TextField
         name="drivingLicense"
-        value={client.drivingLicense}
+        label="Driving License"
+        value={client.drivingLicense || ''}
         onChange={handleChange}
-        placeholder="Driving License"
       />
-      <input
+      <TextField
         name="nationalID"
-        value={client.nationalID}
+        label="National ID"
+        value={client.nationalID || ''}
         onChange={handleChange}
-        placeholder="National ID"
-        required
       />
       <br/>
-      <button type="submit">Update Client</button>
+      <Button type="submit" variant="contained" color="primary">Update Client</Button>
     </form>
   );
 };
