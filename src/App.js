@@ -10,6 +10,7 @@ import EditClient from './pages/client/editClient';
 
 import Locations from './pages/location/Locations';
 import AddLocationForm from './pages/location/addlocationform';
+import EditLocation from './pages/location/editlocation';
 
 import Event from './pages/event/eventList';
 import AddEvent from './pages/event/addEventForm';
@@ -33,8 +34,7 @@ function App() {
           
           <Route path="/Locations" element={<Locations />} />
           <Route path="/addlocationform" element={<AddLocationForm />} />
-
-
+          <Route path="/editlocation/:id" element={<EditLocation />} />
         </Routes>
       </Router>
     </div>

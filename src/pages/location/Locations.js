@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 const Locations = () => {
   const [locations, setLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [confirmDeleteId, setConfirmDeleteId] = useState(null);
+
 
   useEffect(() => {
     // Récupérer les données des locations depuis l'API backend
@@ -31,7 +33,23 @@ const Locations = () => {
     
   };
   
-
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette location ?");
+    if (confirmDelete) {
+      fetch(`http://localhost:3000/v1/api/location/delete/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          setLocations(prevLocations => prevLocations.filter(location => location._id !== id));
+        } else {
+          throw new Error('Failed to delete location');
+        }
+      })
+      .catch(error => console.error('Error deleting location:', error));
+    }
+  };
+  
   return (
     <Container>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
@@ -56,7 +74,7 @@ const Locations = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              
               <TableCell>Date de début</TableCell>
               <TableCell>Date de fin</TableCell>
              <TableCell>Voiture</TableCell>
@@ -69,24 +87,25 @@ const Locations = () => {
           <TableBody>
             {filteredLocations.map((location) => (
               <TableRow key={location._id}>
-                <TableCell>{location._id}</TableCell>
+                
                 <TableCell>{location.StartDateLocation}</TableCell>
                 <TableCell>{location.EndDateLocation}</TableCell>
                 <TableCell>{location.voiture }</TableCell>
                  <TableCell>{location.client}</TableCell> 
                  <TableCell>{location.totalPrice}</TableCell> 
                  <TableCell>
-                  <Link to={``}>
+                  <Link to={`/editlocation/${location._id}`}>
                     <Button variant="contained" color="primary">
                       Modifier
                     </Button>
                   </Link>
                 </TableCell> 
                 <TableCell>
-                  <Button variant="contained" color="secondary">
+                  <Button onClick={() => handleDelete(location._id)} variant="contained" color="secondary">
                     Supprimer
                   </Button>
-                </TableCell> 
+                </TableCell>
+
               </TableRow>
             ))}
           </TableBody>

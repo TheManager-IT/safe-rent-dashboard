@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
@@ -16,6 +17,13 @@ const EditCarForm = () => {
     status: ''
   });
   const { id } = useParams();
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/v1/api/voiture/get/${id}`)
+      .then(response => response.json())
+      .then(data => setCar(data))
+      .catch(error => console.error('Error fetching location:', error));
+  }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -1,107 +1,149 @@
 import React, { useState } from 'react';
-//import { useHistory } from 'react-router-dom';
-import { Button, Container, TextField } from '@mui/material';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Container from '@mui/material/Container';
+import { useHistory } from 'react-router-dom';
 
 const AddLocationForm = () => {
- // const history = useHistory();
+  const [location, setLocation] = useState({
+    StartDateLocation: '',
+    EndDateLocation: '',
+    NumberOfDays: 0,
+    totalPrice: 0,
+    locationTime: '',
+    voiture: '',
+    client: ''
+  });
 
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
-  const [numberOfDays, setNumberOfDays] = useState('');
-  const [totalPrice, setTotalPrice] = useState('');
-  const [voitureId, setVoitureId] = useState('');
-  const [clientId, setClientId] = useState('');
-  const [locationTime, setLocationTime] = useState('');
+  const [errors, setErrors] = useState({
+    StartDateLocation: '',
+    EndDateLocation: '',
+    NumberOfDays: '',
+    totalPrice: '',
+    locationTime: '',
+    voiture: '',
+    client: ''
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setLocation(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+
+    // Réinitialise les messages d'erreur pour le champ en cours de modification
+    setErrors(prevState => ({
+      ...prevState,
+      [name]: ''
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Construire l'objet location à envoyer à l'API
-    const locationData = {
-      startDate,
-      endDate,
-      numberOfDays: parseInt(numberOfDays),
-      totalPrice: parseFloat(totalPrice),
-      voiture: voitureId,
-      client: clientId,
-      locationTime: new Date(locationTime).toISOString()
+  
+    // Convertir la chaîne locationTime en objet Date
+    const formattedLocation = {
+      ...location,
+      locationTime: new Date(`1970-01-01T${location.locationTime}`)
     };
-
+  
     try {
-      // Envoyer les données à l'API backend (remplacer avec votre URL d'API)
+      // Soumettre les données au backend
       const response = await fetch('http://localhost:3000/v1/api/location/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(locationData)
+        body: JSON.stringify(formattedLocation)
       });
-
-      if (!response.ok) {
-        throw new Error('Failed to add location');
-      }
-
-      // Rediriger vers la liste des localisations après ajout réussi
-     // history.push('/locations');
+      if (!response.ok) throw new Error('Network response was not ok.');
+      alert('location added successfully!');
+      // Rediriger vers la page des locations après l'ajout réussi
+      // history.push('/locations');
     } catch (error) {
       console.error('Error adding location:', error);
-      // Gérer l'erreur, par exemple, afficher un message d'erreur à l'utilisateur
+      alert('Failed to add location: ' + error.message);
     }
   };
+  
 
   return (
-    <Container>
-      <h2>Ajouter une localisation</h2>
+    <Container maxWidth="sm">
+      <h2>Ajouter une location</h2>
       <form onSubmit={handleSubmit}>
         <TextField
+          name="StartDateLocation"
           label="Date de début"
           type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
+          value={location.StartDateLocation}
+          onChange={handleChange}
+          error={!!errors.StartDateLocation}
+          helperText={errors.StartDateLocation}
+          fullWidth
           required
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
         />
         <TextField
+          name="EndDateLocation"
           label="Date de fin"
           type="date"
-          value={endDate}
-          onChange={(e) => setEndDate(e.target.value)}
+          value={location.EndDateLocation}
+          onChange={handleChange}
+          error={!!errors.EndDateLocation}
+          helperText={errors.EndDateLocation}
+          fullWidth
           required
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
+        />
+       
+        
+        <TextField
+          name="locationTime"
+          label="Heure de la location"
+          type="time"
+          value={location.locationTime}
+          onChange={handleChange}
+          error={!!errors.locationTime}
+          helperText={errors.locationTime}
+          fullWidth
+          required
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
         />
         <TextField
-          label="Nombre de jours"
-          type="number"
-          value={numberOfDays}
-          onChange={(e) => setNumberOfDays(e.target.value)}
-          required
-        />
-        {/*<TextField
-          label="Prix total"
-          type="number"
-          value={totalPrice}
-          onChange={(e) => setTotalPrice(e.target.value)}
-          required
-  />*/}
-        <TextField
+          name="voiture"
           label="ID de la voiture"
-          value={voitureId}
-          onChange={(e) => setVoitureId(e.target.value)}
+          value={location.voiture}
+          onChange={handleChange}
+          error={!!errors.voiture}
+          helperText={errors.voiture}
+          fullWidth
           required
+          margin="normal"
         />
         <TextField
+          name="client"
           label="ID du client"
-          value={clientId}
-          onChange={(e) => setClientId(e.target.value)}
+          value={location.client}
+          onChange={handleChange}
+          error={!!errors.client}
+          helperText={errors.client}
+          fullWidth
           required
+          margin="normal"
         />
-        <TextField
-          label="Date de la location" 
-          type="datetime-local"
-          value={locationTime} 
-          onChange={(e) => setLocationTime(e.target.value)} 
-          required
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Ajouter la localisation
+
+        <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
+          Ajouter la location
         </Button>
       </form>
     </Container>
