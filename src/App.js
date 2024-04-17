@@ -3,11 +3,16 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Im
 import Cars from './pages/cars/cars';
 import AddCarForm from './pages/cars/AddCarForm';
 import EditCarForm from './pages/cars/EditCarForm ';
+
 import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
 import EditClient from './pages/client/editClient';
+
 import Locations from './pages/location/Locations';
 import AddLocationForm from './pages/location/addlocationform';
+
+import Event from './pages/event/eventList';
+import AddEvent from './pages/event/addEventForm';
 
 function App() {
   return (
@@ -21,9 +26,15 @@ function App() {
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />
           <Route path="/editClient/:id" element={<EditClient />} />
+
+          <Route path="/event" element={<Event />} />
+          <Route path="/addEvent" element={<AddEvent />} />
+         
           
           <Route path="/Locations" element={<Locations />} />
           <Route path="/addlocationform" element={<AddLocationForm />} />
+
+
         </Routes>
       </Router>
     </div>
