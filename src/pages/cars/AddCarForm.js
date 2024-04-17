@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 function AddCarForm() {
   const [car, setCar] = useState({
@@ -13,6 +15,13 @@ function AddCarForm() {
     locationPrice: '',
     status: ''
   });
+  const Status = {
+    RENTING: 'Renting',
+    BEING_WASHED: 'Being Washed',
+    IN_PARKING: 'In Parking',
+    BROKEN_DOWN: 'Broken Down'
+  };
+  
 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -93,68 +102,112 @@ function AddCarForm() {
   };
 
   return (
+    <Container>
+    <h2>Ajouter Voiture</h2>
     <form onSubmit={handleSubmit}>
-      <input
+      <TextField
+      label="Registration Plate"
         name="registrationPlate"
         value={car.registrationPlate}
         onChange={handleChange}
         placeholder="Registration Plate"
         required
+        fullWidth
+        margin="normal"
       />
-      <input
+      <TextField
+      label="Model"
         name="model"
         value={car.model}
         onChange={handleChange}
         placeholder="Model"
         required
+        margin="normal"
+        fullWidth
       />
-      <input
+      <TextField
+      label="Brand"
         name="brand"
         value={car.brand}
         onChange={handleChange}
         placeholder="Brand"
         required
+        margin="normal"
+        fullWidth
       />
-      <input
+      <TextField
+      label="Number of Car Seats"
         name="numberOfCarSeats"
         value={car.numberOfCarSeats}
         onChange={handleChange}
         type="number"
         placeholder="Number of Car Seats"
         required
+        fullWidth
+        margin="normal"
       />
-      <input
+      <TextField
+       label="locationPrice"
         name="locationPrice"
         value={car.locationPrice}
         onChange={handleChange}
         type="number"
         placeholder="Location Price"
+        fullWidth
+        margin="normal"
       />
-      <input
-        name="status"
-        value={car.status}
-        onChange={handleChange}
-        placeholder="Status"
-        required
-      />
-      <input
+     <TextField
+  select
+  label="Status"
+  name="status"
+  value={car.status}
+  onChange={handleChange}
+  fullWidth
+  margin="normal"
+  required
+>
+  {Object.values(Status).map((status) => (
+    <MenuItem key={status} value={status}>
+      {status}
+    </MenuItem>
+  ))}
+</TextField>
+
+      <TextField
+      
         type="file"
         name="images"
         multiple
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
-      <input
+      <TextField
+      label="mileage"
         name="traveled.mileage"
         value={car.traveled.mileage}
         onChange={handleChange}
         type="number"
+        fullWidth
+        margin="normal"
         placeholder="Mileage"
       />
      
       <br />
-      <button type="submit">Add Car</button>
+
+      <Button type="submit" variant="contained" color="primary">
+      Add Car
+        </Button>
+        <Link to="/car">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
+
+      
       {errorMessage && <div>{errorMessage}</div>}
     </form>
+    </Container>
   );
 }
 

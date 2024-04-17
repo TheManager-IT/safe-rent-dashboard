@@ -12,9 +12,9 @@ import Locations from './pages/location/Locations';
 import AddLocationForm from './pages/location/addlocationform';
 import EditLocation from './pages/location/editlocation';
 
-import Event from './pages/event/eventList';
+import Events from './pages/event/eventList';
 import AddEvent from './pages/event/addEventForm';
-
+import EditEvent from './pages/event/editEvent';
 function App() {
   return (
     <div className="App">
@@ -28,13 +28,15 @@ function App() {
           <Route path="/addClient" element={<AddClientForm />} />
           <Route path="/editClient/:id" element={<EditClient />} />
 
-          <Route path="/event" element={<Event />} />
+          <Route path="/event" element={<Events />} />
           <Route path="/addEvent" element={<AddEvent />} />
+          <Route path="/editEvent/:id" element={<EditEvent />} />
          
           
           <Route path="/Locations" element={<Locations />} />
           <Route path="/addlocationform" element={<AddLocationForm />} />
           <Route path="/editlocation/:id" element={<EditLocation />} />
+          
         </Routes>
       </Router>
     </div>

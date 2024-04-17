@@ -121,6 +121,7 @@ const AddEventForm = () => {
             </MenuItem>
           ))}
         </TextField>
+        
         <Button type="submit" variant="contained" color="primary">
           Ajouter l'événement
         </Button>

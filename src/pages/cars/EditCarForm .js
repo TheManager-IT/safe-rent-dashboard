@@ -1,9 +1,8 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+
+import { Button, Container, TextField, MenuItem } from '@mui/material';
 
 const EditCarForm = () => {
   const [car, setCar] = useState({
@@ -16,6 +15,13 @@ const EditCarForm = () => {
     locationPrice: 0,
     status: ''
   });
+  const Status = {
+    RENTING: 'Renting',
+    BEING_WASHED: 'Being Washed',
+    IN_PARKING: 'In Parking',
+    BROKEN_DOWN: 'Broken Down'
+  };
+  
   const { id } = useParams();
 
   useEffect(() => {
@@ -58,61 +64,20 @@ const EditCarForm = () => {
     <Container>
       <h2>Edit Car</h2>
       <form onSubmit={handleSubmit}>
-        <TextField
-          name="registrationPlate"
-          label="Registration Plate"
-          value={car.registrationPlate || ''}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-        />
-        <TextField
-          name="model"
-          label="Model"
-          value={car.model || ''}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-        />
-        <TextField
-          name="brand"
-          label="Brand"
-          value={car.brand || ''}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-        />
-        <TextField
-          name="numberOfCarSeats"
-          label="Number of Car Seats"
-          value={car.numberOfCarSeats || ''}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          type="number"
-          required
-        />
-        <TextField
-          name="locationPrice"
-          label="Location Price"
-          value={car.locationPrice || ''}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          type="number"
-        />
-        <TextField
-          name="status"
-          label="Status"
-          value={car.status || ''}
-          onChange={handleChange}
-          fullWidth
-          margin="normal"
-          required
-        />
+        <TextField  name="registrationPlate"  label="Registration Plate"  value={car.registrationPlate || ''}  onChange={handleChange}  fullWidth  margin="normal"  required  disabled />
+        <TextField  name="model"  label="Model"  value={car.model || ''} onChange={handleChange}  fullWidth  margin="normal"  required/>
+        <TextField  name="brand"  label="Brand"  value={car.brand || ''} onChange={handleChange}  fullWidth  margin="normal"  required/>
+        <TextField  name="numberOfCarSeats"  label="Number of Car Seats"  value={car.numberOfCarSeats || ''}  onChange={handleChange}  fullWidth  margin="normal"  type="number"  required  />
+        <TextField  name="locationPrice"  label="Location Price"  value={car.locationPrice || ''}  onChange={handleChange}  fullWidth  margin="normal"  type="number"/>
+        <TextField select  label="Status"  name="status"  value={car.status || ''}  onChange={handleChange}  fullWidth  margin="normal"  required  >
+          {Object.values(Status).map((status) => (
+            <MenuItem key={status} value={status}>
+              {status}
+            </MenuItem>
+          ))}
+        </TextField>
+
+
         <Button type="submit" variant="contained" color="primary">Save</Button>
       </form>
     </Container>

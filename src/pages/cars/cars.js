@@ -99,7 +99,6 @@ const Cars = () => {
                 <TableCell>{car.model}</TableCell>
                 <TableCell>{car.locationPrice}</TableCell>
                 <TableCell>{car.images}</TableCell>
-               
                 <TableCell>
                   <Link to={`/editCar/${car._id}`}>
                     <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">
