@@ -2,35 +2,23 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Container from '@mui/material/Container';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const EditLocation = () => {
   const [location, setLocation] = useState({
-    StartDateLocation: '',
-    EndDateLocation: '',
+    StartDateLocation: '', 
+    EndDateLocation: '', 
     NumberOfDays: 0,
     totalPrice: 0,
-    locationTime: '',
-    voiture: '',
-    client: ''
-  });
-
-  const [errors, setErrors] = useState({
-    StartDateLocation: '',
-    EndDateLocation: '',
-    NumberOfDays: '',
-    totalPrice: '',
-    locationTime: '',
+    locationTime: '', 
     voiture: '',
     client: ''
   });
 
   const { id } = useParams();
-  //const history = useHistory();
 
   useEffect(() => {
-    // Fetch location data by ID from backend and set it to state
-    fetch(`http://localhost:3000/v1/api/location/${id}`)
+    fetch(`http://localhost:3000/v1/api/location/get/${id}`)
       .then(response => response.json())
       .then(data => setLocation(data))
       .catch(error => console.error('Error fetching location:', error));
@@ -42,25 +30,17 @@ const EditLocation = () => {
       ...prevState,
       [name]: value
     }));
-
-    // Reset error messages for the currently editing field
-    setErrors(prevState => ({
-      ...prevState,
-      [name]: ''
-    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
   
-    // Convert locationTime string to Date object
     const formattedLocation = {
       ...location,
       locationTime: new Date(`1970-01-01T${location.locationTime}`)
     };
   
     try {
-      // Submit data to backend
       const response = await fetch(`http://localhost:3000/v1/api/location/update/${id}`, {
         method: 'PUT',
         headers: {
@@ -70,14 +50,11 @@ const EditLocation = () => {
       });
       if (!response.ok) throw new Error('Network response was not ok.');
       alert('Location updated successfully!');
-      // Redirect to locations page after successful update
-      //history.push('/locations');
     } catch (error) {
       console.error('Error updating location:', error);
       alert('Failed to update location: ' + error.message);
     }
   };
-  
 
   return (
     <Container maxWidth="sm">
@@ -87,10 +64,8 @@ const EditLocation = () => {
           name="StartDateLocation"
           label="Start Date"
           type="date"
-          value={location.StartDateLocation}
+          value={location.StartDateLocation || ''}
           onChange={handleChange}
-          error={!!errors.StartDateLocation}
-          helperText={errors.StartDateLocation}
           fullWidth
           required
           InputLabelProps={{
@@ -102,10 +77,8 @@ const EditLocation = () => {
           name="EndDateLocation"
           label="End Date"
           type="date"
-          value={location.EndDateLocation}
+          value={location.EndDateLocation || ''}
           onChange={handleChange}
-          error={!!errors.EndDateLocation}
-          helperText={errors.EndDateLocation}
           fullWidth
           required
           InputLabelProps={{
@@ -117,10 +90,8 @@ const EditLocation = () => {
           name="locationTime"
           label="Location Time"
           type="time"
-          value={location.locationTime}
+          value={location.locationTime || ''}
           onChange={handleChange}
-          error={!!errors.locationTime}
-          helperText={errors.locationTime}
           fullWidth
           required
           InputLabelProps={{
@@ -131,10 +102,8 @@ const EditLocation = () => {
         <TextField
           name="voiture"
           label="Car ID"
-          value={location.voiture}
+          value={location.voiture || ''}
           onChange={handleChange}
-          error={!!errors.voiture}
-          helperText={errors.voiture}
           fullWidth
           required
           margin="normal"
@@ -142,10 +111,8 @@ const EditLocation = () => {
         <TextField
           name="client"
           label="Client ID"
-          value={location.client}
+          value={location.client || ''}
           onChange={handleChange}
-          error={!!errors.client}
-          helperText={errors.client}
           fullWidth
           required
           margin="normal"
