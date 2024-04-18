@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
-
 import { useParams } from 'react-router-dom';
 import { Button, Container, TextField, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
+
 const EditClientForm = () => {
   const [client, setClient] = useState({
     name: '',
     firstName: '',
     email: '',
-    phoneNumber: ' ',
+    phoneNumber: '',
     address: '',
     contractNumber: '',
     drivingLicense: '',
@@ -36,22 +36,40 @@ const EditClientForm = () => {
   }, [id]);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setClient(prevClient => ({
-      ...prevClient,
-      [name]: value
-    }));
+    const { name, value, files } = e.target;
+    if (name === 'images') {
+      const imageFiles = Array.from(files);
+      setClient(prevClient => ({
+        ...prevClient,
+        images: imageFiles
+      }));
+    } else {
+      setClient(prevClient => ({
+        ...prevClient,
+        [name]: value
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('name', client.name);
+    formData.append('firstName', client.firstName);
+    formData.append('email', client.email);
+    formData.append('phoneNumber', client.phoneNumber);
+    formData.append('address', client.address);
+    formData.append('contractNumber', client.contractNumber);
+    formData.append('drivingLicense', client.drivingLicense);
+    formData.append('nationalID', client.nationalID);
+    client.images.forEach(image => {
+      formData.append('images', image);
+    });
+
     try {
       const response = await fetch(`http://localhost:3000/v1/api/client/update/${id}`, {
         method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(client)
+        body: formData
       });
       if (!response.ok) {
         throw new Error('Failed to update client');
@@ -65,80 +83,25 @@ const EditClientForm = () => {
 
   return (
     <Container>
-    <h2>modifier Client</h2>
-    <form onSubmit={handleSubmit}>
-      <TextField
-        name="name"
-        label="Name"
-        value={client.name || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="firstName"
-        label="First Name"
-        value={client.firstName || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="email"
-        label="Email"
-        value={client.email || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="phoneNumber"
-        label="Phone Number"
-        value={client.phoneNumber || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="address"
-        label="Address"
-        value={client.address || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="contractNumber"
-        label="Contract Number"
-        value={client.contractNumber || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="drivingLicense"
-        label="Driving License"
-        value={client.drivingLicense || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <TextField
-        name="nationalID"
-        label="National ID"
-        value={client.nationalID || ''}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-      />
-      <br/>
-      <Button type="submit" variant="contained" color="primary">Update Client</Button>
-      <Link to="/client">
+      <h2>Edit Client</h2>
+      <form onSubmit={handleSubmit}>
+        <TextField name="name" label="Name" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="firstName" label="First Name" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="email" label="Email" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="phoneNumber" label="Phone Number" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="address" label="Address" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="contractNumber" label="Contract Number" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="drivingLicense" label="Driving License" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="nationalID" label="National ID" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField type="file" name="images" onChange={handleChange} fullWidth margin="normal" multiple />
+        <br />
+        <Button type="submit" variant="contained" color="primary">Update Client</Button>
+        <Link to="/client">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
-            Annuler
+            Cancel
           </Button>
         </Link>
-    </form>
+      </form>
     </Container>
   );
 };
