@@ -99,6 +99,10 @@ const Cars = () => {
                 <TableCell>{car.model}</TableCell>
                 <TableCell>{car.locationPrice}</TableCell>
                 <TableCell>{car.images}</TableCell>
+                {/*<TableCell>
+                  <img src={car.images} alt="Car" style={{ width: '100px', height: 'auto' }} />
+            </TableCell>*/}
+
                 <TableCell>
                   <Link to={`/editCar/${car._id}`}>
                     <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">

@@ -65,7 +65,7 @@ const EditClientForm = () => {
 
   return (
     <Container>
-    <h2>Ajouter Client</h2>
+    <h2>modifier Client</h2>
     <form onSubmit={handleSubmit}>
       <TextField
         name="name"
