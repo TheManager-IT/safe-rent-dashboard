@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 
 const EventType = {
   OIL_CHANGE: 'Oil Change',
@@ -90,7 +91,6 @@ const EditEventForm = () => {
           margin="normal"
           required
         >
-          {/* Options de la liste déroulante */}
           {Object.values(EventType).map((type) => (
             <MenuItem key={type} value={type}>{type}</MenuItem>
           ))}
@@ -125,6 +125,11 @@ const EditEventForm = () => {
           disabled
         />
         <Button type="submit" variant="contained" color="primary">Save</Button>
+        <Link to="/event">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );

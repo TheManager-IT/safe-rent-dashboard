@@ -9,7 +9,7 @@ const AddLocationForm = () => {
     totalPrice: 0,
     locationTime: '',
     voiture: '',
-    client: ''
+    client: '' 
   });
 
   const [voitures, setVoitures] = useState([]);
@@ -54,7 +54,7 @@ const AddLocationForm = () => {
     setSelectedClient(value);
     setLocation(prevState => ({
       ...prevState,
-      client: value ? value.id : ''
+      client: value ? value._id : '' 
     }));
   };
 
@@ -81,6 +81,8 @@ const AddLocationForm = () => {
     <Container maxWidth="sm">
       <h2>Ajouter une location</h2>
       <form onSubmit={handleSubmit}>
+        {/* Autres champs de formulaire */}
+     
         <TextField
           name="StartDateLocation"
           label="Date de début"
@@ -107,19 +109,19 @@ const AddLocationForm = () => {
           }}
           margin="normal"
         />
-        <TextField
-          name="locationTime"
-          label="Heure de la location"
-          type="time"
-          value={location.locationTime}
-          onChange={handleChange}
-          fullWidth
-          
-          InputLabelProps={{
-            shrink: true,
-          }}
-          margin="normal"
-        />
+   <TextField
+  name="locationTime"
+  label="Heure de la location"
+  type="time"
+  value={location.locationTime || ''} // Valeur initiale définie à 08:00
+  onChange={handleChange}
+  fullWidth
+  InputLabelProps={{
+    shrink: true,
+  }}
+  margin="normal"
+/>
+
 
         {/* Choisir une voiture */}
         <TextField
@@ -136,7 +138,6 @@ const AddLocationForm = () => {
             </MenuItem>
           ))}
         </TextField>
-
         {/* Sélectionner un client */}
         <Autocomplete
           options={clients}

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
+import { Button, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const EditLocation = () => {
+  const { id } = useParams(); //  l'ID de la location à modifier
   const [location, setLocation] = useState({
     StartDateLocation: '',
     EndDateLocation: '',
@@ -14,14 +14,53 @@ const EditLocation = () => {
     voiture: '',
     client: ''
   });
-
-  const { id } = useParams();
+  const [voitures, setVoitures] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [selectedCar, setSelectedCar] = useState('');
+  const [selectedClient, setSelectedClient] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:3000/v1/api/location/get/${id}`)
-      .then(response => response.json())
-      .then(data => setLocation(data))
-      .catch(error => console.error('Error fetching location:', error));
+    const fetchLocation = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/v1/api/location/get/${id}`);
+        if (!response.ok) throw new Error('Failed to fetch location');
+        const data = await response.json();
+        setLocation(data);
+        setSelectedCar(data.voiture);
+        setSelectedClient(data.client);
+      } catch (error) {
+        console.error('Error fetching location:', error);
+        // Gérer l'erreur de récupération des données de la location
+      }
+    };
+
+    const fetchVoitures = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/v1/api/voiture');
+        if (!response.ok) throw new Error('Failed to fetch voitures');
+        const data = await response.json();
+        setVoitures(data);
+      } catch (error) {
+        console.error('Error fetching voitures:', error);
+        // Gérer l'erreur de récupération des voitures
+      }
+    };
+
+    const fetchClients = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/v1/api/client');
+        if (!response.ok) throw new Error('Failed to fetch clients');
+        const data = await response.json();
+        setClients(data);
+      } catch (error) {
+        console.error('Error fetching clients:', error);
+        // Gérer l'erreur de récupération des clients
+      }
+    };
+
+    fetchLocation();
+    fetchVoitures();
+    fetchClients();
   }, [id]);
 
   const handleChange = (e) => {
@@ -32,21 +71,32 @@ const EditLocation = () => {
     }));
   };
 
+  const handleCarChange = (e) => {
+    setSelectedCar(e.target.value);
+    setLocation(prevState => ({
+      ...prevState,
+      voiture: e.target.value
+    }));
+  };
+
+  const handleClientChange = (event, value) => {
+    setSelectedClient(value);
+    setLocation(prevState => ({
+      ...prevState,
+      client: value ? value.id : ''
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formattedLocation = {
-      ...location,
-      locationTime: new Date(`1970-01-01T${location.locationTime}`)
-    };
-
+    
     try {
       const response = await fetch(`http://localhost:3000/v1/api/location/update/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formattedLocation)
+        body: JSON.stringify(location)
       });
       if (!response.ok) throw new Error('Network response was not ok.');
       alert('Location updated successfully!');
@@ -58,13 +108,14 @@ const EditLocation = () => {
 
   return (
     <Container maxWidth="sm">
-      <h2>Edit Location</h2>
+      <h2>Modifier une location</h2>
       <form onSubmit={handleSubmit}>
+        
         <TextField
           name="StartDateLocation"
-          label="Start Date"
+          label="Date de début"
           type="date"
-          value={location.StartDateLocation || ''}
+          value={location.StartDateLocation}
           onChange={handleChange}
           fullWidth
           required
@@ -75,9 +126,9 @@ const EditLocation = () => {
         />
         <TextField
           name="EndDateLocation"
-          label="End Date"
+          label="Date de fin"
           type="date"
-          value={location.EndDateLocation || ''}
+          value={location.EndDateLocation}
           onChange={handleChange}
           fullWidth
           required
@@ -88,39 +139,48 @@ const EditLocation = () => {
         />
         <TextField
           name="locationTime"
-          label="Location Time"
+          label="Heure de la location"
           type="time"
-          value={location.locationTime || ''}
+          value={location.locationTime}
           onChange={handleChange}
           fullWidth
-          required
           InputLabelProps={{
             shrink: true,
           }}
           margin="normal"
         />
         <TextField
-          name="voiture"
-          label="Car ID"
-          value={location.voiture || ''}
-          onChange={handleChange}
+          select
+          label="Voiture"
+          value={selectedCar}
+          onChange={handleCarChange}
           fullWidth
-          required
           margin="normal"
-        />
-        <TextField
-          name="client"
-          label="Client ID"
-          value={location.client || ''}
-          onChange={handleChange}
-          fullWidth
-          required
-          margin="normal"
+        >
+          {voitures.map((car) => (
+            <MenuItem key={car._id} value={car._id}>
+              {car.model} - {car.registrationPlate}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <Autocomplete
+          options={clients}
+          getOptionLabel={(option) => `${option.name} ${option.firstName} - ${option.nationalID}`}
+          renderInput={(params) => <TextField {...params} label="Client" fullWidth margin="normal" />}
+          value={selectedClient}
+          onChange={handleClientChange}
         />
 
+       
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
-          Update Location
+          Modifier la location
         </Button>
+        <Link to="/locations">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );
