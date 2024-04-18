@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
@@ -155,6 +156,11 @@ const AddLocationForm = () => {
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
           Ajouter la location
         </Button>
+        <Link to="/locations">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' ,marginTop: '20px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );

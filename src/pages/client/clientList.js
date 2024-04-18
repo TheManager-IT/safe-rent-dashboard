@@ -140,7 +140,8 @@ const Clients = () => {
               <TableCell>Numéro de Téléphone</TableCell>
               <TableCell>CIN</TableCell>
               <TableCell>Adresse</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Modifier</TableCell>
+              <TableCell>Supprimer</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -159,7 +160,9 @@ const Clients = () => {
                       Modifier
                     </Button>
                   </Link>
-                  <Button variant="contained" color="secondary" onClick={() => handleDelete(client._id)} style={{ marginLeft: '10px' }}>
+                  </TableCell>
+                  <TableCell>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(client._id)} >
                     Supprimer
                   </Button>
                 </TableCell>

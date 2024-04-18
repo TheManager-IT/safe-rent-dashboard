@@ -194,11 +194,11 @@ function AddCarForm() {
      
       <br />
 
-      <Button type="submit" variant="contained" color="primary">
+      <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
       Add Car
         </Button>
         <Link to="/car">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' ,marginTop: '20px' }}>
             Annuler
           </Button>
         </Link>

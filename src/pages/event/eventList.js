@@ -103,7 +103,8 @@ const Events = () => {
               <TableCell>Type d'événement</TableCell>
               <TableCell>Note</TableCell>
               <TableCell>Date</TableCell>
-              <TableCell>Actions</TableCell>
+              <TableCell>Modifier</TableCell>
+              <TableCell>Supprimer</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -120,6 +121,8 @@ const Events = () => {
                       Modifier
                     </Button>
                   </Link>
+                  </TableCell>
+                  <TableCell>
                   <Button variant="contained" color="secondary" onClick={() => handleDelete(event._id)} style={{ marginLeft: '10px' }}>
                     Supprimer
                   </Button>

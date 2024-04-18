@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Button, Container, TextField, MenuItem } from '@mui/material';
 
@@ -77,8 +78,12 @@ const EditCarForm = () => {
           ))}
         </TextField>
 
-
-        <Button type="submit" variant="contained" color="primary">Save</Button>
+        <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px' }}>Save</Button>
+        <Link to="/car">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' ,marginTop: '20px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );
