@@ -21,7 +21,7 @@ const EditClientForm = () => {
   useEffect(() => {
     const fetchClientData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/v1/api/client/${id}`);
+        const response = await fetch(`http://localhost:3000/v1/api/client/get/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch client data');
         }
