@@ -37,18 +37,19 @@ function AddCarForm() {
           [subFieldName]: value
         }
       }));
-    } else if (fieldName === 'images') {
+    } else if (name === 'images') {
       setCar(prevState => ({
         ...prevState,
-        images: Array.from(files)
+        images: [...prevState.images, ...e.target.files]
       }));
     } else {
       setCar(prevState => ({
         ...prevState,
-        [fieldName]: value
+        [name]: value
       }));
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

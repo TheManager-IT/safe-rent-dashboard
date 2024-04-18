@@ -30,21 +30,24 @@ const EditCarForm = () => {
       .catch(error => console.error('Error fetching car:', error));
   }, [id]);
 
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === 'images') {
-      const imageFile = files[0];
-      setCar(prevCar => ({
-        ...prevCar,
-        images: [imageFile]
-      }));
-    } else {
-      setCar(prevCar => ({
-        ...prevCar,
-        [name]: value
-      }));
-    }
-  };
+const handleChange = (e) => {
+  const { name, value, files } = e.target;
+  if (name === 'images') {
+    const imageFiles = Array.from(files);
+    setCar(prevCar => ({
+      ...prevCar,
+      images: [...prevCar.images, ...imageFiles]
+    }));
+  } else {
+    setCar(prevCar => ({
+      ...prevCar,
+      [name]: value
+    }));
+  }
+};
+
+  
+  
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +91,7 @@ const EditCarForm = () => {
           ))}
         </TextField>
        
-          {/*<input type="file" accept="image/*" name="images" onChange={handleChange} />*/}
+    
           <TextField
         type="file"
         name="images"
@@ -96,6 +99,7 @@ const EditCarForm = () => {
         onChange={handleChange}
         fullWidth
         margin="normal"
+        
       />
         <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px' }}>Save</Button>
         <Link to="/car">

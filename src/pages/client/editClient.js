@@ -41,7 +41,7 @@ const EditClientForm = () => {
       const imageFiles = Array.from(files);
       setClient(prevClient => ({
         ...prevClient,
-        images: imageFiles
+        images: [...prevClient.images, ...imageFiles] // Ajoutez les nouveaux fichiers à la liste existante
       }));
     } else {
       setClient(prevClient => ({
@@ -50,6 +50,7 @@ const EditClientForm = () => {
       }));
     }
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
