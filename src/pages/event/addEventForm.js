@@ -76,7 +76,7 @@ const AddEventForm = () => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="sm">
       <h2>Ajouter un événement</h2>
       <form onSubmit={handleSubmit}>
         <TextField

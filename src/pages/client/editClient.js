@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button } from '@mui/material';
-import { useParams } from 'react-router-dom';
 
+import { useParams } from 'react-router-dom';
+import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 const EditClientForm = () => {
   const [client, setClient] = useState({
     name: '',
@@ -63,58 +64,82 @@ const EditClientForm = () => {
   };
 
   return (
+    <Container>
+    <h2>Ajouter Client</h2>
     <form onSubmit={handleSubmit}>
       <TextField
         name="name"
         label="Name"
         value={client.name || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="firstName"
         label="First Name"
         value={client.firstName || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="email"
         label="Email"
         value={client.email || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="phoneNumber"
         label="Phone Number"
         value={client.phoneNumber || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="address"
         label="Address"
         value={client.address || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="contractNumber"
         label="Contract Number"
         value={client.contractNumber || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="drivingLicense"
         label="Driving License"
         value={client.drivingLicense || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <TextField
         name="nationalID"
         label="National ID"
         value={client.nationalID || ''}
         onChange={handleChange}
+        fullWidth
+        margin="normal"
       />
       <br/>
       <Button type="submit" variant="contained" color="primary">Update Client</Button>
+      <Link to="/client">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
     </form>
+    </Container>
   );
 };
 

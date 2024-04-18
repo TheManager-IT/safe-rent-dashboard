@@ -102,7 +102,7 @@ function AddCarForm() {
   };
 
   return (
-    <Container>
+    <Container maxWidth="sm">
     <h2>Ajouter Voiture</h2>
     <form onSubmit={handleSubmit}>
       <TextField
@@ -174,7 +174,6 @@ function AddCarForm() {
 </TextField>
 
       <TextField
-      
         type="file"
         name="images"
         multiple

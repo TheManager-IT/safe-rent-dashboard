@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Container from '@mui/material/Container';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Button, Container, TextField, MenuItem } from '@mui/material';
 
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
@@ -15,15 +12,27 @@ const AddLocationForm = () => {
     client: ''
   });
 
-  const [errors, setErrors] = useState({
-    StartDateLocation: '',
-    EndDateLocation: '',
-    NumberOfDays: '',
-    totalPrice: '',
-    locationTime: '',
-    voiture: '',
-    client: ''
-  });
+  const [voitures, setVoitures] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [selectedCar, setSelectedCar] = useState('');
+  const [selectedClient, setSelectedClient] = useState('');
+
+  useEffect(() => {
+    const fetchVoitures = async () => {
+      const response = await fetch('http://localhost:3000/v1/api/voiture');
+      const data = await response.json();
+      setVoitures(data);
+    };
+
+    const fetchClients = async () => {
+      const response = await fetch('http://localhost:3000/v1/api/client');
+      const data = await response.json();
+      setClients(data);
+    };
+
+    fetchVoitures();
+    fetchClients();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,42 +40,42 @@ const AddLocationForm = () => {
       ...prevState,
       [name]: value
     }));
+  };
 
-    // Réinitialise les messages d'erreur pour le champ en cours de modification
-    setErrors(prevState => ({
+  const handleCarChange = (e) => {
+    setSelectedCar(e.target.value);
+    setLocation(prevState => ({
       ...prevState,
-      [name]: ''
+      voiture: e.target.value
+    }));
+  };
+
+  const handleClientChange = (e) => {
+    setSelectedClient(e.target.value);
+    setLocation(prevState => ({
+      ...prevState,
+      client: e.target.value
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
-    // Convertir la chaîne locationTime en objet Date
-    const formattedLocation = {
-      ...location,
-      locationTime: new Date(`1970-01-01T${location.locationTime}`)
-    };
-  
+    
     try {
-      // Soumettre les données au backend
       const response = await fetch('http://localhost:3000/v1/api/location/create', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formattedLocation)
+        body: JSON.stringify(location)
       });
       if (!response.ok) throw new Error('Network response was not ok.');
-      alert('location added successfully!');
-      // Rediriger vers la page des locations après l'ajout réussi
-      // history.push('/locations');
+      alert('Location added successfully!');
     } catch (error) {
       console.error('Error adding location:', error);
       alert('Failed to add location: ' + error.message);
     }
   };
-  
 
   return (
     <Container maxWidth="sm">
@@ -78,8 +87,6 @@ const AddLocationForm = () => {
           type="date"
           value={location.StartDateLocation}
           onChange={handleChange}
-          error={!!errors.StartDateLocation}
-          helperText={errors.StartDateLocation}
           fullWidth
           required
           InputLabelProps={{
@@ -93,8 +100,6 @@ const AddLocationForm = () => {
           type="date"
           value={location.EndDateLocation}
           onChange={handleChange}
-          error={!!errors.EndDateLocation}
-          helperText={errors.EndDateLocation}
           fullWidth
           required
           InputLabelProps={{
@@ -102,16 +107,12 @@ const AddLocationForm = () => {
           }}
           margin="normal"
         />
-       
-        
         <TextField
           name="locationTime"
           label="Heure de la location"
           type="time"
           value={location.locationTime}
           onChange={handleChange}
-          error={!!errors.locationTime}
-          helperText={errors.locationTime}
           fullWidth
           required
           InputLabelProps={{
@@ -119,29 +120,38 @@ const AddLocationForm = () => {
           }}
           margin="normal"
         />
-        <TextField
-          name="voiture"
-          label="ID de la voiture"
-          value={location.voiture}
-          onChange={handleChange}
-          error={!!errors.voiture}
-          helperText={errors.voiture}
-          fullWidth
-          required
-          margin="normal"
-        />
-        <TextField
-          name="client"
-          label="ID du client"
-          value={location.client}
-          onChange={handleChange}
-          error={!!errors.client}
-          helperText={errors.client}
-          fullWidth
-          required
-          margin="normal"
-        />
 
+        <TextField
+          select
+          label="Voiture"
+          value={selectedCar}
+          onChange={handleCarChange}
+          fullWidth
+          margin="normal"
+        >
+          {voitures.map((car) => (
+            <MenuItem key={car._id} value={car._id}>
+              {car.model} - {car.registrationPlate}
+            </MenuItem>
+          ))}
+        </TextField>
+
+        <TextField
+          select
+          label="Client"
+          value={selectedClient}
+          onChange={handleClientChange}
+          fullWidth
+          margin="normal"
+        >
+          {clients.map((client) => (
+            <MenuItem key={client.id} value={client.id}>
+              {client.name} {client.firstName} - {client.nationalID}
+            </MenuItem>
+          ))}
+        </TextField>
+        
+     
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
           Ajouter la location
         </Button>
