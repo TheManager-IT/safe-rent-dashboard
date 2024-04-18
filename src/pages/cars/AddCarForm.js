@@ -104,7 +104,7 @@ function AddCarForm() {
   return (
     <Container maxWidth="sm">
     <h2>Ajouter Voiture</h2>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} encType="multipart/form-data">
       <TextField
       label="Registration Plate"
         name="registrationPlate"
