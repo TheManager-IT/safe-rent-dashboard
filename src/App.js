@@ -15,11 +15,15 @@ import EditLocation from './pages/location/editlocation';
 import Events from './pages/event/eventList';
 import AddEvent from './pages/event/addEventForm';
 import EditEvent from './pages/event/editEvent';
+
+import Header from './pages/Header';
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+          <Route path="/header" element={<Header />} /> 
+        
           <Route path="/car" element={<Cars />} /> 
           <Route path="/addCar" element={<AddCarForm />} /> 
           <Route path="/editCar/:id" element={<EditCarForm />} /> 
