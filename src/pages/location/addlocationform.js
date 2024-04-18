@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Button, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
 
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
@@ -51,11 +50,11 @@ const AddLocationForm = () => {
     }));
   };
 
-  const handleClientChange = (e) => {
-    setSelectedClient(e.target.value);
+  const handleClientChange = (event, value) => {
+    setSelectedClient(value);
     setLocation(prevState => ({
       ...prevState,
-      client: e.target.value
+      client: value ? value.id : ''
     }));
   };
 
@@ -115,13 +114,14 @@ const AddLocationForm = () => {
           value={location.locationTime}
           onChange={handleChange}
           fullWidth
-          required
+          
           InputLabelProps={{
             shrink: true,
           }}
           margin="normal"
         />
 
+        {/* Choisir une voiture */}
         <TextField
           select
           label="Voiture"
@@ -137,30 +137,20 @@ const AddLocationForm = () => {
           ))}
         </TextField>
 
-        <TextField
-          select
-          label="Client"
+        {/* Sélectionner un client */}
+        <Autocomplete
+          options={clients}
+          getOptionLabel={(option) => `${option.name} ${option.firstName} - ${option.nationalID}`}
+          renderInput={(params) => <TextField {...params} label="Client" fullWidth margin="normal" />}
           value={selectedClient}
           onChange={handleClientChange}
-          fullWidth
-          margin="normal"
-        >
-          {clients.map((client) => (
-            <MenuItem key={client.id} value={client.id}>
-              {client.name} {client.firstName} - {client.nationalID}
-            </MenuItem>
-          ))}
-        </TextField>
+        />
+
         
-     
+        {/* Bouton de soumission */}
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
           Ajouter la location
         </Button>
-        <Link to="/locations">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' ,marginTop: '20px' }}>
-            Annuler
-          </Button>
-        </Link>
       </form>
     </Container>
   );
