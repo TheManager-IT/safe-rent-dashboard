@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Button, Container, TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
 function AddClientForm() {
     const [client, setClient] = useState({
@@ -47,6 +47,7 @@ function AddClientForm() {
             });
             if (!response.ok) throw new Error('Network response was not ok.');
             alert('Client added successfully!');
+            window.location.href = '/client';
             // Réinitialisation du formulaire après ajout réussi
             setClient({
                 name: '',
