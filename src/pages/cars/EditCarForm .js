@@ -9,7 +9,10 @@ const EditCarForm = () => {
     brand: '',
     images: [],
     numberOfCarSeats: 0,
-    traveled: [],
+    //traveled: [],
+    traveled: {
+      mileage: '',
+    },
     locationPrice: 0,
     status: ''
   });
@@ -29,28 +32,14 @@ const EditCarForm = () => {
       .then(data => setCar(data))
       .catch(error => console.error('Error fetching car:', error));
   }, [id]);
-/*
-  const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (name === 'images') {
-      setCar(prevCar => ({
-        ...prevCar,
-        images: Array.from(files)
-      }));
-    } else {
-      setCar(prevCar => ({
-        ...prevCar,
-        [name]: value
-      }));
-    }
-  };*/
+
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'images') {
       const imageFiles = Array.from(files);
       setCar(prevCar => ({
         ...prevCar,
-        images: [...prevCar.images, ...imageFiles] // Ajoutez les nouveaux fichiers à la liste existante
+        images: [...prevCar.images, ...imageFiles] 
       }));
     } else {
       setCar(prevCar => ({
@@ -69,11 +58,7 @@ const EditCarForm = () => {
     formData.append('numberOfCarSeats', car.numberOfCarSeats);
     formData.append('locationPrice', car.locationPrice);
     formData.append('status', car.status);
-/*
-    car.images.forEach((file, index) => {
-      formData.append(`images[${index}]`, file);
-    });
-    */
+
     car.images.forEach(image => {
       formData.append('images', image);
     });
@@ -96,10 +81,10 @@ const EditCarForm = () => {
   };
 
   return (
-    <Container>
+    <Container maxWidth="sm">
       <h2>Edit Car</h2>
       <form onSubmit={handleSubmit}>
-        {/* Autres champs textuels */}
+  
         <TextField name="registrationPlate" label="Registration Plate" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />
         <TextField name="model" label="Model" value={car.model || ''} onChange={handleChange} fullWidth margin="normal" required/>
         <TextField name="brand" label="Brand" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required/>
@@ -120,6 +105,19 @@ const EditCarForm = () => {
           fullWidth
           margin="normal"
         />
+
+
+<TextField
+  label="mileage"
+  name="traveled.mileage"
+  value={car.traveled.mileage}
+  onChange={handleChange}
+  type="number"
+  fullWidth
+  margin="normal"
+  placeholder="Mileage"
+/>
+
         <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>Save</Button>
         <Link to="/car">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
