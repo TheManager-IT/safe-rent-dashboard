@@ -112,7 +112,7 @@ const Locations = () => {
                 </TableCell>
                 <TableCell>{location.totalPrice}</TableCell>
                 <TableCell>
-                  <Link to={`/editlocation/${location._id}`}>
+                  <Link to={`/editlocationform/${location._id}`}>
                     <Button variant="contained" color="primary">
                       Modifier
                     </Button>
