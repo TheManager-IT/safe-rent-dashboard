@@ -18,7 +18,7 @@ import AddEvent from './pages/event/addEventForm';
 import EditEvent from './pages/event/editEvent';
 
 import Login from './pages/login/login';
-
+import Register from './pages/login/RegisterForm';
 import Header from './pages/Header';
 function App() {
   return (
@@ -27,6 +27,7 @@ function App() {
         <Routes>
           <Route path="/header" element={<Header />} /> 
           <Route path="/login" element={<Login />} /> 
+          <Route path="/register" element={<Register />} />
           
           <Route path="/car" element={<Cars />} /> 
           <Route path="/addCar" element={<AddCarForm />} /> 
