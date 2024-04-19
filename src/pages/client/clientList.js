@@ -15,15 +15,9 @@ import {
   IconButton,
 } from '@mui/material';
 
-
 const Clients = () => {
   const [clients, setClients] = useState([]);
-  const [selectedClientId, setSelectedClientId] = useState(null);
-  const [filterName, setFilterName] = useState('');
-  const [filterPhone, setFilterPhone] = useState('');
-  const [filterEmail, setFilterEmail] = useState('');
-  const [filterCIN, setFilterCIN] = useState('');
-  const [filterAddress, setFilterAddress] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:3000/v1/api/client')
@@ -33,7 +27,11 @@ const Clients = () => {
   }, []);
 
   const handleEdit = (id) => {
-    setSelectedClientId(id);
+    // Logique de modification
+  };
+
+  const handleAddClient = () => {
+    // Logic for adding a new client
   };
 
   const handleDelete = (id) => {
@@ -53,82 +51,40 @@ const Clients = () => {
     }
   };
 
-  const handleAddClient = () => {
-    // Logic for adding a new client
-  };
 
-  const handleFilterNameChange = (event) => {
-    setFilterName(event.target.value);
-  };
-
-  const handleFilterPhoneChange = (event) => {
-    setFilterPhone(event.target.value);
-  };
-
-  const handleFilterEmailChange = (event) => {
-    setFilterEmail(event.target.value);
-  };
-
-  const handleFilterCINChange = (event) => {
-    setFilterCIN(event.target.value);
-  };
-
-  const handleFilterAddressChange = (event) => {
-    setFilterAddress(event.target.value);
-  };
-
-  const filteredClients = clients.filter(client =>
-    client.name.toLowerCase().includes(filterName.toLowerCase()) &&
-    client.firstName.toLowerCase().includes(filterName.toLowerCase()) &&
-    client.phoneNumber.toLowerCase().includes(filterPhone.toLowerCase()) &&
-    client.email.toLowerCase().includes(filterEmail.toLowerCase()) &&
-    client.nationalID.toLowerCase().includes(filterCIN.toLowerCase()) &&
-    client.address.toLowerCase().includes(filterAddress.toLowerCase())
+  const filteredData = clients.filter(client =>
+    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.phoneNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.nationalID.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.address.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <Container>
-      <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-        <OutlinedInput
-          value={filterName}
-          onChange={handleFilterNameChange}
-          placeholder="Nom ou prénom"
-          startAdornment={
-            <InputAdornment position="start">
-              <IconButton>
-              {/* icon search */}
-              </IconButton>
-              
-            </InputAdornment>
-          }
-        />
-        <OutlinedInput
-          value={filterPhone}
-          onChange={handleFilterPhoneChange}
-          placeholder="Numéro de téléphone"
-        />
-        <OutlinedInput
-          value={filterEmail}
-          onChange={handleFilterEmailChange}
-          placeholder="Email"
-        />
-        <OutlinedInput
-          value={filterCIN}
-          onChange={handleFilterCINChange}
-          placeholder="CIN"
-        />
-        <OutlinedInput
-          value={filterAddress}
-          onChange={handleFilterAddressChange}
-          placeholder="Adresse"
-        />
-        <Link to="/addClient">
+    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+      <OutlinedInput
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Rechercher par nom, prénom, téléphone, email, CIN, adresse..."
+        startAdornment={
+          <InputAdornment position="start">
+            <IconButton>
+              {/* icône de recherche */}
+            </IconButton>
+          </InputAdornment>
+        }
+      />
+        
+      <div>  
+       <Link to="/addClient">
           <Button variant="contained" color="primary" onClick={handleAddClient}>
             Ajouter
           </Button>
         </Link> 
-      </div>
-     
+      </div>  
+</div>
       <TableContainer component={Paper}>
         <Table aria-label="simple table">
           <TableHead>
@@ -145,7 +101,7 @@ const Clients = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredClients.map((client) => (
+            {filteredData.map((client) => (
               <TableRow key={client._id}>
                 <TableCell>{client._id}</TableCell>
                 <TableCell>{client.name}</TableCell>
@@ -160,9 +116,9 @@ const Clients = () => {
                       Modifier
                     </Button>
                   </Link>
-                  </TableCell>
-                  <TableCell>
-                  <Button variant="contained" color="secondary" onClick={() => handleDelete(client._id)} >
+                </TableCell>
+                <TableCell>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(client._id)}>
                     Supprimer
                   </Button>
                 </TableCell>
@@ -171,7 +127,8 @@ const Clients = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+   
+</Container>
   );
 };
 
