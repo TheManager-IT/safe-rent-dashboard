@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 function AddCarForm() {
@@ -104,7 +104,10 @@ function AddCarForm() {
 
   return (
     <Container maxWidth="sm">
-    <h2>Ajouter Voiture</h2>
+  
+    <Typography variant="h4" sx={{ mb: 2 }}>
+    Ajouter Voiture
+      </Typography>
     <form onSubmit={handleSubmit} encType="multipart/form-data">
       <TextField
       label="Registration Plate"

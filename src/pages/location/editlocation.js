@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
+import { Button, Typography,Container, TextField, MenuItem, Autocomplete } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -108,7 +108,10 @@ const EditLocation = () => {
 
   return (
     <Container maxWidth="sm">
-      <h2>Modifier une location</h2>
+     
+      <Typography variant="h4" sx={{ mb: 2 }}>
+     Edit location
+      </Typography>
       <form onSubmit={handleSubmit}>
         
         <TextField

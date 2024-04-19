@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 
 const EditCarForm = () => {
   const [car, setCar] = useState({
@@ -82,7 +82,10 @@ const EditCarForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <h2>Edit Car</h2>
+     
+      <Typography variant="h4" sx={{ mb: 2 }}>
+      Edit Voiture
+      </Typography>
       <form onSubmit={handleSubmit}>
   
         <TextField name="registrationPlate" label="Registration Plate" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />

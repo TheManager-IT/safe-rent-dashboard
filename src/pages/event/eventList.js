@@ -12,7 +12,7 @@ import {
   Paper,
   OutlinedInput,
   InputAdornment,
-  IconButton,
+  IconButton,Typography,
 } from '@mui/material';
 
 
@@ -65,6 +65,9 @@ const Events = () => {
 
   return (
     <Container>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+       Les événements
+      </Typography>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <OutlinedInput
           value={searchTerm}

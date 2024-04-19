@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
+import { Button,Typography, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
 
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
@@ -79,7 +79,10 @@ const AddLocationForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <h2>Ajouter une location</h2>
+     
+      <Typography variant="h4" sx={{ mb: 2 }}>
+      Ajouter une location
+      </Typography>
       <form onSubmit={handleSubmit}>
         {/* Autres champs de formulaire */}
      

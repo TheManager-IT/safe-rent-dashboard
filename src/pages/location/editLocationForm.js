@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 import Autocomplete from '@mui/material/Autocomplete';
 
 const EditLocationForm = () => {
@@ -92,7 +92,10 @@ const EditLocationForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <h2>Edit Location</h2>
+      
+      <Typography variant="h4" sx={{ mb: 2 }}>
+     Edit  location
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           name="StartDateLocation"
