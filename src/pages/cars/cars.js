@@ -80,7 +80,7 @@ const Cars = () => {
         <Table aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              
               <TableCell>Registration Plate</TableCell>
               <TableCell>Brand</TableCell>
               <TableCell>Model</TableCell>
@@ -93,7 +93,7 @@ const Cars = () => {
           <TableBody>
             {filteredCars.map((car) => (
               <TableRow key={car._id}>
-                <TableCell>{car._id}</TableCell>
+                
                 <TableCell>{car.registrationPlate}</TableCell>
                 <TableCell>{car.brand}</TableCell>
                 <TableCell>{car.model}</TableCell>
