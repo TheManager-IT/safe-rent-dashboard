@@ -108,6 +108,7 @@ const Locations = () => {
                 <TableCell>{location.EndDateLocation}</TableCell>
                 <TableCell>{location.voiture}</TableCell>
                 <TableCell>
+                {location.client}
                   {clientDetails ? `${clientDetails.name} ${clientDetails.firstName}` : 'Client introuvable'}
                 </TableCell>
                 <TableCell>{location.totalPrice}</TableCell>
