@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
-import Autocomplete from '@mui/material/Autocomplete';
+import { Button, Container, TextField } from '@mui/material';
 
 const EditLocationForm = () => {
   const [location, setLocation] = useState({
@@ -15,79 +13,40 @@ const EditLocationForm = () => {
     client: '' 
   });
 
-  const [voitures, setVoitures] = useState([]);
-  const [clients, setClients] = useState([]);
-  const [selectedCar, setSelectedCar] = useState('');
-  const [selectedClient, setSelectedClient] = useState('');
-  
   const { id } = useParams();
 
   useEffect(() => {
-    const fetchLocation = async () => {
-      const response = await fetch(`http://localhost:3000/v1/api/location/get/${id}`);
-      const data = await response.json();
-      setLocation(data);
-    };
-
-    const fetchVoitures = async () => {
-      const response = await fetch('http://localhost:3000/v1/api/voiture');
-      const data = await response.json();
-      setVoitures(data);
-    };
-
-    const fetchClients = async () => {
-      const response = await fetch('http://localhost:3000/v1/api/client');
-      const data = await response.json();
-      setClients(data);
-    };
-
-    fetchLocation();
-    fetchVoitures();
-    fetchClients();
+    fetch(`http://localhost:3000/v1/api/location/get/${id}`)
+      .then(response => response.json())
+      .then(data => setLocation(data))
+      .catch(error => console.error('Error fetching location:', error));
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLocation(prevState => ({
-      ...prevState,
+    setLocation(prevLocation => ({
+      ...prevLocation,
       [name]: value
     }));
   };
 
-  const handleCarChange = (e) => {
-    setSelectedCar(e.target.value);
-    setLocation(prevState => ({
-      ...prevState,
-      voiture: e.target.value
-    }));
-  };
-
-  const handleClientChange = (event, value) => {
-    setSelectedClient(value);
-    setLocation(prevState => ({
-      ...prevState,
-      client: value ? value._id : '' 
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    
-    try {
-      const response = await fetch(`http://localhost:3000/v1/api/location/update/${id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(location)
-      });
-      if (!response.ok) throw new Error('Network response was not ok.');
-      alert('Location updated successfully!');
-      window.location.href = '/locations';
-    } catch (error) {
-      console.error('Error updating location:', error);
-      alert('Failed to update location: ' + error.message);
-    }
+    fetch(`http://localhost:3000/v1/api/location/update/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(location)
+    })
+    .then(response => {
+      if (response.ok) {
+        window.location.href = '/locations';
+      } else {
+        throw new Error('Failed to update location');
+      }
+    })
+    .catch(error => console.error('Error updating location:', error));
   };
 
   return (
@@ -124,7 +83,7 @@ const EditLocationForm = () => {
           name="locationTime"
           label="Location Time"
           type="time"
-          value={location.locationTime || ''}
+          value={location.locationTime}
           onChange={handleChange}
           fullWidth
           InputLabelProps={{
@@ -133,34 +92,54 @@ const EditLocationForm = () => {
           margin="normal"
         />
         <TextField
-          select
-          label="Car"
-          value={selectedCar}
-          onChange={handleCarChange}
+          name="NumberOfDays"
+          label="Number of Days"
+          type="number"
+          value={location.NumberOfDays}
+          onChange={handleChange}
           fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
           margin="normal"
-        >
-          {voitures.map((car) => (
-            <MenuItem key={car._id} value={car._id}>
-              {car.model} - {car.registrationPlate}
-            </MenuItem>
-          ))}
-        </TextField>
-        <Autocomplete
-          options={clients}
-          getOptionLabel={(option) => `${option.name} ${option.firstName} - ${option.nationalID}`}
-          renderInput={(params) => <TextField {...params} label="Client" fullWidth margin="normal" />}
-          value={selectedClient}
-          onChange={handleClientChange}
+        />
+        <TextField
+          name="totalPrice"
+          label="Total Price"
+          type="number"
+          value={location.totalPrice}
+          onChange={handleChange}
+          fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
+        />
+        <TextField
+          name="voiture"
+          label="Car"
+          value={location.voiture}
+          onChange={handleChange}
+          fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
+        />
+        <TextField
+          name="client"
+          label="Client"
+          value={location.client}
+          onChange={handleChange}
+          fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
         />
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
           Save
         </Button>
-        <Link to="/locations">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
-            Cancel
-          </Button>
-        </Link>
       </form>
     </Container>
   );
