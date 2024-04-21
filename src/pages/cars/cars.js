@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+
+import {
+  Button,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+Typography,OutlinedInput,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Cars = () => {
@@ -47,10 +51,10 @@ const Cars = () => {
   };
 
   const handleAddCar = () => {
-    // Logique pour ajouter une voiture
+   
   };
 
-  // Fonction de filtrage des voitures en fonction du terme de recherche
+  //recherche
   const filteredCars = cars.filter(car =>
     car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
     car.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -59,9 +63,12 @@ const Cars = () => {
 
   return (
     <Container>
+     <Typography variant="h4" sx={{ mb: 2 }}>
+       Voitures
+      </Typography>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <div>
-          <input
+          <OutlinedInput
             type="text"
             placeholder="Rechercher par matricule ou modèle..."
             value={searchTerm}
@@ -85,6 +92,7 @@ const Cars = () => {
               <TableCell>Brand</TableCell>
               <TableCell>Model</TableCell>
               <TableCell>Location Price</TableCell>
+              <TableCell>kilometrage</TableCell>
               <TableCell>img</TableCell>
               <TableCell>Modifier</TableCell>
               <TableCell>Supprimer</TableCell>
@@ -98,10 +106,9 @@ const Cars = () => {
                 <TableCell>{car.brand}</TableCell>
                 <TableCell>{car.model}</TableCell>
                 <TableCell>{car.locationPrice}</TableCell>
+                <TableCell>{car.traveled.mileage} - {car.traveled.updatedAt}</TableCell>
                 <TableCell>{car.images}</TableCell>
-                {/*<TableCell>
-                  <img src={car.images} alt="Car" style={{ width: '100px', height: 'auto' }} />
-            </TableCell>*/}
+              
 
                 <TableCell>
                   <Link to={`/editCar/${car._id}`}>

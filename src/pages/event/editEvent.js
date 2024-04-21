@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import MenuItem from '@mui/material/MenuItem';
+import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
+
 import { Link } from 'react-router-dom';
 
 const EventType = {
@@ -78,8 +76,10 @@ const EditEventForm = () => {
   };
 
   return (
-    <Container>
-      <h2>Edit Event</h2>
+    <Container maxWidth="sm">
+      <Typography variant="h4" sx={{ mb: 2 }}>
+      Edit un événement
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           select

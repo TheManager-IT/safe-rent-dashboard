@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Button, Container, TextField,Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const EditClientForm = () => {
@@ -66,16 +66,18 @@ const EditClientForm = () => {
     client.images.forEach(image => {
       formData.append('images', image);
     });
-
+    
     try {
       const response = await fetch(`http://localhost:3000/v1/api/client/update/${id}`, {
         method: 'PATCH',
         body: formData
       });
       if (!response.ok) {
+        
         throw new Error('Failed to update client');
       }
       alert('Client updated successfully!');
+      window.location.href = '/client';
     } catch (error) {
       console.error('Error updating client:', error);
       alert('Failed to update client: ' + error.message);
@@ -83,8 +85,11 @@ const EditClientForm = () => {
   };
 
   return (
-    <Container>
-      <h2>Edit Client</h2>
+    <Container maxWidth="sm">
+      
+      <Typography variant="h4" sx={{ mb: 2 }}>
+      Edit Client
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField name="name" label="Name" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required />
         <TextField name="firstName" label="First Name" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required />

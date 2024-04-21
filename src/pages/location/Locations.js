@@ -6,8 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+
+import { Button, Container,Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const Locations = () => {
@@ -70,6 +70,9 @@ const Locations = () => {
 
   return (
     <Container>
+     <Typography variant="h4" sx={{ mb: 2 }}>
+      locations
+      </Typography>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <div>
           <input

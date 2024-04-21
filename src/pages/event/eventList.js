@@ -12,14 +12,13 @@ import {
   Paper,
   OutlinedInput,
   InputAdornment,
-  IconButton,
+  IconButton,Typography,
 } from '@mui/material';
 
 
 const Events = () => {
   const [events, setEvents] = useState([]);
-  const [filterEventType, setFilterEventType] = useState('');
-  const [filterDate, setFilterDate] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:3000/v1/api/evenement')
@@ -49,43 +48,38 @@ const Events = () => {
     }
   };
   
-
   const handleAddEvent = () => {
     // Handle add event logic
   };
 
-  const handleFilterEventTypeChange = (event) => {
-    setFilterEventType(event.target.value);
-  };
-
-  const handleFilterDateChange = (event) => {
-    setFilterDate(event.target.value);
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
   };
 
   const filteredEvents = events.filter(event =>
-    event.eventType.toLowerCase().includes(filterEventType.toLowerCase()) &&
-    event.date.includes(filterDate)
+    event.voiture.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.date.includes(searchTerm)
   );
 
   return (
     <Container>
+      <Typography variant="h4" sx={{ mb: 2 }}>
+       Les événements
+      </Typography>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
         <OutlinedInput
-          value={filterEventType}
-          onChange={handleFilterEventTypeChange}
-          placeholder="Type d'événement"
+          value={searchTerm}
+          onChange={handleSearchTermChange}
+          placeholder="Rechercher par type, date, note ou voiture"
           startAdornment={
             <InputAdornment position="start">
               <IconButton>
-              {/* icon search */}
+                {/* icon search */}
               </IconButton>
             </InputAdornment>
           }
-        />
-        <OutlinedInput
-          value={filterDate}
-          onChange={handleFilterDateChange}
-          placeholder="Date"
         />
         <Link to="/addEvent">
           <Button variant="contained" color="primary" onClick={handleAddEvent}>

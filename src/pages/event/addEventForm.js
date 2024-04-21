@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 
 const EventType = {
   OIL_CHANGE: 'Oil Change',
@@ -77,7 +77,10 @@ const AddEventForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <h2>Ajouter un événement</h2>
+      
+      <Typography variant="h4" sx={{ mb: 2 }}>
+      Ajouter un événement
+      </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
           select

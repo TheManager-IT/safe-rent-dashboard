@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem } from '@mui/material';
+import { useParams, Link } from 'react-router-dom';
+import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 
 const EditCarForm = () => {
   const [car, setCar] = useState({
@@ -10,10 +9,14 @@ const EditCarForm = () => {
     brand: '',
     images: [],
     numberOfCarSeats: 0,
-    traveled: [],
+    //traveled: [],
+    traveled: {
+      mileage: '',
+    },
     locationPrice: 0,
     status: ''
   });
+
   const Status = {
     RENTING: 'Renting',
     BEING_WASHED: 'Being Washed',
@@ -30,25 +33,22 @@ const EditCarForm = () => {
       .catch(error => console.error('Error fetching car:', error));
   }, [id]);
 
-const handleChange = (e) => {
-  const { name, value, files } = e.target;
-  if (name === 'images') {
-    const imageFiles = Array.from(files);
-    setCar(prevCar => ({
-      ...prevCar,
-      images: [...prevCar.images, ...imageFiles]
-    }));
-  } else {
-    setCar(prevCar => ({
-      ...prevCar,
-      [name]: value
-    }));
-  }
-};
+  const handleChange = (e) => {
+    const { name, value, files } = e.target;
+    if (name === 'images') {
+      const imageFiles = Array.from(files);
+      setCar(prevCar => ({
+        ...prevCar,
+        images: [...prevCar.images, ...imageFiles] 
+      }));
+    } else {
+      setCar(prevCar => ({
+        ...prevCar,
+        [name]: value
+      }));
+    }
+  };
 
-  
-  
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -58,10 +58,16 @@ const handleChange = (e) => {
     formData.append('numberOfCarSeats', car.numberOfCarSeats);
     formData.append('locationPrice', car.locationPrice);
     formData.append('status', car.status);
-    formData.append('images', car.images[0]);
+
+    car.images.forEach(image => {
+      formData.append('images', image);
+    });
 
     fetch(`http://localhost:3000/v1/api/voiture/update/${id}`, {
       method: 'PATCH',
+      headers: {
+        // Ne pas définir 'Content-Type': 'multipart/form-data' ici car le navigateur doit le faire pour inclure la boundary
+      },
       body: formData
     })
     .then(response => {
@@ -69,15 +75,19 @@ const handleChange = (e) => {
         window.location.href = '/car';
       } else {
         throw new Error('Failed to update car');
-      }
+      }alert('Car updated successfully!');
     })
     .catch(error => console.error('Error updating car:', error));
   };
 
   return (
-    <Container>
-      <h2>Edit Car</h2>
+    <Container maxWidth="sm">
+     
+      <Typography variant="h4" sx={{ mb: 2 }}>
+      Edit Voiture
+      </Typography>
       <form onSubmit={handleSubmit}>
+  
         <TextField name="registrationPlate" label="Registration Plate" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />
         <TextField name="model" label="Model" value={car.model || ''} onChange={handleChange} fullWidth margin="normal" required/>
         <TextField name="brand" label="Brand" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required/>
@@ -90,18 +100,28 @@ const handleChange = (e) => {
             </MenuItem>
           ))}
         </TextField>
-       
-    
-          <TextField
-        type="file"
-        name="images"
-        multiple
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-        
-      />
-        <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px' }}>Save</Button>
+        <TextField
+          type="file"
+          name="images"
+          multiple
+          onChange={handleChange}
+          fullWidth
+          margin="normal"
+        />
+
+
+<TextField
+  label="mileage"
+  name="traveled.mileage"
+  value={car.traveled.mileage}
+  onChange={handleChange}
+  type="number"
+  fullWidth
+  margin="normal"
+  placeholder="Mileage"
+/>
+
+        <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>Save</Button>
         <Link to="/car">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
             Annuler
