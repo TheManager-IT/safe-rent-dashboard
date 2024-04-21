@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
+import { Button, Container, TextField, MenuItem, Typography } from '@mui/material';
 
 const EventType = {
   OIL_CHANGE: 'Oil Change',
@@ -20,6 +20,7 @@ const AddEventForm = () => {
   const [date, setDate] = useState('');
   const [cars, setCars] = useState([]); // Liste des voitures
   const [selectedCar, setSelectedCar] = useState('');
+  const today = new Date();
 
   useEffect(() => {
     const fetchCars = async () => {
@@ -56,6 +57,28 @@ const AddEventForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    // Validation
+    if (!eventType) {
+      alert("Veuillez sélectionner un type d'événement");
+      return;
+    }
+
+    if (!date) {
+      alert("Veuillez sélectionner une date");
+      return;
+    }
+
+    if (new Date(date) <= today) {
+      alert("La date doit être postérieure à la date actuelle");
+      return;
+    }
+
+    if (!selectedCar) {
+      alert("Veuillez sélectionner une voiture");
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:3000/v1/api/evenement/create', {
         method: 'POST',
@@ -79,7 +102,7 @@ const AddEventForm = () => {
     <Container maxWidth="sm">
       
       <Typography variant="h4" sx={{ mb: 2 }}>
-      Ajouter un événement
+        Ajouter un événement
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField
