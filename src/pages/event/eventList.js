@@ -97,7 +97,7 @@ const Events = () => {
           <Table aria-label="simple table">
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
+               
                 <TableCell>Voiture</TableCell>
                 <TableCell>Type d'événement</TableCell>
                 <TableCell>Note</TableCell>
@@ -109,7 +109,7 @@ const Events = () => {
             <TableBody>
               {filteredEvents.map((event) => (
                 <TableRow key={event._id}>
-                  <TableCell>{event._id}</TableCell>
+                  
                   <TableCell>{event.voiture}</TableCell>
                   <TableCell>{event.eventType}</TableCell>
                   <TableCell>{event.note}</TableCell>
