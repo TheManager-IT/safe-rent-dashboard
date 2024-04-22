@@ -77,6 +77,14 @@ function AddCarForm() {
       if (!car.numberOfCarSeats) {
         newErrors.numberOfCarSeats = 'Veuillez saisir le nombre de sièges de la voiture';
       }
+      if (!car.locationPrice) {
+        newErrors.locationPrice = 'Veuillez saisir le prix de la location';
+        
+      } else if (isNaN(car.locationPrice) || car.locationPrice <= 0) {
+        newErrors.locationPrice = 'Le prix de la location doit être un nombre positif';
+        
+      }
+
 
       if (!car.status) {
         newErrors.status = 'Veuillez sélectionner le statut de la voiture';
@@ -198,6 +206,8 @@ function AddCarForm() {
           placeholder="Location Price"
           fullWidth
           margin="normal"
+          error={!!errors.locationPrice}
+          helperText={errors.locationPrice}
         />
         <TextField
           select
