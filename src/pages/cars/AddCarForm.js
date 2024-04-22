@@ -28,6 +28,7 @@ function AddCarForm() {
     model: '',
     brand: '',
     numberOfCarSeats: '',
+    locationPrice: '',
     status: ''
   });
 
@@ -59,10 +60,12 @@ function AddCarForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // Validation des données
+    
       const newErrors = {};
-
-      if (!car.registrationPlate.match(/\d{1,3}TN\d{1,4}/)) {
+      
+      if (!car.registrationPlate) {
+        newErrors.registrationPlate = 'Veuillez saisir la matricule de la voiture';
+      } else if (!/\d{1,3}TN\d{1,4}/.test(car.registrationPlate)) {
         newErrors.registrationPlate = 'Numéro d\'immatriculation invalide';
       }
 
@@ -76,22 +79,22 @@ function AddCarForm() {
 
       if (!car.numberOfCarSeats) {
         newErrors.numberOfCarSeats = 'Veuillez saisir le nombre de sièges de la voiture';
+      } else if (car.numberOfCarSeats <= 0) {
+        newErrors.numberOfCarSeats = 'Le nombre de sièges doit être un nombre positif';
       }
+      
       if (!car.locationPrice) {
-        newErrors.locationPrice = 'Veuillez saisir le prix de la location';
-        
-      } else if (isNaN(car.locationPrice) || car.locationPrice <= 0) {
+        newErrors.locationPrice = 'Veuillez saisir le prix de la location !';
+      } else if (car.locationPrice <= 0) {
         newErrors.locationPrice = 'Le prix de la location doit être un nombre positif';
-        
       }
-
-
+      
       if (!car.status) {
         newErrors.status = 'Veuillez sélectionner le statut de la voiture';
       }
-
+      
       setErrors(newErrors);
-
+      
       if (Object.keys(newErrors).length > 0) {
         return;
       }
