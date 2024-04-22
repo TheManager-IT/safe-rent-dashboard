@@ -96,7 +96,7 @@ function AddCarForm() {
             formData.append('images', image);
           });
         } else if (key === 'traveled') {
-          // Assurez-vous que mileage est converti en un nombre avant de l'ajouter au formulaire
+          //  mileage est converti en un nombre avant de l'ajouter au formulaire
           const mileage = parseFloat(car.traveled.mileage);
           formData.append('traveled.mileage', mileage);
         } else {
