@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button,Typography, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
+import { Button, Typography, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
 
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
@@ -9,13 +9,14 @@ const AddLocationForm = () => {
     totalPrice: 0,
     locationTime: '',
     voiture: '',
-    client: '' 
+    client: ''
   });
 
   const [voitures, setVoitures] = useState([]);
   const [clients, setClients] = useState([]);
   const [selectedCar, setSelectedCar] = useState('');
   const [selectedClient, setSelectedClient] = useState('');
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const fetchVoitures = async () => {
@@ -54,13 +55,30 @@ const AddLocationForm = () => {
     setSelectedClient(value);
     setLocation(prevState => ({
       ...prevState,
-      client: value ? value._id : '' 
+      client: value ? value._id : ''
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+  
+    // Contrôles de saisie
+    const newErrors = {};
+  
+    if (!location.StartDateLocation || new Date(location.StartDateLocation) < new Date()) {
+      newErrors.StartDateLocation = 'La date de début doit être aujourd\'hui ou ultérieure';
+    }
+  
+    if (location.StartDateLocation >= location.EndDateLocation) {
+      newErrors.EndDateLocation = 'La date de fin doit être postérieure à la date de début';
+    }
+  
+    setErrors(newErrors);
+  
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
+  
+    // Traitement pour la soumission du formulaire
     try {
       const response = await fetch('http://localhost:3000/v1/api/location/create', {
         method: 'POST',
@@ -70,22 +88,35 @@ const AddLocationForm = () => {
         body: JSON.stringify(location)
       });
       if (!response.ok) throw new Error('Network response was not ok.');
+      
+      // Reset the form and related states
+      setLocation({
+        StartDateLocation: '',
+        EndDateLocation: '',
+        NumberOfDays: 0,
+        totalPrice: 0,
+        locationTime: '',
+        voiture: '',
+        client: ''
+      });
+      setSelectedCar('');
+      setSelectedClient('');
+      setErrors({});
+  
       alert('Location added successfully!');
     } catch (error) {
       console.error('Error adding location:', error);
       alert('Failed to add location: ' + error.message);
     }
   };
+  
 
   return (
     <Container maxWidth="sm">
-     
       <Typography variant="h4" sx={{ mb: 2 }}>
-      Ajouter une location
+        Ajouter une location
       </Typography>
       <form onSubmit={handleSubmit}>
-        {/* Autres champs de formulaire */}
-     
         <TextField
           name="StartDateLocation"
           label="Date de début"
@@ -94,6 +125,8 @@ const AddLocationForm = () => {
           onChange={handleChange}
           fullWidth
           required
+          error={!!errors.StartDateLocation}
+          helperText={errors.StartDateLocation}
           InputLabelProps={{
             shrink: true,
           }}
@@ -107,26 +140,25 @@ const AddLocationForm = () => {
           onChange={handleChange}
           fullWidth
           required
+          error={!!errors.EndDateLocation}
+          helperText={errors.EndDateLocation}
           InputLabelProps={{
             shrink: true,
           }}
           margin="normal"
         />
-   <TextField
-  name="locationTime"
-  label="Heure de la location"
-  type="time"
-  value={location.locationTime || ''} // Valeur initiale définie à 08:00
-  onChange={handleChange}
-  fullWidth
-  InputLabelProps={{
-    shrink: true,
-  }}
-  margin="normal"
-/>
-
-
-        {/* Choisir une voiture */}
+        <TextField
+          name="locationTime"
+          label="Heure de la location"
+          type="time"
+          value={location.locationTime || ''}
+          onChange={handleChange}
+          fullWidth
+          InputLabelProps={{
+            shrink: true,
+          }}
+          margin="normal"
+        />
         <TextField
           select
           label="Voiture"
@@ -141,7 +173,6 @@ const AddLocationForm = () => {
             </MenuItem>
           ))}
         </TextField>
-        {/* Sélectionner un client */}
         <Autocomplete
           options={clients}
           getOptionLabel={(option) => `${option.name} ${option.firstName} - ${option.nationalID}`}
@@ -149,9 +180,6 @@ const AddLocationForm = () => {
           value={selectedClient}
           onChange={handleClientChange}
         />
-
-        
-        {/* Bouton de soumission */}
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
           Ajouter la location
         </Button>
