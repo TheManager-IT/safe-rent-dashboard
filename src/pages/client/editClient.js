@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, TextField,Typography } from '@mui/material';
+import { Button, Container, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 const EditClientForm = () => {
@@ -14,6 +14,17 @@ const EditClientForm = () => {
     drivingLicense: '',
     nationalID: '',
     images: []
+  });
+
+  const [errors, setErrors] = useState({
+    name: '',
+    firstName: '',
+    email: '',
+    phoneNumber: '',
+    address: '',
+    contractNumber: '',
+    drivingLicense: '',
+    nationalID: '',
   });
 
   const { id } = useParams();
@@ -50,10 +61,60 @@ const EditClientForm = () => {
       }));
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validation des données
+    const newErrors = {};
+
+    if (!client.name.trim()) {
+      newErrors.name = 'Veuillez saisir le nom du client';
+    }
+
+    if (!client.firstName.trim()) {
+      newErrors.firstName = 'Veuillez saisir le prénom du client';
+    }
+
+    if (!client.email.trim()) {
+      newErrors.email = 'Veuillez saisir l\'adresse e-mail du client';
+    } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(client.email)) {
+      newErrors.email = 'Adresse e-mail invalide';
+    }
+
+    if (!client.phoneNumber.trim()) {
+      newErrors.phoneNumber = 'Veuillez saisir le numéro de téléphone du client';
+    } else if (!/^[9254]\d{7}$/.test(client.phoneNumber)) {
+      newErrors.phoneNumber = 'Numéro de téléphone invalide';
+    }
+
+    if (!client.address.trim()) {
+      newErrors.address = 'Veuillez saisir l\'adresse du client';
+    }
+
+    if (!client.contractNumber.trim()) {
+      newErrors.contractNumber = 'Veuillez saisir le numéro de contrat du client';
+    }
+
+    if (!client.drivingLicense.trim()) {
+      newErrors.drivingLicense = 'Veuillez saisir le numéro de permis de conduire du client';
+    } else if (!/^[0-9]{2}\s\/\s[0-9]{6}$/.test(client.drivingLicense)) {
+      newErrors.drivingLicense = 'Numéro de permis de conduire invalide';
+    }
+
+    if (!client.nationalID.trim()) {
+      newErrors.nationalID = 'Veuillez saisir le numéro d\'identité nationale du client';
+    } else if (!/^\d{8}$/.test(client.nationalID)) {
+      newErrors.nationalID = 'Numéro d\'identité nationale invalide';
+    }
+
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
+
+    // Traitement pour la soumission du formulaire
     const formData = new FormData();
     formData.append('name', client.name);
     formData.append('firstName', client.firstName);
@@ -66,14 +127,13 @@ const EditClientForm = () => {
     client.images.forEach(image => {
       formData.append('images', image);
     });
-    
+
     try {
       const response = await fetch(`http://localhost:3000/v1/api/client/update/${id}`, {
         method: 'PATCH',
         body: formData
       });
       if (!response.ok) {
-        
         throw new Error('Failed to update client');
       }
       alert('Client updated successfully!');
@@ -86,19 +146,18 @@ const EditClientForm = () => {
 
   return (
     <Container maxWidth="sm">
-      
       <Typography variant="h4" sx={{ mb: 2 }}>
-      Edit Client
+        Edit Client
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField name="name" label="Name" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="firstName" label="First Name" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="email" label="Email" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="phoneNumber" label="Phone Number" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="address" label="Address" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="contractNumber" label="Contract Number" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="drivingLicense" label="Driving License" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required />
-        <TextField name="nationalID" label="National ID" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required />
+        <TextField name="name" label="Name" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.name} helperText={errors.name} />
+        <TextField name="firstName" label="First Name" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.firstName} helperText={errors.firstName} />
+        <TextField name="email" label="Email" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.email} helperText={errors.email} />
+        <TextField name="phoneNumber" label="Phone Number" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
+        <TextField name="address" label="Address" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.address} helperText={errors.address} />
+        <TextField name="contractNumber" label="Contract Number" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.contractNumber} helperText={errors.contractNumber} />
+        <TextField name="drivingLicense" label="Driving License" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.drivingLicense} helperText={errors.drivingLicense} />
+        <TextField name="nationalID" label="National ID" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.nationalID} helperText={errors.nationalID} />
         <TextField type="file" name="images" onChange={handleChange} fullWidth margin="normal" multiple />
         <br />
         <Button type="submit" variant="contained" color="primary">Update Client</Button>
