@@ -22,6 +22,11 @@ import {
   IconButton,Typography,TablePagination,
 } from '@mui/material';
 
+import '../../CSS/styles.css';
+
+
+
+
 const Clients = () => {
   const [clients, setClients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -114,8 +119,8 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
 
   <TableHead sx={{ backgroundColor: 'rgb(244, 246, 248)' }}>
   <TableRow>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Nom</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Prénom</TableCell>
+    <TableCell className="table-header-cell" >Nom</TableCell>
+    <TableCell className="table-header-cell">Prénom</TableCell>
     <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Email</TableCell>
     <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Numéro de Téléphone</TableCell>
     <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>CIN</TableCell>

@@ -1,0 +1,21 @@
+/* styles.css */
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .card-header {
+    background-color: rgb(244, 246, 248);
+  }
+  
+  .table-header-cell {
+    font-weight: bold;
+    color: rgb(99, 115, 129);
+  }
+  
