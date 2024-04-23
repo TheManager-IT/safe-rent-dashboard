@@ -20,6 +20,7 @@ const AddEventForm = () => {
   const [date, setDate] = useState('');
   const [cars, setCars] = useState([]); // Liste des voitures
   const [selectedCar, setSelectedCar] = useState('');
+  const [errors, setErrors] = useState({});
   const today = new Date();
 
   useEffect(() => {
@@ -47,38 +48,48 @@ const AddEventForm = () => {
   const handleCarChange = (event) => {
     setSelectedCar(event.target.value);
   };
-
+  
+  
   const resetForm = () => {
     setEventType('');
     setNote('');
     setDate('');
     setSelectedCar('');
+    setErrors({});
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+      let isValid = true;
+      const newErrors = {};
+  
     // Validation
     if (!eventType) {
-      alert("Veuillez sélectionner un type d'événement");
-      return;
+      newErrors.eventType = "Veuillez sélectionner un type d'événement";
+      isValid = false;
     }
 
     if (!date) {
-      alert("Veuillez sélectionner une date");
-      return;
-    }
-
-    if (new Date(date) <= today) {
-      alert("La date doit être postérieure à la date actuelle");
-      return;
+      newErrors.date = "Veuillez sélectionner une date";
+      isValid = false;
+    } else if (new Date(date) < new Date()) {
+      newErrors.date = "La date doit être aujourd'hui ou ultérieure.";
+      isValid = false;
     }
 
     if (!selectedCar) {
-      alert("Veuillez sélectionner une voiture");
+      newErrors.selectedCar = "Veuillez sélectionner une voiture";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+
+    if (!isValid) {
       return;
     }
 
+  
     try {
       const response = await fetch('http://localhost:3000/v1/api/evenement/create', {
         method: 'POST',
@@ -91,6 +102,7 @@ const AddEventForm = () => {
         throw new Error('Failed to add event');
       }
       alert('Event added successfully!');
+      window.location.href = '/event';
       resetForm();
     } catch (error) {
       console.error('Error adding event:', error);
@@ -112,6 +124,8 @@ const AddEventForm = () => {
           onChange={handleEventTypeChange}
           fullWidth
           margin="normal"
+          error={!!errors.eventType}
+          helperText={errors.eventType}
         >
           {Object.values(EventType).map((type) => (
             <MenuItem key={type} value={type}>{type}</MenuItem>
@@ -132,7 +146,10 @@ const AddEventForm = () => {
           fullWidth
           margin="normal"
           InputLabelProps={{ shrink: true }}
+          error={!!errors.date}
+          helperText={errors.date}
         />
+        
         <TextField
           select
           label="Voiture"
@@ -140,6 +157,8 @@ const AddEventForm = () => {
           onChange={handleCarChange}
           fullWidth
           margin="normal"
+          error={!!errors.selectedCar}
+          helperText={errors.selectedCar}
         >
           {cars.map((car) => (
             <MenuItem key={car._id} value={car._id}>

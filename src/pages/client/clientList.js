@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Scrollbar from '../../components/scrollbar';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 
 import {
   Button,
@@ -59,15 +61,7 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
     }
   };
 
-/*
-  const filteredData = clients.filter(client =>
-    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.phoneNumber.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.nationalID.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.address.toLowerCase().includes(searchTerm.toLowerCase())
-  );*/
+
   const filteredData = clients.filter(client =>
     client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     client.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -86,25 +80,27 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
         Clients
       </Typography>
       <Link to="/addClient">
-          <Button variant="contained" color="primary" onClick={handleAddClient}>
-            Ajouter
+          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }}
+  startIcon={<AddIcon />} onClick={handleAddClient}>
+            Ajouter client
           </Button>
+
+ 
         </Link> 
         </Stack>
 
     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-      <OutlinedInput
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        placeholder="Rechercher par nom, prénom, téléphone, email, CIN, adresse..."
-        startAdornment={
-          <InputAdornment position="start">
-            <IconButton>
-              {/* icône de recherche */}
-            </IconButton>
-          </InputAdornment>
-        }
-      />
+    <OutlinedInput
+  value={searchTerm}
+  onChange={(e) => setSearchTerm(e.target.value)}
+  placeholder="Rechercher client..."
+  startAdornment={
+    <InputAdornment position="start">
+      <SearchIcon />
+    </InputAdornment>
+  }
+/>
+
         
    
 </div>
@@ -115,19 +111,20 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
   
   <TableContainer sx={{ overflow: 'unset' }}>
   <Table sx={{ minWidth: 800 }}>
-    <TableHead>
-      <TableRow>
-        
-        <TableCell>Nom</TableCell>
-        <TableCell>Prénom</TableCell>
-        <TableCell>Email</TableCell>
-        <TableCell>Numéro de Téléphone</TableCell>
-        <TableCell>CIN</TableCell>
-        <TableCell>Adresse</TableCell>
-        <TableCell>Modifier</TableCell>
-        <TableCell>Supprimer</TableCell>
-      </TableRow>
-    </TableHead>
+
+  <TableHead sx={{ backgroundColor: 'rgb(244, 246, 248)' }}>
+  <TableRow>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Nom</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Prénom</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Email</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Numéro de Téléphone</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>CIN</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Adresse</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Modifier</TableCell>
+    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Supprimer</TableCell>
+  </TableRow>
+</TableHead>
+
     
     <TableBody>
       {filteredData.map((client) => (
@@ -157,6 +154,8 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
   </Table>
 
 
+
+</TableContainer>
   <TablePagination
     component="div"
     count={clients.length} // total number of rows
@@ -169,8 +168,6 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
     }}
     rowsPerPageOptions={[5, 10, 25]}
   />
-</TableContainer>
-
 </Scrollbar>
  
  </Card>

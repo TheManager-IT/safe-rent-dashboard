@@ -23,10 +23,16 @@ const EditEventForm = () => {
     date: '',
     voiture: ''
   });
+
   const [carInfo, setCarInfo] = useState({
     model: '',
     registrationPlate: ''
   });
+  const [errors, setErrors] = useState({
+    date: '',
+   
+  });
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -56,6 +62,16 @@ const EditEventForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validation des données
+    const newErrors = {};
+    if (new Date(event.date) < new Date()) {
+      newErrors.date = "La date doit être aujourd'hui ou ultérieure.";
+    }
+    setErrors(newErrors);
+
+    if (Object.keys(newErrors).length > 0) {
+      return;
+    }
     // Envoyer les données modifiées de l'événement à l'API backend
     fetch(`http://localhost:3000/v1/api/evenement/update/${id}`, {
       method: 'PATCH', // Utilisation de la méthode PATCH
@@ -114,6 +130,7 @@ const EditEventForm = () => {
           margin="normal"
           InputLabelProps={{ shrink: true }}
           required
+          error={!!errors.date} helperText={errors.date}
         />
         <TextField
           name="voiture"

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Scrollbar from '../../components/scrollbar';
+import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
+
 import {
-  Button,
+  Button,Stack,
   Container,
   Table,
   TableBody,
@@ -15,7 +18,7 @@ import {
   InputAdornment,
   IconButton,
   Typography,
-  TablePagination,
+  TablePagination,Card,
 } from '@mui/material';
 
 const Events = () => {
@@ -69,35 +72,38 @@ const Events = () => {
 
   return (
     <Container>
-      <Scrollbar>
+              <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4" sx={{ mb: 2 }}>
           Les événements
         </Typography>
+        <Link to="/addEvent">
+            <Button variant="contained"   style={{ backgroundColor: '#222831', color: 'white' }}
+  startIcon={<AddIcon />} onClick={handleAddEvent}>
+              Ajouter événement
+            </Button>
+          </Link>
+
+        </Stack>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
           <OutlinedInput
             value={searchTerm}
             onChange={handleSearchTermChange}
-            placeholder="Rechercher par type, date, note ou voiture"
+            placeholder="Rechercher événement..."
             startAdornment={
-              <InputAdornment position="start">
-                <IconButton>
-                  {/* icon search */}
-                </IconButton>
-              </InputAdornment>
-            }
+    <InputAdornment position="start">
+      <SearchIcon />
+    </InputAdornment>
+  }
           />
-          <Link to="/addEvent">
-            <Button variant="contained" color="primary" onClick={handleAddEvent}>
-              Ajouter
-            </Button>
-          </Link>
+          
         </div>
-
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
+        <Card>
+        <Scrollbar>
+        <TableContainer sx={{ overflow: 'unset' }}>
+          <Table sx={{ minWidth: 800 }}>
             <TableHead>
               <TableRow>
-                <TableCell>ID</TableCell>
+               
                 <TableCell>Voiture</TableCell>
                 <TableCell>Type d'événement</TableCell>
                 <TableCell>Note</TableCell>
@@ -109,7 +115,6 @@ const Events = () => {
             <TableBody>
               {filteredEvents.map((event) => (
                 <TableRow key={event._id}>
-                  <TableCell>{event._id}</TableCell>
                   <TableCell>{event.voiture}</TableCell>
                   <TableCell>{event.eventType}</TableCell>
                   <TableCell>{event.note}</TableCell>
@@ -131,6 +136,7 @@ const Events = () => {
             </TableBody>
           </Table>
         </TableContainer>
+        </Scrollbar>
         <TablePagination
           component="div"
           count={events.length} // total number of rows
@@ -143,7 +149,9 @@ const Events = () => {
           }}
           rowsPerPageOptions={[5, 10, 25]}
         />
-      </Scrollbar>
+     
+
+      </Card>
     </Container>
   );
 };
