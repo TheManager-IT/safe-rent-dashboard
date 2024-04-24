@@ -22,7 +22,7 @@ import {
   IconButton,Typography,TablePagination,
 } from '@mui/material';
 
-import '../../CSS/styles.css';
+
 
 
 
