@@ -118,10 +118,10 @@ const Cars = () => {
           <Table sx={{ minWidth: 800 }}>
             <TableHead className="table-header">
               <TableRow>
-                <TableCell className="table-header-cell">Registration Plate</TableCell>
-                <TableCell className="table-header-cell">Brand</TableCell>
-                <TableCell className="table-header-cell">Model</TableCell>
-                <TableCell className="table-header-cell">Location Price</TableCell>
+                <TableCell className="table-header-cell">Imatriculation</TableCell>
+                <TableCell className="table-header-cell">Marque</TableCell>
+                <TableCell className="table-header-cell">Modele</TableCell>
+                <TableCell className="table-header-cell">Prix de la location</TableCell>
                 <TableCell className="table-header-cell">Kilometrage</TableCell>
                 <TableCell className="table-header-cell">Image</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>

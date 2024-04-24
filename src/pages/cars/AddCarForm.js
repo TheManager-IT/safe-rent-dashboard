@@ -152,11 +152,11 @@ function AddCarForm() {
       </Typography>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
         <TextField
-          label="Registration Plate"
+          label="Imatriculation"
           name="registrationPlate"
           value={car.registrationPlate}
           onChange={handleChange}
-          placeholder="Registration Plate"
+          placeholder="Imatriculation"
           required
           fullWidth
           margin="normal"
@@ -164,11 +164,11 @@ function AddCarForm() {
           helperText={errors.registrationPlate}
         />
         <TextField
-          label="Model"
+          label="Modele"
           name="model"
           value={car.model}
           onChange={handleChange}
-          placeholder="Model"
+          placeholder="Modele"
           required
           margin="normal"
           fullWidth
@@ -176,11 +176,11 @@ function AddCarForm() {
           helperText={errors.model}
         />
         <TextField
-          label="Brand"
+          label="Marque"
           name="brand"
           value={car.brand}
           onChange={handleChange}
-          placeholder="Brand"
+          placeholder="Marque"
           required
           margin="normal"
           fullWidth
@@ -188,12 +188,12 @@ function AddCarForm() {
           helperText={errors.brand}
         />
         <TextField
-          label="Number of Car Seats"
+          label="Nombre de places"
           name="numberOfCarSeats"
           value={car.numberOfCarSeats}
           onChange={handleChange}
           type="number"
-          placeholder="Number of Car Seats"
+          placeholder="Nombre de places"
           required
           fullWidth
           margin="normal"
@@ -201,12 +201,12 @@ function AddCarForm() {
           helperText={errors.numberOfCarSeats}
         />
         <TextField
-          label="Location Price"
+          label="Prix de la location"
           name="locationPrice"
           value={car.locationPrice}
           onChange={handleChange}
           type="number"
-          placeholder="Location Price"
+          placeholder="Prix de la location"
           fullWidth
           margin="normal"
           error={!!errors.locationPrice}
@@ -250,7 +250,7 @@ function AddCarForm() {
         />
         <br />
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
-          Add Car
+        Ajouter Voiture
         </Button>
         <Link to="/car">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>

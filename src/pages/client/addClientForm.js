@@ -150,23 +150,26 @@ function AddClientForm() {
                     error={!!errors.name}
                     helperText={errors.name}
                 />
-                <TextField name="firstName" value={client.firstName} onChange={handleChange}  placeholder="First Name"  required fullWidth   margin="normal" label="First Name" />
+
+
+
+                <TextField name="firstName" value={client.firstName} onChange={handleChange}  placeholder="Prénom"  required fullWidth   margin="normal" label="Prénom" />
             <TextField  name="email"  value={client.email}  onChange={handleChange}  placeholder="Email"   required fullWidth    margin="normal"  label="Email"   error={!!errors.email}
                     helperText={errors.email}/>
-            <TextField name="phoneNumber" value={client.phoneNumber} onChange={handleChange}   placeholder="Phone Number"  required  fullWidth  margin="normal" label="Phone Number"   error={!!errors.phoneNumber}
+            <TextField name="phoneNumber" value={client.phoneNumber} onChange={handleChange}   placeholder="Numéro de Téléphone"  required  fullWidth  margin="normal" label="Numéro de Téléphone"   error={!!errors.phoneNumber}
                     helperText={errors.phoneNumber} />
             <TextField name="address" value={client.address} onChange={handleChange} placeholder="Address" required  fullWidth    margin="normal" label="Address"/>
-            <TextField   name="contractNumber"   value={client.contractNumber}  onChange={handleChange}  placeholder="Contract Number" required fullWidth    margin="normal"  label="Contract Number"/>
-            <TextField name="drivingLicense" value={client.drivingLicense} onChange={handleChange}  placeholder="Driving License  :  xx / xxxxxx" fullWidth    margin="normal" label="Driving License"  error={!!errors.drivingLicense}
+            <TextField   name="contractNumber"   value={client.contractNumber}  onChange={handleChange}  placeholder="N° contrat" required fullWidth margin="normal" label="N° contrat"/>
+            <TextField name="drivingLicense" value={client.drivingLicense} onChange={handleChange}  placeholder="N° de permis de conduire  :  xx / xxxxxx" fullWidth    margin="normal" label="N° de permis de conduire"  error={!!errors.drivingLicense}
                     helperText={errors.drivingLicense}/>
-            <TextField name="nationalID" value={client.nationalID}     onChange={handleChange}   placeholder="National ID"    required fullWidth  margin="normal" label="National ID"   error={!!errors.nationalID}
+            <TextField name="nationalID" value={client.nationalID}     onChange={handleChange}   placeholder="CIN"    required fullWidth  margin="normal" label="CIN"   error={!!errors.nationalID}
                     helperText={errors.nationalID} />
             <TextField  type="file" name="images"   multiple  onChange={handleChange} fullWidth margin="normal" required />
             <br/>
             <br/>
 
                 <Button type="submit" variant="contained" color="primary">
-                    Add Client
+                Ajouter Client
                 </Button>
                 <Link to="/client">
                     <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
