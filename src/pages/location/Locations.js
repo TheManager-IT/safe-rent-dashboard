@@ -1,18 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Scrollbar from '../../components/scrollbar';
-import { Button, Container, InputAdornment,Typography, OutlinedInput,  Stack,
+
+
+import {Table,TableBody,TableCell,TableContainer, TableHead,TableRow ,Button, Container, InputAdornment,Typography, OutlinedInput,  Stack,
   Card, TablePagination } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
-
+import '../tableStyles.css'; 
 const Locations = () => {
   const [locations, setLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -74,7 +68,7 @@ const Locations = () => {
   return (
     <Container>
      
-      <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5} >
+      <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={5} >
 
         <Typography variant="h4" sx={{ mb: 2 }}>
           Locations
@@ -85,38 +79,32 @@ const Locations = () => {
               </Button>
             </Link>
       </Stack>
-
-
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-          <div>
+        <div className="search" >
             <OutlinedInput
               type="text"
               placeholder="Rechercher location..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               startAdornment={
-    <InputAdornment position="start">
-      <SearchIcon />
-    </InputAdornment>
-  }
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              }
             />
-          </div>
-         
-        </div>
-        
+          </div> 
 <Card>
-        <Scrollbar>
-        <TableContainer component={Paper}>
-          <Table aria-label="simple table">
-            <TableHead>
+       
+        <TableContainer sx={{ overflow: 'unset' }}>
+          <Table sx={{ minWidth: 800 }}>
+            <TableHead className="table-header">
               <TableRow>
-                <TableCell>Date de début</TableCell>
-                <TableCell>Date de fin</TableCell>
-                <TableCell>Voiture</TableCell>
-                <TableCell>Client</TableCell>
-                <TableCell>Total Price</TableCell>
-                <TableCell>Modifier</TableCell>
-                <TableCell>Supprimer</TableCell>
+                <TableCell className="table-header-cell">Date de début</TableCell>
+                <TableCell className="table-header-cell">Date de fin</TableCell>
+                <TableCell className="table-header-cell">Voiture</TableCell>
+                <TableCell className="table-header-cell">Client</TableCell>
+                <TableCell className="table-header-cell">Total Price</TableCell>
+                <TableCell className="table-header-cell">Modifier</TableCell>
+                <TableCell className="table-header-cell">Supprimer</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -130,7 +118,8 @@ const Locations = () => {
                   <TableCell>{location.voiture}</TableCell>
                   <TableCell>
                     {location.client}
-                    {clientDetails ? `${clientDetails.name} ${clientDetails.firstName}` : 'Client introuvable'}
+                  {/* {clientDetails ? `${clientDetails.name} ${clientDetails.firstName}` : 'Client introuvable'} */}
+
                   </TableCell>
                   <TableCell>{location.totalPrice}</TableCell>
                   <TableCell>
@@ -162,7 +151,7 @@ const Locations = () => {
           }}
           rowsPerPageOptions={[5, 10, 25]}
         />
-      </Scrollbar>
+    
       </Card>
     </Container>
   );

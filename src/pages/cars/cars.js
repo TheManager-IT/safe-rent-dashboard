@@ -3,6 +3,7 @@ import Scrollbar from '../../components/scrollbar';
 
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import '../tableStyles.css'; 
 
 import {
   Button,
@@ -73,7 +74,7 @@ const Cars = () => {
   return (
     <Container>
      
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack  className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" sx={{ mb: 2 }}>
             Voitures
           </Typography>
@@ -89,7 +90,7 @@ const Cars = () => {
 
           </Link>
         </Stack>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+<div className="search" >
           <OutlinedInput
             type="text"
             placeholder="Rechercher voiture..."
@@ -103,19 +104,19 @@ const Cars = () => {
           />
         </div>
         <Card>
-          <Scrollbar>
+         
             <TableContainer sx={{ overflow: 'unset' }}>
               <Table sx={{ minWidth: 800 }}>
-                <TableHead>
+                <TableHead className="table-header">
                   <TableRow>
-                    <TableCell>Registration Plate</TableCell>
-                    <TableCell>Brand</TableCell>
-                    <TableCell>Model</TableCell>
-                    <TableCell>Location Price</TableCell>
-                    <TableCell>Kilometrage</TableCell>
-                    <TableCell>Image</TableCell>
-                    <TableCell>Modifier</TableCell>
-                    <TableCell>Supprimer</TableCell>
+                    <TableCell className="table-header-cell">Registration Plate</TableCell>
+                    <TableCell className="table-header-cell">Brand</TableCell>
+                    <TableCell className="table-header-cell">Model</TableCell>
+                    <TableCell className="table-header-cell">Location Price</TableCell>
+                    <TableCell className="table-header-cell">Kilometrage</TableCell>
+                    <TableCell className="table-header-cell">Image</TableCell>
+                    <TableCell className="table-header-cell">Modifier</TableCell>
+                    <TableCell className="table-header-cell">Supprimer</TableCell>
                   </TableRow>
                 </TableHead>
 
@@ -149,18 +150,18 @@ const Cars = () => {
 
           <TablePagination
             component="div"
-            count={filteredCars.length} // nombre total de lignes
+            count={filteredCars.length} 
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={(event, newPage) => setPage(newPage)}
             onRowsPerPageChange={(event) => {
               setRowsPerPage(parseInt(event.target.value, 10));
-              setPage(0); // Réinitialiser la page à 0 lorsque le nombre de lignes par page change
+              setPage(0); 
             }}
             rowsPerPageOptions={[5, 10, 25]}
           />
            </TableContainer>
-          </Scrollbar>
+        
         </Card>
       
     </Container>

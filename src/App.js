@@ -20,12 +20,15 @@ import EditEvent from './pages/event/editEvent';
 import Login from './pages/login/login';
 import Register from './pages/login/RegisterForm';
 import Header from './pages/Header';
+import NavBar from './pages/navBar';
 import Error404 from './pages/error/notFoundView';
+
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
+        <Route path="/" element={<NavBar/>} /> 
           <Route path="/header" element={<Header />} /> 
           <Route path="/404" element={<Error404 />} /> 
           <Route path="/login" element={<Login />} /> 

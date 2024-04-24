@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Scrollbar from '../../components/scrollbar';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import '../tableStyles.css'; 
 
 import {
   Button,Stack,
@@ -13,10 +14,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   OutlinedInput,
   InputAdornment,
-  IconButton,
   Typography,
   TablePagination,Card,
 } from '@mui/material';
@@ -72,7 +71,7 @@ const Events = () => {
 
   return (
     <Container>
-              <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+              <Stack  className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={5}>
         <Typography variant="h4" sx={{ mb: 2 }}>
           Les événements
         </Typography>
@@ -84,7 +83,7 @@ const Events = () => {
           </Link>
 
         </Stack>
-        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+        <div className="search" >
           <OutlinedInput
             value={searchTerm}
             onChange={handleSearchTermChange}
@@ -98,18 +97,17 @@ const Events = () => {
           
         </div>
         <Card>
-        <Scrollbar>
+       
         <TableContainer sx={{ overflow: 'unset' }}>
           <Table sx={{ minWidth: 800 }}>
-            <TableHead>
+            <TableHead className="table-header">
               <TableRow>
-               
-                <TableCell>Voiture</TableCell>
-                <TableCell>Type d'événement</TableCell>
-                <TableCell>Note</TableCell>
-                <TableCell>Date</TableCell>
-                <TableCell>Modifier</TableCell>
-                <TableCell>Supprimer</TableCell>
+                <TableCell className="table-header-cell" >Voiture</TableCell>
+                <TableCell className="table-header-cell">Type d'événement</TableCell>
+                <TableCell className="table-header-cell">Note</TableCell>
+                <TableCell className="table-header-cell">Date</TableCell>
+                <TableCell className="table-header-cell">Modifier</TableCell>
+                <TableCell className="table-header-cell">Supprimer</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -136,16 +134,16 @@ const Events = () => {
             </TableBody>
           </Table>
         </TableContainer>
-        </Scrollbar>
+       
         <TablePagination
           component="div"
-          count={events.length} // total number of rows
+          count={events.length} 
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={(event, newPage) => setPage(newPage)}
           onRowsPerPageChange={(event) => {
             setRowsPerPage(parseInt(event.target.value, 10));
-            setPage(0); // Reset page to 0 when rowsPerPage changes
+            setPage(0); 
           }}
           rowsPerPageOptions={[5, 10, 25]}
         />

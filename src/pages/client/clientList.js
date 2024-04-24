@@ -78,55 +78,45 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
   
 
   return (
-    <Container>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+    <Container className="blue-container">
+      <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Typography variant="h4" sx={{ mb: 2 }}>
+            Clients
+          </Typography>
+        <Link to="/addClient">
+        <Button variant="contained" style={{ backgroundColor: 'rgb(33, 43, 54)', color: 'white', padding: '6px 16px' }} startIcon={<AddIcon />} onClick={handleAddClient}>
+  Ajouter client
+</Button>
 
-     <Typography variant="h4" sx={{ mb: 2 }}>
-        Clients
-      </Typography>
-      <Link to="/addClient">
-          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }}
-  startIcon={<AddIcon />} onClick={handleAddClient}>
-            Ajouter client
-          </Button>
-
- 
         </Link> 
-        </Stack>
+      </Stack>
 
-    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-    <OutlinedInput
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-  placeholder="Rechercher client..."
-  startAdornment={
-    <InputAdornment position="start">
-      <SearchIcon />
-    </InputAdornment>
-  }
-/>
-
-        
-   
+      <div className="search" >
+      <OutlinedInput
+    value={searchTerm}
+    onChange={(e) => setSearchTerm(e.target.value)}
+    placeholder="Rechercher client..."
+    startAdornment={
+      <InputAdornment position="start">
+        <SearchIcon />
+      </InputAdornment>
+    }
+  /> 
 </div>
 
-<Card>
-        
-<Scrollbar>
-  
+<Card className="card">
   <TableContainer sx={{ overflow: 'unset' }}>
   <Table sx={{ minWidth: 800 }}>
-
-  <TableHead sx={{ backgroundColor: 'rgb(244, 246, 248)' }}>
+  <TableHead className="table-header">
   <TableRow>
     <TableCell className="table-header-cell" >Nom</TableCell>
     <TableCell className="table-header-cell">Prénom</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Email</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Numéro de Téléphone</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>CIN</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Adresse</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Modifier</TableCell>
-    <TableCell sx={{ fontWeight: 'bold' ,color: 'rgb(99, 115, 129)'}}>Supprimer</TableCell>
+    <TableCell className="table-header-cell" >Email</TableCell>
+    <TableCell className="table-header-cell">Numéro de Téléphone</TableCell>
+    <TableCell className="table-header-cell" >CIN</TableCell>
+    <TableCell className="table-header-cell">Adresse</TableCell>
+    <TableCell className="table-header-cell" >Modifier</TableCell>
+    <TableCell  className="table-header-cell">Supprimer</TableCell>
   </TableRow>
 </TableHead>
 
@@ -157,9 +147,6 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
       ))}
     </TableBody>
   </Table>
-
-
-
 </TableContainer>
   <TablePagination
     component="div"
@@ -173,7 +160,7 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
     }}
     rowsPerPageOptions={[5, 10, 25]}
   />
-</Scrollbar>
+
  
  </Card>
 </Container>

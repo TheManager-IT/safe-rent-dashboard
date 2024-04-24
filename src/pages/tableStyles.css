@@ -1,0 +1,68 @@
+/* tableStyles.css */
+body{
+    /*background-color: rgb(250, 251, 249);*/
+  background-color: rgb(249, 250, 251);
+  /* color: rgb(33, 43, 54);
+    line-height: 1.5 !important;
+    font-size: 1rem !important;
+    font-family: "Public Sans", sans-serif !important;*/
+}
+.Stack{
+margin-top: 10px;
+}
+
+/*----------- start search div-------------*/
+.search{
+    position: relative !important;
+    -webkit-box-align: center !important;
+    align-items: center !important;
+    min-height: 56px !important;
+    height: 96px !important;
+    display: flex !important;
+    -webkit-box-pack: justify !important;
+    justify-content: space-between !important;
+    padding: 0px 8px 0px 24px !important;
+    background-color: rgb(237, 177, 233);
+    border-radius: 15px 15px 0px 0px;
+
+}
+@media (min-width: 600px){
+
+.search {
+    min-height: 64px;
+}}
+@media (min-width: 600px)
+ {
+.search {
+    padding-left: 24px;
+    padding-right: 24px;
+}
+}
+/*----------- end search div-------------*/
+
+
+.table-header {
+    background-color: rgb(244, 246, 248);
+  }
+  
+.table-header-cell {
+    font-weight: 400 !important;
+    color: rgb(99, 115, 129) !important;
+   
+  }
+
+  /*
+  .blue-container {
+    /*background-color: blue;*/
+   /* color: rgb(33, 43, 54);
+    font-family: "Public Sans", sans-serif;
+    font-weight: 400;
+   
+  }
+*/
+  .card{
+   
+
+  }
+
+  
