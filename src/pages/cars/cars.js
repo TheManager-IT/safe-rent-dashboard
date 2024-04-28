@@ -124,6 +124,7 @@ const Cars = () => {
                 <TableCell className="table-header-cell">Prix de la location</TableCell>
                 <TableCell className="table-header-cell">Kilometrage</TableCell>
                 <TableCell className="table-header-cell">Image</TableCell>
+                <TableCell className="table-header-cell">detail</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
               </TableRow>
@@ -137,6 +138,14 @@ const Cars = () => {
                   <TableCell>{car.locationPrice}</TableCell>
                   <TableCell>{car.traveled.mileage} - {car.traveled.updatedAt}</TableCell>
                   <TableCell>{car.images}</TableCell>
+                  <TableCell>
+                    <Link to={`/car/${car._id}`}>
+                      <Button variant="contained" color="primary">
+                        Détails
+                      </Button>
+                    </Link>
+                  </TableCell>
+                  
                   <TableCell>
                     <Link to={`/editCar/${car._id}`}>
                       <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">

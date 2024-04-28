@@ -115,6 +115,7 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
     <TableCell className="table-header-cell">Numéro de Téléphone</TableCell>
     <TableCell className="table-header-cell" >CIN</TableCell>
     <TableCell className="table-header-cell">Adresse</TableCell>
+    <TableCell className="table-header-cell">Detail</TableCell>
     <TableCell className="table-header-cell" >Modifier</TableCell>
     <TableCell  className="table-header-cell">Supprimer</TableCell>
   </TableRow>
@@ -131,6 +132,13 @@ const [rowsPerPage, setRowsPerPage] = useState(5);
           <TableCell>{client.phoneNumber}</TableCell>
           <TableCell>{client.nationalID}</TableCell>
           <TableCell>{client.address}</TableCell>
+          <TableCell>
+            <Link to={`/client/${client._id}`}>
+              <Button variant="contained" color="primary">
+                Détails
+              </Button>
+            </Link>
+          </TableCell>
           <TableCell>
             <Link to={`/editClient/${client._id}`}>
               <Button variant="contained" color="primary" onClick={() => handleEdit(client._id)}>
