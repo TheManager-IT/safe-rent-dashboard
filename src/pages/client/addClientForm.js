@@ -141,7 +141,7 @@ function AddClientForm() {
     };
 
     return (
-        <Container maxWidth="sm" style={{backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://infoidevice.fr/wp-content/uploads/2011/11/121.jpg")',backgroundRepeat:'no-repeat',backgroundSize: 'cover', padding: '20px', borderRadius: '20px' }}>
+        <Container maxWidth="sm" style={{backgroundRepeat:'no-repeat',backgroundSize: 'cover', padding: '20px', borderRadius: '20px' }}>
         
             <Typography variant="h4" sx={{ mb: 2 }}>
                 Ajouter Client
