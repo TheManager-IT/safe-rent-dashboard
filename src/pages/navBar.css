@@ -58,3 +58,46 @@
   text-decoration: none;
   
 }
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar-toggle-btn {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #ffffff;
+    color: white;
+    border-right: 2px dashed #ccc;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-toggle-btn {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    z-index: 999;
+  }
+}

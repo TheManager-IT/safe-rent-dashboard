@@ -29,6 +29,7 @@ function App() {
     <div className="App">
       <Router>
         <NavBar />
+        <Header />
         <Routes>
           <Route path="/header" element={<Header />} /> 
           <Route path="/404" element={<Error404 />} /> 

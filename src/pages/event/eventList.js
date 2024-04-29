@@ -71,7 +71,7 @@ const Events = () => {
 
   return (
     <Container>
-              <Stack  className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+              <Stack  className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
         <Typography variant="h4" sx={{ mb: 2 }}>
           Les événements
         </Typography>
