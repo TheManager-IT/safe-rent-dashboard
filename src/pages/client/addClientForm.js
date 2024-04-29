@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import EmailIcon from '@mui/icons-material/Email'; // Importez l'icône Email
+import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import HomeIcon from '@mui/icons-material/Home';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import ContactEmergencyRoundedIcon from '@mui/icons-material/ContactEmergencyRounded';
+import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
+import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 function AddClientForm() {
     const [client, setClient] = useState({
         name: '',
@@ -133,7 +141,8 @@ function AddClientForm() {
     };
 
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="sm" style={{backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("https://infoidevice.fr/wp-content/uploads/2011/11/121.jpg")',backgroundRepeat:'no-repeat',backgroundSize: 'cover', padding: '20px', borderRadius: '20px' }}>
+        
             <Typography variant="h4" sx={{ mb: 2 }}>
                 Ajouter Client
             </Typography>
@@ -142,29 +151,89 @@ function AddClientForm() {
                     name="name"
                     value={client.name}
                     onChange={handleChange}
-                    placeholder="Nom"
+                    placeholder="    Nom"
                     required
                     fullWidth
                     margin="normal"
                     label="Nom"
                     error={!!errors.name}
                     helperText={errors.name}
+                    InputProps={{
+                        startAdornment: (
+                            <PersonIcon  style={{ opacity: 0.6 }} />
+                        ),
+                      
+                    }}
                 />
 
 
 
-                <TextField name="firstName" value={client.firstName} onChange={handleChange}  placeholder="Prénom"  required fullWidth   margin="normal" label="Prénom" />
-            <TextField  name="email"  value={client.email}  onChange={handleChange}  placeholder="Email"   required fullWidth    margin="normal"  label="Email"   error={!!errors.email}
-                    helperText={errors.email}/>
-            <TextField name="phoneNumber" value={client.phoneNumber} onChange={handleChange}   placeholder="Numéro de Téléphone"  required  fullWidth  margin="normal" label="Numéro de Téléphone"   error={!!errors.phoneNumber}
-                    helperText={errors.phoneNumber} />
-            <TextField name="address" value={client.address} onChange={handleChange} placeholder="Address" required  fullWidth    margin="normal" label="Address"/>
-            <TextField   name="contractNumber"   value={client.contractNumber}  onChange={handleChange}  placeholder="N° contrat" required fullWidth margin="normal" label="N° contrat"/>
-            <TextField name="drivingLicense" value={client.drivingLicense} onChange={handleChange}  placeholder="N° de permis de conduire  :  xx / xxxxxx" fullWidth    margin="normal" label="N° de permis de conduire"  error={!!errors.drivingLicense}
-                    helperText={errors.drivingLicense}/>
-            <TextField name="nationalID" value={client.nationalID}     onChange={handleChange}   placeholder="CIN"    required fullWidth  margin="normal" label="CIN"   error={!!errors.nationalID}
-                    helperText={errors.nationalID} />
-            <TextField  type="file" name="images"   multiple  onChange={handleChange} fullWidth margin="normal" required />
+                <TextField name="firstName" value={client.firstName} onChange={handleChange}  placeholder="    Prénom"  required fullWidth   margin="normal" label="Prénom" 
+
+                        InputProps={{
+                        startAdornment: (
+                            <PersonIcon style={{ opacity: 0.6 }} />
+                        ),
+                    }}
+                />
+            <TextField  name="email"  value={client.email}  onChange={handleChange}  placeholder="    Email"   required fullWidth    margin="normal"  label="Email"   error={!!errors.email}
+                    helperText={errors.email}   
+                    InputProps={{
+                        startAdornment: (
+                            <AlternateEmailRoundedIcon style={{ opacity: 0.6 }} />
+                        ),
+                    }}/>
+            <TextField name="phoneNumber" value={client.phoneNumber} onChange={handleChange}   placeholder="    Numéro de Téléphone"  required  fullWidth  margin="normal" label="Numéro de Téléphone"   error={!!errors.phoneNumber}
+                    helperText={errors.phoneNumber} 
+
+                    InputProps={{
+                        startAdornment: (
+                            <PhoneIcon  style={{ opacity: 0.6 }}/>
+                        ),
+                    }}
+                    />
+            <TextField name="address" value={client.address} onChange={handleChange} placeholder="    Address" required  fullWidth    margin="normal" label="Address"
+
+InputProps={{
+                        startAdornment: (
+                            <HomeIcon  style={{ opacity: 0.6 }}/>
+                        ),
+                    }}
+            />
+            <TextField   name="contractNumber"   value={client.contractNumber}  onChange={handleChange}  placeholder="    N° contrat" required fullWidth margin="normal" label="N° contrat"
+
+InputProps={{
+                        startAdornment: (
+                            <AssignmentIcon style={{ opacity: 0.6 }}/>
+                        ),
+                    }}
+            />
+            <TextField name="drivingLicense" value={client.drivingLicense} onChange={handleChange}  placeholder="    N° de permis de conduire  :  xx / xxxxxx" fullWidth    margin="normal" label="N° de permis de conduire"  error={!!errors.drivingLicense}
+                    helperText={errors.drivingLicense}
+                    InputProps={{
+                        startAdornment: (
+                            <CreditCardRoundedIcon style={{ opacity: 0.6 }} />
+                        ),
+                    }}
+                    />
+            <TextField name="nationalID" value={client.nationalID}     onChange={handleChange}   placeholder="    CIN"    required fullWidth  margin="normal" label="CIN"   error={!!errors.nationalID}
+                    helperText={errors.nationalID} 
+                    InputProps={{
+                        startAdornment: (
+                            <ContactEmergencyRoundedIcon  style={{ opacity: 0.6 }} />
+                        ),
+                    }}
+                    />
+                    
+            <TextField  type="file" name="images"   multiple  onChange={handleChange} fullWidth margin="normal" required 
+                InputProps={{
+                        startAdornment: (
+                            <ImageRoundedIcon style={{ opacity: 0.6 }} />
+                        ),
+                    }}
+
+
+            />
             <br/>
             <br/>
 

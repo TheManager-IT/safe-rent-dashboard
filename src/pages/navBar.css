@@ -6,7 +6,7 @@
   height: 100%;
   background-color: #ffffff;
   color: white;
-  border-right: 2px dashed #ccc; /* bordure pointillée */
+  border-right: 1.5px dashed #ccc; /* bordure pointillée */
 
 }
 .icon-right {
@@ -81,7 +81,7 @@
     height: 100%;
     background-color: #ffffff;
     color: white;
-    border-right: 2px dashed #ccc;
+    border-right: 1px dashed #ccc;
     transition: transform 0.3s ease;
   }
 

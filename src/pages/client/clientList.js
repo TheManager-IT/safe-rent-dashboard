@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import AddClientForm from '../client/addClientForm'; // Assurez-vous d'importer correctement le composant AddClientForm
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 import {
   Button,
@@ -129,18 +131,18 @@ const Clients = () => {
                         Détails
                       </Button>
                     </Link>
+                   
                   </TableCell>
                   <TableCell>
-                    <Link to={`/editClient/${client._id}`}>
-                      <Button variant="contained" color="primary" onClick={() => handleEdit(client._id)}>
-                        Modifier
-                      </Button>
-                    </Link>
+                  <IconButton component={Link} to={`/editClient/${client._id}`} color="primary">
+                    <EditIcon />
+                  </IconButton>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" onClick={() => handleDelete(client._id)}>
-                      Supprimer
-                    </Button>
+                    
+                    <IconButton onClick={() => handleDelete(client._id)}  style={{ color: '#C50000' }}>
+                    <DeleteIcon />
+                  </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
