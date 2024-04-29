@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Container, Typography } from '@mui/material';
 
 const CarDetail = () => {
@@ -30,7 +30,6 @@ const CarDetail = () => {
         <Typography>Prix de la location: {car.locationPrice}</Typography>
         <img src={`http://localhost:3001/${car.images}`} alt="Car Image" />
         <Typography>Kilométrage: {car.traveled.mileage}</Typography>
-       
       </div>
     </Container>
   );
