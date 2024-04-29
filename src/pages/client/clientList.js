@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
-import AddClientForm from '../client/addClientForm'; // Assurez-vous d'importer correctement le composant AddClientForm
+import AddClientForm from '../client/addClientForm'; 
+import EdittClientForm from '../client/editClient'; 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -32,8 +33,9 @@ const Clients = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [menuAnchorEl, setMenuAnchorEl] = useState(null); // Déclarez la variable d'état menuAnchorEl
-  const [currentClientId, setCurrentClientId] = useState(null); // Déclarez la variable d'état currentClientId
-  const [addClientOpen, setAddClientOpen] = useState(false); // Déclarez la variable d'état addClientOpen
+  const [currentClientId, setCurrentClientId] = useState(null); 
+  const [addClientOpen, setAddClientOpen] = useState(false); 
+  const [editClientOpen, setEditClientOpen] = useState(false); 
 
   useEffect(() => {
     fetch('http://localhost:3000/v1/api/client')
@@ -73,7 +75,11 @@ const Clients = () => {
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const handleAddClient = () => {
-    setAddClientOpen(true); // Ouvrir le pop-up du formulaire client
+    setAddClientOpen(true); // Ouvrir le pop-up du formulaire  add client
+  };
+
+  const handleEditClient = () => {
+    setEditClientOpen(true); // Ouvrir le pop-up du formulaire edit client
   };
 
   return (
@@ -134,7 +140,8 @@ const Clients = () => {
                    
                   </TableCell>
                   <TableCell>
-                  <IconButton component={Link} to={`/editClient/${client._id}`} color="primary">
+                  {/* component={Link} to={`/editClient/${client._id}`}  */}
+                  <IconButton color="primary" onClick={handleEditClient}>
                     <EditIcon />
                   </IconButton>
                   </TableCell>
@@ -171,6 +178,16 @@ const Clients = () => {
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
         <AddClientForm onSuccess={() => setAddClientOpen(false)} />
+      </Popover>
+
+      {/* Popover pour l'edit d'un client */}
+      <Popover
+        open={editClientOpen}
+        onClose={() => setEditClientOpen(false)}
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
+      >
+        <EdittClientForm onSuccess={() => setEditClientOpen(false)} />
       </Popover>
     </Container>
   );
