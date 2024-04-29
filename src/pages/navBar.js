@@ -1,28 +1,67 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './navBar.css';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import PersonIcon from '@mui/icons-material/Person';
+import EventIcon from '@mui/icons-material/Event';
+import PlaceIcon from '@mui/icons-material/Place';
+import LoginIcon from '@mui/icons-material/Login';
+import ErrorIcon from '@mui/icons-material/Error';
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <div className="navbar-brand">
+    <div className="sidebar">
+      <div className="sidebar-brand">
         <Link to="/">
           <img src="/logo.png" alt="Logo" />
-          <span>Jaydon Frankie</span>
+          <br/>
+          <span>SAFE RENT </span>
         </Link>
       </div>
-      <ul className="navbar-nav">
-        <li><Link to="/">Dashboard</Link></li>
-        <li><Link to="/car">voiture</Link></li>
-        <li><Link to="/client">client</Link></li>
-        <li><Link to="/event">evenement</Link></li>
-        <li><Link to="/locations">locations</Link></li>
+      <ul className="sidebar-nav">
+        <li>
+          <Link to="/">
+            <DashboardIcon className="icon-right" /> 
+            Dashboard
+          </Link>
+        </li>
+        <li>
+          <Link to="/car">
+            <DirectionsCarIcon className="icon-right" />
+            Voitures
+          </Link>
+        </li>
+        <li>
+          <Link to="/client">
+            <PersonIcon className="icon-right" />
+            Clients
+          </Link>
+        </li>
+        <li>
+          <Link to="/event">
+            <EventIcon  className="icon-right"/>
+            Evenements
+          </Link>
+        </li>
+        <li>
+          <Link to="/locations">
+            <PlaceIcon  className="icon-right"/>
+            Locations
+          </Link>
+        </li>
       </ul>
-      <div className="navbar-actions">
-        <Link to="/login" className="btn btn-primary">Login</Link>
-        <Link to="/not-found" className="btn btn-secondary">Not Found</Link>
+      <div className="sidebar-actions">
+        <Link to="/login" className="btn btn-primary">
+          <LoginIcon />
+          Login
+        </Link>
+        <Link to="/not-found" className="btn btn-secondary">
+          <ErrorIcon />
+          Not Found
+        </Link>
       </div>
-    </nav>
+    </div>
   );
 };
 

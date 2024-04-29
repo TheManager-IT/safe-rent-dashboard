@@ -1,45 +1,60 @@
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+.sidebar {
+  width: 250px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background-color: #ffffff;
+  color: white;
+  border-right: 2px dashed #ccc; /* bordure pointillée */
+
+}
+.icon-right {
+  margin-right: 10px;
+}
+
+.sidebar-brand, .sidebar-nav, .sidebar-actions {
+  padding: 10px;
+}
+
+.sidebar-brand img {
+  max-width: 100px;
+  margin-right: 10px;
+}
+
+.sidebar-nav li {
+  list-style: none;
   
-  .navbar-brand {
-    display: flex;
-    align-items: center;
-  }
+}
+
+.sidebar-nav li a {
+  display: flex;
+  align-items: center;
+  /*color: #333;*/
+  color:rgb(99, 115, 129);
   
-  .navbar-brand img {
-    width: 40px;
-    height: 40px;
-    margin-right: 10px;
-  }
+  text-decoration: none;
+  padding: 20px;
+ 
+}
+
+.sidebar-nav li a .material-icons {
+  margin-right: 10px;
   
-  .navbar-nav {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
+}
+
+.sidebar-actions {
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+}
+
+.sidebar-actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  color: #333;
+  text-decoration: none;
   
-  .navbar-nav li {
-    margin-right: 20px;
-  }
-  
-  .navbar-nav a {
-    color: #333;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .navbar-actions {
-    display: flex;
-  }
-  
-  .navbar-actions .btn {
-    margin-left: 10px;
-  }
-  
+}
