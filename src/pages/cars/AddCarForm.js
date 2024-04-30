@@ -64,9 +64,9 @@ function AddCarForm() {
       const newErrors = {};
       
       if (!car.registrationPlate) {
-        newErrors.registrationPlate = 'Veuillez saisir la matricule de la voiture';
+        newErrors.registrationPlate = 'Veuillez saisir la matricule de la voiture.';
       } else if (!/\d{1,3}TN\d{1,4}/.test(car.registrationPlate)) {
-        newErrors.registrationPlate = 'Numéro d\'immatriculation invalide';
+        newErrors.registrationPlate = 'Numéro d\'immatriculation invalide.  Le format doit être comme ceci : 125TN1234';
       }
 
       if (!car.model.trim()) {

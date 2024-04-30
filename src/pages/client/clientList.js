@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import AddClientForm from '../client/addClientForm'; 
-import EdittClientForm from '../client/editClient'; 
+import EditClientForm from '../client/editClient'; 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -78,9 +78,12 @@ const Clients = () => {
     setAddClientOpen(true); // Ouvrir le pop-up du formulaire  add client
   };
 
-  const handleEditClient = () => {
+  const handleEditClient = (id) => {
+    setCurrentClientId(id); // Stocker l'ID du client actuel
     setEditClientOpen(true); // Ouvrir le pop-up du formulaire edit client
   };
+  
+
 
   return (
     <Container className="blue-container">
@@ -141,15 +144,14 @@ const Clients = () => {
                   </TableCell>
                   <TableCell>
                   {/* component={Link} to={`/editClient/${client._id}`}  */}
-                  <IconButton color="primary" onClick={handleEditClient}>
-                    <EditIcon />
-                  </IconButton>
+                    <IconButton color="primary" component={Link} to={`/editClient/${client._id}`}>
+                      <EditIcon />
+                    </IconButton>
                   </TableCell>
                   <TableCell>
-                    
                     <IconButton onClick={() => handleDelete(client._id)}  style={{ color: '#C50000' }}>
-                    <DeleteIcon />
-                  </IconButton>
+                      <DeleteIcon />
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}
@@ -187,8 +189,12 @@ const Clients = () => {
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         transformOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <EdittClientForm onSuccess={() => setEditClientOpen(false)} />
+        <EditClientForm 
+          clientId={currentClientId} 
+          onSuccess={() => setEditClientOpen(false)} 
+        />
       </Popover>
+
     </Container>
   );
 };

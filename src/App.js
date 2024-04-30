@@ -7,7 +7,7 @@ import CarDetail from './pages/cars/CarDetail';
 
 import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
-import EditClient from './pages/client/editClient';
+import EditClientForm from './pages/client/editClient';
 import ClientDetail from './pages/client/ClientDetail';
 
 import Locations from './pages/location/Locations';
@@ -45,7 +45,7 @@ function App() {
           
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />
-          <Route path="/editClient/:id" element={<EditClient />} />
+          <Route path="/editClient/:id" element={<EditClientForm />} />
           <Route path="/client/:id" element={<ClientDetail />} />
 
           <Route path="/event" element={<Events />} />
