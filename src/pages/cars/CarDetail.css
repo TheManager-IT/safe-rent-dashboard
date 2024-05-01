@@ -1,0 +1,15 @@
+.car-details-container {
+    /* Ajoutez vos styles pour la mise en page des détails de la voiture ici */
+    background-color: rgb(233, 202, 233);
+    padding: 50px 50px 50px 650px;
+    border-radius: 20px;
+  }
+  
+  .button-group {
+    margin-top: 20px;
+  }
+  
+  .button-group button {
+    margin-right: 10px;
+  }
+  

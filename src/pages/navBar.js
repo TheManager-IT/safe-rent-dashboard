@@ -8,6 +8,7 @@ import EventIcon from '@mui/icons-material/Event';
 import PlaceIcon from '@mui/icons-material/Place';
 import LoginIcon from '@mui/icons-material/Login';
 import ErrorIcon from '@mui/icons-material/Error';
+import CarRentalRoundedIcon from '@mui/icons-material/CarRentalRounded';
 
 const Navbar = () => {
   return (
@@ -46,7 +47,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/locations">
-            <PlaceIcon  className="icon-right"/>
+            <CarRentalRoundedIcon  className="icon-right"/>
             Locations
           </Link>
         </li>

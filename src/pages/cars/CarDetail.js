@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Container, Typography } from '@mui/material';
-
+import { Container, Typography, Button } from '@mui/material';
+import './CarDetail.css'; 
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import TroubleshootSharpIcon from '@mui/icons-material/TroubleshootSharp';
 const CarDetail = () => {
   const [car, setCar] = useState(null);
   const { id } = useParams();
@@ -14,22 +17,43 @@ const CarDetail = () => {
       .catch(error => console.error('Error fetching car details:', error));
   }, [id]);
 
+  const handleDelete = () => {
+    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?')) {
+      return;
+    }
+    // Logique de suppression ici
+  };
+
   if (!car) {
     return <div>Loading...</div>;
   }
 
   return (
     <Container>
-      <Typography variant="h4" sx={{ mb: 2 }}>
-        Détails de la voiture
+      <Typography variant="h4" sx={{ mb: 2 , mt:13}}>
+       {car.model}
       </Typography>
-      <div>
-        <Typography>Immatriculation: {car.registrationPlate}</Typography>
-        <Typography>Marque: {car.brand}</Typography>
-        <Typography>Modèle: {car.model}</Typography>
-        <Typography>Prix de la location: {car.locationPrice}</Typography>
+      <div className="car-details-container">
+        <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
+        <Typography> <b> Marque:</b> {car.brand}</Typography>
+        <Typography> <b> Modèle:</b> {car.model}</Typography>
+        <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
         <img src={`http://localhost:3001/${car.images}`} alt="Car Image" />
-        <Typography>Kilométrage: {car.traveled.mileage}</Typography>
+        <Typography> <b> Kilométrage:</b>  {car.traveled.mileage}</Typography>
+        <Typography> <b> Statut:</b>  {car.status}</Typography>
+
+       
+        <div className="button-group">
+          <Button variant="contained" component={Link} to={`/editCar/${car.id}`} startIcon={<EditIcon />} sx={{ mr: 1 }}>
+            Modifier
+          </Button>
+          <Button variant="contained" color="error" onClick={handleDelete} startIcon={<DeleteIcon />}>
+            Supprimer
+          </Button>
+          <Button variant="contained" color="info" startIcon={<TroubleshootSharpIcon  />}>
+            Diagnostic
+          </Button>
+        </div>
       </div>
     </Container>
   );
