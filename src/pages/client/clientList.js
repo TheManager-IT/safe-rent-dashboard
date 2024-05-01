@@ -75,12 +75,12 @@ const Clients = () => {
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const handleAddClient = () => {
-    setAddClientOpen(true); // Ouvrir le pop-up du formulaire  add client
+    setAddClientOpen(true); 
   };
 
   const handleEditClient = (id) => {
-    setCurrentClientId(id); // Stocker l'ID du client actuel
-    setEditClientOpen(true); // Ouvrir le pop-up du formulaire edit client
+    setCurrentClientId(id); 
+    setEditClientOpen(true);
   };
   
 
@@ -160,7 +160,7 @@ const Clients = () => {
         </TableContainer>
         <TablePagination
           component="div"
-          count={clients.length} // total number of rows
+          count={clients.length}            
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={(event, newPage) => setPage(newPage)}

@@ -35,7 +35,6 @@ const Cars = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    // Récupérer les données des voitures depuis l'API backend
     fetch('http://localhost:3000/v1/api/voiture')
       .then(response => response.json())
       .then(data => setCars(data))
@@ -67,11 +66,15 @@ const Cars = () => {
     // Logique pour ajouter une nouvelle voiture
   };
 
-  // Recherche et filtrage
-  const filteredCars = cars.filter(car =>
-    car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (brandFilter === '' || car.brand.toLowerCase().includes(brandFilter.toLowerCase()))
-  );
+ 
+  // Recherche 
+const filteredCars = cars.filter(car =>
+  car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  car.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+  car.locationPrice.toString().includes(searchTerm.toLowerCase())
+);
+
 
   return (
     <Container>

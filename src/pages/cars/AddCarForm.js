@@ -214,8 +214,8 @@ function AddCarForm() {
         />
         <TextField
           select
-          label="Status"
-          name="status"
+          label="Statut"
+          name="statut"
           value={car.status}
           onChange={handleChange}
           fullWidth
@@ -239,14 +239,14 @@ function AddCarForm() {
           margin="normal"
         />
         <TextField
-          label="Mileage"
+          label="Kilométrage"
           name="traveled.mileage"
           value={car.traveled.mileage}
           onChange={handleChange}
           type="number"
           fullWidth
           margin="normal"
-          placeholder="Mileage"
+          placeholder="Kilométrage"
         />
         <br />
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>

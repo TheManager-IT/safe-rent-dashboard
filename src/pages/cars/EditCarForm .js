@@ -9,7 +9,6 @@ const EditCarForm = () => {
     brand: '',
     images: [],
     numberOfCarSeats: 0,
-    //traveled: [],
     traveled: {
       mileage: '',
     },
@@ -23,7 +22,6 @@ const EditCarForm = () => {
     brand: '',
     images: [],
     numberOfCarSeats: '',
-    //traveled: [],
     traveled: {
       mileage: '',
     },
@@ -104,8 +102,6 @@ const EditCarForm = () => {
     }
 
 
-
-
     const formData = new FormData();
     formData.append('registrationPlate', car.registrationPlate);
     formData.append('model', car.model);
@@ -121,7 +117,6 @@ const EditCarForm = () => {
     fetch(`http://localhost:3000/v1/api/voiture/update/${id}`, {
       method: 'PATCH',
       headers: {
-        // Ne pas définir 'Content-Type': 'multipart/form-data' ici car le navigateur doit le faire pour inclure la boundary
       },
       body: formData
     })
@@ -143,12 +138,12 @@ const EditCarForm = () => {
       </Typography>
       <form onSubmit={handleSubmit}>
   
-        <TextField name="registrationPlate" label="Registration Plate" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />
-        <TextField name="model" label="Model" value={car.model || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.model} helperText={errors.model} />
-        <TextField name="brand" label="Brand" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.brand} helperText={errors.brand}/>
-        <TextField name="numberOfCarSeats" label="Number of Car Seats" value={car.numberOfCarSeats || ''} onChange={handleChange} fullWidth margin="normal" type="number" required  error={!!errors.numberOfCarSeats} helperText={errors.numberOfCarSeats}/>
-        <TextField name="locationPrice" label="Location Price" value={car.locationPrice || ''} onChange={handleChange} fullWidth margin="normal" type="number"error={!!errors.locationPrice} helperText={errors.locationPrice}/>
-        <TextField select label="Status" name="status" value={car.status || ''} onChange={handleChange} fullWidth margin="normal" required   error={!!errors.status}
+        <TextField name="registrationPlate" label="Imatriculation" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />
+        <TextField name="model" label="Modele" value={car.model || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.model} helperText={errors.model} />
+        <TextField name="brand" label="Marque" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.brand} helperText={errors.brand}/>
+        <TextField name="numberOfCarSeats" label="Nombre de places" value={car.numberOfCarSeats || ''} onChange={handleChange} fullWidth margin="normal" type="number" required  error={!!errors.numberOfCarSeats} helperText={errors.numberOfCarSeats}/>
+        <TextField name="locationPrice" label="Prix de la location" value={car.locationPrice || ''} onChange={handleChange} fullWidth margin="normal" type="number"error={!!errors.locationPrice} helperText={errors.locationPrice}/>
+        <TextField select label="Statut" name="statut" value={car.status || ''} onChange={handleChange} fullWidth margin="normal" required   error={!!errors.status}
           helperText={errors.status}>
           {Object.values(Status).map((status) => (
             <MenuItem key={status} value={status}>
@@ -166,7 +161,7 @@ const EditCarForm = () => {
         />
 
         <TextField
-          label="mileage"
+          label="Kilométrage"
           name="traveled.mileage"
           value={car.traveled.mileage}
           onChange={handleChange}
