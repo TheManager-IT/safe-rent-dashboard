@@ -67,13 +67,13 @@ function AddClientForm() {
             if (!client.email.trim()) {
                 newErrors.email = 'Veuillez saisir l\'adresse e-mail du client';
             } else if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(client.email)) {
-                newErrors.email = 'Adresse e-mail invalide';
+                newErrors.email = 'Adresse e-mail invalide. Veuillez saisir une adresse email au format exemple@domaine.com';
             }
 
             if (!client.phoneNumber.trim()) {
                 newErrors.phoneNumber = 'Veuillez saisir le numéro de téléphone du client';
             } else if (!/^[9254]\d{7}$/.test(client.phoneNumber)) {
-                newErrors.phoneNumber = 'Numéro de téléphone invalide';
+                newErrors.phoneNumber = 'Numéro de téléphone invalide. Veuillez saisir un numéro de téléphone de 8 chiffres commençant par 9, 2, 5 ou 4.';
             }
 
             if (!client.address.trim()) {
@@ -87,13 +87,13 @@ function AddClientForm() {
             if (!client.drivingLicense.trim()) {
                 newErrors.drivingLicense = 'Veuillez saisir le numéro de permis de conduire du client';
             } else if (!/^[0-9]{2}\s\/\s[0-9]{6}$/.test(client.drivingLicense)) {
-                newErrors.drivingLicense = 'Numéro de permis de conduire invalide';
+                newErrors.drivingLicense = 'Numéro de permis de conduire invalide. Veuillez saisir un numéro de permis au format 00 / 000000.';
             }
 
             if (!client.nationalID.trim()) {
                 newErrors.nationalID = 'Veuillez saisir le numéro d\'identité nationale du client';
             } else if (!/^\d{8}$/.test(client.nationalID)) {
-                newErrors.nationalID = 'Numéro d\'identité nationale invalide';
+                newErrors.nationalID = 'Numéro d\'identité nationale invalide. Veuillez saisir un numéro d\'identité nationale à 8 chiffres.';
             }
 
             setErrors(newErrors);

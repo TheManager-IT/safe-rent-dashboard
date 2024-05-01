@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
+
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return date.toLocaleDateString('fr-FR', options);
+};
+
+
 const Locations = () => {
   const [locations, setLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -64,6 +72,7 @@ const Locations = () => {
       .catch(error => console.error('Error deleting location:', error));
     }
   };
+  
 
   return (
     <Container>
@@ -113,8 +122,9 @@ const Locations = () => {
                 : locations
               ).map((location) => (
                 <TableRow key={location._id}>
-                  <TableCell>{location.StartDateLocation}</TableCell>
-                  <TableCell>{location.EndDateLocation}</TableCell>
+                  <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
+                  <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
+
                   <TableCell>{location.voiture}</TableCell>
                   <TableCell>
                     {location.client}

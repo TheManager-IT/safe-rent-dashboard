@@ -61,6 +61,10 @@ const Events = () => {
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
   };
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(date).toLocaleDateString('fr-FR', options);
+  };
 
   const filteredEvents = events.filter(event =>
     event.voiture.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -116,7 +120,8 @@ const Events = () => {
                   <TableCell>{event.voiture}</TableCell>
                   <TableCell>{event.eventType}</TableCell>
                   <TableCell>{event.note}</TableCell>
-                  <TableCell>{event.date}</TableCell>
+                  <TableCell>{formatDate(event.date)}</TableCell>
+
                   <TableCell>
                     <Link to={`/editEvent/${event._id}`}>
                       <Button variant="contained" color="primary" onClick={() => handleEdit(event._id)}>
