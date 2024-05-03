@@ -214,8 +214,8 @@ function AddCarForm() {
         />
         <TextField
           select
-          label="Statut"
-          name="statut"
+          label="Status"
+          name="status"
           value={car.status}
           onChange={handleChange}
           fullWidth

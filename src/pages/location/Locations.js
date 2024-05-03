@@ -1,12 +1,31 @@
 import React, { useState, useEffect } from 'react';
+import Scrollbar from '../../components/scrollbar';
 
-
-import {Table,TableBody,TableCell,TableContainer, TableHead,TableRow ,Button, Container, InputAdornment,Typography, OutlinedInput,  Stack,
-  Card, TablePagination } from '@mui/material';
-import { Link } from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
+
+import {
+  Button,
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Stack,
+  Typography,
+  OutlinedInput,
+  Card,
+  TablePagination,
+  IconButton,
+  InputAdornment,
+  MenuItem,
+  Select,
+} from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const formatDate = (dateString) => {
   const date = new Date(dateString);
@@ -14,11 +33,9 @@ const formatDate = (dateString) => {
   return date.toLocaleDateString('fr-FR', options);
 };
 
-
 const Locations = () => {
   const [locations, setLocations] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [clientDetails, setClientDetails] = useState({});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -29,28 +46,6 @@ const Locations = () => {
       .then(data => setLocations(data))
       .catch(error => console.error('Error fetching locations:', error));
   }, []);
-
-  useEffect(() => {
-    const fetchClientDetails = async () => {
-      if (locations[page]) {
-        const details = await getClientDetails(locations[page].client);
-        setClientDetails(details);
-      }
-    };
-
-    fetchClientDetails();
-  }, [locations, page]);
-
-  const getClientDetails = async (id) => {
-    try {
-      const response = await fetch(`http://localhost:3000/v1/api/client/get/${id}`);
-      const clientData = await response.json();
-      return clientData;
-    } catch (error) {
-      console.error('Error fetching client details:', error);
-      return null;
-    }
-  };
 
   const handleAddLocation = () => {
     //  location
@@ -72,37 +67,33 @@ const Locations = () => {
       .catch(error => console.error('Error deleting location:', error));
     }
   };
-  
 
   return (
     <Container>
-     
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13} >
-
         <Typography variant="h4" sx={{ mb: 2 }}>
           Locations
         </Typography>
-            <Link to="/addlocationform">
-              <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddLocation}>
-                Ajouter location
-              </Button>
-            </Link>
+        <Link to="/addlocationform">
+          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddLocation}>
+            Ajouter location
+          </Button>
+        </Link>
       </Stack>
-        <div className="search" >
-            <OutlinedInput
-              type="text"
-              placeholder="Rechercher location..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              startAdornment={
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              }
-            />
-          </div> 
-<Card>
-       
+      <div className="search" >
+        <OutlinedInput
+          type="text"
+          placeholder="Rechercher location..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
+        />
+      </div> 
+      <Card>
         <TableContainer sx={{ overflow: 'unset' }}>
           <Table sx={{ minWidth: 800 }}>
             <TableHead className="table-header">
@@ -124,13 +115,8 @@ const Locations = () => {
                 <TableRow key={location._id}>
                   <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
                   <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
-
-                  <TableCell>{location.voiture}</TableCell>
-                  <TableCell>
-                    {location.client}
-                  {/* {clientDetails ? `${clientDetails.name} ${clientDetails.firstName}` : 'Client introuvable'} */}
-
-                  </TableCell>
+                  <TableCell>{location.voiture.model}</TableCell>
+                  <TableCell>{location.client.name} {location.client.firstName}</TableCell>
                   <TableCell>{location.totalPrice}</TableCell>
                   <TableCell>
                     <Link to={`/editlocationform/${location._id}`}>
@@ -161,7 +147,6 @@ const Locations = () => {
           }}
           rowsPerPageOptions={[5, 10, 25]}
         />
-    
       </Card>
     </Container>
   );

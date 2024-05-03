@@ -66,7 +66,6 @@ const Cars = () => {
     // Logique pour ajouter une nouvelle voiture
   };
 
- 
   // Recherche 
 const filteredCars = cars.filter(car =>
   car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
