@@ -1,12 +1,25 @@
+*{
+ font-family: monospace;
+ /*font-family: cursive;*/
+ /*line-height: 1.57143;*/
+   
+    /*font-family: "Public Sans", sans-serif;*/
+    /*font-weight: 500;*/
+    
+    text-transform: capitalize;
+}
+
 .sidebar {
   width: 250px;
   position: fixed;
   left: 0;
   top: 0;
   height: 100%;
-  background-color: #ffffff;
+ /* background-color: #ffffff;*/
+  background-color: rgb(249, 250, 251);
+
   color: white;
-  border-right: 1.5px dashed #ccc; /* bordure pointillée */
+  border-right: 1.2px dashed #ccc; 
 
 }
 .icon-right {
@@ -32,10 +45,28 @@
   align-items: center;
   /*color: #333;*/
   color:rgb(99, 115, 129);
-  
-  text-decoration: none;
-  padding: 20px;
  
+  text-decoration: none;
+  /*font-size: 20px;*/
+  padding: 20px;
+}
+
+.sidebar-nav li a:hover {
+  background-color: rgba(145, 158, 171, 0.08);
+  /* Changement de couleur du texte pour assurer une meilleure lisibilité */
+}
+.sidebar-nav li a:active {
+  background-color: rgba(0, 0, 255, 0.557);
+  color: white; /* Changement de couleur du texte pour assurer une meilleure lisibilité */
+}
+.sidebar-nav li a:focus {
+  /*-webkit-tap-highlight-color: transparent;*/
+  color: rgb(24, 119, 242);
+  text-transform: capitalize;
+  background-color: rgba(24, 119, 242, 0.08);
+/*
+  background-color: rgba(0, 0, 255, 0.263);
+  color: rgba(0, 0, 255, 0.557);*/ /* Changement de couleur du texte pour assurer une meilleure lisibilité */
 }
 
 .sidebar-nav li a .material-icons {

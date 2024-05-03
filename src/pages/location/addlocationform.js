@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Typography, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
-
+import { Link } from 'react-router-dom';
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
     StartDateLocation: '',
@@ -60,16 +60,23 @@ const AddLocationForm = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+  // Crée une nouvelle instance de Date pour "aujourd'hui" et remet les heures, minutes, secondes et millisecondes à zéro
+const today = new Date();
+today.setHours(0, 0, 0, 0);
+
+// Fait de même pour la date de début reçue
+const startDate = new Date(location.StartDateLocation);
+startDate.setHours(0, 0, 0, 0);
+
     // Contrôles de saisie
     const newErrors = {};
   
-    if (!location.StartDateLocation || new Date(location.StartDateLocation) < new Date()) {
-      newErrors.StartDateLocation = 'La date de début doit être aujourd\'hui ou ultérieure';
+    if (!location.StartDateLocation || startDate < today) {
+      newErrors.StartDateLocation = 'La date de début doit être aujourd\'hui ou ultérieure.';
     }
   
     if (location.StartDateLocation >= location.EndDateLocation) {
-      newErrors.EndDateLocation = 'La date de fin doit être postérieure à la date de début';
+      newErrors.EndDateLocation = 'La date de fin doit être ultérieure à la date de début.';
     }
   
     setErrors(newErrors);
@@ -103,10 +110,10 @@ const AddLocationForm = () => {
       setSelectedClient('');
       setErrors({});
   
-      alert('Location added successfully!');
+      alert('Location ajoutée avec succès !');
     } catch (error) {
       console.error('Error adding location:', error);
-      alert('Failed to add location: ' + error.message);
+      alert('Échec de l\'ajout de la location : ' + error.message);
     }
   };
   
@@ -183,6 +190,11 @@ const AddLocationForm = () => {
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
           Ajouter la location
         </Button>
+        <Link to="/locations">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );

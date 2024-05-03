@@ -125,9 +125,9 @@ const EditCarForm = () => {
         window.location.href = '/car';
       } else {
         throw new Error('Failed to update car');
-      }alert('Car updated successfully!');
+      }alert('Voiture mise à jour avec succès !');
     })
-    .catch(error => console.error('Error updating car:', error));
+    .catch(error => console.error('Erreur lors de la mise à jour de la voiture :', error));
   };
 
   return (

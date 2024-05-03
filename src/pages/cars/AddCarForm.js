@@ -138,10 +138,10 @@ function AddCarForm() {
         status: ''
       });
   
-      alert('Car added successfully!');
+      alert('Voiture ajoutée avec succès !');
       
     } catch (error) {
-      setErrors({ ...errors, serverError: 'Failed to add car: ' + error.message });
+      setErrors({ ...errors, serverError: 'Échec de l\'ajout de la voiture : ' + error.message });
     }
   };
 
@@ -214,7 +214,7 @@ function AddCarForm() {
         />
         <TextField
           select
-          label="Status"
+          label="Statut"
           name="status"
           value={car.status}
           onChange={handleChange}
