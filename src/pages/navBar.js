@@ -14,7 +14,7 @@ const Navbar = () => {
     <div className="sidebar">
       <div className="sidebar-brand">
         <Link to="/">
-          <img src="../images/logo/safe.jpg" alt="Logo" />
+          <img src="../image/LogoSafeRent.png" alt="Logo" />
           <br/>
           <img src="../images/logo/safe.jpg" alt="safee rent" />
 
