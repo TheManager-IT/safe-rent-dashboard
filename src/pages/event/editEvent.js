@@ -118,7 +118,7 @@ const EditEventForm = () => {
           onChange={handleChange}
           fullWidth
           margin="normal"
-          required
+          
         />
         <TextField
           name="date"

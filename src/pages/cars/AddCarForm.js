@@ -138,10 +138,10 @@ function AddCarForm() {
         status: ''
       });
   
-      alert('Car added successfully!');
+      alert('Voiture ajoutée avec succès !');
       
     } catch (error) {
-      setErrors({ ...errors, serverError: 'Failed to add car: ' + error.message });
+      setErrors({ ...errors, serverError: 'Échec de l\'ajout de la voiture : ' + error.message });
     }
   };
 
@@ -214,7 +214,7 @@ function AddCarForm() {
         />
         <TextField
           select
-          label="Status"
+          label="Statut"
           name="status"
           value={car.status}
           onChange={handleChange}
@@ -239,14 +239,14 @@ function AddCarForm() {
           margin="normal"
         />
         <TextField
-          label="Mileage"
+          label="Kilométrage"
           name="traveled.mileage"
           value={car.traveled.mileage}
           onChange={handleChange}
           type="number"
           fullWidth
           margin="normal"
-          placeholder="Mileage"
+          placeholder="Kilométrage"
         />
         <br />
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>

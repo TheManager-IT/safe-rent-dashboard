@@ -4,6 +4,8 @@ import Scrollbar from '../../components/scrollbar';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
+import FilterListIcon from '@mui/icons-material/FilterList';
+
 
 import {
   Button,
@@ -14,7 +16,6 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
   Stack,
   Typography,
   OutlinedInput,
@@ -35,7 +36,6 @@ const Cars = () => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
-    // Récupérer les données des voitures depuis l'API backend
     fetch('http://localhost:3000/v1/api/voiture')
       .then(response => response.json())
       .then(data => setCars(data))
@@ -64,14 +64,18 @@ const Cars = () => {
   };
 
   const handleAddCar = () => {
-    // Logique pour ajouter une nouvelle voiture
+    
   };
 
-  // Recherche et filtrage
+  // Recherche 
   const filteredCars = cars.filter(car =>
-    car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (brandFilter === '' || car.brand.toLowerCase().includes(brandFilter.toLowerCase()))
+    (car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    car.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    car.locationPrice.toString().includes(searchTerm.toLowerCase())) &&
+    (brandFilter === '' || car.brand === brandFilter) 
   );
+
 
   return (
     <Container>
@@ -102,16 +106,26 @@ const Cars = () => {
             </InputAdornment>
           }
         />
-        <Select
-          value={brandFilter}
-          onChange={(e) => setBrandFilter(e.target.value)}
-          style={{ minWidth: 150 }}
-        >
-          <MenuItem value="">Toutes les marques</MenuItem>
-          {Array.from(new Set(cars.map(car => car.brand))).map(brand => (
-            <MenuItem key={brand} value={brand}>{brand}</MenuItem>
-          ))}
-        </Select>
+    <Select
+        value={brandFilter}
+        onChange={(e) => setBrandFilter(e.target.value)}
+        label="Marque" // Assurez-vous que le label correspond avec InputLabel pour l'accessibilité
+        startAdornment={
+          <InputAdornment position="start">
+            <FilterListIcon />
+          </InputAdornment>
+        }
+        inputProps={{
+          id: 'brand-select',
+        }}
+      >
+        <MenuItem value="">
+          <em>Toutes les marques</em>
+        </MenuItem>
+        {Array.from(new Set(cars.map(car => car.brand))).map(brand => (
+          <MenuItem key={brand} value={brand}>{brand}</MenuItem>
+        ))}
+      </Select>
       </div>
       <Card>
         <TableContainer sx={{ overflow: 'unset' }}>

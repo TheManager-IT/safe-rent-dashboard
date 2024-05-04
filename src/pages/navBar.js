@@ -5,17 +5,19 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import PersonIcon from '@mui/icons-material/Person';
 import EventIcon from '@mui/icons-material/Event';
-import PlaceIcon from '@mui/icons-material/Place';
 import LoginIcon from '@mui/icons-material/Login';
 import ErrorIcon from '@mui/icons-material/Error';
+import CarRentalRoundedIcon from '@mui/icons-material/CarRentalRounded';
 
 const Navbar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-brand">
         <Link to="/">
-          <img src="/logo.png" alt="Logo" />
+          <img src="../images/logo/safe.jpg" alt="Logo" />
           <br/>
+          <img src="../images/logo/safe.jpg" alt="safee rent" />
+
           <span>SAFE RENT </span>
         </Link>
       </div>
@@ -46,7 +48,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/locations">
-            <PlaceIcon  className="icon-right"/>
+            <CarRentalRoundedIcon  className="icon-right"/>
             Locations
           </Link>
         </li>
@@ -56,7 +58,7 @@ const Navbar = () => {
           <LoginIcon />
           Login
         </Link>
-        <Link to="/not-found" className="btn btn-secondary">
+        <Link to="/404" className="btn btn-secondary">
           <ErrorIcon />
           Not Found
         </Link>
