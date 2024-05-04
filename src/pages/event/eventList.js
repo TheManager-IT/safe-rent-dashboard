@@ -106,6 +106,7 @@ const Events = () => {
           <Table sx={{ minWidth: 800 }}>
             <TableHead className="table-header">
               <TableRow>
+              <TableCell className="table-header-cell" >modele</TableCell>
                 <TableCell className="table-header-cell" >Voiture</TableCell>
                 <TableCell className="table-header-cell">Type d'événement</TableCell>
                 <TableCell className="table-header-cell">Note</TableCell>
@@ -117,6 +118,8 @@ const Events = () => {
             <TableBody>
               {filteredEvents.map((event) => (
                 <TableRow key={event._id}>
+                   <TableCell>{event.voiture.model}</TableCell>
+
                   <TableCell>{event.voiture}</TableCell>
                   <TableCell>{event.eventType}</TableCell>
                   <TableCell>{event.note}</TableCell>
