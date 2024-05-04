@@ -120,6 +120,7 @@ const Clients = () => {
                 <TableCell className="table-header-cell">Numéro de Téléphone</TableCell>
                 <TableCell className="table-header-cell">CIN</TableCell>
                 <TableCell className="table-header-cell">Adresse</TableCell>
+                <TableCell className="table-header-cell">location</TableCell>
                 <TableCell className="table-header-cell">Detail</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
@@ -134,6 +135,7 @@ const Clients = () => {
                   <TableCell>{client.phoneNumber}</TableCell>
                   <TableCell>{client.nationalID}</TableCell>
                   <TableCell>{client.address}</TableCell>
+                  <TableCell>{client.locations}</TableCell>
                   <TableCell>
                     <Link to={`/client/${client._id}`}>
                       <Button variant="contained" color="primary">
