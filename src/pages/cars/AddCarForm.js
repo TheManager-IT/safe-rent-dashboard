@@ -9,9 +9,9 @@ function AddCarForm() {
     brand: '',
     images: [],
     numberOfCarSeats: '',
-    traveled: {
+    traveled: [{
       mileage: '',
-    },
+    }],
     locationPrice: '',
     status: ''
   });
@@ -109,7 +109,7 @@ function AddCarForm() {
         } else if (key === 'traveled') {
           //  mileage est converti en un nombre avant de l'ajouter au formulaire
           const mileage = parseFloat(car.traveled.mileage);
-          formData.append('traveled.mileage', mileage);
+          formData.append('traveled[mileage]', mileage);
         } else {
           formData.append(key, car[key]);
         }
@@ -131,9 +131,9 @@ function AddCarForm() {
         brand: '',
         images: [],
         numberOfCarSeats: '',
-        traveled: {
+        traveled: [{
           mileage: '',
-        },
+        }],
         locationPrice: '',
         status: ''
       });

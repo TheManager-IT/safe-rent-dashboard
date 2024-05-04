@@ -115,8 +115,8 @@ const Locations = () => {
                 <TableRow key={location._id}>
                   <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
                   <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
-                  <TableCell>{location.voiture.model}</TableCell>
-                  <TableCell>{location.client.name} {location.client.firstName}</TableCell>
+                  <TableCell>{location.voiture}</TableCell>
+                  <TableCell>{location.client} {location.client.firstName}</TableCell>
                   <TableCell>{location.totalPrice}</TableCell>
                   <TableCell>
                     <Link to={`/editlocationform/${location._id}`}>

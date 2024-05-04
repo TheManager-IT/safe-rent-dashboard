@@ -150,7 +150,7 @@ const Cars = () => {
                   <TableCell>{car.brand}</TableCell>
                   <TableCell>{car.model}</TableCell>
                   <TableCell>{car.locationPrice}</TableCell>
-                  <TableCell>{car.traveled.mileage} - {car.traveled.updatedAt}</TableCell>
+                  <TableCell>{car.traveled.at(-1).mileage}</TableCell>
                   
                   <TableCell>
                     <Link to={`/car/${car._id}`}>

@@ -38,7 +38,7 @@ const CarDetail = () => {
         <Typography> <b> Marque:</b> {car.brand}</Typography>
         <Typography> <b> Modèle:</b> {car.model}</Typography>
         <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
-        <img src={`http://localhost:3001/${car.images}`} alt="Car Image" />
+        <img src={`http://localhost:3000/uploads/${car.images}`} alt="Car Image" />
         <Typography> <b> Kilométrage:</b>  {car.traveled.mileage}</Typography>
         <Typography> <b> Statut:</b>  {car.status}</Typography>
 
