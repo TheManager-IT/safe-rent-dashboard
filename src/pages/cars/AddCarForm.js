@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Container, TextField, MenuItem, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ function AddCarForm() {
   const [car, setCar] = useState({
     registrationPlate: '',
     model: '',
-    brand: '',
+    //brand: '',
     images: [],
     numberOfCarSeats: '',
     traveled: [{
@@ -15,6 +15,23 @@ function AddCarForm() {
     locationPrice: '',
     status: ''
   });
+
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    fetchModels();
+  }, []);
+
+  const fetchModels = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/v1/api/modele');
+      const data = await response.json();
+      setModels(data);
+    } catch (error) {
+      console.error('Error fetching models:', error);
+    }
+  };
+
 
   const Status = {
     RENTING: 'Renting',
@@ -26,7 +43,7 @@ function AddCarForm() {
   const [errors, setErrors] = useState({
     registrationPlate: '',
     model: '',
-    brand: '',
+    //brand: '',
     numberOfCarSeats: '',
     locationPrice: '',
     status: ''
@@ -73,9 +90,9 @@ function AddCarForm() {
         newErrors.model = 'Veuillez saisir le modèle de la voiture';
       }
 
-      if (!car.brand.trim()) {
+     /* if (!car.brand.trim()) {
         newErrors.brand = 'Veuillez saisir la marque de la voiture';
-      }
+      }*/
 
       if (!car.numberOfCarSeats) {
         newErrors.numberOfCarSeats = 'Veuillez saisir le nombre de sièges de la voiture';
@@ -128,7 +145,7 @@ function AddCarForm() {
       setCar({
         registrationPlate: '',
         model: '',
-        brand: '',
+        //brand: '',
         images: [],
         numberOfCarSeats: '',
         traveled: [{
@@ -164,6 +181,7 @@ function AddCarForm() {
           helperText={errors.registrationPlate}
         />
         <TextField
+          select
           label="Modele"
           name="model"
           value={car.model}
@@ -174,8 +192,14 @@ function AddCarForm() {
           fullWidth
           error={!!errors.model}
           helperText={errors.model}
-        />
-        <TextField
+        >
+          {models.map((model) => (
+            <MenuItem key={model._id} value={model._id}>
+              {model.modelName}
+            </MenuItem>
+          ))}
+        </TextField>
+        {/*<TextField
           label="Marque"
           name="brand"
           value={car.brand}
@@ -186,7 +210,7 @@ function AddCarForm() {
           fullWidth
           error={!!errors.brand}
           helperText={errors.brand}
-        />
+        />*/}
         <TextField
           label="Nombre de places"
           name="numberOfCarSeats"

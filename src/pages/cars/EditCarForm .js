@@ -6,25 +6,40 @@ const EditCarForm = () => {
   const [car, setCar] = useState({
     registrationPlate: '',
     model: '',
-    brand: '',
+   // brand: '',
     images: [],
     numberOfCarSeats: 0,
-    traveled: {
+    traveled: [{
       mileage: '',
-    },
+    }],
     locationPrice: 0,
     status: ''
   });
+  const [models, setModels] = useState([]);
+
+  useEffect(() => {
+    fetchModels();
+  }, []);
+
+  const fetchModels = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/v1/api/modele');
+      const data = await response.json();
+      setModels(data);
+    } catch (error) {
+      console.error('Error fetching models:', error);
+    }
+  };
 
   const [errors, setErrors] = useState({
     registrationPlate: '',
     model: '',
-    brand: '',
+  //  brand: '',
     images: [],
     numberOfCarSeats: '',
-    traveled: {
+    traveled: [{
       mileage: '',
-    },
+    }],
     locationPrice: '',
     status: ''
   });
@@ -75,9 +90,9 @@ const EditCarForm = () => {
       newErrors.model = 'Veuillez saisir le modèle de la voiture';
     }
 
-    if (!car.brand.trim()) {
+   /* if (!car.brand.trim()) {
       newErrors.brand = 'Veuillez saisir la marque de la voiture';
-    }
+    }*/
 
     if (!car.numberOfCarSeats) {
       newErrors.numberOfCarSeats = 'Veuillez saisir le nombre de sièges de la voiture';
@@ -105,7 +120,7 @@ const EditCarForm = () => {
     const formData = new FormData();
     formData.append('registrationPlate', car.registrationPlate);
     formData.append('model', car.model);
-    formData.append('brand', car.brand);
+    //formData.append('brand', car.brand);
     formData.append('numberOfCarSeats', car.numberOfCarSeats);
     formData.append('locationPrice', car.locationPrice);
     formData.append('status', car.status);
@@ -139,8 +154,26 @@ const EditCarForm = () => {
       <form onSubmit={handleSubmit}>
   
         <TextField name="registrationPlate" label="Imatriculation" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />
-        <TextField name="model" label="Modele" value={car.model || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.model} helperText={errors.model} />
-        <TextField name="brand" label="Marque" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.brand} helperText={errors.brand}/>
+        <TextField
+          select
+          label="Modele"
+          name="model"
+          value={car.model}
+          onChange={handleChange}
+          placeholder="Modele"
+          required
+          margin="normal"
+          fullWidth
+          error={!!errors.model}
+          helperText={errors.model}
+        >
+          {models.map((model) => (
+            <MenuItem key={model._id} value={model._id}>
+              {model.modelName}
+            </MenuItem>
+          ))}
+        </TextField>
+        {/*<TextField name="brand" label="Marque" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.brand} helperText={errors.brand}/>*/}
         <TextField name="numberOfCarSeats" label="Nombre de places" value={car.numberOfCarSeats || ''} onChange={handleChange} fullWidth margin="normal" type="number" required  error={!!errors.numberOfCarSeats} helperText={errors.numberOfCarSeats}/>
         <TextField name="locationPrice" label="Prix de la location" value={car.locationPrice || ''} onChange={handleChange} fullWidth margin="normal" type="number"error={!!errors.locationPrice} helperText={errors.locationPrice}/>
         <TextField select label="Statut" name="statut" value={car.status || ''} onChange={handleChange} fullWidth margin="normal" required   error={!!errors.status}

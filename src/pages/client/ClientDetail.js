@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { Document, Page, Text, PDFDownloadLink } from '@react-pdf/renderer';
+import { Document, Page, Text, PDFDownloadLink, Image } from '@react-pdf/renderer';
 import './clientDetail.css'; 
 
 const ClientDetail = () => {
@@ -14,7 +14,10 @@ const ClientDetail = () => {
     email: true,
     phoneNumber: true,
     nationalID: true,
-    address: true
+    address: true,
+    contractNumber: true,
+    drivingLicense: true,
+    locations: true
   });
 
   const { id } = useParams(); // Récupérer l'ID du client depuis les paramètres d'URL
@@ -38,12 +41,17 @@ const ClientDetail = () => {
   const MyDocument = () => (
     <Document>
       <Page>
+      
         {fields.name && <Text>Nom: {client.name}</Text>}
         {fields.firstName && <Text>Prénom: {client.firstName}</Text>}
         {fields.email && <Text>Email: {client.email}</Text>}
         {fields.phoneNumber && <Text>Numéro de Téléphone: {client.phoneNumber}</Text>}
         {fields.nationalID && <Text>CIN: {client.nationalID}</Text>}
         {fields.address && <Text>Adresse: {client.address}</Text>}
+        {fields.contractNumber && <Text>Numéro Contrat: {client.contractNumber}</Text>}
+        {fields.drivingLicense && <Text>numéro de Permis: {client.drivingLicense}</Text>}
+        {fields.locations && <Text>Locations : {client.locations}</Text>}
+        <img src={`http://localhost:3000/uploads/${client.images}`} alt="client Image" />
       </Page>
     </Document>
   );
@@ -65,12 +73,15 @@ const ClientDetail = () => {
         Détails du client
       </Typography>
       <div>
+      <img src={`http://localhost:3000/uploads/${client.images}`} alt="client Image" />
         <Typography>Nom: {client.name}</Typography>
         <Typography>Prénom: {client.firstName}</Typography>
         <Typography>Email: {client.email}</Typography>
         <Typography>Numéro de Téléphone: {client.phoneNumber}</Typography>
         <Typography>CIN: {client.nationalID}</Typography>
         <Typography>Adresse: {client.address}</Typography>
+        <Typography>numéro Contrat: {client.contractNumber}</Typography>
+        <Typography>numéro de Permis: {client.drivingLicense}</Typography>
         <Typography>locations :{client.locations}</Typography>
         <Button variant="contained" color="info" onClick={generatePDF}>
           Télécharger PDF
