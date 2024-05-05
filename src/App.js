@@ -5,6 +5,8 @@ import AddCarForm from './pages/cars/AddCarForm';
 import EditCarForm from './pages/cars/EditCarForm ';
 import CarDetail from './pages/cars/CarDetail';
 
+import Brands from './pages/model/ModelList';
+
 import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
 import EditClientForm from './pages/client/editClient';
@@ -42,6 +44,8 @@ function App() {
           <Route path="/addCar" element={<AddCarForm />} /> 
           <Route path="/editCar/:id" element={<EditCarForm />} /> 
           <Route path="/car/:id" element={<CarDetail />} /> 
+
+          <Route path="/model" element={<Brands />} /> 
           
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />
