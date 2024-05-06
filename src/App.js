@@ -5,7 +5,12 @@ import AddCarForm from './pages/cars/AddCarForm';
 import EditCarForm from './pages/cars/EditCarForm ';
 import CarDetail from './pages/cars/CarDetail';
 
-import Brands from './pages/model/ModelList';
+import Brands from './pages/brand/brandList';
+import AddBrand from './pages/brand/addBrand';
+import EditBrand from './pages/brand/editBrand';
+
+import ModelList from './pages/model/modelList';
+import AddModel from './pages/model/addModel';
 
 import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
@@ -33,7 +38,7 @@ function App() {
     <div className="App">
       <Router>
         <NavBar />
-        <Header />
+       { /*<Header />*/}
         <Routes>
           <Route path="/header" element={<Header />} /> 
           <Route path="/404" element={<Error404 />} /> 
@@ -45,7 +50,12 @@ function App() {
           <Route path="/editCar/:id" element={<EditCarForm />} /> 
           <Route path="/car/:id" element={<CarDetail />} /> 
 
-          <Route path="/model" element={<Brands />} /> 
+          <Route path="/brand" element={<Brands />} /> 
+          <Route path="/AddBrand" element={<AddBrand />} />
+          <Route path="/editBrand/:id" element={<EditBrand />} />
+
+          <Route path="/model" element={<ModelList />} /> 
+          <Route path="/addModel" element={<AddModel />} /> 
           
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />

@@ -4,75 +4,65 @@ import { Button, Container, Typography, Table, TableBody, TableCell, TableContai
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 
-const ModelList = () => {
-  const [models, setModels] = useState([]);
+const Brands = () => {
+  const [brands, setBrands] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [error, setError] = useState('');
 
   useEffect(() => {
-    fetchModels();
+    fetchBrands();
   }, []);
 
-  const fetchModels = () => {
-    fetch('http://localhost:3000/v1/api/modele')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch models');
-        }
-        return response.json();
-      })
-      .then(data => setModels(data))
-      .catch(error => {
-        console.error('Error fetching models:', error);
-        setError('Erreur lors du chargement des modèles');
-      });
+  const fetchBrands = () => {
+    fetch('http://localhost:3000/v1/api/marque')
+      .then(response => response.json())
+      .then(data => setBrands(data))
+      .catch(error => console.error('Error fetching brands:', error));
   };
 
-  const handleEditModel = (id) => {
-    // Handle edit model logic
+  const handleEditBrand = (id) => {
+    // Handle edit brand logic
   };
 
-  const handleDeleteModel = (id) => {
-    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce modèle ?");
+  const handleDeleteBrand = (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette marque ?");
     if (confirmDelete) {
-      fetch(`http://localhost:3000/v1/api/model/delete/${id}`, {
+      fetch(`http://localhost:3000/v1/api/marque/delete/${id}`, {
         method: 'DELETE'
       })
         .then(response => {
           if (response.ok) {
-            fetchModels(); // Refetch models after deletion
+            fetchBrands(); // Refetch brands after deletion
           } else {
-            throw new Error('Failed to delete model');
+            throw new Error('Failed to delete brand');
           }
         })
-        .catch(error => console.error('Error deleting model:', error));
+        .catch(error => console.error('Error deleting brand:', error));
     }
   };
 
-  const handleAddModel = () => {
-    // Handle add model logic
+  const handleAddBrand = () => {
+    // Handle add brand logic
   };
 
   const handleSearchTermChange = (event) => {
     setSearchTerm(event.target.value);
-    setPage(0); // Reset page number when searching
   };
 
-  const filteredModels = models.filter(model =>
-    model.modelName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredBrands = brands.filter(brand =>
+    brand.brandName.toLowerCase().includes(searchTerm.toLowerCase())
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Liste des modèles
+          Liste des marques
         </Typography>
-        <Link to="/addModel">
-          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddModel}>
-            Ajouter un modèle
+        <Link to="/AddBrand">
+          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddBrand}>
+            Ajouter une marque
           </Button>
         </Link>
       </Stack>
@@ -80,7 +70,7 @@ const ModelList = () => {
         <OutlinedInput
           value={searchTerm}
           onChange={handleSearchTermChange}
-          placeholder="Rechercher un modèle..."
+          placeholder="Rechercher une marque..."
           startAdornment={
             <InputAdornment position="start">
               <SearchIcon />
@@ -88,32 +78,29 @@ const ModelList = () => {
           }
         />
       </div>
-      {error && <Typography color="error">{error}</Typography>}
       <Card style={{ marginBottom: '20px' }}>
         <TableContainer sx={{ overflow: 'unset' }}>
           <Table sx={{ minWidth: 800 }}>
             <TableHead className="table-header">
               <TableRow>
-                <TableCell className="table-header-cell">Modèle</TableCell>
                 <TableCell className="table-header-cell">Marque</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredModels.map((model) => (
-                <TableRow key={model._id}>
-                  <TableCell>{model.modelName}</TableCell>
-                  <TableCell>{model.brand.brandName}</TableCell>
+              {filteredBrands.map((brand) => (
+                <TableRow key={brand._id}>
+                  <TableCell>{brand.brandName}</TableCell>
                   <TableCell>
-                    <Link to={`/editModel/${model._id}`}>
-                      <Button variant="contained" color="primary" onClick={() => handleEditModel(model._id)}>
+                    <Link to={`/editBrand/${brand._id}`}>
+                      <Button variant="contained" color="primary" onClick={() => handleEditBrand(brand._id)}>
                         Modifier
                       </Button>
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" onClick={() => handleDeleteModel(model._id)} style={{ marginLeft: '10px' }}>
+                    <Button variant="contained" color="secondary" onClick={() => handleDeleteBrand(brand._id)} style={{ marginLeft: '10px' }}>
                       Supprimer
                     </Button>
                   </TableCell>
@@ -124,7 +111,7 @@ const ModelList = () => {
         </TableContainer>
         <TablePagination
           component="div"
-          count={models.length}
+          count={brands.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onPageChange={(event, newPage) => setPage(newPage)}
@@ -135,8 +122,9 @@ const ModelList = () => {
           rowsPerPageOptions={[5, 10, 25]}
         />
       </Card>
+      
     </Container>
   );
 };
 
-export default ModelList;
+export default Brands;
