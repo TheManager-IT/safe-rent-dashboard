@@ -52,6 +52,18 @@ const Navbar = () => {
             Locations
           </Link>
         </li>
+        <li>
+          <Link to="/brand">
+            <CarRentalRoundedIcon  className="icon-right"/>
+            Marque voiture
+          </Link>
+        </li>
+        <li>
+          <Link to="/model">
+            <CarRentalRoundedIcon  className="icon-right"/>
+            Modèle voiture
+          </Link>
+        </li>
       </ul>
       <div className="sidebar-actions">
         <Link to="/login" className="btn btn-primary">

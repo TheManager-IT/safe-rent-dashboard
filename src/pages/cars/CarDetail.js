@@ -6,7 +6,34 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import TroubleshootSharpIcon from '@mui/icons-material/TroubleshootSharp';
 import { PDFDownloadLink, Document, Page, Text, Image } from '@react-pdf/renderer'; 
-
+/*
+const styles = StyleSheet.create({
+  page: {
+    fontFamily: 'Helvetica',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  table: {
+    flexDirection: 'row',
+    borderStyle: 'solid',
+    borderWidth: 1,
+    borderColor: '#000',
+    marginBottom: 10,
+  },
+  tableCell: {
+    flex: 1,
+    padding: 5,
+  },
+  headerCell: {
+    fontWeight: 'bold',
+    backgroundColor: '#eee',
+  },
+});
+*/
 const CarDetail = () => {
   const [car, setCar] = useState(null);
   const [open, setOpen] = useState(false);

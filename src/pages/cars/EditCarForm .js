@@ -127,6 +127,7 @@ const EditCarForm = () => {
 
     car.images.forEach(image => {
       formData.append('images', image);
+
     });
 
     fetch(`http://localhost:3000/v1/api/voiture/update/${id}`, {
@@ -201,7 +202,7 @@ const EditCarForm = () => {
           type="number"
           fullWidth
           margin="normal"
-          placeholder="Mileage"
+          placeholder="Kilométrage"
         />
 
         <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>Save</Button>

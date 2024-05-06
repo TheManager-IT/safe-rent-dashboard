@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, OutlinedInput, InputAdornment, TablePagination, Card, Stack } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const ModelList = () => {
   const [models, setModels] = useState([]);
@@ -37,7 +38,7 @@ const ModelList = () => {
   const handleDeleteModel = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce modèle ?");
     if (confirmDelete) {
-      fetch(`http://localhost:3000/v1/api/model/delete/${id}`, {
+      fetch(`http://localhost:3000/v1/api/modele/delete/${id}`, {
         method: 'DELETE'
       })
         .then(response => {
@@ -104,7 +105,9 @@ const ModelList = () => {
               {filteredModels.map((model) => (
                 <TableRow key={model._id}>
                   <TableCell>{model.modelName}</TableCell>
-                  <TableCell>{model.brand.brandName}</TableCell>
+                 {/** <TableCell>{model.brand.brandName}</TableCell>*/} 
+                 <TableCell>{model.brand }</TableCell>
+
                   <TableCell>
                     <Link to={`/editModel/${model._id}`}>
                       <Button variant="contained" color="primary" onClick={() => handleEditModel(model._id)}>

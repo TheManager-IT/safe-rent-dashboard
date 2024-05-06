@@ -9,8 +9,9 @@ import Brands from './pages/brand/brandList';
 import AddBrand from './pages/brand/addBrand';
 import EditBrand from './pages/brand/editBrand';
 
-import ModelList from './pages/model/modelList';
+import ModelList from './pages/model/ModelList';
 import AddModel from './pages/model/addModel';
+import EditModel from './pages/model/editModel';
 
 import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
@@ -56,6 +57,7 @@ function App() {
 
           <Route path="/model" element={<ModelList />} /> 
           <Route path="/addModel" element={<AddModel />} /> 
+          <Route path="/editModel/:id" element={<EditModel />} /> 
           
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />

@@ -64,14 +64,6 @@ const AddModel = () => {
         Ajouter un modèle
       </Typography>
       <form>
-        <TextField
-          label="Nom du modèle"
-          variant="outlined"
-          value={modelName}
-          onChange={handleModelNameChange}
-          fullWidth
-          sx={{ mb: 2 }}
-        />
         <Select
           label="Marque"
           variant="outlined"
@@ -84,6 +76,14 @@ const AddModel = () => {
             <MenuItem key={brand._id} value={brand._id}>{brand.brandName}</MenuItem>
           ))}
         </Select>
+        <TextField
+          label="Nom du modèle"
+          variant="outlined"
+          value={modelName}
+          onChange={handleModelNameChange}
+          fullWidth
+          sx={{ mb: 2 }}
+        />
         {error && <Typography color="error">{error}</Typography>}
         <Button variant="contained" color="primary" onClick={handleAddModel}>
           Ajouter
