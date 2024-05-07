@@ -73,7 +73,10 @@ const ClientDetail = () => {
         Détails du client
       </Typography>
       <div>
-      <img src={`http://localhost:3000/uploads/${client.images}`} alt="client Image" />
+      {client.images.map((image, index) => (
+    <img src={`http://localhost:3000/uploads/${client.images}`} alt="client Image" />
+  ))}
+      
         <Typography>Nom: {client.name}</Typography>
         <Typography>Prénom: {client.firstName}</Typography>
         <Typography>Email: {client.email}</Typography>

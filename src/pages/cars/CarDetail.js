@@ -5,35 +5,9 @@ import './CarDetail.css';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import TroubleshootSharpIcon from '@mui/icons-material/TroubleshootSharp';
-import { PDFDownloadLink, Document, Page, Text, Image } from '@react-pdf/renderer'; 
-/*
-const styles = StyleSheet.create({
-  page: {
-    fontFamily: 'Helvetica',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  table: {
-    flexDirection: 'row',
-    borderStyle: 'solid',
-    borderWidth: 1,
-    borderColor: '#000',
-    marginBottom: 10,
-  },
-  tableCell: {
-    flex: 1,
-    padding: 5,
-  },
-  headerCell: {
-    fontWeight: 'bold',
-    backgroundColor: '#eee',
-  },
-});
-*/
+import { PDFDownloadLink, Document, Page, Text, Image, View } from '@react-pdf/renderer'; 
+import { StyleSheet } from '@react-pdf/renderer';
+
 const CarDetail = () => {
   const [car, setCar] = useState(null);
   const [open, setOpen] = useState(false);
@@ -74,13 +48,52 @@ const CarDetail = () => {
 
   const MyDocument = () => (
     <Document>
-      <Page>
-        {fields.registrationPlate && <Text>Immatriculation: {car.registrationPlate}</Text>}
-        {fields.brand && <Text>Marque: {car.brand}</Text>}
-        {fields.model && <Text>Modèle: {car.model}</Text>}
-        {fields.locationPrice && <Text>Prix de la location par jour: {car.locationPrice}</Text>}
-        {fields.mileage && <Text>Kilométrage: {car.traveled.at(-1).mileage}</Text>}
-        {fields.status && <Text>Statut: {car.status}</Text>}
+      <Page style={styles.page}>
+        <Text style={styles.title}>Détails de la voiture</Text>
+        <View style={styles.table}>
+          {fields.registrationPlate && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Immatriculation</Text>
+              <Text style={styles.tableCell}>{car.registrationPlate}</Text>
+            </>
+          )}
+          {fields.brand && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Marque</Text>
+              <Text style={styles.tableCell}>{car.brand}</Text>
+            </>
+          )}
+          {fields.model && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Modèle</Text>
+              <Text style={styles.tableCell}>{car.model}</Text>
+            </>
+          )}
+          {fields.locationPrice && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Prix de la location par jour</Text>
+              <Text style={styles.tableCell}>{car.locationPrice}</Text>
+            </>
+          )}
+          {fields.mileage && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Kilométrage</Text>
+              <Text style={styles.tableCell}>{car.traveled.at(-1).mileage}</Text>
+            </>
+          )}
+          {fields.status && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Statut</Text>
+              <Text style={styles.tableCell}>{car.status}</Text>
+            </>
+          )}
+          {fields.evenements && (
+            <>
+              <Text style={[styles.tableCell, styles.headerCell]}>Evenements</Text>
+              <Text style={styles.tableCell}>{car.evenements}</Text>
+            </>
+          )}
+        </View>
         <Image src={`http://localhost:3000/uploads/${car.images}`} />
       </Page>
     </Document>
@@ -96,18 +109,20 @@ const CarDetail = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
   const handleEdit = (id) => {
     console.log('Edit car with id:', id);
   };
 
-
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 2 , mt:13}}>
-       {car.model}
+        {car.model}
       </Typography>
       <div className="car-details-container">
-        <img src={`http://localhost:3000/uploads/${car.images}`} alt="Car Image" />
+      {car.images.map((image, index) => (
+        <img key={index} src={`http://localhost:3000/uploads/${image}`} alt={`Car Image ${index}`} />
+      ))}
         <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
         <Typography> <b> Marque:</b> {car.brand}</Typography>
         <Typography> <b> Modèle:</b> {car.model}</Typography>
@@ -153,5 +168,31 @@ const CarDetail = () => {
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  page: {
+    fontFamily: 'Helvetica',
+    padding: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  table: {
+    display: 'table',
+    width: '100%',
+    borderCollapse: 'collapse',
+    marginBottom: 10,
+  },
+  tableCell: {
+    border: '1px solid #000',
+    padding: '8px',
+  },
+  headerCell: {
+    fontWeight: 'bold',
+    backgroundColor: '#eee',
+  },
+});
 
 export default CarDetail;
