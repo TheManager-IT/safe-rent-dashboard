@@ -37,9 +37,7 @@ const EditCarForm = () => {
   //  brand: '',
     images: [],
     numberOfCarSeats: '',
-    traveled: [{
-      mileage: '',
-    }],
+    traveled: [{ mileage: '' }],
     locationPrice: '',
     status: ''
   });
@@ -68,6 +66,11 @@ const EditCarForm = () => {
         ...prevCar,
         images: [...prevCar.images, ...imageFiles] 
       }));
+    } else if (name === 'traveled.mileage') {
+      setCar(prevCar => ({
+        ...prevCar,
+        traveled: [{ mileage: value }] // Mettre à jour la propriété mileage de traveled
+      }));
     } else {
       setCar(prevCar => ({
         ...prevCar,
@@ -75,6 +78,7 @@ const EditCarForm = () => {
       }));
     }
   };
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -204,7 +208,6 @@ const EditCarForm = () => {
           margin="normal"
           placeholder="Kilométrage"
         />
-
         <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>Save</Button>
         <Link to="/car">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>

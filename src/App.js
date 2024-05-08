@@ -13,6 +13,10 @@ import ModelList from './pages/model/ModelList';
 import AddModel from './pages/model/addModel';
 import EditModel from './pages/model/editModel';
 
+import Charges from './pages/charge/charge';
+import AddChargeForm from './pages/charge/addChargeForm';
+import EditChargeForm from './pages/charge/editChargeForm';
+
 import Client from './pages/client/clientList';
 import AddClientForm from './pages/client/addClientForm';
 import EditClientForm from './pages/client/editClient';
@@ -58,6 +62,10 @@ function App() {
           <Route path="/model" element={<ModelList />} /> 
           <Route path="/addModel" element={<AddModel />} /> 
           <Route path="/editModel/:id" element={<EditModel />} /> 
+
+          <Route path="/charge" element={<Charges />} /> 
+          <Route path="/addCharge" element={<AddChargeForm />} /> 
+          <Route path="/editcharge/:id" element={<EditChargeForm />} /> 
           
           <Route path="/client" element={<Client />} />
           <Route path="/addClient" element={<AddClientForm />} />
