@@ -25,8 +25,8 @@ const CarDetail = () => {
 
   useEffect(() => {
     if (!id) return; 
-    fetch(`http://localhost:3000/v1/api/voiture/get/${id}`)
-      .then(response => response.json())
+    fetch('http://localhost:3000/v1/api/voiture/get/${id}')
+    .then(response => response.json())
       .then(data => setCar(data))
       .catch(error => console.error('Error fetching car details:', error));
   }, [id]);

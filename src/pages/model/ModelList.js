@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, OutlinedInput, InputAdornment, TablePagination, Card, Stack } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
-import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+//import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 
 const ModelList = () => {
   const [models, setModels] = useState([]);
