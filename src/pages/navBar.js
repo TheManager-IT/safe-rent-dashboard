@@ -8,7 +8,8 @@ import EventIcon from '@mui/icons-material/Event';
 import LoginIcon from '@mui/icons-material/Login';
 import ErrorIcon from '@mui/icons-material/Error';
 import CarRentalRoundedIcon from '@mui/icons-material/CarRentalRounded';
-
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 const Navbar = () => {
   return (
     <div className="sidebar">
@@ -30,7 +31,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/car">
-            <DirectionsCarIcon className="icon-right" />
+            <DirectionsCarRoundedIcon className="icon-right" />
             Voitures
           </Link>
         </li>
@@ -54,14 +55,20 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="/brand">
-            <CarRentalRoundedIcon  className="icon-right"/>
+            <DirectionsCarRoundedIcon  className="icon-right"/>
             Marque voiture
           </Link>
         </li>
         <li>
           <Link to="/model">
-            <CarRentalRoundedIcon  className="icon-right"/>
+            <DirectionsCarRoundedIcon  className="icon-right"/>
             Modèle voiture
+          </Link>
+        </li>
+        <li>
+          <Link to="/charge">
+            <PaidOutlinedIcon  className="icon-right"/>
+            Charges voiture
           </Link>
         </li>
       </ul>

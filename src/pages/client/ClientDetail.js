@@ -4,6 +4,8 @@ import { Link, useParams } from 'react-router-dom';
 import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { Document, Page, Text, PDFDownloadLink, Image } from '@react-pdf/renderer';
 import './clientDetail.css'; 
+import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
+import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
 
 const ClientDetail = () => {
   const [client, setClient] = useState(null);
@@ -87,10 +89,10 @@ const ClientDetail = () => {
         <Typography>numéro de Permis: {client.drivingLicense}</Typography>
         <Typography>locations :{client.locations}</Typography>
         <Button variant="contained" color="info" onClick={generatePDF}>
-          Télécharger PDF
+        <PictureAsPdfRoundedIcon sx={{ mr: 1 }} /> Génerer rapport PDF
         </Button>
         <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Choisir les champs pour le PDF</DialogTitle>
+          <DialogTitle>Choisir les champs pour le  rapport PDF</DialogTitle>
           <DialogContent>
             {Object.keys(fields).map((field, index) => (
               <div key={index}>
@@ -103,7 +105,7 @@ const ClientDetail = () => {
             <Button onClick={handleClose}>Annuler</Button>
             <PDFDownloadLink document={<MyDocument />} fileName="client-details.pdf">
               {({ blob, url, loading, error }) =>
-                loading ? 'Chargement du PDF...' : 'Télécharger le PDF'
+                loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2 }} /> 
               }
             </PDFDownloadLink>
           </DialogActions>

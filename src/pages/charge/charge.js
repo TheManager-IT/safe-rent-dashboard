@@ -26,7 +26,10 @@ const Charges = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(date).toLocaleDateString('fr-FR', options);
+  };
   useEffect(() => {
     // Replace this URL with your API endpoint to fetch charges
     fetch('http://localhost:3000/v1/api/charges')
@@ -107,7 +110,6 @@ const Charges = () => {
                 <TableCell className="table-header-cell">Description</TableCell>
                 <TableCell className="table-header-cell">Coût</TableCell>
                 <TableCell className="table-header-cell">Voiture</TableCell>
-                <TableCell className="table-header-cell">Détail</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
               </TableRow>
@@ -115,17 +117,11 @@ const Charges = () => {
             <TableBody>
               {filteredCharges.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((charge) => (
                 <TableRow key={charge._id}>
-                  <TableCell>{charge.date}</TableCell>
+                  <TableCell>{formatDate(charge.date)}</TableCell>
                   <TableCell>{charge.description}</TableCell>
-                  <TableCell>{charge.cost}</TableCell>
+                  <TableCell>{charge.cost} DT</TableCell>
                   <TableCell>{charge.voiture}</TableCell>
-                  <TableCell>
-                    <Link to={`/charge/${charge._id}`}>
-                      <Button variant="contained" color="primary">
-                        Détails
-                      </Button>
-                    </Link>
-                  </TableCell>
+              
                   <TableCell>
                     <IconButton component={Link} to={`/editcharge/${charge._id}`} color="primary">
                       <EditIcon />
@@ -133,7 +129,7 @@ const Charges = () => {
                   </TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleDelete(charge._id)}>
-                      <DeleteIcon color="secondary" />
+                      <DeleteIcon style={{ color: '#C50000' }}/>
                     </IconButton>
                   </TableCell>
                 </TableRow>

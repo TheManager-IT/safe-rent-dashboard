@@ -64,9 +64,7 @@
   color: rgb(24, 119, 242);
   text-transform: capitalize;
   background-color: rgba(24, 119, 242, 0.08);
-/*
-  background-color: rgba(0, 0, 255, 0.263);
-  color: rgba(0, 0, 255, 0.557);*/ /* Changement de couleur du texte pour assurer une meilleure lisibilité */
+
 }
 
 .sidebar-nav li a .material-icons {

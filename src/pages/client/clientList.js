@@ -6,7 +6,9 @@ import AddClientForm from '../client/addClientForm';
 import EditClientForm from '../client/editClient'; 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
+import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import {
   Button,
   Container,
@@ -119,8 +121,9 @@ const Clients = () => {
                 <TableCell className="table-header-cell">Email</TableCell>
                 <TableCell className="table-header-cell">Numéro de Téléphone</TableCell>
                 <TableCell className="table-header-cell">CIN</TableCell>
+                <TableCell className="table-header-cell">N° de permis de conduire</TableCell>
                 <TableCell className="table-header-cell">Adresse</TableCell>
-                <TableCell className="table-header-cell">location</TableCell>
+                {/*<TableCell className="table-header-cell">location</TableCell>*/}
                 <TableCell className="table-header-cell">Detail</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
@@ -134,13 +137,15 @@ const Clients = () => {
                   <TableCell>{client.email}</TableCell>
                   <TableCell>{client.phoneNumber}</TableCell>
                   <TableCell>{client.nationalID}</TableCell>
+                  <TableCell>{client.drivingLicense}</TableCell>
                   <TableCell>{client.address}</TableCell>
-                  <TableCell>{client.locations}</TableCell>
+                  {/*<TableCell>{client.locations}</TableCell>*/}
                   <TableCell>
                     <Link to={`/client/${client._id}`}>
-                      <Button variant="contained" color="primary">
-                        Détails
-                      </Button>
+                      <IconButton variant="contained" color="primary">
+                      {/*<MoreHorizOutlinedIcon/>*/}
+                      <DescriptionOutlinedIcon/>
+                      </IconButton>
                     </Link>
                    
                   </TableCell>
@@ -152,7 +157,7 @@ const Clients = () => {
                   </TableCell>
                   <TableCell>
                     <IconButton onClick={() => handleDelete(client._id)}  style={{ color: '#C50000' }}>
-                      <DeleteIcon />
+                      <DeleteIcon   />
                     </IconButton>
                   </TableCell>
                 </TableRow>

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, OutlinedInput, InputAdornment, TablePagination, Card, Stack } from '@mui/material';
+import { Button, IconButton, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, OutlinedInput, InputAdornment, TablePagination, Card, Stack } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 const Brands = () => {
   const [brands, setBrands] = useState([]);
@@ -94,15 +95,16 @@ const Brands = () => {
                   <TableCell>{brand.brandName}</TableCell>
                   <TableCell>
                     <Link to={`/editBrand/${brand._id}`}>
-                      <Button variant="contained" color="primary" onClick={() => handleEditBrand(brand._id)}>
-                        Modifier
-                      </Button>
+                      <IconButton variant="contained" color="primary" onClick={() => handleEditBrand(brand._id)}>
+                      <EditIcon />
+                      </IconButton>
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" onClick={() => handleDeleteBrand(brand._id)} style={{ marginLeft: '10px' }}>
-                      Supprimer
-                    </Button>
+                    <IconButton variant="contained" color="secondary" onClick={() => handleDeleteBrand(brand._id)} style={{ marginLeft: '10px' }}>
+                    <DeleteIcon style={{ color: '#C50000' }}/>
+
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}

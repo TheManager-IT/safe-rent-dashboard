@@ -85,7 +85,6 @@ startDate.setHours(0, 0, 0, 0);
       return;
     }
   
-    // Traitement pour la soumission du formulaire
     try {
       const response = await fetch('http://localhost:3000/v1/api/location/create', {
         method: 'POST',
@@ -96,7 +95,7 @@ startDate.setHours(0, 0, 0, 0);
       });
       if (!response.ok) throw new Error('Network response was not ok.');
       
-      // Reset the form and related states
+     
       setLocation({
         StartDateLocation: '',
         EndDateLocation: '',

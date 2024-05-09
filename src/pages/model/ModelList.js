@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, OutlinedInput, InputAdornment, TablePagination, Card, Stack } from '@mui/material';
+import { Button, IconButton, Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, OutlinedInput, InputAdornment, TablePagination, Card, Stack } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 //import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+
 
 const ModelList = () => {
   const [models, setModels] = useState([]);
@@ -110,15 +112,16 @@ const ModelList = () => {
 
                   <TableCell>
                     <Link to={`/editModel/${model._id}`}>
-                      <Button variant="contained" color="primary" onClick={() => handleEditModel(model._id)}>
-                        Modifier
-                      </Button>
+                      <IconButton variant="contained" color="primary" onClick={() => handleEditModel(model._id)}>
+                      <EditIcon />
+                      </IconButton>
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <Button variant="contained" color="secondary" onClick={() => handleDeleteModel(model._id)} style={{ marginLeft: '10px' }}>
-                      Supprimer
-                    </Button>
+                    <IconButton variant="contained" color="secondary" onClick={() => handleDeleteModel(model._id)} style={{ marginLeft: '10px' }}>
+                    <DeleteIcon style={{ color: '#C50000' }}/>
+
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}

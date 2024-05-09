@@ -4,6 +4,7 @@ import Scrollbar from '../../components/scrollbar';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
 import {
   Button,
@@ -14,7 +15,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
+ 
   Stack,
   Typography,
   OutlinedInput,
@@ -100,6 +101,7 @@ const Locations = () => {
               <TableRow>
                 <TableCell className="table-header-cell">Date de début</TableCell>
                 <TableCell className="table-header-cell">Date de fin</TableCell>
+                <TableCell className="table-header-cell">Heure de location</TableCell>
                 <TableCell className="table-header-cell">Voiture</TableCell>
                 <TableCell className="table-header-cell">Client</TableCell>
                 <TableCell className="table-header-cell">Total Price</TableCell>
@@ -115,20 +117,19 @@ const Locations = () => {
                 <TableRow key={location._id}>
                   <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
                   <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
+                  <TableCell>{location.locationTime}</TableCell>
                   <TableCell>{location.voiture}</TableCell>
                   <TableCell>{location.client} {location.client.firstName}</TableCell>
-                  <TableCell>{location.totalPrice}</TableCell>
+                  <TableCell>{location.totalPrice} DT </TableCell>
                   <TableCell>
                     <Link to={`/editlocationform/${location._id}`}>
-                      <Button variant="contained" color="primary">
-                        Modifier
-                      </Button>
+                      <IconButton variant="contained" color="primary">
+                      <EditIcon />                      </IconButton>
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <Button onClick={() => handleDelete(location._id)} variant="contained" color="secondary">
-                      Supprimer
-                    </Button>
+                    <IconButton onClick={() => handleDelete(location._id)} variant="contained" color="secondary">
+                    <DeleteIcon style={{ color: '#C50000' }}/>                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}

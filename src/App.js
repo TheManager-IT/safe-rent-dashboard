@@ -24,7 +24,6 @@ import ClientDetail from './pages/client/ClientDetail';
 
 import Locations from './pages/location/Locations';
 import AddLocationForm from './pages/location/addlocationform';
-import EditLocation from './pages/location/editlocation';
 import EditLocationForm from './pages/location/editLocationForm';
 
 import Events from './pages/event/eventList';
@@ -78,7 +77,6 @@ function App() {
         
           <Route path="/Locations" element={<Locations />} />
           <Route path="/addlocationform" element={<AddLocationForm />} />
-          <Route path="/editlocation/:id" element={<EditLocation />} />
           <Route path="/editlocationform/:id" element={<EditLocationForm />} />
         </Routes>
       </Router>

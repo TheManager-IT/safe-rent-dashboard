@@ -3,15 +3,14 @@ import { Link } from 'react-router-dom';
 import { Button, Container, TextField, MenuItem, Typography } from '@mui/material';
 
 const EventType = {
-  OIL_CHANGE: 'Oil Change',
-  TECHNICAL_INSPECTION: 'Technical Inspection',
-  INSURANCE: 'Insurance',
-  BIRTHDAY: 'Birthday',
-  CAR_WASH: 'Car Wash',
-  INTERIOR_CLEANING: 'Interior Cleaning',
-  MAINTENANCE: 'Maintenance',
-  HEADLIGHT_REPLACEMENT: 'Headlight Replacement',
-  OTHER: 'Other'
+  OIL_CHANGE: 'Changement d\'huile',
+  TECHNICAL_INSPECTION: 'Inspection technique',
+  INSURANCE: 'Assurance',
+  BIRTHDAY: 'Anniversaire',
+  CAR_WASH: 'Lavage de voiture',
+  INTERIOR_CLEANING: 'Nettoyage intérieur',
+  MAINTENANCE: 'Entretien',
+  OTHER: 'Autre'
 };
 
 const AddEventForm = () => {

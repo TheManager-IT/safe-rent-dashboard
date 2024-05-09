@@ -34,10 +34,10 @@ function AddCarForm() {
 
 
   const Status = {
-    RENTING: 'Renting',
-    BEING_WASHED: 'Being Washed',
-    IN_PARKING: 'In Parking',
-    BROKEN_DOWN: 'Broken Down'
+    RENTING: 'En location',
+    BEING_WASHED: 'En lavage',
+    IN_PARKING: 'En parc',
+    BROKEN_DOWN: 'En panne'
   };
 
   const [errors, setErrors] = useState({

@@ -5,7 +5,8 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
 import FilterListIcon from '@mui/icons-material/FilterList';
-
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 
 import {
   Button,
@@ -134,10 +135,11 @@ const Cars = () => {
               <TableRow>
                 <TableCell className="table-header-cell">Imatriculation</TableCell>
                 <TableCell className="table-header-cell">Marque</TableCell>
-                <TableCell className="table-header-cell">Modele</TableCell>
+                <TableCell className="table-header-cell">Modèle</TableCell>
+                <TableCell className="table-header-cell">Nombre de places</TableCell>
                 <TableCell className="table-header-cell">Prix de la location</TableCell>
+                <TableCell className="table-header-cell">Statut</TableCell>
                 <TableCell className="table-header-cell">Kilometrage</TableCell>
-               
                 <TableCell className="table-header-cell">detail</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
@@ -149,28 +151,30 @@ const Cars = () => {
                   <TableCell>{car.registrationPlate}</TableCell>
                   <TableCell>{car.brand}</TableCell>
                   <TableCell>{car.model}</TableCell>
-                  <TableCell>{car.locationPrice}</TableCell>
+                  <TableCell>{car.numberOfCarSeats}</TableCell>
+                  <TableCell>{car.locationPrice} DT</TableCell>
+                  <TableCell>{car.status}</TableCell>
                   <TableCell>{car.traveled.at(-1).mileage}</TableCell>
                   
                   <TableCell>
                     <Link to={`/car/${car._id}`}>
-                      <Button variant="contained" color="primary">
-                        Détails
-                      </Button>
+                      <IconButton variant="contained" color="primary">
+                      <DescriptionOutlinedIcon/>
+                      </IconButton>
                     </Link>
                   </TableCell>
                   
                   <TableCell>
                     <Link to={`/editCar/${car._id}`}>
-                      <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary">
-                        Modifier
-                      </Button>
+                      <IconButton onClick={() => handleEdit(car._id)} variant="contained" color="primary">
+                      <EditIcon />
+                      </IconButton>
                     </Link>
                   </TableCell>
                   <TableCell>
-                    <Button onClick={() => handleDelete(car._id)} variant="contained" color="secondary">
-                      Supprimer
-                    </Button>
+                    <IconButton onClick={() => handleDelete(car._id)} variant="contained" >
+                    <DeleteIcon style={{ color: '#C50000' }}/>
+                    </IconButton>
                   </TableCell>
                 </TableRow>
               ))}

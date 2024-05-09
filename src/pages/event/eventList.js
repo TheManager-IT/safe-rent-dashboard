@@ -4,12 +4,15 @@ import Scrollbar from '../../components/scrollbar';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
+import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
+import SwapVertRoundedIcon from '@mui/icons-material/SwapVertRounded';
 
 import {
   Button,Stack,
   Container,
   Table,
   TableBody,
+  IconButton,
   TableCell,
   TableContainer,
   TableHead,
@@ -109,9 +112,7 @@ const Events = () => {
               Ajouter événement
             </Button>
           </Link>
-          <Button variant="contained" color="primary" onClick={handleSortByDate}>
-          Trier par date
-        </Button>
+        
         </Stack>
         <div className="search" >
           <OutlinedInput
@@ -124,6 +125,9 @@ const Events = () => {
     </InputAdornment>
   }
           />
+            <Button variant="contained" color="primary" onClick={handleSortByDate}>
+            <SwapVertRoundedIcon sx={{ mr: 1 }} /> Trier par date
+        </Button>
           
         </div>
         <Card>
@@ -176,7 +180,7 @@ const Events = () => {
     )
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     .map((event) => (
-      <TableRow key={event._id} style={{ background: isWithinAWeek(event.date) ? 'yellow' : 'inherit' }}>
+      <TableRow key={event._id} style={{ background: isWithinAWeek(event.date) ? 'rgba(24, 119, 242, 0.17)' : 'inherit' }}>
         <TableCell>{event.voiture.model}</TableCell>
         <TableCell>{event.voiture}</TableCell>
         <TableCell>{event.eventType}</TableCell>
@@ -184,11 +188,13 @@ const Events = () => {
         <TableCell>{formatDate(event.date)}</TableCell>
         <TableCell>
           <Link to={`/editEvent/${event._id}`}>
-            <Button variant="contained" color="primary" onClick={() => handleEdit(event._id)}>Modifier</Button>
+            <IconButton variant="contained" color="primary" onClick={() => handleEdit(event._id)}> 
+            <EditIcon />
+            </IconButton>
           </Link>
         </TableCell>
         <TableCell>
-          <Button variant="contained" color="secondary" onClick={() => handleDelete(event._id)} style={{ marginLeft: '10px' }}>Supprimer</Button>
+          <IconButton variant="contained" onClick={() => handleDelete(event._id)} style={{ marginLeft: '10px' }}><DeleteIcon style={{ color: '#C50000' }}/></IconButton>
         </TableCell>
       </TableRow>
     ))}

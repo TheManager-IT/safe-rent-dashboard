@@ -62,7 +62,7 @@ const EditLocationForm = () => {
       <form onSubmit={handleSubmit}>
         <TextField
           name="StartDateLocation"
-          label="Start Date"
+          label="Date De Début"
           type="date"
           value={location.StartDateLocation}
           onChange={handleChange}
@@ -75,7 +75,7 @@ const EditLocationForm = () => {
         />
         <TextField
           name="EndDateLocation"
-          label="End Date"
+          label="Date De Fin"
           type="date"
           value={location.EndDateLocation}
           onChange={handleChange}
@@ -88,7 +88,7 @@ const EditLocationForm = () => {
         />
         <TextField
           name="locationTime"
-          label="Location Time"
+          label="Heure de location"
           type="time"
           value={location.locationTime}
           onChange={handleChange}
@@ -98,7 +98,7 @@ const EditLocationForm = () => {
           }}
           margin="normal"
         />
-        <TextField
+      {/*  <TextField
           name="NumberOfDays"
           label="Number of Days"
           type="number"
@@ -110,7 +110,7 @@ const EditLocationForm = () => {
           }}
           margin="normal"
         />
-        <TextField
+      <TextField
           name="totalPrice"
           label="Total Price"
           type="number"
@@ -121,10 +121,10 @@ const EditLocationForm = () => {
             shrink: true,
           }}
           margin="normal"
-        />
+        />*/}
         <TextField
           name="voiture"
-          label="Car"
+          label="	Voiture"
           value={location.voiture}
           onChange={handleChange}
           fullWidth
@@ -133,19 +133,21 @@ const EditLocationForm = () => {
           }}
           margin="normal"
         />
-        <TextField
+       <TextField
           name="client"
           label="Client"
           value={location.client}
           onChange={handleChange}
           fullWidth
+          
           InputLabelProps={{
             shrink: true,
           }}
           margin="normal"
+          disabled
         />
         <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
-          Save
+       Modifier location
         </Button>
       </form>
     </Container>
