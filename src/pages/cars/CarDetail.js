@@ -94,7 +94,7 @@ const CarDetail = () => {
             </>
           )}
           {car.images.map((image, index) => (
-            <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
+            <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={{ width: 200, height: 100 }} />
           ))}
         </View>
         
@@ -116,6 +116,7 @@ const CarDetail = () => {
   const handleEdit = (id) => {
     console.log('Edit car with id:', id);
   };
+
 
   return (
     <Container>
@@ -162,11 +163,12 @@ const CarDetail = () => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Annuler</Button>
-              <PDFDownloadLink document={<MyDocument />} fileName="car-details.pdf">
+              <PDFDownloadLink document={<MyDocument />} fileName={`${car.registrationPlate}-${car.model}.pdf`}>
                 {({ blob, url, loading, error }) =>
                   loading ? 'Chargement du PDF...' : 'Télécharger le PDF'
                 }
               </PDFDownloadLink>
+             
             </DialogActions>
           </Dialog>
         </div>
