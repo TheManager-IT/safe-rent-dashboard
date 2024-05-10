@@ -18,7 +18,8 @@ const CarDetail = () => {
     locationPrice: true,
     mileage: true,
     status: true,
-    evenements: true
+    evenements: true,
+    totalRentalPrice: true
   });
 
   const { id } = useParams();
@@ -128,14 +129,16 @@ const CarDetail = () => {
   <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
 ))}
 
-       
+
         <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
         <Typography> <b> Marque:</b> {car.brand}</Typography>
         <Typography> <b> Modèle:</b> {car.model}</Typography>
         <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
         <Typography><b> Kilométrage: </b> {car.traveled.at(-1).mileage}</Typography>
-
+        <Typography><b>chargeTotale:</b> {car.chargeTotale}</Typography>
+        <Typography><b>locationTotale:</b> {car.locationTotal}</Typography>
         <Typography>Evenements :{car.evenements}</Typography>
+        
         <div className="button-group">
           <Link to={`/editCar/${car._id}`}>
             <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary"  startIcon={<EditIcon />} sx={{ mr: 1 }}>
