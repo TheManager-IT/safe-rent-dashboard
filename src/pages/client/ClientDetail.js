@@ -53,7 +53,10 @@ const ClientDetail = () => {
         {fields.contractNumber && <Text>Numéro Contrat: {client.contractNumber}</Text>}
         {fields.drivingLicense && <Text>numéro de Permis: {client.drivingLicense}</Text>}
         {fields.locations && <Text>Locations : {client.locations}</Text>}
-        <img src={`http://localhost:3000/uploads/${client.images}`} alt="client Image" />
+        {client.images.map((image, index) => (
+            <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={{ width: 200, height: 100 }} />
+          ))}
+        
       </Page>
     </Document>
   );
@@ -76,8 +79,9 @@ const ClientDetail = () => {
       </Typography>
       <div>
       {client.images.map((image, index) => (
-    <img src={`http://localhost:3000/uploads/${client.images}`} alt="client Image" />
-  ))}
+  <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`client Image ${index}`} />
+))}
+
       
         <Typography>Nom: {client.name}</Typography>
         <Typography>Prénom: {client.firstName}</Typography>
