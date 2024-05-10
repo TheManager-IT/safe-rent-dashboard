@@ -93,7 +93,9 @@ const CarDetail = () => {
               <Text style={styles.tableCell}>{car.evenements}</Text>
             </>
           )}
-           <img src={`http://localhost:3000/uploads/${car.images}`} alt="client Image" />
+          {car.images.map((image, index) => (
+            <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
+          ))}
         </View>
         
       </Page>
