@@ -25,7 +25,7 @@ const CarDetail = () => {
 
   useEffect(() => {
     if (!id) return; 
-    fetch('http://localhost:3000/v1/api/voiture/get/${id}')
+    fetch(`http://localhost:3000/v1/api/voiture/get/${id}`)
       .then(response => response.json())
       .then(data => setCar(data))
       .catch(error => console.error('Error fetching car details:', error));
@@ -93,8 +93,9 @@ const CarDetail = () => {
               <Text style={styles.tableCell}>{car.evenements}</Text>
             </>
           )}
+           <img src={`http://localhost:3000/uploads/${car.images}`} alt="client Image" />
         </View>
-        <Image src={`http://localhost:3000/uploads/${car.images}`} />
+        
       </Page>
     </Document>
   );
@@ -120,17 +121,16 @@ const CarDetail = () => {
         {car.model}
       </Typography>
       <div className="car-details-container">
-    {car.images.map((image, index) => (
-        <img key={index} src={`http://localhost:3000/uploads/${image}`} alt={`Car Image ${index}`} />
-      ))}
+      {car.images.map((image, index) => (
+  <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
+))}
+
        
         <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
         <Typography> <b> Marque:</b> {car.brand}</Typography>
         <Typography> <b> Modèle:</b> {car.model}</Typography>
         <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
         <Typography><b> Kilométrage: </b> {car.traveled.at(-1).mileage}</Typography>
-
-
 
         <Typography>Evenements :{car.evenements}</Typography>
         <div className="button-group">
