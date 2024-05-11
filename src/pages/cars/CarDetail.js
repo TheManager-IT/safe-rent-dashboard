@@ -50,26 +50,11 @@ const CarDetail = () => {
   const MyDocument = () => (
     <Document>
       <Page style={styles.page}>
+          {fields.registrationPlate && <Text>Immatriculation: {car.registrationPlate}</Text>}
+          {fields.brand && <Text>Marque: {car.brand}</Text>}
+          {fields.model && <Text>Modèle: {car.model}</Text>}
         <Text style={styles.title}>Détails de la voiture</Text>
         <View style={styles.table}>
-          {fields.registrationPlate && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Immatriculation</Text>
-              <Text style={styles.tableCell}>{car.registrationPlate}</Text>
-            </>
-          )}
-          {fields.brand && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Marque</Text>
-              <Text style={styles.tableCell}>{car.brand}</Text>
-            </>
-          )}
-          {fields.model && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Modèle</Text>
-              <Text style={styles.tableCell}>{car.model}</Text>
-            </>
-          )}
           {fields.locationPrice && (
             <>
               <Text style={[styles.tableCell, styles.headerCell]}>Prix de la location par jour</Text>
