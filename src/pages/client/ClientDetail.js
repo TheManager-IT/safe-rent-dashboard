@@ -6,6 +6,8 @@ import { Document, Page, Text, PDFDownloadLink, Image } from '@react-pdf/rendere
 import './clientDetail.css'; 
 import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 
 const ClientDetail = () => {
   const [client, setClient] = useState(null);
@@ -71,6 +73,26 @@ const ClientDetail = () => {
   const handleClose = () => {
     setOpen(false);
   };
+  const handleEdit = (id) => {
+    // Logique de modification
+  };
+
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
+    if (confirmDelete) {
+      fetch(`http://localhost:3000/v1/api/client/delete/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          setClient(null);
+        } else {
+          throw new Error('Failed to delete client');
+        }
+      })
+      .catch(error => console.error('Error deleting client:', error));
+    }
+  };
 
   return (
     <Container>
@@ -92,6 +114,14 @@ const ClientDetail = () => {
         <Typography>numéro Contrat: {client.contractNumber}</Typography>
         <Typography>numéro de Permis: {client.drivingLicense}</Typography>
         <Typography>locations :{client.locations}</Typography>
+        <Link to={`/editClient/${client._id}`}>
+            <Button onClick={() => handleEdit(client._id)} variant="contained" color="primary"  startIcon={<EditIcon />} sx={{ mr: 1 }}>
+              Modifier
+            </Button>
+          </Link>
+          <Button variant="contained" color="error" onClick={() => handleDelete(client._id)}  startIcon={<DeleteIcon />}>
+            Supprimer
+          </Button>
         <Button variant="contained" color="info" onClick={generatePDF}>
         <PictureAsPdfRoundedIcon sx={{ mr: 1 }} /> Génerer rapport PDF
         </Button>

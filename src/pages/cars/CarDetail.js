@@ -32,11 +32,21 @@ const CarDetail = () => {
       .catch(error => console.error('Error fetching car details:', error));
   }, [id]);
 
-  const handleDelete = () => {
-    if (!window.confirm('Êtes-vous sûr de vouloir supprimer cette voiture ?')) {
-      return;
+  const handleDelete = (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
+    if (confirmDelete) {
+      fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
+        method: 'DELETE'
+      })
+      .then(response => {
+        if (response.ok) {
+          setCar(prevCars => prevCars.filter(car => car._id !== id));
+        } else {
+          throw new Error('Failed to delete car');
+        }
+      })
+      .catch(error => console.error('Error deleting car:', error));
     }
-    // Logique de suppression ici
   };
 
   const generatePDF = () => {
@@ -130,9 +140,10 @@ const CarDetail = () => {
               Modifier
             </Button>
           </Link>
-          <Button variant="contained" color="error" onClick={handleDelete} startIcon={<DeleteIcon />}>
+          <Button variant="contained" color="error" onClick={() => handleDelete(car._id)}  startIcon={<DeleteIcon />}>
             Supprimer
           </Button>
+          
           <Button variant="contained" color="info" startIcon={<TroubleshootSharpIcon  />}>
             Diagnostic
           </Button>
