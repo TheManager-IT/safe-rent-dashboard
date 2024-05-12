@@ -108,7 +108,7 @@ const ModelList = () => {
                 <TableRow key={model._id}>
                   <TableCell>{model.modelName}</TableCell>
                  {/** <TableCell>{model.brand.brandName}</TableCell>*/} 
-                 <TableCell>{model.brand }</TableCell>
+                 <TableCell>{model.brand && model.brand.brandName}</TableCell>
 
                   <TableCell>
                     <Link to={`/editModel/${model._id}`}>

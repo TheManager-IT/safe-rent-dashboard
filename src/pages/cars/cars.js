@@ -149,8 +149,8 @@ const Cars = () => {
               {filteredCars.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((car) => (
                 <TableRow key={car._id}>
                   <TableCell>{car.registrationPlate}</TableCell>
-                  <TableCell>{car.brand}</TableCell>
-                  <TableCell>{car.model}</TableCell>
+                  <TableCell>{car.model.brand.brandName}</TableCell>
+                  <TableCell>{car.model.modelName}</TableCell>
                   <TableCell>{car.numberOfCarSeats}</TableCell>
                   <TableCell>{car.locationPrice} DT</TableCell>
                   <TableCell>{car.status}</TableCell>

@@ -126,8 +126,9 @@ const CarDetail = () => {
 
 
         <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
-        <Typography> <b> Marque:</b> {car.brand}</Typography>
-        <Typography> <b> Modèle:</b> {car.model}</Typography>
+        <Typography> <b> Marque:</b> </Typography>
+        <Typography> <b> Modèle:</b> {car.model.modelName}</Typography>
+        
         <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
         <Typography><b> Kilométrage: </b> {car.traveled.at(-1).mileage}</Typography>
         <Typography><b>chargeTotale:</b> {car.chargeTotale}</Typography>
