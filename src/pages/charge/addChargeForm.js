@@ -152,7 +152,7 @@ const AddChargeForm = () => {
         >
           {cars.map((car) => (
             <MenuItem key={car._id} value={car._id}>
-              {car.model} - {car.registrationPlate}
+              {car.model.modelName} - {car.registrationPlate}
             </MenuItem>
           ))}
         </TextField>

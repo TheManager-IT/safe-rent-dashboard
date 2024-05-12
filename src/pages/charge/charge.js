@@ -121,7 +121,10 @@ const Charges = () => {
                   <TableCell>{charge.description}</TableCell>
                   <TableCell>{charge.cost} DT</TableCell>
                   
-                  <TableCell>{charge.voiture ? charge.voiture.registrationPlate : ''}</TableCell>
+                  <TableCell>
+                   
+                    {charge.voiture ? `${charge.voiture.registrationPlate} - ${charge.voiture.model.modelName}` : 'N/A'}
+                  </TableCell>
                   <TableCell>
                     <IconButton component={Link} to={`/editcharge/${charge._id}`} color="primary">
                       <EditIcon />
