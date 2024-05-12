@@ -84,7 +84,7 @@ const Events = () => {
   };
 
   const filteredEvents = events.filter(event =>
-    event.voiture.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    //(event.voiture && event.voiture.toLowerCase().includes(searchTerm.toLowerCase())) ||
     event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
     event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
     event.date.includes(searchTerm)
@@ -173,7 +173,7 @@ const Events = () => {
             <TableBody>
   {events
     .filter(event => 
-      event.voiture.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      event.voiture && (event.voiture.registrationPlate || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
       event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
       event.date.includes(searchTerm)
@@ -181,8 +181,8 @@ const Events = () => {
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     .map((event) => (
       <TableRow key={event._id} style={{ background: isWithinAWeek(event.date) ? 'rgba(24, 119, 242, 0.17)' : 'inherit' }}>
-        <TableCell>{event.voiture.model}</TableCell>
-        <TableCell>{event.voiture}</TableCell>
+        <TableCell>{event.voiture && event.voiture.model && event.voiture.model.modelName}</TableCell>
+        <TableCell>{event.voiture ? event.voiture.registrationPlate : ''}</TableCell>
         <TableCell>{event.eventType}</TableCell>
         <TableCell>{event.note}</TableCell>
         <TableCell>{formatDate(event.date)}</TableCell>

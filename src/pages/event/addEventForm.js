@@ -150,21 +150,23 @@ const AddEventForm = () => {
         />
         
         <TextField
-          select
-          label="Voiture"
-          value={selectedCar}
-          onChange={handleCarChange}
-          fullWidth
-          margin="normal"
-          error={!!errors.selectedCar}
-          helperText={errors.selectedCar}
-        >
-          {cars.map((car) => (
-            <MenuItem key={car._id} value={car._id}>
-              {car.model} - {car.registrationPlate}
-            </MenuItem>
-          ))}
-        </TextField>
+  select
+  label="Voiture"
+  value={selectedCar}
+  onChange={handleCarChange}
+  fullWidth
+  margin="normal"
+  error={!!errors.selectedCar}
+  helperText={errors.selectedCar}
+>
+  {cars.map((car) => (
+    <MenuItem key={car._id} value={car._id}>
+      {car.model.modelName} - {car.registrationPlate}
+    </MenuItem>
+  ))}
+</TextField>
+
+
         
         <Button type="submit" variant="contained" color="primary">
           Ajouter l'événement

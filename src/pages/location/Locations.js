@@ -118,8 +118,14 @@ const Locations = () => {
                   <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
                   <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
                   <TableCell>{location.locationTime}</TableCell>
-                  <TableCell>{location.voiture}</TableCell>
-                  <TableCell>{location.client} {location.client.firstName}</TableCell>
+                  <TableCell>
+  {location.voiture ? `${location.voiture.registrationPlate} - ${location.voiture.model.modelName}` : 'N/A'}
+</TableCell>
+
+
+
+                  
+                  <TableCell>{location.client}-{location.client.firstName}</TableCell>
                   <TableCell>{location.totalPrice} DT </TableCell>
                   <TableCell>
                     <Link to={`/editlocationform/${location._id}`}>

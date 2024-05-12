@@ -166,19 +166,20 @@ startDate.setHours(0, 0, 0, 0);
           margin="normal"
         />
         <TextField
-          select
-          label="Voiture"
-          value={selectedCar}
-          onChange={handleCarChange}
-          fullWidth
-          margin="normal"
-        >
-          {voitures.map((car) => (
-            <MenuItem key={car._id} value={car._id}>
-              {car.model} - {car.registrationPlate}
-            </MenuItem>
-          ))}
-        </TextField>
+  select
+  label="Voiture"
+  value={selectedCar}
+  onChange={handleCarChange}
+  fullWidth
+  margin="normal"
+>
+  {voitures.map((car) => (
+    <MenuItem key={car._id} value={car._id}>
+      {car.model.modelName} - {car.registrationPlate}
+    </MenuItem>
+  ))}
+</TextField>
+
         <Autocomplete
           options={clients}
           getOptionLabel={(option) => `${option.name} ${option.firstName} - ${option.nationalID}`}

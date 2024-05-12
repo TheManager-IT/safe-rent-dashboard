@@ -40,16 +40,24 @@ const EditEventForm = () => {
         const eventResponse = await fetch(`http://localhost:3000/v1/api/evenement/get/${id}`);
         const eventData = await eventResponse.json();
         setEvent(eventData);
+  
         const carResponse = await fetch(`http://localhost:3000/v1/api/voiture/get/${eventData.voiture}`);
         const carData = await carResponse.json();
-        setCarInfo({ model: carData.model, registrationPlate: carData.registrationPlate });
+  
+        if (carData.model) {
+          setCarInfo({ model: carData.model.modelName, registrationPlate: carData.registrationPlate });
+        } else {
+          setCarInfo({ model: 'Unknown', registrationPlate: carData.registrationPlate });
+        }
       } catch (error) {
         console.error('Error fetching event and car:', error);
       }
     };
-
+  
     fetchEvent();
   }, [id]);
+  
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -131,15 +139,16 @@ const EditEventForm = () => {
           required
           error={!!errors.date} helperText={errors.date}
         />
-        <TextField
-          name="voiture"
-          label="Car"
-          value={`${carInfo.model} - ${carInfo.registrationPlate}`}
-          fullWidth
-          margin="normal"
-          required
-          disabled
-        />
+       <TextField
+  name="voiture"
+  label="Car"
+  value={`${carInfo.model || 'Unknown'} - ${carInfo.registrationPlate}`}
+  fullWidth
+  margin="normal"
+  required
+  disabled
+/>
+
         <Button type="submit" variant="contained" color="primary">Save</Button>
         <Link to="/event">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>

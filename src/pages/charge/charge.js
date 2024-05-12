@@ -120,8 +120,8 @@ const Charges = () => {
                   <TableCell>{formatDate(charge.date)}</TableCell>
                   <TableCell>{charge.description}</TableCell>
                   <TableCell>{charge.cost} DT</TableCell>
-                  <TableCell>{charge.voiture}</TableCell>
-              
+                  
+                  <TableCell>{charge.voiture ? charge.voiture.registrationPlate : ''}</TableCell>
                   <TableCell>
                     <IconButton component={Link} to={`/editcharge/${charge._id}`} color="primary">
                       <EditIcon />
