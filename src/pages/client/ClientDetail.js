@@ -8,6 +8,14 @@ import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from '@mui/material';
 
 const ClientDetail = () => {
   const [client, setClient] = useState(null);
@@ -93,6 +101,8 @@ const ClientDetail = () => {
       .catch(error => console.error('Error deleting client:', error));
     }
   };
+  console.log(client.locations);
+  console.log(client.locations.totalPrice);
 
   return (
     <Container>
@@ -113,7 +123,28 @@ const ClientDetail = () => {
         <Typography>Adresse: {client.address}</Typography>
         <Typography>numéro Contrat: {client.contractNumber}</Typography>
         <Typography>numéro de Permis: {client.drivingLicense}</Typography>
-        <Typography>locations :{client.locations}</Typography>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Date De Début</TableCell>
+                <TableCell>Date De Fin</TableCell>
+                <TableCell>Voiture</TableCell>
+                <TableCell>Total Price</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+  {client.locations.map((location, index) => (
+    <TableRow key={index}>
+      <TableCell>{location.StartDateLocation}</TableCell>
+      <TableCell>{location.EndDateLocation}</TableCell>
+      <TableCell>{location.voiture}</TableCell>
+      <TableCell>{location.totalPrice}</TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+          </Table>
+        </TableContainer>
         <Link to={`/editClient/${client._id}`}>
             <Button onClick={() => handleEdit(client._id)} variant="contained" color="primary"  startIcon={<EditIcon />} sx={{ mr: 1 }}>
               Modifier

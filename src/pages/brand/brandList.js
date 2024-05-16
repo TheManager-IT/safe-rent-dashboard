@@ -55,6 +55,8 @@ const Brands = () => {
     brand.brandName.toLowerCase().includes(searchTerm.toLowerCase())
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
+  console.log('brands:', brands);
+
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
@@ -92,7 +94,7 @@ const Brands = () => {
             <TableBody>
               {filteredBrands.map((brand) => (
                 <TableRow key={brand._id}>
-                  <TableCell>{brand.brandName}</TableCell>
+                  <TableCell>{brand.brandName}</TableCell>  
                   <TableCell>
                     <Link to={`/editBrand/${brand._id}`}>
                       <IconButton variant="contained" color="primary" onClick={() => handleEditBrand(brand._id)}>

@@ -13,13 +13,11 @@ const CarDetail = () => {
   const [open, setOpen] = useState(false);
   const [fields, setFields] = useState({
     registrationPlate: true,
-    brand: true,
     model: true,
     locationPrice: true,
     mileage: true,
     status: true,
     evenements: true,
-    totalRentalPrice: true
   });
 
   const { id } = useParams();
@@ -40,7 +38,7 @@ const CarDetail = () => {
       })
       .then(response => {
         if (response.ok) {
-          setCar(prevCars => prevCars.filter(car => car._id !== id));
+          setCar(null); // Clear car data after deletion
         } else {
           throw new Error('Failed to delete car');
         }
@@ -60,40 +58,18 @@ const CarDetail = () => {
   const MyDocument = () => (
     <Document>
       <Page style={styles.page}>
-          {fields.registrationPlate && <Text>Immatriculation: {car.registrationPlate}</Text>}
-          {fields.brand && <Text>Marque: {car.brand}</Text>}
-          {fields.model && <Text>Modèle: {car.model}</Text>}
         <Text style={styles.title}>Détails de la voiture</Text>
-        <View style={styles.table}>
-          {fields.locationPrice && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Prix de la location par jour</Text>
-              <Text style={styles.tableCell}>{car.locationPrice}</Text>
-            </>
-          )}
-          {fields.mileage && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Kilométrage</Text>
-              <Text style={styles.tableCell}>{car.traveled.at(-1).mileage}</Text>
-            </>
-          )}
-          {fields.status && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Statut</Text>
-              <Text style={styles.tableCell}>{car.status}</Text>
-            </>
-          )}
-          {fields.evenements && (
-            <>
-              <Text style={[styles.tableCell, styles.headerCell]}>Evenements</Text>
-              <Text style={styles.tableCell}>{car.evenements}</Text>
-            </>
-          )}
+        <Text>Immatriculation: {car.registrationPlate}</Text>
+        <Text>Modèle: {car.model.name}</Text>
+        <Text>Prix de la location par jour: {car.locationPrice}</Text>
+        <Text>Kilométrage: {car.traveled[0].mileage}</Text>
+        <Text>Statut: {car.status}</Text>
+        <Text>Evenements: {car.evenements.join(', ')}</Text>
+        <View style={styles.imageContainer}>
           {car.images.map((image, index) => (
-            <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={{ width: 200, height: 100 }} />
+            <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={styles.image} />
           ))}
         </View>
-        
       </Page>
     </Document>
   );
@@ -117,23 +93,19 @@ const CarDetail = () => {
   return (
     <Container>
       <Typography variant="h4" sx={{ mb: 2 , mt:13}}>
-        {car.model}
+        {car.model.name}
       </Typography>
       <div className="car-details-container">
-      {car.images.map((image, index) => (
-  <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
-))}
-
-
+        {car.images.map((image, index) => (
+          <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
+        ))}
         <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
-        <Typography> <b> Marque:</b> </Typography>
-        <Typography> <b> Modèle:</b> {car.model.modelName}</Typography>
-        
+        <Typography> <b> Marque:</b> {car.model.brand.brandName}</Typography>
+        <Typography> <b> Model:</b> {car.model.modelName}</Typography>
         <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
-        <Typography><b> Kilométrage: </b> {car.traveled.at(-1).mileage}</Typography>
+        <Typography><b> Kilométrage: </b> {car.traveled[0].mileage}</Typography>
         <Typography><b>chargeTotale:</b> {car.chargeTotale}</Typography>
         <Typography><b>locationTotale:</b> {car.locationTotal}</Typography>
-        <Typography>Evenements :{car.evenements}</Typography>
         
         <div className="button-group">
           <Link to={`/editCar/${car._id}`}>
@@ -163,12 +135,11 @@ const CarDetail = () => {
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose}>Annuler</Button>
-              <PDFDownloadLink document={<MyDocument />} fileName={`${car.registrationPlate}-${car.model}.pdf`}>
+              <PDFDownloadLink document={<MyDocument />} fileName={`${car.registrationPlate}-${car.model.name}.pdf`}>
                 {({ blob, url, loading, error }) =>
                   loading ? 'Chargement du PDF...' : 'Télécharger le PDF'
                 }
               </PDFDownloadLink>
-             
             </DialogActions>
           </Dialog>
         </div>
@@ -187,20 +158,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: 'center',
   },
-  table: {
-    display: 'table',
-    width: '100%',
-    borderCollapse: 'collapse',
-    marginBottom: 10,
+  imageContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 10,
   },
-  tableCell: {
-    border: '1px solid #000',
-    padding: '8px',
-  },
-  headerCell: {
-    fontWeight: 'bold',
-    backgroundColor: '#eee',
+  image: {
+    width: 200,
+    height: 100,
+    margin: 5,
   },
 });
 
-export default CarDetail;
+export default CarDetail
