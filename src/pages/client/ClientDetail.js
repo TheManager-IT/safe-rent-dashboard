@@ -138,7 +138,7 @@ const ClientDetail = () => {
     <TableRow key={index}>
       <TableCell>{location.StartDateLocation}</TableCell>
       <TableCell>{location.EndDateLocation}</TableCell>
-      <TableCell>{location.voiture}</TableCell>
+      <TableCell>{location.voiture.registrationPlate}</TableCell>
       <TableCell>{location.totalPrice}</TableCell>
     </TableRow>
   ))}
