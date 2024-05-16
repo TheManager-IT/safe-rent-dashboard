@@ -62,10 +62,14 @@ const ClientDetail = () => {
         {fields.address && <Text>Adresse: {client.address}</Text>}
         {fields.contractNumber && <Text>Numéro Contrat: {client.contractNumber}</Text>}
         {fields.drivingLicense && <Text>numéro de Permis: {client.drivingLicense}</Text>}
-        {fields.locations && <Text>Locations : {client.locations}</Text>}
+        
         {client.images.map((image, index) => (
             <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={{ width: 200, height: 100 }} />
           ))}
+        {client.locations.map((location, index) => (
+            <Text key={index}>Date De Début: {location.StartDateLocation}</Text>
+           
+        ))}
         
       </Page>
     </Document>
@@ -129,6 +133,7 @@ const ClientDetail = () => {
               <TableRow>
                 <TableCell>Date De Début</TableCell>
                 <TableCell>Date De Fin</TableCell>
+                <TableCell>nombre de jours</TableCell>
                 <TableCell>Voiture</TableCell>
                 <TableCell>Total Price</TableCell>
               </TableRow>
@@ -138,7 +143,8 @@ const ClientDetail = () => {
     <TableRow key={index}>
       <TableCell>{location.StartDateLocation}</TableCell>
       <TableCell>{location.EndDateLocation}</TableCell>
-      <TableCell>{location.voiture.registrationPlate}</TableCell>
+      <TableCell>{location.NumberOfDays}</TableCell>
+      <TableCell>{location.voiture.registrationPlate}-{location.voiture.model.modelName}</TableCell>
       <TableCell>{location.totalPrice}</TableCell>
     </TableRow>
   ))}
@@ -168,7 +174,7 @@ const ClientDetail = () => {
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Annuler</Button>
-            <PDFDownloadLink document={<MyDocument />} fileName="client-details.pdf">
+            <PDFDownloadLink document={<MyDocument />} fileName={`${client.nationalID}-${client.name} ${client.firstName}.pdf`}>
               {({ blob, url, loading, error }) =>
                 loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2 }} /> 
               }
