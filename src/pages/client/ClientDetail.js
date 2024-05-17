@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
-import { Document, Page, Text, PDFDownloadLink, Image } from '@react-pdf/renderer';
+import { Document, Page, Text, PDFDownloadLink, Image, View, StyleSheet } from '@react-pdf/renderer';
 import './clientDetail.css'; 
 import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
@@ -50,26 +50,73 @@ const ClientDetail = () => {
     return <div>Loading...</div>;
   }
 
+  const styles = StyleSheet.create({
+    table: {
+      display: "table",
+      width: "auto",
+      margin: "10px 0"
+    },
+    tableRow: {
+      flexDirection: "row"
+    },
+    tableCol: {
+      width: "20%",
+      borderStyle: "solid",
+      borderWidth: 1,
+      borderColor: '#bfbfbf',
+      padding: 5
+    },
+    tableHeader: {
+      backgroundColor: '#f3f3f3',
+      fontWeight: 'bold'
+    },
+    tableCell: {
+      margin: 5,
+      fontSize: 10
+    },
+    image: {
+      width: 200,
+      height: 100
+    }
+  });
+
   const MyDocument = () => (
     <Document>
       <Page>
-      
-        {fields.name && <Text>Nom: {client.name}</Text>}
-        {fields.firstName && <Text>Prénom: {client.firstName}</Text>}
-        {fields.email && <Text>Email: {client.email}</Text>}
-        {fields.phoneNumber && <Text>Numéro de Téléphone: {client.phoneNumber}</Text>}
-        {fields.nationalID && <Text>CIN: {client.nationalID}</Text>}
-        {fields.address && <Text>Adresse: {client.address}</Text>}
-        {fields.contractNumber && <Text>Numéro Contrat: {client.contractNumber}</Text>}
-        {fields.drivingLicense && <Text>numéro de Permis: {client.drivingLicense}</Text>}
-        
+        <View>
+          {fields.name && <Text>Nom: {client.name}</Text>}
+          {fields.firstName && <Text>Prénom: {client.firstName}</Text>}
+          {fields.email && <Text>Email: {client.email}</Text>}
+          {fields.phoneNumber && <Text>Numéro de Téléphone: {client.phoneNumber}</Text>}
+          {fields.nationalID && <Text>CIN: {client.nationalID}</Text>}
+          {fields.address && <Text>Adresse: {client.address}</Text>}
+          {fields.contractNumber && <Text>Numéro Contrat: {client.contractNumber}</Text>}
+          {fields.drivingLicense && <Text>numéro de Permis: {client.drivingLicense}</Text>}
+        </View>
+        {fields.locations && (
+          <View style={styles.table}>
+            <View style={[styles.tableRow, styles.tableHeader]}>
+              <View style={styles.tableCol}><Text style={styles.tableCell}>Date de Début</Text></View>
+              <View style={styles.tableCol}><Text style={styles.tableCell}>Date de Fin</Text></View>
+              <View style={styles.tableCol}><Text style={styles.tableCell}>Nombre de Jours</Text></View>
+              <View style={styles.tableCol}><Text style={styles.tableCell}>Voiture</Text></View>
+              <View style={styles.tableCol}><Text style={styles.tableCell}>Prix Total</Text></View>
+            </View>
+            {client.locations.map((location, index) => (
+              <View style={styles.tableRow} key={index}>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.StartDateLocation}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.EndDateLocation}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.NumberOfDays}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.voiture.registrationPlate} - {location.voiture.model.modelName}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.totalPrice}</Text></View>
+              </View>
+            ))}
+          </View>
+        )}
         {client.images.map((image, index) => (
             <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={{ width: 200, height: 100 }} />
           ))}
-        {client.locations.map((location, index) => (
-            <Text key={index}>Date De Début: {location.StartDateLocation}</Text>
-           
-        ))}
+       
         
       </Page>
     </Document>
