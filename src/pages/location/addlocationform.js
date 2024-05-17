@@ -58,6 +58,12 @@ const AddLocationForm = () => {
       client: value ? value._id : ''
     }));
   };
+
+  const extractErrorMessage = (errorString) => {
+    const regex = /La voiture est déjà réservée pour cette période\.$/;
+    const match = errorString.match(regex);
+    return match ? match[0] : 'Erreur inconnue lors de l\'ajout de la location.';
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
   // Crée une nouvelle instance de Date pour "aujourd'hui" et remet les heures, minutes, secondes et millisecondes à zéro
@@ -93,8 +99,12 @@ startDate.setHours(0, 0, 0, 0);
         },
         body: JSON.stringify(location)
       });
-      if (!response.ok) throw new Error('Network response was not ok.');
-      
+      //if (!response.ok) throw new Error('Network response was not ok.');
+      if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = extractErrorMessage(errorData.error);
+        throw new Error(errorMessage); // Lève une erreur avec le message d'erreur renvoyé par le serveur
+      }
      
       setLocation({
         StartDateLocation: '',

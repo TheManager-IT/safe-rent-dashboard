@@ -30,6 +30,8 @@ import Events from './pages/event/eventList';
 import AddEvent from './pages/event/addEventForm';
 import EditEvent from './pages/event/editEvent';
 
+import LoginForm from './pages/login/loginForm';
+
 import Login from './pages/login/login';
 import Register from './pages/login/RegisterForm';
 import Header from './pages/Header';
@@ -49,6 +51,8 @@ function App() {
           <Route path="/login" element={<Login />} /> 
           <Route path="/register" element={<Register />} />
         
+          <Route path="/loginform" element={<LoginForm />} />
+
           <Route path="/car" element={<Cars />} /> 
           <Route path="/addCar" element={<AddCarForm />} /> 
           <Route path="/editCar/:id" element={<EditCarForm />} /> 
