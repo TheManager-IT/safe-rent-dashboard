@@ -96,7 +96,7 @@ const AddChargeForm = () => {
         throw new Error('Failed to add charge');
       }
       alert('Charge added successfully!');
-      window.location.href = '/charges';
+      window.location.href = '/charge';
       resetForm();
     } catch (error) {
       console.error('Error adding charge:', error);

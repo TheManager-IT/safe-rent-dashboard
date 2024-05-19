@@ -173,10 +173,11 @@ const Events = () => {
             <TableBody>
   {events
     .filter(event => 
-      event.voiture && (event.voiture.registrationPlate || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      event.date.includes(searchTerm)
+      (event.voiture && event.voiture.registrationPlate && event.voiture.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (event.voiture && event.voiture.model && event.voiture.model.modelName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.date.includes(searchTerm)
     )
     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
     .map((event) => (

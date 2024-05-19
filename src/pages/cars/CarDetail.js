@@ -103,9 +103,8 @@ const CarDetail = () => {
         <Text>Prix de la location par jour: {car.locationPrice}</Text>
         <Text>Kilométrage: {car.traveled[0].mileage}</Text>
         <Text>Statut: {car.status}</Text>
-        <Text>Evenements: {car.evenements.join(', ')}</Text>
       </View>
-
+      <Text>Locations: </Text>
       {fields.locations && (
           <View style={styles.table}>
             <View style={[styles.tableRow, styles.tableHeader]}>
@@ -126,7 +125,7 @@ const CarDetail = () => {
             ))}
           </View>
       )}
-
+<Text>Charges: </Text>
       {fields.charges && (
         <View style={styles.table}>
           <View style={[styles.tableRow, styles.tableHeader]}>
@@ -143,7 +142,7 @@ const CarDetail = () => {
           ))}
         </View>
     )}
-
+  <Text>Evenements: </Text>
     {fields.evenements && (
       <View style={styles.table}>
         <View style={[styles.tableRow, styles.tableHeader]}>

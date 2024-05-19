@@ -64,7 +64,8 @@ const ModelList = () => {
   };
 
   const filteredModels = models.filter(model =>
-    model.modelName.toLowerCase().includes(searchTerm.toLowerCase())
+    model.modelName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (model.brand && model.brand.brandName.toLowerCase().includes(searchTerm.toLowerCase()))
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (

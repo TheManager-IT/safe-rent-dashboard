@@ -69,6 +69,20 @@ const Locations = () => {
     }
   };
 
+  const filteredLocations = locations.filter(location => {
+    const term = searchTerm.toLowerCase();
+    return (
+      (!term || 
+      (location.voiture && location.voiture.registrationPlate.toLowerCase().includes(term)) ||
+      (location.voiture && location.voiture.model && location.voiture.model.modelName.toLowerCase().includes(term)) ||
+      (location.client && location.client.nationalID.toLowerCase().includes(term)) ||
+      (location.client && location.client.name.toLowerCase().includes(term)) ||
+      (location.client && location.client.firstName.toLowerCase().includes(term)) ||
+      (formatDate(location.StartDateLocation).includes(term)) ||
+      (formatDate(location.EndDateLocation).includes(term)))
+    );
+  });
+
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13} >
@@ -111,8 +125,8 @@ const Locations = () => {
             </TableHead>
             <TableBody>
               {(rowsPerPage > 0
-                ? locations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                : locations
+                ? filteredLocations.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                : filteredLocations
               ).map((location) => (
                 <TableRow key={location._id}>
                   <TableCell>{formatDate(location.StartDateLocation)}</TableCell>

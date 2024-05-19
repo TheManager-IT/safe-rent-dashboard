@@ -69,13 +69,16 @@ const Cars = () => {
   };
 
   // Recherche 
-  const filteredCars = cars.filter(car =>
-    (car.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    car.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    car.locationPrice.toString().includes(searchTerm.toLowerCase())) &&
-    (brandFilter === '' || car.brand === brandFilter) 
-  );
+  const filteredCars = cars.filter(car =>{
+    const searchTermLower = searchTerm.toLowerCase();
+    return (
+      car.registrationPlate.toLowerCase().includes(searchTermLower) ||
+      car.model.modelName.toLowerCase().includes(searchTermLower) ||
+      car.model.brand.brandName.toLowerCase().includes(searchTermLower) ||
+      car.numberOfCarSeats.toString().includes(searchTermLower) ||
+      car.locationPrice.toString().includes(searchTermLower)
+    );
+  });
 
 
   return (

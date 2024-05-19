@@ -70,7 +70,10 @@ const Charges = () => {
   };
 
   const filteredCharges = charges.filter(charge =>
-    charge.description.toLowerCase().includes(searchTerm.toLowerCase())
+    charge.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    (charge.voiture &&
+      (charge.voiture.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase()) ||
+       charge.voiture.model.modelName.toLowerCase().includes(searchTerm.toLowerCase())))
   );
 
   return (
