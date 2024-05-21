@@ -8,6 +8,7 @@ import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import '../cars/CarDetail.css'; 
 import {
   Table,
   TableBody,
@@ -33,7 +34,10 @@ const ClientDetail = () => {
   });
 
   const { id } = useParams(); // Récupérer l'ID du client depuis les paramètres d'URL
-
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(date).toLocaleDateString('fr-FR', options);
+  };
   useEffect(() => {
     // Récupérer les détails du client depuis l'API backend
     fetch(`http://localhost:3000/v1/api/client/get/${id}`)
@@ -104,8 +108,8 @@ const ClientDetail = () => {
             </View>
             {client.locations.map((location, index) => (
               <View style={styles.tableRow} key={index}>
-                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.StartDateLocation}</Text></View>
-                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.EndDateLocation}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{formatDate(location.StartDateLocation)}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{formatDate(location.EndDateLocation)}</Text></View>
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.NumberOfDays}</Text></View>
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.voiture.registrationPlate} - {location.voiture.model.modelName}</Text></View>
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.totalPrice}</Text></View>
@@ -161,43 +165,17 @@ const ClientDetail = () => {
         Détails du client
       </Typography>
       <div>
-      {client.images.map((image, index) => (
-  <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`client Image ${index}`} />
-))}
+  
+        <Typography > <b>Nom: </b> {client.name}</Typography>
+        <Typography> <b>Prénom:</b> {client.firstName}</Typography>
+        <Typography><b> Email:</b> {client.email}</Typography>
+        <Typography><b>Numéro de Téléphone:</b> {client.phoneNumber}</Typography>
+        <Typography><b>CIN:</b> {client.nationalID}</Typography>
+        <Typography><b>Adresse:</b> {client.address}</Typography>
+        <Typography><b>numéro Contrat:</b> {client.contractNumber}</Typography>
+        <Typography><b>numéro de Permis:</b> {client.drivingLicense}</Typography>
 
-      
-        <Typography>Nom: {client.name}</Typography>
-        <Typography>Prénom: {client.firstName}</Typography>
-        <Typography>Email: {client.email}</Typography>
-        <Typography>Numéro de Téléphone: {client.phoneNumber}</Typography>
-        <Typography>CIN: {client.nationalID}</Typography>
-        <Typography>Adresse: {client.address}</Typography>
-        <Typography>numéro Contrat: {client.contractNumber}</Typography>
-        <Typography>numéro de Permis: {client.drivingLicense}</Typography>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date De Début</TableCell>
-                <TableCell>Date De Fin</TableCell>
-                <TableCell>nombre de jours</TableCell>
-                <TableCell>Voiture</TableCell>
-                <TableCell>Total Price</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-  {client.locations.map((location, index) => (
-    <TableRow key={index}>
-      <TableCell>{location.StartDateLocation}</TableCell>
-      <TableCell>{location.EndDateLocation}</TableCell>
-      <TableCell>{location.NumberOfDays}</TableCell>
-      <TableCell>{location.voiture.registrationPlate}-{location.voiture.model.modelName}</TableCell>
-      <TableCell>{location.totalPrice}</TableCell>
-    </TableRow>
-  ))}
-</TableBody>
-          </Table>
-        </TableContainer>
+
         <Link to={`/editClient/${client._id}`}>
             <Button onClick={() => handleEdit(client._id)} variant="contained" color="primary"  startIcon={<EditIcon />} sx={{ mr: 1 }}>
               Modifier
@@ -209,18 +187,58 @@ const ClientDetail = () => {
         <Button variant="contained" color="info" onClick={generatePDF}>
         <PictureAsPdfRoundedIcon sx={{ mr: 1 }} /> Génerer rapport PDF
         </Button>
+
+
+        <TableContainer>
+
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>Historique de location </b></Typography>      
+
+          <Table>
+            <TableHead  sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
+              <TableRow >
+                <TableCell className='headTable'>Date De Début</TableCell>
+                <TableCell className='headTable'>Date De Fin</TableCell>
+                <TableCell className='headTable'>Heure De Location</TableCell>
+                <TableCell className='headTable'>nombre de jours</TableCell>
+                <TableCell className='headTable'>Voiture</TableCell>
+                <TableCell className='headTable'>Total Price</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+
+  {client.locations.map((location, index) => (
+    <TableRow key={index}>
+      <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
+      <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
+      <TableCell>{location.locationTime}</TableCell>
+      <TableCell>{location.NumberOfDays}</TableCell>
+      <TableCell>{location.voiture.registrationPlate}-{location.voiture.model.modelName}</TableCell>
+      <TableCell>{location.totalPrice}</TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+          </Table>
+        </TableContainer>
+
+
+        {client.images.map((image, index) => (
+  <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`client Image ${index}`} />
+))}
+
+        
+
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Choisir les champs pour le  rapport PDF</DialogTitle>
           <DialogContent>
-            {Object.keys(fields).map((field, index) => (
-              <div key={index}>
-                <Checkbox checked={fields[field]} onChange={() => handleFieldChange(field)} />
-                <Typography>{field}</Typography>
-              </div>
-            ))}
-          </DialogContent>
+  {Object.keys(fields).map((field, index) => (
+    <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+      <Checkbox checked={fields[field]} onChange={() => handleFieldChange(field)} />
+      <Typography>{field}</Typography>
+    </div>
+  ))}
+</DialogContent>
           <DialogActions>
-            <Button onClick={handleClose}>Annuler</Button>
+            <Button onClick={handleClose}  variant="contained" color="error">Annuler</Button>
             <PDFDownloadLink document={<MyDocument />} fileName={`${client.nationalID}-${client.name} ${client.firstName}.pdf`}>
               {({ blob, url, loading, error }) =>
                 loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2 }} /> 

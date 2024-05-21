@@ -1,19 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions,Box } from '@mui/material';
 import './CarDetail.css'; 
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import TroubleshootSharpIcon from '@mui/icons-material/TroubleshootSharp';
 import { PDFDownloadLink, Document, Page, Text, Image, View } from '@react-pdf/renderer'; 
 import { StyleSheet } from '@react-pdf/renderer';
+import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
+
 import {
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
-  TableRow,
+  TableRow,TablePagination,
 } from '@mui/material';
 
 const CarDetail = () => {
@@ -31,6 +36,22 @@ const CarDetail = () => {
   });
 
   const { id } = useParams();
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(date).toLocaleDateString('fr-FR', options);
+  };
+  const [carr, setCarr] = useState({ images: [] });
+
+    // Pagination states for locations, charges, and events
+    const [locationsPage, setLocationsPage] = useState(0);
+    const [chargesPage, setChargesPage] = useState(0);
+    const [eventsPage, setEventsPage] = useState(0);
+    const rowsPerPage = 4;
+
+    const handleChangePage = (setPage) => (event, newPage) => {
+      setPage(newPage);
+    };
+
 
   useEffect(() => {
     if (!id) return; 
@@ -116,8 +137,8 @@ const CarDetail = () => {
             </View>
             {car.locations.map((location, index) => (
               <View style={styles.tableRow} key={index}>
-                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.StartDateLocation}</Text></View>
-                <View style={styles.tableCol}><Text style={styles.tableCell}>{location.EndDateLocation}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{formatDate(location.StartDateLocation)}</Text></View>
+                <View style={styles.tableCol}><Text style={styles.tableCell}>{formatDate(location.EndDateLocation)}</Text></View>
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.NumberOfDays}</Text></View>
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.client.nationalID} - {location.client.name}  {location.client.firstName}</Text></View>
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.totalPrice}</Text></View>
@@ -125,6 +146,9 @@ const CarDetail = () => {
             ))}
           </View>
       )}
+
+
+      
 <Text>Charges: </Text>
       {fields.charges && (
         <View style={styles.table}>
@@ -135,7 +159,7 @@ const CarDetail = () => {
           </View>
           {car.charges.map((charge, index) => (
             <View style={styles.tableRow} key={index}>
-              <View style={styles.tableCol}><Text style={styles.tableCell}>{charge.date}</Text></View>
+              <View style={styles.tableCol}><Text style={styles.tableCell}>{formatDate(charge.date)}</Text></View>
               <View style={styles.tableCol}><Text style={styles.tableCell}>{charge.description}</Text></View>
               <View style={styles.tableCol}><Text style={styles.tableCell}>{charge.cost}</Text></View>
             </View>
@@ -154,7 +178,7 @@ const CarDetail = () => {
           <View style={styles.tableRow} key={index}>
             <View style={styles.tableCol}><Text style={styles.tableCell}>{evenement.eventType}</Text></View>
             <View style={styles.tableCol}><Text style={styles.tableCell}>{evenement.note}</Text></View>
-            <View style={styles.tableCol}><Text style={styles.tableCell}>{evenement.date}</Text></View>
+            <View style={styles.tableCol}><Text style={styles.tableCell}>{formatDate(evenement.date)}</Text></View>
           </View>
         ))}
       </View>
@@ -188,36 +212,127 @@ const CarDetail = () => {
 
   return (
     <Container>
-      <Typography variant="h4" sx={{ mb: 2 , mt:13}}>
+      <Typography variant="h4" sx={{ mb: 2 , mt:2}}>
         {car.model.modelName}
       </Typography>
       <div className="car-details-container">
-        {car.images.map((image, index) => (
+        {/*{car.images.map((image, index) => (
           <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`Car Image ${index}`} />
         ))}
-        <Typography> <b> Immatriculation:</b> {car.registrationPlate}</Typography>
-        <Typography> <b> Model:</b> {car.model.modelName}</Typography>
-        <Typography> <b>Prix de la location par jour: </b>  {car.locationPrice}</Typography>
-        <Typography><b> Kilométrage: </b> {car.traveled[0].mileage}</Typography>
-        <Typography><b>chargeTotale:</b> {car.chargeTotale}</Typography>
-        <Typography><b>locationTotale:</b> {car.locationTotal}</Typography>
-        <Typography><b>location :</b></Typography>      
+        */}
+
+        <Box display="flex" justifyContent="space-between">
+      <Box flex="1" mr={2}>
+        {car.images.length > 0 ? (
+          <Carousel>
+            {car.images.map((image, index) => (
+              <div key={index}>
+                <img src={`http://localhost:3000/uploads/${image}`} alt={`Car Image ${index}`} />
+              </div>
+            ))}
+          </Carousel>
+        ) : (
+          <p>Pas d'images disponibles pour cette voiture.</p>
+        )}
+      </Box>
+      <Box flex="1">
+        <Typography variant="h5" className="marginBottom"><b>Immatriculation:</b> {car.registrationPlate}</Typography>
+        <Typography variant="h5" className="marginBottom"><b>Modèle:</b> {car.model?.modelName}</Typography>
+        <Typography variant="h5" className="marginBottom"><b>Nombre De Places:</b> {car.numberOfCarSeats}  </Typography>
+        <Typography variant="h5" className="marginBottom"><b>Prix de la location par jour:</b> {car.locationPrice} DT</Typography>
+        <Typography variant="h5" className="marginBottom"><b>Kilométrage:</b> {car.traveled[0]?.mileage} kilomètre</Typography>
+        <Typography variant="h5" className="marginBottom" ><b>Location Totale:</b> {car.locationTotal} DT</Typography>
+        <Typography variant="h5" className="marginBottom"><b>Charge Totale:</b> {car.chargeTotale} DT </Typography>
+        <Typography variant="h5" className="marginBottom"><b>Statut:</b> {car.status}  </Typography>
+
+
+<br/>
+<Link to={`/editCar/${car._id}`}>
+  <Button
+    onClick={() => handleEdit(car._id)}
+    variant="contained"
+    color="info"
+    startIcon={<EditIcon />}
+    sx={{
+      width:'190px',
+      mr: 2,
+      //borderRadius: '10px', // Arrondir les bords
+      '&:hover': {
+        color: 'rgb(24, 119, 242)',
+        backgroundColor: ' rgb(232, 232, 232)',
+
+      },
+    }}
+  >
+    Modifier
+  </Button>
+</Link>
+          <Button variant="outlined" color="error" onClick={() => handleDelete(car._id)}  startIcon={<DeleteIcon />}
+            sx={{
+      width:'190px',
+      mr: 2,
+      //borderRadius: '10px', // Arrondir les bords
+      '&:hover': {
+        color: '#C50000',
+        backgroundColor: ' rgb(232, 232, 232)',
+
+      },
+    }}
+          >
+            Supprimer
+          </Button>
+          <br/>
+<br/>
+          <Button  variant="outlined" color="info" startIcon={<TroubleshootSharpIcon  />}   sx={{
+      width:'190px',
+      mr: 2,
+      //borderRadius: '10px', // Arrondir les bords
+      '&:hover': {
+       color: '#333',
+      
+       backgroundColor: ' rgb(232, 232, 232)', // Changer la couleur de la bordure au survol
+
+      },
+    }}>
+            Diagnostic
+          </Button>
+            <Button variant="contained" color="info" onClick={generatePDF} startIcon={<PictureAsPdfRoundedIcon/>}   sx={{
+      width:'190px',
+      mr: 2,
+      //borderRadius: '10px', // Arrondir les bords
+      '&:hover': {
+        color: 'rgb(24, 119, 242)',
+        backgroundColor: ' rgb(255, 255, 255)',
+
+      },
+    }}>
+           Génerer rapport PDF
+          </Button>
+      
+
+      </Box>
+    
+    </Box>
+    
+       <div>
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>location </b></Typography>      
         <TableContainer>
           <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Date De Début</TableCell>
-                <TableCell>Date De Fin</TableCell>
-                <TableCell>NumberOfDays</TableCell>
-                <TableCell>Total Price</TableCell>
-                <TableCell>Client</TableCell>
-              </TableRow>
-            </TableHead>
+          <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
+  <TableRow>
+    <TableCell className='headTable'>Date De Début</TableCell>
+    <TableCell className='headTable'>Date De Fin</TableCell>
+    <TableCell className='headTable'>NumberOfDays</TableCell>
+    <TableCell className='headTable'>Total Price</TableCell>
+    <TableCell className='headTable'>Client</TableCell>
+  </TableRow>
+</TableHead>
+
             <TableBody>
               {car.locations.map((location, index) => (
                 <TableRow key={index}>
-                  <TableCell>{location.StartDateLocation}</TableCell>
-                  <TableCell>{location.EndDateLocation}</TableCell>
+                  <TableCell>{formatDate(location.StartDateLocation)}</TableCell>
+                  <TableCell>{formatDate(location.EndDateLocation)}</TableCell>
                   <TableCell>{location.NumberOfDays}</TableCell>
                   <TableCell>{location.totalPrice}</TableCell>
                   <TableCell>{location.client ? `${location.client.nationalID} - ${location.client.name} ${location.client.firstName}` : 'N/A'}</TableCell>
@@ -225,15 +340,25 @@ const CarDetail = () => {
               ))}
             </TableBody>
           </Table>
+          <TablePagination
+            component="div"
+            count={car.locations.length}
+            rowsPerPage={rowsPerPage}
+            page={locationsPage}
+            onPageChange={handleChangePage(setLocationsPage)}
+            rowsPerPageOptions={[rowsPerPage]}
+          />
+
+
             </TableContainer>
-            <Typography><b>evenements :</b></Typography>      
+            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>evenements</b></Typography>      
         <TableContainer>
           <Table>
-            <TableHead>
+            <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow>
-                <TableCell>eventType </TableCell>
-                <TableCell>note</TableCell>
-                <TableCell>date</TableCell>
+                <TableCell className='headTable'>eventType </TableCell>
+                <TableCell className='headTable'>note</TableCell>
+                <TableCell className='headTable'>date</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -241,27 +366,27 @@ const CarDetail = () => {
                 <TableRow key={index}>
                   <TableCell>{evenement.eventType}</TableCell>
                   <TableCell>{evenement.note}</TableCell>
-                  <TableCell>{evenement.date}</TableCell>
+                  <TableCell>{formatDate(evenement.date)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
             </TableContainer>
 
-            <Typography><b>charges :</b></Typography>      
+            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}> <b>charges </b></Typography>      
         <TableContainer>
           <Table>
-            <TableHead>
+            <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow>
-                <TableCell>date </TableCell>
-                <TableCell>description</TableCell>
-                <TableCell>cost</TableCell>
+                <TableCell className='headTable'>date </TableCell>
+                <TableCell className='headTable'>description</TableCell>
+                <TableCell className='headTable'>cost</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {car.charges.map((charge, index) => (
                 <TableRow key={index}>
-                  <TableCell>{charge.date}</TableCell>
+                  <TableCell>{formatDate(charge.date)}</TableCell>
                   <TableCell>{charge.description}</TableCell>
                   <TableCell>{charge.cost}</TableCell>
                 </TableRow>
@@ -269,68 +394,36 @@ const CarDetail = () => {
             </TableBody>
           </Table>
             </TableContainer>
-
-        <div className="button-group">
-          <Link to={`/editCar/${car._id}`}>
-            <Button onClick={() => handleEdit(car._id)} variant="contained" color="primary"  startIcon={<EditIcon />} sx={{ mr: 1 }}>
-              Modifier
-            </Button>
-          </Link>
-          <Button variant="contained" color="error" onClick={() => handleDelete(car._id)}  startIcon={<DeleteIcon />}>
-            Supprimer
-          </Button>
-          <Button variant="contained" color="info" startIcon={<TroubleshootSharpIcon  />}>
-            Diagnostic
-          </Button>
-          <Button variant="contained" color="info" onClick={generatePDF}>
-            Télécharger PDF
-          </Button>
+</div>
+        
+          
           <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Choisir les champs pour le PDF</DialogTitle>
+            <DialogTitle>Choisir Les Champs Pour Le Rapport PDF</DialogTitle>
             <DialogContent>
-              {Object.keys(fields).map((field, index) => (
-                <div key={index}>
-                  <Checkbox checked={fields[field]} onChange={() => handleFieldChange(field)} />
-                  <Typography>{field}</Typography>
-                </div>
-              ))}
-            </DialogContent>
+  {Object.keys(fields).map((field, index) => (
+    <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
+      <Checkbox checked={fields[field]} onChange={() => handleFieldChange(field)} />
+      <Typography>{field}</Typography>
+    </div>
+  ))}
+</DialogContent>
+
             <DialogActions>
-              <Button onClick={handleClose}>Annuler</Button>
-              <PDFDownloadLink document={<MyDocument />} fileName={`${car.registrationPlate}-${car.model.modelName}.pdf`}>
+              <Button onClick={handleClose} variant="contained" color="error" >Annuler</Button>
+             
+             <PDFDownloadLink document={<MyDocument />} fileName={`${car.registrationPlate}-${car.model.modelName}.pdf`}>
                 {({ blob, url, loading, error }) =>
-                  loading ? 'Chargement du PDF...' : 'Télécharger le PDF'
+                  loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2 }}/>
                 }
               </PDFDownloadLink>
+              
             </DialogActions>
           </Dialog>
         </div>
-      </div>
+     
     </Container>
   );
 };
 
-/*const styles = StyleSheet.create({
-  page: {
-    fontFamily: 'Helvetica',
-    padding: 20,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  imageContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginTop: 10,
-  },
-  image: {
-    width: 200,
-    height: 100,
-    margin: 5,
-  },
-});
-*/
+
 export default CarDetail;

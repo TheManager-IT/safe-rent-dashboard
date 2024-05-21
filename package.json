@@ -18,6 +18,8 @@
     "date-fns": "^3.6.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-particle-effect-button": "^1.0.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
     "simplebar-react": "^3.2.4",
@@ -49,6 +51,7 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/brainhubeu__react-carousel": "^2.0.10"
   }
 }
