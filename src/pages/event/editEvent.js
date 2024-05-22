@@ -89,8 +89,9 @@ const EditEventForm = () => {
     })
     .then(response => {
       if (response.ok) {
+        alert('Événement mis à jour avec succès!');
         // Redirection vers la liste des événements après modification
-        window.location.href = '/event';
+      {/*window.location.href = '/event';*/}
       } else {
         throw new Error('Failed to update event');
       }

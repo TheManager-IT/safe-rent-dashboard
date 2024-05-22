@@ -96,7 +96,7 @@ const AddChargeForm = () => {
         throw new Error('Failed to add charge');
       }
       alert('Charge added successfully!');
-      window.location.href = '/charge';
+    {/*window.location.href = '/charge';*/}
       resetForm();
     } catch (error) {
       console.error('Error adding charge:', error);
@@ -159,7 +159,7 @@ const AddChargeForm = () => {
         <Button type="submit" variant="contained" color="primary">
           Ajouter la charge
         </Button>
-        <Link to="/charges">
+        <Link to="/charge">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
             Annuler
           </Button>

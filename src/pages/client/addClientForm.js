@@ -121,7 +121,7 @@ function AddClientForm() {
             if (!response.ok) throw new Error('Network response was not ok.');
 
             alert('Client added successfully!');
-            window.location.href = '/client';
+        {/*window.location.href = '/client';*/}
 
             // Réinitialisation du formulaire après ajout réussi
             setClient({
