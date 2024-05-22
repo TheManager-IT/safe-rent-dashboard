@@ -41,7 +41,7 @@ const EditBrand = () => {
         throw new Error('Failed to update brand');
       }
       alert('Brand updated successfully !');
-      window.location.href = '/brand';
+      {/*window.location.href = '/brand';*/}
       console.log('Brand updated successfully!');
     } catch (error) {
       console.error('Error updating brand:', error);

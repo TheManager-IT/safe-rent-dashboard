@@ -73,8 +73,9 @@ const EditChargeForm = () => {
     })
     .then(response => {
       if (response.ok) {
+        alert('charge mis à jour avec succès!');
         // Redirection vers la liste des charges après modification
-        window.location.href = '/charge';
+      {/*window.location.href = '/charge';*/}
       } else {
         throw new Error('Failed to update charge');
       }
@@ -133,7 +134,7 @@ const EditChargeForm = () => {
         <Button type="submit" variant="contained" color="primary">
           Enregistrer
         </Button>
-        <Link to="/charges">
+        <Link to="/charge">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
             Annuler
           </Button>

@@ -73,7 +73,7 @@ const Navbar = () => {
         </li>
       </ul>
       <div className="sidebar-actions">
-        <Link to="/loginform" className="btn btn-primary">
+        <Link to="/login" className="btn btn-primary">
           <LoginIcon />
           Login
         </Link>

@@ -48,7 +48,7 @@ const EditCarForm = () => {
     IN_PARKING: 'En parc',
     BROKEN_DOWN: 'En panne'
   };
-  
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -142,7 +142,8 @@ const EditCarForm = () => {
     })
     .then(response => {
       if (response.ok) {
-        window.location.href = '/car';
+        
+     {/* window.location.href = '/car';*/}
       } else {
         throw new Error('Failed to update car');
       }alert('Voiture mise à jour avec succès !');

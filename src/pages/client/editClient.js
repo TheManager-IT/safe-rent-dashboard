@@ -137,7 +137,7 @@ const EditClientForm = () => {
         throw new Error('Failed to update client');
       }
       alert('Client updated successfully!');
-      window.location.href = '/client';
+    {/*window.location.href = '/client';*/}
     } catch (error) {
       console.error('Error updating client:', error);
       alert('Failed to update client: ' + error.message);

@@ -1,5 +1,6 @@
+// App.js
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Import des composants de routage depuis react-router-dom
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Cars from './pages/cars/cars';
 import AddCarForm from './pages/cars/AddCarForm';
 import EditCarForm from './pages/cars/EditCarForm ';
@@ -31,60 +32,62 @@ import AddEvent from './pages/event/addEventForm';
 import EditEvent from './pages/event/editEvent';
 
 import LoginForm from './pages/login/loginForm';
-
-import Login from './pages/login/login';
-import Register from './pages/login/RegisterForm';
-import Header from './pages/Header';
-import NavBar from './pages/navBar';
 import Error404 from './pages/error/notFoundView';
 
+import { AuthProvider } from './pages/login/AuthContext';
+import ProtectedRoute from './pages/login/ProtectedRoute';
+import NavBar from './pages/navBar';
 
 function App() {
   return (
-    <div className="App">
+    <AuthProvider>
       <Router>
-        <NavBar />
-       { /*<Header />*/}
         <Routes>
-          <Route path="/header" element={<Header />} /> 
-          <Route path="/404" element={<Error404 />} /> 
-          <Route path="/login" element={<Login />} /> 
-          <Route path="/register" element={<Register />} />
-        
-          <Route path="/loginform" element={<LoginForm />} />
+          <Route path="/login" element={<LoginForm />} />
+          <Route
+            path="/*"
+            element={
+              <ProtectedRoute>
+                <NavBar />
+                <Routes>
+                  <Route path="/car" element={<Cars />} />
+                  <Route path="/addCar" element={<AddCarForm />} />
+                  <Route path="/editCar/:id" element={<EditCarForm />} />
+                  <Route path="/car/:id" element={<CarDetail />} />
 
-          <Route path="/car" element={<Cars />} /> 
-          <Route path="/addCar" element={<AddCarForm />} /> 
-          <Route path="/editCar/:id" element={<EditCarForm />} /> 
-          <Route path="/car/:id" element={<CarDetail />} /> 
+                  <Route path="/brand" element={<Brands />} />
+                  <Route path="/addBrand" element={<AddBrand />} />
+                  <Route path="/editBrand/:id" element={<EditBrand />} />
 
-          <Route path="/brand" element={<Brands />} /> 
-          <Route path="/AddBrand" element={<AddBrand />} />
-          <Route path="/editBrand/:id" element={<EditBrand />} />
+                  <Route path="/model" element={<ModelList />} />
+                  <Route path="/addModel" element={<AddModel />} />
+                  <Route path="/editModel/:id" element={<EditModel />} />
 
-          <Route path="/model" element={<ModelList />} /> 
-          <Route path="/addModel" element={<AddModel />} /> 
-          <Route path="/editModel/:id" element={<EditModel />} /> 
+                  <Route path="/charge" element={<Charges />} />
+                  <Route path="/addCharge" element={<AddChargeForm />} />
+                  <Route path="/editcharge/:id" element={<EditChargeForm />} />
 
-          <Route path="/charge" element={<Charges />} /> 
-          <Route path="/addCharge" element={<AddChargeForm />} /> 
-          <Route path="/editcharge/:id" element={<EditChargeForm />} /> 
-          
-          <Route path="/client" element={<Client />} />
-          <Route path="/addClient" element={<AddClientForm />} />
-          <Route path="/editClient/:id" element={<EditClientForm />} />
-          <Route path="/client/:id" element={<ClientDetail />} />
+                  <Route path="/client" element={<Client />} />
+                  <Route path="/addClient" element={<AddClientForm />} />
+                  <Route path="/editClient/:id" element={<EditClientForm />} />
+                  <Route path="/client/:id" element={<ClientDetail />} />
 
-          <Route path="/event" element={<Events />} />
-          <Route path="/addEvent" element={<AddEvent />} />
-          <Route path="/editEvent/:id" element={<EditEvent />} />
-        
-          <Route path="/Locations" element={<Locations />} />
-          <Route path="/addlocationform" element={<AddLocationForm />} />
-          <Route path="/editlocationform/:id" element={<EditLocationForm />} />
+                  <Route path="/event" element={<Events />} />
+                  <Route path="/addEvent" element={<AddEvent />} />
+                  <Route path="/editEvent/:id" element={<EditEvent />} />
+
+                  <Route path="/locations" element={<Locations />} />
+                  <Route path="/addlocationform" element={<AddLocationForm />} />
+                  <Route path="/editlocationform/:id" element={<EditLocationForm />} />
+
+                  <Route path="/404" element={<Error404 />} />
+                </Routes>
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
-    </div>
+    </AuthProvider>
   );
 }
 

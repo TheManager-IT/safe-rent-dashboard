@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+// loginForm.js
+import React, { useState, useContext } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from './AuthContext';
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -18,13 +23,15 @@ const LoginForm = () => {
             });
 
             if (!response.ok) {
-                const errorMessage = await response.text(); // Récupérer le message d'erreur renvoyé par le serveur
-                setError(errorMessage); // Afficher le message d'erreur
+                const errorMessage = await response.text();
+                setError(errorMessage);
                 return;
             }
 
-            // Redirection vers la page d'accueil si l'authentification est réussie
-            window.location.href = '/';
+            const data = await response.json();
+            localStorage.setItem('token', data.token);
+            login(data.token);  // Mettez à jour l'état d'authentification
+            navigate('/');  // Redirigez vers le tableau de bord
         } catch (error) {
             console.error('Erreur de connexion :', error);
             setError('Erreur de connexion, veuillez réessayer.');

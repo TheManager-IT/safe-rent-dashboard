@@ -101,7 +101,7 @@ const AddEventForm = () => {
         throw new Error('Failed to add event');
       }
       alert('Event added successfully!');
-      window.location.href = '/event';
+    {/*window.location.href = '/event';*/}
       resetForm();
     } catch (error) {
       console.error('Error adding event:', error);

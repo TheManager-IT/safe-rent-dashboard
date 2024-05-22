@@ -65,14 +65,15 @@ const EditModel = () => {
     })
     .then(response => {
       if (response.ok) {
-        // Redirection vers la liste des modeles après modification
-        window.location.href = '/model';
+          alert('Modèle mis à jour avec succès!');
+          // Redirection vers la liste des modèles après modification
+     {/* window.location.href = '/model';*/}
       } else {
-        throw new Error('Failed to update modele');
+          throw new Error('Failed to update modele');
       }
-    })
-    .catch(error => console.error('Error updating modele:', error));
-  };
+  })
+  .catch(error => console.error('Error updating modele:', error));
+};
 
   return (
     <Container maxWidth="sm">
