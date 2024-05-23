@@ -37,7 +37,7 @@ import Error404 from './pages/error/notFoundView';
 import { AuthProvider } from './pages/login/AuthContext';
 import ProtectedRoute from './pages/login/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
-
+import Predict from './pages/detectionIA/predict';
 import NavBar from './pages/navBar';
 
 
@@ -86,6 +86,10 @@ function App() {
                   <Route path="/locations" element={<Locations />} />
                   <Route path="/addlocationform" element={<AddLocationForm />} />
                   <Route path="/editlocationform/:id" element={<EditLocationForm />} />
+
+                  
+                  <Route path="/predict" element={<Predict />} />
+
 
                   <Route path="/404" element={<Error404 />} />
                 </Routes>
