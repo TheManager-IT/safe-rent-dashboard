@@ -101,6 +101,11 @@ const CarDetail = () => {
       borderColor: '#bfbfbf',
       padding: 5
     },
+    tableCol2: {
+         
+      borderColor: '#ffffff',
+     
+    },
     tableHeader: {
       backgroundColor: '#f3f3f3',
       fontWeight: 'bold'
@@ -144,6 +149,12 @@ const CarDetail = () => {
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.totalPrice}</Text></View>
               </View>
             ))}
+             {/* Ligne de total des locations */}
+            <View style={styles.tableRow}>
+             <View style={[styles.tableCol,  styles.tableHeader, { flex: 4 }]}><Text style={styles.tableCell}>Total</Text></View>
+             <View style={[styles.tableCol]}><Text style={styles.tableCell}>{car.locationTotal}</Text></View>
+            </View>
+         
           </View>
       )}
 
@@ -152,10 +163,10 @@ const CarDetail = () => {
 <Text>Charges: </Text>
       {fields.charges && (
         <View style={styles.table}>
-          <View style={[styles.tableRow, styles.tableHeader]}>
-            <View style={styles.tableCol}><Text style={styles.tableCell}>Date </Text></View>
-            <View style={styles.tableCol}><Text style={styles.tableCell}>Description</Text></View>
-            <View style={styles.tableCol}><Text style={styles.tableCell}>cost</Text></View>
+          <View style={[styles.tableRow]}>
+            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Date </Text></View>
+            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Description</Text></View>
+            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>cost</Text></View>
           </View>
           {car.charges.map((charge, index) => (
             <View style={styles.tableRow} key={index}>
@@ -164,15 +175,22 @@ const CarDetail = () => {
               <View style={styles.tableCol}><Text style={styles.tableCell}>{charge.cost}</Text></View>
             </View>
           ))}
+          <View style={styles.tableRow}>
+             <View style={[styles.tableCol, { flex: 2 }]}><Text style={styles.tableCell}>Total</Text></View>
+            
+             <View style={[styles.tableCol]}><Text style={styles.tableCell}>{car.chargeTotale}</Text></View>
+             <View style={[styles.tableCol, styles.tableCol2]}><Text style={styles.tableCell}></Text></View>
+             <View style={[styles.tableCol, styles.tableCol2]}><Text style={styles.tableCell}></Text></View>
+            </View>
         </View>
     )}
   <Text>Evenements: </Text>
     {fields.evenements && (
       <View style={styles.table}>
-        <View style={[styles.tableRow, styles.tableHeader]}>
-          <View style={styles.tableCol}><Text style={styles.tableCell}>eventType </Text></View>
-          <View style={styles.tableCol}><Text style={styles.tableCell}>note</Text></View>
-          <View style={styles.tableCol}><Text style={styles.tableCell}>date</Text></View>
+        <View style={[styles.tableRow]}>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>eventType </Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>note</Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>date</Text></View>
           </View>
         {car.evenements.map((evenement, index) => (
           <View style={styles.tableRow} key={index}>

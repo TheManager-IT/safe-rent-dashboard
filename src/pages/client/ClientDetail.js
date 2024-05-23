@@ -30,7 +30,8 @@ const ClientDetail = () => {
     address: true,
     contractNumber: true,
     drivingLicense: true,
-    locations: true
+    locations: true,
+    locationTotalClient: true
   });
 
   const { id } = useParams(); // Récupérer l'ID du client depuis les paramètres d'URL
@@ -78,6 +79,22 @@ const ClientDetail = () => {
       margin: 5,
       fontSize: 10
     },
+    headerText: {
+      fontSize: 12,
+      fontWeight: 'bold',
+      fontFamily: 'Helvetica-Bold',
+    },
+    titleText: {
+      fontSize: 14,
+      fontWeight: 'bold',
+      color: '#333',
+      marginBottom: 10,
+      fontFamily: 'Helvetica-Bold',
+    },
+    bodyText: {
+      fontSize: 10,
+      fontFamily: 'Helvetica',
+    },
     image: {
       width: 200,
       height: 100
@@ -88,14 +105,14 @@ const ClientDetail = () => {
     <Document>
       <Page>
         <View>
-          {fields.name && <Text>Nom: {client.name}</Text>}
-          {fields.firstName && <Text>Prénom: {client.firstName}</Text>}
-          {fields.email && <Text>Email: {client.email}</Text>}
-          {fields.phoneNumber && <Text>Numéro de Téléphone: {client.phoneNumber}</Text>}
-          {fields.nationalID && <Text>CIN: {client.nationalID}</Text>}
-          {fields.address && <Text>Adresse: {client.address}</Text>}
-          {fields.contractNumber && <Text>Numéro Contrat: {client.contractNumber}</Text>}
-          {fields.drivingLicense && <Text>numéro de Permis: {client.drivingLicense}</Text>}
+          {fields.name && <Text style={styles.titleText}>Nom: <Text style={styles.bodyText}>{client.name}</Text></Text>}
+          {fields.firstName && <Text style={styles.titleText}>Prénom: <Text style={styles.bodyText}>{client.firstName}</Text></Text>}
+          {fields.email && <Text style={styles.titleText}>Email: <Text style={styles.bodyText}>{client.email}</Text></Text>}
+          {fields.phoneNumber && <Text style={styles.titleText}>Numéro de Téléphone: <Text style={styles.bodyText}>{client.phoneNumber}</Text></Text>}
+          {fields.nationalID && <Text style={styles.titleText}>CIN: <Text style={styles.bodyText}>{client.nationalID}</Text></Text>}
+          {fields.address && <Text style={styles.titleText}>Adresse: <Text style={styles.bodyText}>{client.address}</Text></Text>}
+          {fields.contractNumber && <Text style={styles.titleText}>Numéro Contrat: <Text style={styles.bodyText}>{client.contractNumber}</Text></Text>}
+          {fields.drivingLicense && <Text style={styles.titleText}>Numéro de Permis: <Text style={styles.bodyText}>{client.drivingLicense}</Text></Text>}
         </View>
         {fields.locations && (
           <View style={styles.table}>
@@ -115,8 +132,13 @@ const ClientDetail = () => {
                 <View style={styles.tableCol}><Text style={styles.tableCell}>{location.totalPrice}</Text></View>
               </View>
             ))}
+             <View style={styles.tableRow}>
+             <View style={[styles.tableCol,  styles.tableHeader, { flex: 4 }]}><Text style={styles.tableCell}>Total</Text></View>
+             <View style={[styles.tableCol]}><Text style={styles.tableCell}>{client.locationTotalClient}</Text></View>
+            </View>
           </View>
         )}
+        
         {client.images.map((image, index) => (
             <Image key={index} src={`http://localhost:3000/uploads/${image}`} style={{ width: 200, height: 100 }} />
           ))}
@@ -220,7 +242,7 @@ const ClientDetail = () => {
           </Table>
         </TableContainer>
 
-
+        <Typography><b>locationTotalClient:</b> {client.locationTotalClient}</Typography>
         {client.images.map((image, index) => (
   <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`client Image ${index}`} />
 ))}
