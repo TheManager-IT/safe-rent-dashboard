@@ -10,6 +10,7 @@ const Brands = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     fetchBrands();
@@ -39,7 +40,12 @@ const Brands = () => {
             throw new Error('Failed to delete brand');
           }
         })
-        .catch(error => console.error('Error deleting brand:', error));
+        .catch(error => {
+          console.error('Error deleting brand:', error);
+          setErrorMessage(error.message);
+          alert(error.message);
+         //alert("Impossible de supprimer la marque car elle est associée à des modèles");
+        });
     }
   };
 

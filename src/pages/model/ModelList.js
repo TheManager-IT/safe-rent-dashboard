@@ -50,7 +50,11 @@ const ModelList = () => {
             throw new Error('Failed to delete model');
           }
         })
-        .catch(error => console.error('Error deleting model:', error));
+        .catch(error => {
+          console.error('Error deleting model:', error);
+          alert(error.message);
+          setError(error.message);
+        });
     }
   };
 
