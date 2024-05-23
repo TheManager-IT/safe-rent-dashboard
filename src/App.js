@@ -36,7 +36,10 @@ import Error404 from './pages/error/notFoundView';
 
 import { AuthProvider } from './pages/login/AuthContext';
 import ProtectedRoute from './pages/login/ProtectedRoute';
+import Dashboard from './pages/Dashboard';
+
 import NavBar from './pages/navBar';
+
 
 function App() {
   return (
@@ -49,7 +52,11 @@ function App() {
             element={
               <ProtectedRoute>
                 <NavBar />
+               
                 <Routes>
+
+                <Route path="/" element={<Dashboard />} />
+
                   <Route path="/car" element={<Cars />} />
                   <Route path="/addCar" element={<AddCarForm />} />
                   <Route path="/editCar/:id" element={<EditCarForm />} />
