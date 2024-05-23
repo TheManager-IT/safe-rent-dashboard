@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie, Line } from 'react-chartjs-2';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
-import PersonIcon from '@mui/icons-material/Person';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import {
   Chart as ChartJS,
@@ -44,23 +43,70 @@ const Dashboard = () => {
   const [totalClientCount, setTotalClientCount] = useState(0);
 
   useEffect(() => {
+    // Fetching client data
+    fetch('http://localhost:3000/v1/api/client')
+      .then(response => response.json())
+      .then(data => {
+        const clientNames = data.map(client => client.name);
+        const clientRevenues = data.map(client => client.locationTotalClient);
 
+        setClientRevenueData({
+          labels: clientNames,
+          datasets: [{
+            label: 'Revenus par Client',
+            data: clientRevenues,
+            backgroundColor: 'rgba(192,12,192,0.4)',
+            borderColor: 'rgba(192,12,192,1)',
+            borderWidth: 1,
+          }]
+        });
 
-     // Fetching total car count data
-     fetch('http://localhost:3000/v1/api/voiture/count')
-     .then(response => response.json())
-     .then(data => {
-       setTotalCarCount(data.totalCarCount);
-     })
-     .catch(error => console.error('Error fetching total car count data:', error));
+        const clientLocationCounts = data.map(client => client.locations.length);
+        setClientLocationData({
+          labels: clientNames,
+          datasets: [{
+            label: 'Nombre de Locations par Client',
+            data: clientLocationCounts,
+            backgroundColor: 'rgba(70,12,192,0.4)',
+            borderColor: 'rgba(70,12,192,1)',
+            borderWidth: 1,
+          }]
+        });
 
+        const cityCounts = data.reduce((acc, client) => {
+          const city = client.address.split('-')[0]; // Assuming city is the first part of the address
+          acc[city] = (acc[city] || 0) + 1;
+          return acc;
+        }, {});
 
-     fetch('http://localhost:3000/v1/api/client/clientCount')
-     .then(response => response.json())
-     .then(data => {
-         setTotalClientCount(data.totalClientCount);
-     })
-     .catch(error => console.error('Error fetching total client count data:', error));
+        setClientCityData({
+          labels: Object.keys(cityCounts),
+          datasets: [{
+            label: 'Répartition par Ville',
+            data: Object.values(cityCounts),
+            backgroundColor: ['rgba(70,192,192,0.4)', 'rgba(192,192,70,0.4)', 'rgba(192,70,70,0.4)'],
+            borderColor: ['rgba(70,192,192,1)', 'rgba(192,192,70,1)', 'rgba(192,70,70,1)'],
+            borderWidth: 1,
+          }]
+        });
+      })
+      .catch(error => console.error('Error fetching clients:', error));
+
+    // Fetching total car count data
+    fetch('http://localhost:3000/v1/api/voiture/count')
+      .then(response => response.json())
+      .then(data => {
+        setTotalCarCount(data.totalCarCount);
+      })
+      .catch(error => console.error('Error fetching total car count data:', error));
+
+    // Fetching total client count data
+    fetch('http://localhost:3000/v1/api/client/clientCount')
+      .then(response => response.json())
+      .then(data => {
+        setTotalClientCount(data.totalClientCount);
+      })
+      .catch(error => console.error('Error fetching total client count data:', error));
 
     // Fetching monthly location counts data
     fetch('http://localhost:3000/v1/api/location/monthly-location-counts')
@@ -168,8 +214,8 @@ const Dashboard = () => {
           datasets: [{
             label: 'Charges Totales',
             data: totalCharges,
-           // backgroundColor: 'rgba(70,192,12,0.4)',
-            borderColor: 'rgba(70,192,12,1)',
+            backgroundColor: 'rgba(12,192,192,0.4)',
+            borderColor: 'rgba(12,192,192,1)',
             borderWidth: 1,
           }]
         });
@@ -185,66 +231,8 @@ const Dashboard = () => {
             borderWidth: 1,
           }]
         });
-
-        // Fetching client data and calculating revenues by client
-        fetch('http://localhost:3000/v1/api/client')
-          .then(response => response.json())
-          .then(clients => {
-            const clientNames = clients.map(client => `${client.firstName} ${client.name}`);
-            const locationCounts = clients.map(client => client.locations.length);
-
-            setClientLocationData({
-              labels: clientNames,
-              datasets: [{
-                label: 'Nombre de Locations',
-                data: locationCounts,
-                backgroundColor: 'rgba(70,12,192,0.4)',
-                borderColor: 'rgba(70,12,192,1)',
-                borderWidth: 1,
-              }]
-            });
-
-            const cityCounts = clients.reduce((acc, client) => {
-              const city = client.address.split('-')[0]; // Assuming city is the first part of the address
-              acc[city] = (acc[city] || 0) + 1;
-              return acc;
-            }, {});
-
-            setClientCityData({
-              labels: Object.keys(cityCounts),
-              datasets: [{
-                label: 'Répartition par Ville',
-                data: Object.values(cityCounts),
-                backgroundColor: ['rgba(70,192,192,0.4)', 'rgba(192,192,70,0.4)', 'rgba(192,70,70,0.4)'],
-                borderColor: ['rgba(70,192,192,1)', 'rgba(192,192,70,1)', 'rgba(192,70,70,1)'],
-                borderWidth: 1,
-              }]
-            });
-
-            const clientRevenues = clients.map(client => {
-              return client.locations.reduce((total, location) => {
-                const car = data.find(car => car._id === location.carId);
-                return total + (car ? car.locationPrice : 0);
-              }, 0);
-            });
-
-            setClientRevenueData({
-              labels: clientNames,
-              datasets: [{
-                label: 'Revenus par Client',
-                data: clientRevenues,
-                backgroundColor: 'rgba(192,12,192,0.4)',
-                borderColor: 'rgba(192,12,192,1)',
-                borderWidth: 1,
-              }]
-            });
-
-          })
-          .catch(error => console.error('Error fetching client data:', error));
-
       })
       .catch(error => console.error('Error fetching voiture data:', error));
-
   }, []);
 
   const options = {
@@ -261,11 +249,11 @@ const Dashboard = () => {
       <h2>Tableau de Bord</h2>
 
       <div style={{ marginLeft: '30%' }}>
-        <h3> <DirectionsCarRoundedIcon className="icon-right" />Nombre Total de Voitures: {totalCarCount}</h3>
+        <h3><DirectionsCarRoundedIcon className="icon-right" />Nombre Total de Voitures: {totalCarCount}</h3>
       </div>
 
       <div style={{ marginLeft: '40%' }}>
-        <h3><PeopleAltRoundedIcon className="icon-right" />   Nombre Total de Clients: {totalClientCount}</h3>
+        <h3><PeopleAltRoundedIcon className="icon-right" />Nombre Total de Clients: {totalClientCount}</h3>
       </div>
 
       <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
@@ -307,8 +295,6 @@ const Dashboard = () => {
         <h3>Nombre d'Événements par Voiture</h3>
         <Bar data={eventCountsData} options={options} />
       </div>
-
-      
 
       <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
         <h3>Nombre de Locations par Client</h3>
