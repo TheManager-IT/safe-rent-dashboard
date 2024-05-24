@@ -4,7 +4,7 @@ import { Button, IconButton, Container, Typography, Table, TableBody, TableCell,
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-
+import axios from 'axios';
 const Brands = () => {
   const [brands, setBrands] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -27,7 +27,7 @@ const Brands = () => {
     // Handle edit brand logic
   };
 
-  const handleDeleteBrand = (id) => {
+  /*const handleDeleteBrand = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette marque ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/marque/delete/${id}`, {
@@ -41,11 +41,28 @@ const Brands = () => {
           }
         })
         .catch(error => {
-          console.error('Error deleting brand:', error);
+          //console.error('Error deleting brand:', error);
           setErrorMessage(error.message);
-          alert(error.message);
+          //alert(error.message);
+          console.error('Error deleting brand:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete brand';
+        alert(errorMessage);
          //alert("Impossible de supprimer la marque car elle est associée à des modèles");
         });
+    }
+  };*/
+
+  const handleDeleteBrand = async (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette marque ?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3000/v1/api/marque/delete/${id}`);
+        fetchBrands(); // Refetch brands after deletion
+      } catch (error) {
+        console.error('Error deleting brand:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete brand';
+        alert(errorMessage);
+      }
     }
   };
 
