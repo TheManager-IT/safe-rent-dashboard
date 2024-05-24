@@ -5,7 +5,7 @@ import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 //import { Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
-
+import axios from 'axios';
 
 const ModelList = () => {
   const [models, setModels] = useState([]);
@@ -37,7 +37,7 @@ const ModelList = () => {
     // Handle edit model logic
   };
 
-  const handleDeleteModel = (id) => {
+  /*const handleDeleteModel = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce modèle ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/modele/delete/${id}`, {
@@ -56,10 +56,25 @@ const ModelList = () => {
           setError(error.message);
         });
     }
-  };
+  };*/
 
   const handleAddModel = () => {
     // Handle add model logic
+  };
+
+  const handleDeleteModel = async (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce modèle ?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3000/v1/api/modele/delete/${id}`);
+        fetchModels(); // Refetch models after deletion
+      } catch (error) {
+        console.error('Error deleting model:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete model';
+        alert(errorMessage);
+        setError(errorMessage);
+      }
+    }
   };
 
   const handleSearchTermChange = (event) => {

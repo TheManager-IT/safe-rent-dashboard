@@ -11,7 +11,7 @@ import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
-
+import axios from 'axios';
 import {
   Table,
   TableBody,
@@ -23,6 +23,7 @@ import {
 
 const CarDetail = () => {
   const [car, setCar] = useState(null);
+  const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
   const [fields, setFields] = useState({
     registrationPlate: true,
@@ -61,7 +62,7 @@ const CarDetail = () => {
       .catch(error => console.error('Error fetching car details:', error));
   }, [id]);
 
-  const handleDelete = (id) => {
+  /*const handleDelete = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
@@ -75,6 +76,26 @@ const CarDetail = () => {
         }
       })
       .catch(error => console.error('Error deleting car:', error));
+    }
+  };*/
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3000/v1/api/voiture/delete/${id}`);
+        setCarr(prevCars => {
+          if (!Array.isArray(prevCars)) {
+            return []; // ou gérer autrement si prevCars n'est pas un tableau
+          }
+          return prevCars.filter(car => car._id !== id);
+        });
+        setError(''); // Clear any previous error
+      } catch (error) {
+        console.error('Error deleting car:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete car';
+        alert(errorMessage);
+      }
     }
   };
 
