@@ -73,8 +73,13 @@ const EditBrand = () => {
         />
         {error && <Typography color="error">{error}</Typography>}
         <Button variant="contained" color="primary" onClick={handleEditBrand}>
-          Enregistrer
+        sauvegarder
         </Button>
+        <Link to="/brand">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );

@@ -132,7 +132,7 @@ const EditChargeForm = () => {
           disabled
         />
         <Button type="submit" variant="contained" color="primary">
-          Enregistrer
+        sauvegarder
         </Button>
         <Link to="/charge">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>

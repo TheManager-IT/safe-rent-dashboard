@@ -108,7 +108,7 @@ const EditEventForm = () => {
         <TextField
           select
           name="eventType"
-          label="Event Type"
+          label="Type d'événement"
           value={event.eventType || ''}
           onChange={handleChange}
           fullWidth
@@ -142,7 +142,7 @@ const EditEventForm = () => {
         />
        <TextField
   name="voiture"
-  label="Car"
+  label="Voiture"
   value={`${carInfo.model || 'Unknown'} - ${carInfo.registrationPlate}`}
   fullWidth
   margin="normal"
@@ -150,7 +150,7 @@ const EditEventForm = () => {
   disabled
 />
 
-        <Button type="submit" variant="contained" color="primary">Save</Button>
+        <Button type="submit" variant="contained" color="primary">Sauvegarder</Button>
         <Link to="/event">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
             Annuler

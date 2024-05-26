@@ -209,7 +209,7 @@ const EditCarForm = () => {
           margin="normal"
           placeholder="Kilométrage"
         />
-        <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>Save</Button>
+        <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>sauvegarder</Button>
         <Link to="/car">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
             Annuler

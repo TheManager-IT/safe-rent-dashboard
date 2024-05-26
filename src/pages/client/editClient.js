@@ -150,20 +150,20 @@ const EditClientForm = () => {
         Edit Client
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField name="name" label="Name" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.name} helperText={errors.name} />
-        <TextField name="firstName" label="First Name" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.firstName} helperText={errors.firstName} />
-        <TextField name="email" label="Email" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.email} helperText={errors.email} />
-        <TextField name="phoneNumber" label="Phone Number" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
-        <TextField name="address" label="Address" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.address} helperText={errors.address} />
-        <TextField name="contractNumber" label="Contract Number" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.contractNumber} helperText={errors.contractNumber} />
-        <TextField name="drivingLicense" label="Driving License" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.drivingLicense} helperText={errors.drivingLicense} />
-        <TextField name="nationalID" label="National ID" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.nationalID} helperText={errors.nationalID} />
+        <TextField name="name" label="Nom" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.name} helperText={errors.name} />
+        <TextField name="firstName" label="Prénom" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.firstName} helperText={errors.firstName} />
+        <TextField name="email" label="E-mail" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.email} helperText={errors.email} />
+        <TextField name="phoneNumber" label="Numéro de téléphone" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
+        <TextField name="address" label="Adresse" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.address} helperText={errors.address} />
+        <TextField name="contractNumber" label="Numéro de contrat" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.contractNumber} helperText={errors.contractNumber} />
+        <TextField name="drivingLicense" label="Permis de conduire" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.drivingLicense} helperText={errors.drivingLicense} />
+        <TextField name="nationalID" label="carte d'identité" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.nationalID} helperText={errors.nationalID} />
         <TextField type="file" name="images" onChange={handleChange} fullWidth margin="normal" multiple />
         <br />
-        <Button type="submit" variant="contained" color="primary">Update Client</Button>
+        <Button type="submit" variant="contained" color="primary">sauvegarder</Button>
         <Link to="/client">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
-            Cancel
+          Annuler
           </Button>
         </Link>
       </form>

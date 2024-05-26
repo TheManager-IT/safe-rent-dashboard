@@ -187,7 +187,7 @@ const CarDetail = () => {
           <View style={[styles.tableRow]}>
             <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Date </Text></View>
             <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Description</Text></View>
-            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>cost</Text></View>
+            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Coût</Text></View>
           </View>
           {car.charges.map((charge, index) => (
             <View style={styles.tableRow} key={index}>
@@ -209,9 +209,9 @@ const CarDetail = () => {
     {fields.evenements && (
       <View style={styles.table}>
         <View style={[styles.tableRow]}>
-          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>eventType </Text></View>
-          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>note</Text></View>
-          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>date</Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Type d'événement </Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Note</Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Date</Text></View>
           </View>
         {car.evenements.map((evenement, index) => (
           <View style={styles.tableRow} key={index}>
@@ -354,15 +354,15 @@ const CarDetail = () => {
     </Box>
     
        <div>
-        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>location </b></Typography>      
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>locations </b></Typography>      
         <TableContainer>
           <Table>
           <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
   <TableRow>
     <TableCell className='headTable'>Date De Début</TableCell>
     <TableCell className='headTable'>Date De Fin</TableCell>
-    <TableCell className='headTable'>NumberOfDays</TableCell>
-    <TableCell className='headTable'>Total Price</TableCell>
+    <TableCell className='headTable'>Nombre de jours</TableCell>
+    <TableCell className='headTable'>Prix ​​total</TableCell>
     <TableCell className='headTable'>Client</TableCell>
   </TableRow>
 </TableHead>
@@ -395,7 +395,7 @@ const CarDetail = () => {
           <Table>
             <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow>
-                <TableCell className='headTable'>eventType </TableCell>
+                <TableCell className='headTable'>type d'événement </TableCell>
                 <TableCell className='headTable'>note</TableCell>
                 <TableCell className='headTable'>date</TableCell>
               </TableRow>
@@ -419,7 +419,7 @@ const CarDetail = () => {
               <TableRow>
                 <TableCell className='headTable'>date </TableCell>
                 <TableCell className='headTable'>description</TableCell>
-                <TableCell className='headTable'>cost</TableCell>
+                <TableCell className='headTable'>coût</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
