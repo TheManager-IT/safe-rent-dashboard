@@ -28,7 +28,7 @@ const PredictComponent = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{  marginLeft: '20%' }}>
         <input type="file" onChange={handleFileChange} />
         <button type="submit">Predict</button>
       </form>
