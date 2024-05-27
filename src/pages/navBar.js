@@ -10,15 +10,13 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CarRentalRoundedIcon from '@mui/icons-material/CarRentalRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+import myImage from '../images/logo/safe.jpg';
 const Navbar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-brand">
         <Link to="/">
-          <img src="../image/LogoSafeRent.png" alt="Logo" />
-          <br/>
-          <img src="../images/logo/safe.jpg" alt="safee rent" />
-
+          <img src={myImage} alt="Description de l'image" />
           <span>SAFE RENT </span>
         </Link>
       </div>
