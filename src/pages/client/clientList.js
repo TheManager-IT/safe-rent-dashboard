@@ -7,6 +7,7 @@ import EditClientForm from '../client/editClient';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
+import axios from 'axios';
 
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 import {
@@ -50,20 +51,17 @@ const Clients = () => {
     // Logique de modification
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
     if (confirmDelete) {
-      fetch(`http://localhost:3000/v1/api/client/delete/${id}`, {
-        method: 'DELETE'
-      })
-      .then(response => {
-        if (response.ok) {
-          setClients(prevClients => prevClients.filter(client => client._id !== id));
-        } else {
-          throw new Error('Failed to delete client');
+        try {
+            await axios.delete(`http://localhost:3000/v1/api/client/delete/${id}`);
+            setClients(prevClients => prevClients.filter(client => client._id !== id));
+        } catch (error) {
+            console.error('Error deleting client:', error);
+            const errorMessage = error.response?.data?.error || 'Failed to delete client';
+            alert(errorMessage);
         }
-      })
-      .catch(error => console.error('Error deleting client:', error));
     }
   };
 

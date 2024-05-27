@@ -11,7 +11,7 @@ import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
-
+import axios from 'axios';
 import {
   Table,
   TableBody,
@@ -23,6 +23,7 @@ import {
 
 const CarDetail = () => {
   const [car, setCar] = useState(null);
+  const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
   const [fields, setFields] = useState({
     registrationPlate: true,
@@ -61,7 +62,7 @@ const CarDetail = () => {
       .catch(error => console.error('Error fetching car details:', error));
   }, [id]);
 
-  const handleDelete = (id) => {
+  /*const handleDelete = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
@@ -75,6 +76,26 @@ const CarDetail = () => {
         }
       })
       .catch(error => console.error('Error deleting car:', error));
+    }
+  };*/
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3000/v1/api/voiture/delete/${id}`);
+        setCarr(prevCars => {
+          if (!Array.isArray(prevCars)) {
+            return []; // ou gérer autrement si prevCars n'est pas un tableau
+          }
+          return prevCars.filter(car => car._id !== id);
+        });
+        setError(''); // Clear any previous error
+      } catch (error) {
+        console.error('Error deleting car:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete car';
+        alert(errorMessage);
+      }
     }
   };
 
@@ -166,7 +187,7 @@ const CarDetail = () => {
           <View style={[styles.tableRow]}>
             <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Date </Text></View>
             <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Description</Text></View>
-            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>cost</Text></View>
+            <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Coût</Text></View>
           </View>
           {car.charges.map((charge, index) => (
             <View style={styles.tableRow} key={index}>
@@ -188,9 +209,9 @@ const CarDetail = () => {
     {fields.evenements && (
       <View style={styles.table}>
         <View style={[styles.tableRow]}>
-          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>eventType </Text></View>
-          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>note</Text></View>
-          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>date</Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Type d'événement </Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Note</Text></View>
+          <View style={[styles.tableCol, styles.tableHeader]}><Text style={styles.tableCell}>Date</Text></View>
           </View>
         {car.evenements.map((evenement, index) => (
           <View style={styles.tableRow} key={index}>
@@ -333,15 +354,15 @@ const CarDetail = () => {
     </Box>
     
        <div>
-        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>location </b></Typography>      
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>locations </b></Typography>      
         <TableContainer>
           <Table>
           <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
   <TableRow>
     <TableCell className='headTable'>Date De Début</TableCell>
     <TableCell className='headTable'>Date De Fin</TableCell>
-    <TableCell className='headTable'>NumberOfDays</TableCell>
-    <TableCell className='headTable'>Total Price</TableCell>
+    <TableCell className='headTable'>Nombre de jours</TableCell>
+    <TableCell className='headTable'>Prix ​​total</TableCell>
     <TableCell className='headTable'>Client</TableCell>
   </TableRow>
 </TableHead>
@@ -374,7 +395,7 @@ const CarDetail = () => {
           <Table>
             <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow>
-                <TableCell className='headTable'>eventType </TableCell>
+                <TableCell className='headTable'>type d'événement </TableCell>
                 <TableCell className='headTable'>note</TableCell>
                 <TableCell className='headTable'>date</TableCell>
               </TableRow>
@@ -398,7 +419,7 @@ const CarDetail = () => {
               <TableRow>
                 <TableCell className='headTable'>date </TableCell>
                 <TableCell className='headTable'>description</TableCell>
-                <TableCell className='headTable'>cost</TableCell>
+                <TableCell className='headTable'>coût</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>

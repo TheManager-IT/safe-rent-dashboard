@@ -17,6 +17,7 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material';
+import axios from 'axios';
 
 const ClientDetail = () => {
   const [client, setClient] = useState(null);
@@ -162,7 +163,7 @@ const ClientDetail = () => {
     // Logique de modification
   };
 
-  const handleDelete = (id) => {
+  /*const handleDelete = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/client/delete/${id}`, {
@@ -177,7 +178,22 @@ const ClientDetail = () => {
       })
       .catch(error => console.error('Error deleting client:', error));
     }
+  };*/
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce client ?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3000/v1/api/client/delete/${id}`);
+        setClient(null); // Réinitialisez l'état du client après la suppression
+      } catch (error) {
+        console.error('Error deleting client:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete client';
+        alert(errorMessage);
+      }
+    }
   };
+  
   console.log(client.locations);
   console.log(client.locations.totalPrice);
 

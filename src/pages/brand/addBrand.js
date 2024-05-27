@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const AddBrand = () => {
   const [brandName, setBrandName] = useState('');
@@ -49,8 +50,13 @@ const AddBrand = () => {
         />
         {error && <Typography color="error">{error}</Typography>}
         <Button variant="contained" color="primary" onClick={handleAddBrand}>
-          Ajouter
+          Ajouter marque
         </Button>
+        <Link to="/brand">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );

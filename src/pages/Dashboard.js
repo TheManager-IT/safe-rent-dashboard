@@ -14,6 +14,15 @@ import {
   PointElement,
   LineElement
 } from 'chart.js';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TablePagination,Card,
+} from '@mui/material';
 
 ChartJS.register(
   CategoryScale,
@@ -41,6 +50,10 @@ const Dashboard = () => {
   const [clientRevenueData, setClientRevenueData] = useState({ labels: [], datasets: [] });
   const [totalCarCount, setTotalCarCount] = useState(0);
   const [totalClientCount, setTotalClientCount] = useState(0);
+  const [events, setEvents] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
     // Fetching client data
@@ -107,6 +120,14 @@ const Dashboard = () => {
         setTotalClientCount(data.totalClientCount);
       })
       .catch(error => console.error('Error fetching total client count data:', error));
+
+      fetch('http://localhost:3000/v1/api/evenement')
+      .then(response => response.json())
+      .then(data => {
+        const filteredEvents = data.filter(event => isWithinAWeek(event.date));
+        setEvents(filteredEvents);
+      })
+      .catch(error => console.error('Error fetching events:', error));
 
     // Fetching monthly location counts data
     fetch('http://localhost:3000/v1/api/location/monthly-location-counts')
@@ -244,7 +265,27 @@ const Dashboard = () => {
     },
   };
 
+  const formatDate = (date) => {
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    return new Date(date).toLocaleDateString('fr-FR', options);
+  };
+
+  const isWithinAWeek = (date) => {
+    const today = new Date();
+    const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 jours plus tard
+    const eventDate = new Date(date);
+    return eventDate >= today && eventDate <= nextWeek;
+  };
+
+  const filteredEvents = events.filter(event =>
+    //(event.voiture && event.voiture.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    event.date.includes(searchTerm)
+  ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
   return (
+    <div>
     <div>
       <h2>Tableau de Bord</h2>
 
@@ -311,6 +352,62 @@ const Dashboard = () => {
         <Bar data={clientRevenueData} options={options} />
       </div>
     </div>
+
+
+<Card>
+       
+       <TableContainer sx={{ overflow: 'unset' }}>
+         <Table sx={{ minWidth: 800 }}>
+           <TableHead className="table-header">
+             <TableRow>
+             <TableCell className="table-header-cell" >modele</TableCell>
+               <TableCell className="table-header-cell" >Voiture</TableCell>
+               <TableCell className="table-header-cell">Type d'événement</TableCell>
+               <TableCell className="table-header-cell">Note</TableCell>
+               <TableCell className="table-header-cell">Date</TableCell>
+             </TableRow>
+           </TableHead>
+           <TableBody>
+ {/*{events
+   .filter(event => 
+     (event.voiture && event.voiture.registrationPlate && event.voiture.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase())) ||
+   (event.voiture && event.voiture.model && event.voiture.model.modelName.toLowerCase().includes(searchTerm.toLowerCase())) ||
+   event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
+   event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
+   event.date.includes(searchTerm)
+   )*/}
+   {filteredEvents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+   .map((event) => (
+     <TableRow key={event._id} >
+       <TableCell>{event.voiture && event.voiture.model && event.voiture.model.modelName}</TableCell>
+       <TableCell>{event.voiture ? event.voiture.registrationPlate : ''}</TableCell>
+       <TableCell>{event.eventType}</TableCell>
+       <TableCell>{event.note}</TableCell>
+       <TableCell>{formatDate(event.date)}</TableCell>
+     </TableRow>
+   ))}
+</TableBody>
+
+         </Table>
+       </TableContainer>
+      
+       <TablePagination
+         component="div"
+         count={events.length} 
+         rowsPerPage={rowsPerPage}
+         page={page}
+         onPageChange={(event, newPage) => setPage(newPage)}
+         onRowsPerPageChange={(event) => {
+           setRowsPerPage(parseInt(event.target.value, 10));
+           setPage(0); 
+         }}
+         rowsPerPageOptions={[5, 10, 25]}
+       />
+    
+
+     </Card>
+
+</div>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, TextField, Button, Select, MenuItem } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 const AddModel = () => {
   const [modelName, setModelName] = useState('');
@@ -88,6 +89,11 @@ const AddModel = () => {
         <Button variant="contained" color="primary" onClick={handleAddModel}>
           Ajouter
         </Button>
+        <Link to="/model">
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+            Annuler
+          </Button>
+        </Link>
       </form>
     </Container>
   );

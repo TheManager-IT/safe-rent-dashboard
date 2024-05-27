@@ -106,7 +106,7 @@ const EditModel = () => {
           
         />
         {error && <Typography color="error">{error}</Typography>}
-        <Button type="submit" variant="contained" color="primary">Enregistrer</Button>
+        <Button type="submit" variant="contained" color="primary">sauvegarder</Button>
         <Link to="/model">
           <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
             Annuler

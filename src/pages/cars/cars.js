@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Scrollbar from '../../components/scrollbar';
-
+import axios from 'axios';
 import AddIcon from '@mui/icons-material/Add';
 import SearchIcon from '@mui/icons-material/Search';
 import '../tableStyles.css'; 
@@ -35,6 +35,7 @@ const Cars = () => {
   const [brandFilter, setBrandFilter] = useState('');
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:3000/v1/api/voiture')
@@ -47,7 +48,7 @@ const Cars = () => {
     console.log('Edit car with id:', id);
   };
 
-  const handleDelete = (id) => {
+ /* const handleDelete = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
     if (confirmDelete) {
       fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
@@ -61,6 +62,21 @@ const Cars = () => {
         }
       })
       .catch(error => console.error('Error deleting car:', error));
+    }
+  };*/
+
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:3000/v1/api/voiture/delete/${id}`);
+        setCars(prevCars => prevCars.filter(car => car._id !== id));
+        setError(''); // Clear any previous error
+      } catch (error) {
+        console.error('Error deleting car:', error);
+        const errorMessage = error.response?.data?.error || 'Failed to delete car';
+        alert(errorMessage);
+      }
     }
   };
 
@@ -152,7 +168,7 @@ const Cars = () => {
               {filteredCars.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((car) => (
                 <TableRow key={car._id}>
                   <TableCell>{car.registrationPlate}</TableCell>
-                  <TableCell>{car.model.brand.brandName}</TableCell>
+                  <TableCell>{car.model?.brand?.brandName || 'N/A'}</TableCell>
                   <TableCell>{car.model.modelName}</TableCell>
                   <TableCell>{car.numberOfCarSeats}</TableCell>
                   <TableCell>{car.locationPrice} DT</TableCell>
