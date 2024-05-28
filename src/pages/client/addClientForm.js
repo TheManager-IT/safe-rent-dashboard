@@ -143,7 +143,7 @@ function AddClientForm() {
     return (
         <Container maxWidth="sm" style={{backgroundRepeat:'no-repeat',backgroundSize: 'cover', padding: '20px', borderRadius: '20px' }}>
         
-            <Typography variant="h4" sx={{ mb: 2 }}>
+            <Typography variant="h4" sx={{ mb: 2 }} align="center">
                 Ajouter Client
             </Typography>
             <form onSubmit={handleSubmit}>

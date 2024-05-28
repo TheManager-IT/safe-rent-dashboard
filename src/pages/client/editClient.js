@@ -146,7 +146,7 @@ const EditClientForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2 }} align="center">
         Edit Client
       </Typography>
       <form onSubmit={handleSubmit}>

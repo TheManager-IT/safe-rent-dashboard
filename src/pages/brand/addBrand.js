@@ -36,7 +36,7 @@ const AddBrand = () => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2 }} align="center">
         Ajouter une marque
       </Typography>
       <form>

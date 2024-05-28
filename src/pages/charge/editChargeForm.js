@@ -85,7 +85,7 @@ const EditChargeForm = () => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2 }} align="center">
         Modifier une charge
       </Typography>
       <form onSubmit={handleSubmit}>
