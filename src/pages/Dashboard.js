@@ -375,7 +375,6 @@ const Dashboard = () => {
     width: '100%', 
     margin: 'auto', 
     //padding:"50px",
-
     //marginLeft:'4%',
 }}>
     <div style={{ width: '600px', height: '400px', margin: 'auto'   }}>
