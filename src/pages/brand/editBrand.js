@@ -59,7 +59,7 @@ const EditBrand = () => {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2 }} align="center">
         Modifier la marque
       </Typography>
       <form>

@@ -164,7 +164,7 @@ function AddCarForm() {
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2 }} align="center">
         Ajouter Voiture
       </Typography>
       <form onSubmit={handleSubmit} encType="multipart/form-data">

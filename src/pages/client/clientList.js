@@ -91,9 +91,11 @@ const Clients = () => {
         <Typography variant="h4" sx={{ mb: 2 }}>
           Clients
         </Typography>
+        <Link to="/addClient">
         <Button variant="contained" style={{ backgroundColor: 'rgb(33, 43, 54)', color: 'white', padding: '6px 16px' }} startIcon={<AddIcon />} onClick={handleAddClient}>
           Ajouter client
         </Button>
+        </Link>
       </Stack>
 
       <div className="search">
@@ -178,27 +180,10 @@ const Clients = () => {
       </Card>
 
       {/* Popover pour l'ajout d'un client */}
-      <Popover
-        open={addClientOpen}
-        onClose={() => setAddClientOpen(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <AddClientForm onSuccess={() => setAddClientOpen(false)} />
-      </Popover>
+      
 
       {/* Popover pour l'edit d'un client */}
-      <Popover
-        open={editClientOpen}
-        onClose={() => setEditClientOpen(false)}
-        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center' }}
-      >
-        <EditClientForm 
-          clientId={currentClientId} 
-          onSuccess={() => setEditClientOpen(false)} 
-        />
-      </Popover>
+      
 
     </Container>
   );

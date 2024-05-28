@@ -129,7 +129,7 @@ startDate.setHours(0, 0, 0, 0);
 
   return (
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }}>
+      <Typography variant="h4" sx={{ mb: 2 }} align="center">
         Ajouter une location
       </Typography>
       <form onSubmit={handleSubmit}>
