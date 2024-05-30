@@ -4,7 +4,7 @@ import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import carImage from '../images/icone/car.png';  
 import UserImage from '../images/icone/iconUsers.png';
-
+import RentCar from '../images/icone/iconRentCar.png';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -57,6 +57,7 @@ const Dashboard = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [mixedData, setMixedData] = useState({ labels: [], datasets: [] });
+  const [totalLocationCount, setTotalLocationCount] = useState(0);
 
 
   useEffect(() => {
@@ -124,6 +125,14 @@ const Dashboard = () => {
         setTotalClientCount(data.totalClientCount);
       })
       .catch(error => console.error('Error fetching total client count data:', error));
+
+      fetch('http://localhost:3000/v1/api/location/locationCount')
+      .then(response => response.json())
+      .then(data => {
+        setTotalLocationCount(data.totalLocationCount);
+      })
+      .catch(error => console.error('Error fetching total location count:', error));
+
 
       fetch('http://localhost:3000/v1/api/evenement')
       .then(response => response.json())
@@ -306,7 +315,7 @@ const Dashboard = () => {
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-    <div>
+<div  style={{ marginLeft: '5%' }} >
     <div>
       <h2 style={{ marginLeft: '15%' }} >Salut, .. 👋</h2>
       <div style={{
@@ -363,26 +372,40 @@ const Dashboard = () => {
             {totalClientCount} <br/> Clients
         </div>
     </div>
+
+    <div style={{
+    flexDirection: 'column',
+    marginLeft :'8%',
+    width: '15%',
+    height:'40%',
+    backgroundColor: 'rgba(255, 255, 255, 1)', 
+    borderRadius: '30px', 
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
+    padding: '25px'
+  }}>
+    <img src={RentCar} alt="RentCar" style={{ width: '70px', height: '70px', marginBottom: '10px' }} />
+    <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
+      {totalLocationCount} <br/> Locations
+    </div>
+  </div>
+
 </div>
-
-
- 
 
 <div style={{ 
     display: 'flex', 
     justifyContent: 'space-around', 
     alignItems: 'center', 
     width: '100%', 
-    margin: 'auto', 
+    //margin: 'auto', 
     //padding:"50px",
     //marginLeft:'4%',
 }}>
-    <div style={{ width: '600px', height: '400px', margin: 'auto'   }}>
+    <div style={{ width: '600px', height: '400px',   }}>
         <h3>Locations Mensuelles</h3>
         <Bar data={monthlyLocationData} options={options} />
     </div>
 
-    <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+    <div style={{ width: '600px', height: '400px',  }}>
       <h3>Prix de Location et Total des Locations</h3>
       <Bar data={mixedData} options={options} />
     </div>
@@ -399,19 +422,19 @@ const Dashboard = () => {
     justifyContent: 'space-around', 
     alignItems: 'center', 
     width: '100%', 
-    margin: 'auto', 
+    //margin: 'auto', 
    // padding:"50px",
     //marginLeft:'4%',
     marginTop:'-2%',
 
    
 }}>
-<div style={{ width: '600px', height: '400px', margin: 'auto'}}>
+<div style={{ width: '600px', height: '400px',}}>
         <h3>Revenus par Client</h3>
         <Bar data={clientRevenueData} options={options} />
       </div>
 
-<div style={{ width: '300px', height: '300px' , margin: 'auto'  }}>
+<div style={{ width: '300px', height: '300px' ,  }}>
         <h3>Répartition des Clients par Ville</h3>
         <Pie data={clientCityData} options={options} />
       </div>
@@ -422,17 +445,17 @@ const Dashboard = () => {
     justifyContent: 'space-around', 
     alignItems: 'center', 
     width: '100%', 
-    margin: 'auto', 
+    //margin: 'auto', 
    // padding:"50px",
 
    // marginLeft:'4%',
 }}>
-   <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+   <div style={{ width: '600px', height: '400px',  }}>
         <h3>Charges Totales</h3>
         <Bar data={totalChargesData} options={options} />
       </div>
 
-      <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+      <div style={{ width: '600px', height: '400px',  }}>
         <h3>Nombre d'Événements par Voiture</h3>
         <Bar data={eventCountsData} options={options} />
       </div>
@@ -440,9 +463,6 @@ const Dashboard = () => {
 
 
 </div>
-
-
-
 
 
 
@@ -464,13 +484,13 @@ const Dashboard = () => {
 */}
      
 
-      <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+      <div style={{ width: '600px', height: '400px',  }}>
         <h3>Nombre de Locations par Client</h3>
         <Bar data={clientLocationData} options={options} />
       </div>
 
 
-<Card sx={{ width: '50%',marginLeft:"20%"  , padding: '10px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>
+<Card sx={{ width: '50%',marginLeft:"0%"  , padding: '10px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>
        
        <TableContainer sx={{ overflow: 'unset' }}>
          <Table sx={{ minWidth: 500 }}>

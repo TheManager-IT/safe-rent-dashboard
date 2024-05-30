@@ -111,7 +111,7 @@ const Clients = () => {
         />
       </div>
 
-      <Card className="card">
+      <Card  style={{}}>
         <TableContainer sx={{ overflow: 'unset' }}>
           <Table sx={{ minWidth: 800 }}>
             <TableHead className="table-header">
@@ -123,7 +123,6 @@ const Clients = () => {
                 <TableCell className="table-header-cell">CIN</TableCell>
                 <TableCell className="table-header-cell">N° de permis de conduire</TableCell>
                 <TableCell className="table-header-cell">Adresse</TableCell>
-                {/*<TableCell className="table-header-cell">location</TableCell>*/}
                 <TableCell className="table-header-cell">Detail</TableCell>
                 <TableCell className="table-header-cell">Modifier</TableCell>
                 <TableCell className="table-header-cell">Supprimer</TableCell>
@@ -139,7 +138,6 @@ const Clients = () => {
                   <TableCell>{client.nationalID}</TableCell>
                   <TableCell>{client.drivingLicense}</TableCell>
                   <TableCell>{client.address}</TableCell>
-                  {/*<TableCell>{client.locations}</TableCell>*/}
                   <TableCell>
                     <Link to={`/client/${client._id}`}>
                       <IconButton variant="contained" color="primary">
@@ -177,13 +175,7 @@ const Clients = () => {
           }}
           rowsPerPageOptions={[5, 10, 25]}
         />
-      </Card>
-
-      {/* Popover pour l'ajout d'un client */}
-      
-
-      {/* Popover pour l'edit d'un client */}
-      
+      </Card>      
 
     </Container>
   );
