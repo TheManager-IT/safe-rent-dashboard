@@ -340,6 +340,7 @@ const CarDetail = () => {
        backgroundColor: ' rgb(232, 232, 232)', // Changer la couleur de la bordure au survol
       },}}> Diagnostic
           </Button>
+          </Link>
           <br/>
           <br/>
             <Button variant="contained"  onClick={generatePDF} startIcon={<PictureAsPdfRoundedIcon/>}   sx={{
@@ -352,7 +353,7 @@ const CarDetail = () => {
       },
     }}> Génerer rapport PDF
 </Button>
-</Link>
+
       
 
       </Box>
