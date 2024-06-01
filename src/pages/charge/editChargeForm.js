@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Container, TextField, Typography, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+
+
 
 const EditChargeForm = () => {
   const [charge, setCharge] = useState({
@@ -99,6 +105,11 @@ const EditChargeForm = () => {
           margin="normal"
           InputLabelProps={{ shrink: true }}
           required
+          InputProps={{
+                        startAdornment: (
+                            <DateRangeRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
           error={!!errors.date}
           helperText={errors.date}
         />
@@ -109,6 +120,11 @@ const EditChargeForm = () => {
           onChange={handleChange}
           fullWidth
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <DescriptionRoundedIcon  style={{ opacity: 0.6  ,marginRight: '10px'}} />
+                        ),
+                    }}
         />
         <TextField
           name="cost"
@@ -121,6 +137,11 @@ const EditChargeForm = () => {
           required
           error={!!errors.cost}
           helperText={errors.cost}
+          InputProps={{
+                        startAdornment: (
+                            <PaidOutlinedIcon  style={{ opacity: 0.6  ,marginRight: '10px'}} />
+                        ),
+                    }}
         />
         <TextField
           name="voiture"
@@ -130,12 +151,17 @@ const EditChargeForm = () => {
           margin="normal"
           required
           disabled
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained"   style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
         sauvegarder
         </Button>
         <Link to="/charge">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained"  style={{ marginLeft: '10px' ,marginTop: '20px' ,backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

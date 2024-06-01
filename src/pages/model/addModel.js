@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, TextField, Button, Select, MenuItem } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 const AddModel = () => {
   const [modelName, setModelName] = useState('');
   const [brand, setBrand] = useState('');
@@ -72,6 +72,11 @@ const AddModel = () => {
           onChange={handleBrandChange}
           fullWidth
           sx={{ mb: 2 }}
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         >
           {brands.map((brand) => (
             <MenuItem key={brand._id} value={brand._id}>{brand.brandName}</MenuItem>
@@ -83,14 +88,20 @@ const AddModel = () => {
           value={modelName}
           onChange={handleModelNameChange}
           fullWidth
+          placeholder=" modèle voiture"
           sx={{ mb: 2 }}
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         {error && <Typography color="error">{error}</Typography>}
-        <Button variant="contained" color="primary" onClick={handleAddModel}>
-          Ajouter
+        <Button variant="contained"  onClick={handleAddModel}    style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
+          Ajouter modèle
         </Button>
         <Link to="/model">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained"  style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

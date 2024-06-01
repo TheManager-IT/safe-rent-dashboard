@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Typography, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
 import { Link } from 'react-router-dom';
+
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+import PersonIcon from '@mui/icons-material/Person';
+import AlarmRoundedIcon from '@mui/icons-material/AlarmRounded';
+
 const AddLocationForm = () => {
   const [location, setLocation] = useState({
     StartDateLocation: '',
@@ -147,6 +153,11 @@ startDate.setHours(0, 0, 0, 0);
             shrink: true,
           }}
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <DateRangeRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <TextField
           name="EndDateLocation"
@@ -162,6 +173,11 @@ startDate.setHours(0, 0, 0, 0);
             shrink: true,
           }}
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <DateRangeRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <TextField
           name="locationTime"
@@ -174,6 +190,11 @@ startDate.setHours(0, 0, 0, 0);
             shrink: true,
           }}
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <AlarmRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <TextField
   select
@@ -182,6 +203,11 @@ startDate.setHours(0, 0, 0, 0);
   onChange={handleCarChange}
   fullWidth
   margin="normal"
+  InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
 >
   {voitures.map((car) => (
     <MenuItem key={car._id} value={car._id}>
@@ -196,12 +222,17 @@ startDate.setHours(0, 0, 0, 0);
           renderInput={(params) => <TextField {...params} label="Client" fullWidth margin="normal" />}
           value={selectedClient}
           onChange={handleClientChange}
+          InputProps={{
+                        startAdornment: (
+                            <PersonIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
-        <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
+        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
           Ajouter la location
         </Button>
         <Link to="/locations">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
+          <Button variant="contained" style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

@@ -101,12 +101,12 @@ const Cars = () => {
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Voitures
+        Liste Des Voitures
         </Typography>
         <Link to="/addCar">
           <Button
             variant="contained"
-            style={{ backgroundColor: '#222831', color: 'white' }}
+            style={{ backgroundColor: '#263238', color: 'white' }} 
             startIcon={<AddIcon />}
             onClick={handleAddCar}
           >
@@ -177,8 +177,8 @@ const Cars = () => {
                   
                   <TableCell>
                     <Link to={`/car/${car._id}`}>
-                      <IconButton variant="contained" color="primary">
-                      <DescriptionOutlinedIcon/>
+                      <IconButton variant="contained">
+                      <DescriptionOutlinedIcon    style={{ color: 'rgba(108,151,187,1)' }}/>
                       </IconButton>
                     </Link>
                   </TableCell>
@@ -186,7 +186,7 @@ const Cars = () => {
                   <TableCell>
                     <Link to={`/editCar/${car._id}`}>
                       <IconButton onClick={() => handleEdit(car._id)} variant="contained" color="primary">
-                      <EditIcon />
+                      <EditIcon style={{ color: 'rgba(12,192,70,1)' }} />
                       </IconButton>
                     </Link>
                   </TableCell>

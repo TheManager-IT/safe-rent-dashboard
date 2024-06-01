@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 const AddBrand = () => {
   const [brandName, setBrandName] = useState('');
   const [error, setError] = useState('');
@@ -41,19 +41,25 @@ const AddBrand = () => {
       </Typography>
       <form>
         <TextField
-          label="Nom de la marque"
+          label="Nom de la marque voiture"
           variant="outlined"
           value={brandName}
           onChange={handleBrandNameChange}
           fullWidth
+          placeholder=" Marque voiture"
           sx={{ mb: 2 }}
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         {error && <Typography color="error">{error}</Typography>}
-        <Button variant="contained" color="primary" onClick={handleAddBrand}>
+        <Button variant="contained"  onClick={handleAddBrand}     style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
           Ajouter marque
         </Button>
         <Link to="/brand">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained" color="secondary" style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

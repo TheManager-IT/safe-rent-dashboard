@@ -10,14 +10,14 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CarRentalRoundedIcon from '@mui/icons-material/CarRentalRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
-import myImage from '../images/logo/safe.jpg';
+import myImage from '../images/logo/logo rent.png';
 const Navbar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-brand">
         <Link to="/">
-          <img src={myImage} alt="Description de l'image" />
-          <span>SAFE RENT </span>
+          <img src={myImage} alt="SAFE RENT" />
+          
         </Link>
       </div>
       <ul className="sidebar-nav">
@@ -71,12 +71,12 @@ const Navbar = () => {
         </li>
 
 
-        <li>
+        {/*<li>
           <Link to="/predict">
             <PaidOutlinedIcon  className="icon-right"/>
             Diagnostic voiture
           </Link>
-        </li>
+        </li>*/}
 
       </ul>
       <div className="sidebar-actions">

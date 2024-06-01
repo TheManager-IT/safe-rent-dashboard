@@ -94,7 +94,7 @@ const ModelList = () => {
           Liste des modèles
         </Typography>
         <Link to="/addModel">
-          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddModel}>
+          <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddModel}>
             Ajouter un modèle
           </Button>
         </Link>
@@ -133,7 +133,7 @@ const ModelList = () => {
                   <TableCell>
                     <Link to={`/editModel/${model._id}`}>
                       <IconButton variant="contained" color="primary" onClick={() => handleEditModel(model._id)}>
-                      <EditIcon />
+                      <EditIcon style={{ color: 'rgba(12,192,70,1)' }}/>
                       </IconButton>
                     </Link>
                   </TableCell>

@@ -3,6 +3,11 @@ import { useParams } from 'react-router-dom';
 import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 
 import { Link } from 'react-router-dom';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+
 
 const EventType = {
   OIL_CHANGE: 'Changement d\'huile',
@@ -114,6 +119,11 @@ const EditEventForm = () => {
           fullWidth
           margin="normal"
           required
+          InputProps={{
+                        startAdornment: (
+                            <ChecklistRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         >
           {Object.values(EventType).map((type) => (
             <MenuItem key={type} value={type}>{type}</MenuItem>
@@ -126,6 +136,11 @@ const EditEventForm = () => {
           onChange={handleChange}
           fullWidth
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <EventNoteRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
           
         />
         <TextField
@@ -139,6 +154,11 @@ const EditEventForm = () => {
           InputLabelProps={{ shrink: true }}
           required
           error={!!errors.date} helperText={errors.date}
+          InputProps={{
+                        startAdornment: (
+                            <DateRangeRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
        <TextField
   name="voiture"
@@ -148,11 +168,16 @@ const EditEventForm = () => {
   margin="normal"
   required
   disabled
+  InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
 />
 
-        <Button type="submit" variant="contained" color="primary">Sauvegarder</Button>
+        <Button type="submit" variant="contained" style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>Sauvegarder</Button>
         <Link to="/event">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained" style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

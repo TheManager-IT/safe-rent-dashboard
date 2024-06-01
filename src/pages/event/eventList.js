@@ -104,10 +104,10 @@ const Events = () => {
     <Container>
               <Stack  className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Les événements
+        Liste Des événements
         </Typography>
         <Link to="/addEvent">
-            <Button variant="contained"   style={{ backgroundColor: '#222831', color: 'white' }}
+            <Button variant="contained"   style={{ backgroundColor: '#263238  ', color: 'white' }}
   startIcon={<AddIcon />} onClick={handleAddEvent}>
               Ajouter événement
             </Button>
@@ -125,7 +125,7 @@ const Events = () => {
     </InputAdornment>
   }
           />
-            <Button variant="contained" color="primary" onClick={handleSortByDate}>
+            <Button variant="contained"  onClick={handleSortByDate}      style={{ backgroundColor: ' rgb(108,151,187)',}}  >
             <SwapVertRoundedIcon sx={{ mr: 1 }} /> Trier par date
         </Button>
           
@@ -190,7 +190,7 @@ const Events = () => {
         <TableCell>
           <Link to={`/editEvent/${event._id}`}>
             <IconButton variant="contained" color="primary" onClick={() => handleEdit(event._id)}> 
-            <EditIcon />
+            <EditIcon  style={{ color: 'rgba(12,192,70,1)' }}/>
             </IconButton>
           </Link>
         </TableCell>

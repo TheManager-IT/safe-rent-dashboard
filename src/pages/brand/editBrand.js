@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 const EditBrand = () => {
   const [brandName, setBrandName] = useState('');
   const [error, setError] = useState('');
@@ -70,13 +70,18 @@ const EditBrand = () => {
           onChange={handleBrandNameChange}
           fullWidth
           sx={{ mb: 2 }}
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         {error && <Typography color="error">{error}</Typography>}
-        <Button variant="contained" color="primary" onClick={handleEditBrand}>
+        <Button variant="contained" onClick={handleEditBrand}  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}  >
         sauvegarder
         </Button>
         <Link to="/brand">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained" style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

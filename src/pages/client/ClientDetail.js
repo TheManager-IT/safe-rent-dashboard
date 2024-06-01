@@ -1,12 +1,14 @@
 // Import des composants nécessaires
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions,Box } from '@mui/material';
 import { Document, Page, Text, PDFDownloadLink, Image, View, StyleSheet } from '@react-pdf/renderer';
 import './clientDetail.css'; 
 import PictureAsPdfRoundedIcon from '@mui/icons-material/PictureAsPdfRounded';
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { Carousel } from 'react-responsive-carousel';
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import EditIcon from '@mui/icons-material/Edit';
 import '../cars/CarDetail.css'; 
 import {
@@ -202,30 +204,109 @@ const ClientDetail = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Détails du client
       </Typography>
-      <div>
-  
-        <Typography > <b>Nom: </b> {client.name}</Typography>
-        <Typography> <b>Prénom:</b> {client.firstName}</Typography>
-        <Typography><b> Email:</b> {client.email}</Typography>
-        <Typography><b>Numéro de Téléphone:</b> {client.phoneNumber}</Typography>
-        <Typography><b>CIN:</b> {client.nationalID}</Typography>
-        <Typography><b>Adresse:</b> {client.address}</Typography>
-        <Typography><b>numéro Contrat:</b> {client.contractNumber}</Typography>
-        <Typography><b>numéro de Permis:</b> {client.drivingLicense}</Typography>
+      <Box display="flex" justifyContent="space-between">
+      <Box flex="1" mr={2}>
+        {client.images.length > 0 ? (
+          <Carousel>
+          {client.images.map((image, index) => (
+          <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`client Image ${index}`} />
+        ))}
+          </Carousel>
+        ) : (
+          <p>Pas d'images disponibles pour ce client.</p>
+        )}
+      </Box>
 
+      <Box flex="1">
+      <Typography variant="h5" className="marginBottom" > <b>Nom: </b> {client.name}</Typography>
+        <Typography variant="h5" className="marginBottom"> <b>Prénom:</b> {client.firstName}</Typography>
+        <Typography variant="h5" className="marginBottom"><b> Email:</b> {client.email}</Typography>
+        <Typography  variant="h5" className="marginBottom"><b>Numéro de Téléphone:</b> {client.phoneNumber}</Typography>
+        <Typography  variant="h5" className="marginBottom"><b>CIN:</b> {client.nationalID}</Typography>
+        <Typography  variant="h5" className="marginBottom"><b>Adresse:</b> {client.address}</Typography>
+        <Typography  variant="h5" className="marginBottom"><b>numéro Contrat:</b> {client.contractNumber}</Typography>
+        <Typography  variant="h5" className="marginBottom"><b>numéro de Permis:</b> {client.drivingLicense}</Typography>
 
         <Link to={`/editClient/${client._id}`}>
-            <Button onClick={() => handleEdit(client._id)} variant="contained" color="primary"  startIcon={<EditIcon />} sx={{ mr: 1 }}>
+            <Button onClick={() => handleEdit(client._id)} variant="outlined"  startIcon={<EditIcon />} sx={{
+      width:'190px',
+      mr: 2,
+      mt: 5,
+      color: 'rgb(38 ,50, 56 )', // Couleur du texte
+      borderColor: 'rgb(38 ,50, 56 )', // Couleur de la bordure
+     //backgroundColor: 'rgb(108,151,187)',
+      '&:hover': {
+        borderColor: 'rgb(38 ,50, 56 )',
+       //backgroundColor: ' rgb(38 ,50, 56)',
+      // backgroundColor: 'rgb(38 ,50, 56)',
+      //borderColor: 'rgb(108,151,187)', // Couleur de la bordure au survol
+
+      },
+    }}>
               Modifier
             </Button>
           </Link>
-          <Button variant="contained" color="error" onClick={() => handleDelete(client._id)}  startIcon={<DeleteIcon />}>
-            Supprimer
-          </Button>
-        <Button variant="contained" color="info" onClick={generatePDF}>
-        <PictureAsPdfRoundedIcon sx={{ mr: 1 }} /> Génerer rapport PDF
-        </Button>
+          <Button variant="outlined"  onClick={() => handleDelete(client._id)}  startIcon={<DeleteIcon />}  
+          sx={{
+    width: '190px',
+    mr: 0,
+    mt: 5,
+    color: '#C50000', // Couleur du texte
+    borderColor: '#C50000', // Couleur de la bordure
+    '&:hover': {
+      backgroundColor: 'rgb(232, 232, 232)',
+      borderColor: '#C50000', // Couleur de la bordure au survol
+    },}}>Supprimer </Button>
+        <br/>
+<br/>
+      <Button variant="contained"  onClick={generatePDF} startIcon={<PictureAsPdfRoundedIcon/>}   sx={{
+      width:'398px',
+      ml: 0,
+      mt: 0,
+    
+      backgroundColor: 'rgb(108,151,187)',
+      '&:hover': {
+        color: '#333',
+       backgroundColor: ' rgb(232, 232, 232)', 
+      },
+    }}> Génerer rapport PDF
+</Button>
 
+      </Box>
+
+
+
+
+      </Box>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div>
+  
+  
 
         <TableContainer>
 
@@ -259,10 +340,7 @@ const ClientDetail = () => {
         </TableContainer>
 
         <Typography><b>locationTotalClient:</b> {client.locationTotalClient}</Typography>
-        {client.images.map((image, index) => (
-  <img key={index} src={`http://localhost:3000/uploads/${image}`}  alt={`client Image ${index}`} />
-))}
-
+      
         
 
         <Dialog open={open} onClose={handleClose}>
@@ -279,7 +357,7 @@ const ClientDetail = () => {
             <Button onClick={handleClose}  variant="contained" color="error">Annuler</Button>
             <PDFDownloadLink document={<MyDocument />} fileName={`${client.nationalID}-${client.name} ${client.firstName}.pdf`}>
               {({ blob, url, loading, error }) =>
-                loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2 }} /> 
+                loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2,mt:1,  color:'#65B741 ', fontSize: '30px' }} /> 
               }
             </PDFDownloadLink>
           </DialogActions>

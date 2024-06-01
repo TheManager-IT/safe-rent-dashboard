@@ -73,9 +73,12 @@ const Dashboard = () => {
           datasets: [{
             label: 'Revenus par Client',
             data: clientRevenues,
-            backgroundColor: 'rgba(192,12,192,0.4)',
-            borderColor: 'rgba(192,12,192,1)',
+            backgroundColor: 'rgba(210 ,52,118,0.7)',
+            borderColor: 'rgba(210 ,52,118,1)',
             borderWidth: 1,
+           
+            borderRadius: 40, // Bords arrondis des barres
+            barThickness: 30, // Épaisseur des barres
           }]
         });
 
@@ -85,9 +88,12 @@ const Dashboard = () => {
           datasets: [{
             label: 'Nombre de Locations par Client',
             data: clientLocationCounts,
-            backgroundColor: 'rgba(70,12,192,0.4)',
-            borderColor: 'rgba(70,12,192,1)',
+            backgroundColor: 'rgba(192,12,70,1)',
+            borderColor: 'rgba(192,12,70,1)',
             borderWidth: 1,
+            
+            borderRadius: 5, // Bords arrondis des barres
+            barThickness: 30, // Épaisseur des barres
           }]
         });
 
@@ -102,8 +108,8 @@ const Dashboard = () => {
           datasets: [{
             label: 'Répartition par Ville',
             data: Object.values(cityCounts),
-            backgroundColor: ['rgba(70,192,192,0.4)', 'rgba(192,192,70,0.4)', 'rgba(192,70,70,0.4)'],
-            borderColor: ['rgba(70,192,192,1)', 'rgba(192,192,70,1)', 'rgba(192,70,70,1)'],
+            backgroundColor: ['rgba(70,192,192,0.4)', 'rgba(192,192,70,0.4)', 'rgba(192,70,70,0.4)','rgba(192,12,70,0.4)','rgba(210 ,52,118,0.4)','rgba(38 ,50, 56 ,0.4)','rgba( 144,202,249 ,0.4)'],
+            borderColor: ['rgba(70,192,192,1)', 'rgba(192,192,70,1)', 'rgba(192,70,70,1)','rgba(192,12,70,1)','rgba(210 ,52,118,1)','rgba(38 ,50, 56 ,1)','rgba( 144,202,249 ,1)'],
             borderWidth: 1,
           }]
         });
@@ -155,9 +161,12 @@ const Dashboard = () => {
             {
               label: 'Nombre de Locations Mensuelles',
               data: counts,
-              backgroundColor: 'rgba(70,12,192,0.4)',
-              borderColor: 'rgba(70,12,192,1)',
-              borderWidth: 1,
+              backgroundColor: 'rgba(144,202,249,0.7)',
+              borderColor: 'rgba(144,202,249,1)',
+              
+              borderWidth: 2,
+              borderRadius: 5, // Bords arrondis des barres
+              barThickness: 25, // Épaisseur des barres
             }
           ]
         });
@@ -265,9 +274,11 @@ const Dashboard = () => {
           datasets: [{
             label: 'Charges Totales',
             data: totalCharges,
-            backgroundColor: 'rgba(12,192,192,0.4)',
-            borderColor: 'rgba(12,192,192,1)',
+            backgroundColor: 'rgba(38, 50, 56 ,1)',
+            borderColor: 'rgba(38, 50, 56,1)',
             borderWidth: 1,
+           borderRadius: 5, // Bords arrondis des barres
+           barThickness: 35, // Épaisseur des barres
           }]
         });
 
@@ -277,9 +288,12 @@ const Dashboard = () => {
           datasets: [{
             label: 'Nombre d\'Événements',
             data: eventCounts,
-            backgroundColor: 'rgba(192,70,12,0.4)',
-            borderColor: 'rgba(192,70,12,1)',
-            borderWidth: 1,
+            backgroundColor: 'rgba(108,151,187,0.2)',
+            borderColor: 'rgba(108,151,187,0.5)',
+            
+            borderWidth: 2,
+            borderRadius: 5, // Bords arrondis des barres
+            barThickness: 30, // Épaisseur des barres
           }]
         });
       })
@@ -315,233 +329,259 @@ const Dashboard = () => {
   ).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   return (
-<div  style={{ marginLeft: '5%' }} >
-    <div>
-      <h2 style={{ marginLeft: '15%' }} >Salut, .. 👋</h2>
-      <div style={{
-    display: 'flex',
-    //justifyContent: 'space-around',
-    alignItems: 'center',
-    marginTop: '3%',
-    margin: 'auto' ,
-    //backgroundColor: 'rgba(255, 2255, 255, 1)', 
-    //borderRadius: '30px', 
-   // boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
-    //padding: '25px'  /* Réduisez le padding pour diminuer l'espace intérieur */
-}}>
-    <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        //alignItems: 'center',
-        width: '15%',
-        height:'40%',
-        marginLeft :'15%',
-        backgroundColor: 'rgba(255, 255, 255, 1)', 
-        borderRadius: '30px', 
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
-        padding: '25px'
-    }}>
-        <img 
-            src={carImage}
-            alt="Car" 
-            style={{ width: '70px', height: '70px', marginBottom: '10px' }} 
-        />
-        <div style={{ marginLeft:'40%', marginTop: '-20%', fontSize: '20px' }}>
-            {totalCarCount} <br/> Voitures
-        </div>
-    </div>
+<div  style={{ marginLeft: '0%' ,padding: '0px 0px 50px 200px'}} >
+                <div>
+                  <h2 style={{ marginLeft: '7%' }} >Salut, .. 👋</h2>
 
-    <div style={{
-        //display: 'flex',
-        flexDirection: 'column',
-        marginLeft :'8%',
-        //alignItems: 'center',
-        width: '15%',
-        height:'40%',
-        backgroundColor: 'rgba(255, 255, 255, 1)', 
-        borderRadius: '30px', 
-        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
-        padding: '25px'
-    }}>
-        <img 
-            src={UserImage}
-            alt="User" 
-            style={{ width: '70px', height: '70px', marginBottom: '10px' }} 
-        />
-        <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
-            {totalClientCount} <br/> Clients
-        </div>
-    </div>
+                  <div style={{
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                marginTop: '3%',
+                //backgroundColor: '#DBB5B5', 
+               padding: '10px 0px 10px 30px' 
+            }}>
+                <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    width: '15%',
+                    height:'40%',
+                    backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '30px', 
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
+                    padding: '25px'
+                }}>
+                    <img 
+                        src={carImage}
+                        alt="Car" 
+                        style={{ width: '70px', height: '70px', marginBottom: '10px' }} 
+                    />
+                    <div style={{ marginLeft:'40%', marginTop: '-20%', fontSize: '20px' }}>
+                        {totalCarCount} <br/> Voitures
+                    </div>
+                </div>
 
-    <div style={{
-    flexDirection: 'column',
-    marginLeft :'8%',
-    width: '15%',
-    height:'40%',
-    backgroundColor: 'rgba(255, 255, 255, 1)', 
-    borderRadius: '30px', 
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
-    padding: '25px'
-  }}>
-    <img src={RentCar} alt="RentCar" style={{ width: '70px', height: '70px', marginBottom: '10px' }} />
-    <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
-      {totalLocationCount} <br/> Locations
-    </div>
-  </div>
+                <div style={{
+                    //display: 'flex',
+                    flexDirection: 'column',
+                    marginLeft :'8%',
+                    //alignItems: 'center',
+                    width: '15%',
+                    height:'40%',
+                    backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '30px', 
+                    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
+                    padding: '25px'
+                }}>
+                    <img 
+                        src={UserImage}
+                        alt="User" 
+                        style={{ width: '70px', height: '70px', marginBottom: '10px' }} 
+                    />
+                    <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
+                        {totalClientCount} <br/> Clients
+                    </div>
+                </div>
 
-</div>
+                <div style={{
+                flexDirection: 'column',
+                marginLeft :'8%',
+                width: '15%',
+                height:'40%',
+                backgroundColor: 'rgba(255, 255, 255, 1)', 
+                borderRadius: '30px', 
+                boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
+                padding: '25px'
+              }}>
+                <img src={RentCar} alt="RentCar" style={{ width: '70px', height: '70px', marginBottom: '10px' }} />
+                <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
+                  {totalLocationCount} <br/> Locations
+                </div>
+              </div>
 
-<div style={{ 
-    display: 'flex', 
-    justifyContent: 'space-around', 
-    alignItems: 'center', 
-    width: '100%', 
-    //margin: 'auto', 
-    //padding:"50px",
-    //marginLeft:'4%',
-}}>
-    <div style={{ width: '600px', height: '400px',   }}>
-        <h3>Locations Mensuelles</h3>
-        <Bar data={monthlyLocationData} options={options} />
-    </div>
+            </div>
 
-    <div style={{ width: '600px', height: '400px',  }}>
-      <h3>Prix de Location et Total des Locations</h3>
-      <Bar data={mixedData} options={options} />
-    </div>
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-around', 
+                alignItems: 'center', 
+               // backgroundColor: '#BFF6C3',
+                padding: '30px 0px 30px 0px' ,
+            }}>
+                <div style={{ width: '600px', height: '400px', 
+                  backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    //boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    padding: '20px 20px 10px 20px' ,
+                   // padding: '25px'
+                  }}>
+                    <h3>Locations Mensuelles</h3>
+                    <Bar data={monthlyLocationData} options={options} />
+                </div>
 
-    {/*<div style={{ width: '600px', height: '400px' }}>
-        <h3>Prix de Location</h3>
-        <Bar data={locationPriceData} options={options} />
-    </div>*/}
-</div>
+                <div style={{ width: '600px', height: '400px', 
+                 backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    //boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    padding: '20px 20px 10px 20px' ,
+                 }}>
+                  <h3>Prix de Location et Total des Locations</h3>
+                  <Bar data={mixedData} options={options} />
+                </div>
 
-
-<div style={{ 
-    display: 'flex', 
-    justifyContent: 'space-around', 
-    alignItems: 'center', 
-    width: '100%', 
-    //margin: 'auto', 
-   // padding:"50px",
-    //marginLeft:'4%',
-    marginTop:'-2%',
-
-   
-}}>
-<div style={{ width: '600px', height: '400px',}}>
-        <h3>Revenus par Client</h3>
-        <Bar data={clientRevenueData} options={options} />
-      </div>
-
-<div style={{ width: '300px', height: '300px' ,  }}>
-        <h3>Répartition des Clients par Ville</h3>
-        <Pie data={clientCityData} options={options} />
-      </div>
-</div>
-    
-    <div style={{ 
-    display: 'flex', 
-    justifyContent: 'space-around', 
-    alignItems: 'center', 
-    width: '100%', 
-    //margin: 'auto', 
-   // padding:"50px",
-
-   // marginLeft:'4%',
-}}>
-   <div style={{ width: '600px', height: '400px',  }}>
-        <h3>Charges Totales</h3>
-        <Bar data={totalChargesData} options={options} />
-      </div>
-
-      <div style={{ width: '600px', height: '400px',  }}>
-        <h3>Nombre d'Événements par Voiture</h3>
-        <Bar data={eventCountsData} options={options} />
-      </div>
-    </div>
+                {/*<div style={{ width: '600px', height: '400px' }}>
+                    <h3>Prix de Location</h3>
+                    <Bar data={locationPriceData} options={options} />
+                </div>*/}
+            </div>
 
 
-</div>
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-around', 
+                alignItems: 'center', 
+                marginLeft:'-5%',
+              //  backgroundColor: '#CAF4FF',
+                padding: '10px 0px 30px 0px' ,
+
+              
+            }}>
+            <div style={{ width: '600px', height: '400px',
+            backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                    padding: '20px 20px 10px 20px' ,
+            }}>
+                    <h3>Revenus par Client</h3>
+                    <Bar data={clientRevenueData} options={options} />
+                  </div>
+
+            <div style={{ width: '350px', height: '350px' ,  }}>
+                    <h3>Répartition des Clients par Ville</h3>
+                    <Pie data={clientCityData} options={options} />
+                  </div>
+            </div>
+                
+                <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-around', 
+                alignItems: 'center', 
+               //backgroundColor: '#C7C8CC',
+                padding: '30px 0px 20px 10px' ,
+               
+            }}>
+             <div style={{ width: '600px', height: '400px', 
+                 backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    padding: '20px 20px 10px 20px' ,
+              }}>
+                    <h3>Nombre de Locations par Client</h3>
+                    <Bar data={clientLocationData} options={options} />
+                  </div>
+
+              <div style={{ width: '600px', height: '400px',
+                  backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    padding: '20px 20px 10px 20px' ,  }}>
+                    <h3>Charges Totales pour chaque voiture</h3>
+                    <Bar data={totalChargesData} options={options} />
+                  </div>
+                </div>
+            </div>
 
 
 
-{/** 
-      <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
-        <h3>Total des Locations</h3>
-        <Line data={locationTotalData} options={options} />
-      </div>
+            {/** 
+                  <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+                    <h3>Total des Locations</h3>
+                    <Line data={locationTotalData} options={options} />
+                  </div>
 
-      <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
-        <h3>Distance Parcourue</h3>
-        <Bar data={traveledData} options={options} />
-      </div>
+                  <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+                    <h3>Distance Parcourue</h3>
+                    <Bar data={traveledData} options={options} />
+                  </div>
 
-      <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
-        <h3>État des Voitures</h3>
-        <Pie data={carStatusData} options={options} />
-      </div>
-*/}
-     
+                  <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
+                    <h3>État des Voitures</h3>
+                    <Pie data={carStatusData} options={options} />
+                  </div>
+            */}
+                
+            <div style={{ 
+                display: 'flex', 
+                justifyContent: 'space-around', 
+                alignItems: 'center', 
+               // backgroundColor: '#CAa4FF',
+                padding: '30px 0px 20px 80px' ,
+                
+            }}>
 
-      <div style={{ width: '600px', height: '400px',  }}>
-        <h3>Nombre de Locations par Client</h3>
-        <Bar data={clientLocationData} options={options} />
-      </div>
 
+            <Card sx={{ width: '50%',
+              backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    padding: '20px 20px 10px 20px' ,
+            
+            }}>
+            <h3>Événements Automobiles de la Semaine : Ne Manquez Pas Ces Événements !</h3>
+                  <TableContainer sx={{ overflow: 'unset' }}>
+                    <Table sx={{ minWidth: 500 }}>
+                      <TableHead className="table-header">
+                        <TableRow>
+                        <TableCell className="table-header-cell" >Modele voiture</TableCell>
+                          <TableCell className="table-header-cell" > Imatriculation</TableCell>
+                          <TableCell className="table-header-cell">Type d'événement</TableCell>
+                          <TableCell className="table-header-cell">Note</TableCell>
+                          <TableCell className="table-header-cell">Date</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+          
+              {filteredEvents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .map((event) => (
+                <TableRow key={event._id} >
+                  <TableCell>{event.voiture && event.voiture.model && event.voiture.model.modelName}</TableCell>
+                  <TableCell>{event.voiture ? event.voiture.registrationPlate : ''}</TableCell>
+                  <TableCell>{event.eventType}</TableCell>
+                  <TableCell>{event.note}</TableCell>
+                  <TableCell>{formatDate(event.date)}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
 
-<Card sx={{ width: '50%',marginLeft:"0%"  , padding: '10px', boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', borderRadius: '10px' }}>
-       
-       <TableContainer sx={{ overflow: 'unset' }}>
-         <Table sx={{ minWidth: 500 }}>
-           <TableHead className="table-header">
-             <TableRow>
-             <TableCell className="table-header-cell" >modele</TableCell>
-               <TableCell className="table-header-cell" >Voiture</TableCell>
-               <TableCell className="table-header-cell">Type d'événement</TableCell>
-               <TableCell className="table-header-cell">Note</TableCell>
-               <TableCell className="table-header-cell">Date</TableCell>
-             </TableRow>
-           </TableHead>
-           <TableBody>
- {/*{events
-   .filter(event => 
-     (event.voiture && event.voiture.registrationPlate && event.voiture.registrationPlate.toLowerCase().includes(searchTerm.toLowerCase())) ||
-   (event.voiture && event.voiture.model && event.voiture.model.modelName.toLowerCase().includes(searchTerm.toLowerCase())) ||
-   event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
-   event.note.toLowerCase().includes(searchTerm.toLowerCase()) ||
-   event.date.includes(searchTerm)
-   )*/}
-   {filteredEvents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-   .map((event) => (
-     <TableRow key={event._id} >
-       <TableCell>{event.voiture && event.voiture.model && event.voiture.model.modelName}</TableCell>
-       <TableCell>{event.voiture ? event.voiture.registrationPlate : ''}</TableCell>
-       <TableCell>{event.eventType}</TableCell>
-       <TableCell>{event.note}</TableCell>
-       <TableCell>{formatDate(event.date)}</TableCell>
-     </TableRow>
-   ))}
-</TableBody>
+                    </Table>
+                  </TableContainer>
+                  
+                  <TablePagination
+                    component="div"
+                    count={events.length} 
+                    rowsPerPage={rowsPerPage}
+                    page={page}
+                    onPageChange={(event, newPage) => setPage(newPage)}
+                    onRowsPerPageChange={(event) => {
+                      setRowsPerPage(parseInt(event.target.value, 10));
+                      setPage(0); 
+                    }}
+                    rowsPerPageOptions={[5, 10, 25]}
+                  />
+                
 
-         </Table>
-       </TableContainer>
-      
-       <TablePagination
-         component="div"
-         count={events.length} 
-         rowsPerPage={rowsPerPage}
-         page={page}
-         onPageChange={(event, newPage) => setPage(newPage)}
-         onRowsPerPageChange={(event) => {
-           setRowsPerPage(parseInt(event.target.value, 10));
-           setPage(0); 
-         }}
-         rowsPerPageOptions={[5, 10, 25]}
-       />
-    
+            </Card>
 
-</Card>
+            <div style={{ width: '600px', height: '400px',
+            backgroundColor: 'rgba(255, 255, 255, 1)', 
+                    borderRadius: '20px', 
+                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    padding: '20px 20px 10px 20px' ,
+              }}>
+                    <h3>Nombre d'Événements par Voiture</h3>
+                    <Bar data={eventCountsData} options={options} />
+                  </div>
+            </div>
 
 </div>
   );

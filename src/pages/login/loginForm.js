@@ -59,13 +59,13 @@ const LoginForm = () => {
                                 label="Email"
                                 variant="outlined"
                                 value={email}
-                                placeholder="    Entrez votre adresse e-mail"
+                                placeholder=" Entrez votre adresse e-mail"
                                 onChange={(e) => setEmail(e.target.value)}
                                 fullWidth
                                 sx={{ mb: 4  }}
                                 InputProps={{
                         startAdornment: (
-                            <AlternateEmailSharpIcon  style={{ opacity: 0.6 }} />
+                            <AlternateEmailSharpIcon  style={{ opacity: 0.6,marginRight: '10px' }} />
                         ),
                         
                       
@@ -76,13 +76,13 @@ const LoginForm = () => {
                                 variant="outlined"
                                 type="password"
                                 value={password}
-                                placeholder="    entrez votre mot de passe"
+                                placeholder=" entrez votre mot de passe"
                                 onChange={(e) => setPassword(e.target.value)}
                                 fullWidth
                                 sx={{ mb: 3 }}
                                 InputProps={{
                         startAdornment: (
-                            <HttpsRoundedIcon  style={{ opacity: 0.6 }} />
+                            <HttpsRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px'}} />
                         ),
                       
                     }}
@@ -96,7 +96,7 @@ const LoginForm = () => {
                                     fontWeight: 550 ,
                                   width:'180px',
                                   height:'40px',
-                                backgroundColor: '#5C8CB3',
+                                backgroundColor: '#455a64',
                                 color: 'white',
                                 '&:hover': {
                                     backgroundColor: '#6c97bb', 

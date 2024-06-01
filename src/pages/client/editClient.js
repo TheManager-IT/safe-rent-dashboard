@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, Container, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
-
+import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
+import PersonIcon from '@mui/icons-material/Person';
+import PhoneIcon from '@mui/icons-material/Phone';
+import HomeIcon from '@mui/icons-material/Home';
+import AssignmentIcon from '@mui/icons-material/Assignment';
+import ContactEmergencyRoundedIcon from '@mui/icons-material/ContactEmergencyRounded';
+import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
+import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 const EditClientForm = () => {
   const [client, setClient] = useState({
     name: '',
@@ -150,19 +157,58 @@ const EditClientForm = () => {
         Edit Client
       </Typography>
       <form onSubmit={handleSubmit}>
-        <TextField name="name" label="Nom" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.name} helperText={errors.name} />
-        <TextField name="firstName" label="Prénom" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.firstName} helperText={errors.firstName} />
-        <TextField name="email" label="E-mail" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.email} helperText={errors.email} />
-        <TextField name="phoneNumber" label="Numéro de téléphone" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.phoneNumber} helperText={errors.phoneNumber} />
-        <TextField name="address" label="Adresse" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.address} helperText={errors.address} />
-        <TextField name="contractNumber" label="Numéro de contrat" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.contractNumber} helperText={errors.contractNumber} />
-        <TextField name="drivingLicense" label="Permis de conduire" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.drivingLicense} helperText={errors.drivingLicense} />
-        <TextField name="nationalID" label="carte d'identité" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.nationalID} helperText={errors.nationalID} />
-        <TextField type="file" name="images" onChange={handleChange} fullWidth margin="normal" multiple />
+        <TextField name="name" label="Nom" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.name} helperText={errors.name}    InputProps={{
+                        startAdornment: (
+                            <PersonIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}/>
+        <TextField name="firstName" label="Prénom" value={client.firstName || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.firstName} helperText={errors.firstName}    InputProps={{
+                        startAdornment: (
+                            <PersonIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }} />
+        <TextField name="email" label="E-mail" value={client.email || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.email} helperText={errors.email} InputProps={{
+                        startAdornment: (
+                            <AlternateEmailRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}/>
+        <TextField name="phoneNumber" label="Numéro de téléphone" value={client.phoneNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.phoneNumber} helperText={errors.phoneNumber}   InputProps={{
+                        startAdornment: (
+                            <PhoneIcon  style={{ opacity: 0.6 ,marginRight: '10px'}}/>
+                        ),
+                    }}/>
+        <TextField name="address" label="Adresse" value={client.address || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.address} helperText={errors.address} InputProps={{
+                        startAdornment: (
+                            <HomeIcon  style={{ opacity: 0.6 ,marginRight: '10px'}}/>
+                        ),
+                    }} />
+        <TextField name="contractNumber" label="Numéro de contrat" value={client.contractNumber || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.contractNumber} helperText={errors.contractNumber} 
+InputProps={{
+                        startAdornment: (
+                            <AssignmentIcon style={{ opacity: 0.6 ,marginRight: '10px' }}/>
+                        ),
+                    }} />
+        <TextField name="drivingLicense" label="Permis de conduire" value={client.drivingLicense || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.drivingLicense} helperText={errors.drivingLicense} InputProps={{
+                        startAdornment: (
+                            <CreditCardRoundedIcon style={{ opacity: 0.6 ,marginRight: '10px'}} />
+                        ),
+                    }}/>
+        <TextField name="nationalID" label="carte d'identité" value={client.nationalID || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.nationalID} helperText={errors.nationalID}
+            InputProps={{
+                        startAdornment: (
+                            <ContactEmergencyRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}
+         />
+        <TextField type="file" name="images" onChange={handleChange} fullWidth margin="normal" multiple   InputProps={{
+                        startAdornment: (
+                            <ImageRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}/>
         <br />
-        <Button type="submit" variant="contained" color="primary">sauvegarder</Button>
+        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>sauvegarder</Button>
         <Link to="/client">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained"  style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
           Annuler
           </Button>
         </Link>

@@ -141,8 +141,7 @@ function AddClientForm() {
     };
 
     return (
-        <Container maxWidth="sm" style={{backgroundRepeat:'no-repeat',backgroundSize: 'cover', padding: '20px', borderRadius: '20px' }}>
-        
+        <Container  maxWidth="sm">
             <Typography variant="h4" sx={{ mb: 2 }} align="center">
                 Ajouter Client
             </Typography>
@@ -151,7 +150,7 @@ function AddClientForm() {
                     name="name"
                     value={client.name}
                     onChange={handleChange}
-                    placeholder="    Nom"
+                    placeholder=" Nom"
                     required
                     fullWidth
                     margin="normal"
@@ -160,67 +159,64 @@ function AddClientForm() {
                     helperText={errors.name}
                     InputProps={{
                         startAdornment: (
-                            <PersonIcon  style={{ opacity: 0.6 }} />
+                            <PersonIcon  style={{ opacity: 0.6 ,marginRight: '10px'}} />
                         ),
                       
                     }}
                 />
-
-
-
-                <TextField name="firstName" value={client.firstName} onChange={handleChange}  placeholder="    Prénom"  required fullWidth   margin="normal" label="Prénom" 
+                <TextField name="firstName" value={client.firstName} onChange={handleChange}  placeholder=" Prénom"  required fullWidth   margin="normal" label="Prénom" 
 
                         InputProps={{
                         startAdornment: (
-                            <PersonIcon style={{ opacity: 0.6 }} />
+                            <PersonIcon style={{ opacity: 0.6,marginRight: '10px' }} />
                         ),
                     }}
                 />
-            <TextField  name="email"  value={client.email}  onChange={handleChange}  placeholder="    Email"   required fullWidth    margin="normal"  label="Email"   error={!!errors.email}
+            <TextField  name="email"  value={client.email}  onChange={handleChange}  placeholder=" Email"   required fullWidth    margin="normal"  label="Email"   error={!!errors.email}
                     helperText={errors.email}   
                     InputProps={{
                         startAdornment: (
-                            <AlternateEmailRoundedIcon style={{ opacity: 0.6 }} />
+                            <AlternateEmailRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
                         ),
                     }}/>
-            <TextField name="phoneNumber" value={client.phoneNumber} onChange={handleChange}   placeholder="    Numéro de Téléphone"  required  fullWidth  margin="normal" label="Numéro de Téléphone"   error={!!errors.phoneNumber}
+            <TextField name="phoneNumber" value={client.phoneNumber} onChange={handleChange}   placeholder=" Numéro de Téléphone"  required  fullWidth  margin="normal" label="Numéro de Téléphone"   error={!!errors.phoneNumber}
                     helperText={errors.phoneNumber} 
 
                     InputProps={{
                         startAdornment: (
-                            <PhoneIcon  style={{ opacity: 0.6 }}/>
+                            <PhoneIcon  style={{ opacity: 0.6 ,marginRight: '10px'}}/>
                         ),
                     }}
                     />
-            <TextField name="address" value={client.address} onChange={handleChange} placeholder="    Address" required  fullWidth    margin="normal" label="Address"
+            <TextField name="address" value={client.address} onChange={handleChange} placeholder=" Address" required  fullWidth    margin="normal" label="Address"
 
 InputProps={{
                         startAdornment: (
-                            <HomeIcon  style={{ opacity: 0.6 }}/>
+                            <HomeIcon  style={{ opacity: 0.6 ,marginRight: '10px'}}/>
                         ),
                     }}
             />
-            <TextField   name="contractNumber"   value={client.contractNumber}  onChange={handleChange}  placeholder="    N° contrat" required fullWidth margin="normal" label="N° contrat"
+            <TextField   name="contractNumber"   value={client.contractNumber}  onChange={handleChange}  placeholder=" N° contrat" required fullWidth margin="normal" label="N° contrat"
 
 InputProps={{
                         startAdornment: (
-                            <AssignmentIcon style={{ opacity: 0.6 }}/>
+                            <AssignmentIcon style={{ opacity: 0.6 ,marginRight: '10px' }}/>
                         ),
                     }}
             />
-            <TextField name="drivingLicense" value={client.drivingLicense} onChange={handleChange}  placeholder="    N° de permis de conduire  :  xx / xxxxxx" fullWidth    margin="normal" label="N° de permis de conduire"  error={!!errors.drivingLicense}
+            <TextField name="drivingLicense" value={client.drivingLicense} onChange={handleChange}  placeholder=" N° de permis de conduire  :  xx / xxxxxx" fullWidth    margin="normal" label="N° de permis de conduire"  error={!!errors.drivingLicense}
                     helperText={errors.drivingLicense}
                     InputProps={{
                         startAdornment: (
-                            <CreditCardRoundedIcon style={{ opacity: 0.6 }} />
+                            <CreditCardRoundedIcon style={{ opacity: 0.6 ,marginRight: '10px'}} />
                         ),
                     }}
                     />
-            <TextField name="nationalID" value={client.nationalID}     onChange={handleChange}   placeholder="    CIN"    required fullWidth  margin="normal" label="CIN"   error={!!errors.nationalID}
+            <TextField name="nationalID" value={client.nationalID}     onChange={handleChange}   placeholder=" CIN"    required fullWidth  margin="normal" label="CIN"   error={!!errors.nationalID}
                     helperText={errors.nationalID} 
                     InputProps={{
                         startAdornment: (
-                            <ContactEmergencyRoundedIcon  style={{ opacity: 0.6 }} />
+                            <ContactEmergencyRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
                         ),
                     }}
                     />
@@ -228,7 +224,7 @@ InputProps={{
             <TextField  type="file" name="images"   multiple  onChange={handleChange} fullWidth margin="normal" required 
                 InputProps={{
                         startAdornment: (
-                            <ImageRoundedIcon style={{ opacity: 0.6 }} />
+                            <ImageRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
                         ),
                     }}
 
@@ -237,11 +233,11 @@ InputProps={{
             <br/>
             <br/>
 
-                <Button type="submit" variant="contained" color="primary">
+                <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
                 Ajouter Client
                 </Button>
                 <Link to="/client">
-                    <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+                    <Button variant="contained" style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
                         Annuler
                     </Button>
                 </Link>

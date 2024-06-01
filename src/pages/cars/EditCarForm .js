@@ -2,6 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
 
+import AirlineSeatReclineNormalRoundedIcon from '@mui/icons-material/AirlineSeatReclineNormalRounded';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import CarCrashRoundedIcon from '@mui/icons-material/CarCrashRounded';
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+
+
 const EditCarForm = () => {
   const [car, setCar] = useState({
     registrationPlate: '',
@@ -159,7 +166,11 @@ const EditCarForm = () => {
       </Typography>
       <form onSubmit={handleSubmit}>
   
-        <TextField name="registrationPlate" label="Imatriculation" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled />
+        <TextField name="registrationPlate" label="Imatriculation" value={car.registrationPlate || ''} onChange={handleChange} fullWidth margin="normal" required disabled InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }} />
         <TextField
           select
           label="Modele"
@@ -170,6 +181,11 @@ const EditCarForm = () => {
           required
           margin="normal"
           fullWidth
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
           error={!!errors.model}
           helperText={errors.model}
         >
@@ -180,10 +196,22 @@ const EditCarForm = () => {
           ))}
         </TextField>
         {/*<TextField name="brand" label="Marque" value={car.brand || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.brand} helperText={errors.brand}/>*/}
-        <TextField name="numberOfCarSeats" label="Nombre de places" value={car.numberOfCarSeats || ''} onChange={handleChange} fullWidth margin="normal" type="number" required  error={!!errors.numberOfCarSeats} helperText={errors.numberOfCarSeats}/>
-        <TextField name="locationPrice" label="Prix de la location" value={car.locationPrice || ''} onChange={handleChange} fullWidth margin="normal" type="number"error={!!errors.locationPrice} helperText={errors.locationPrice}/>
+        <TextField name="numberOfCarSeats" label="Nombre de places" value={car.numberOfCarSeats || ''} onChange={handleChange} fullWidth margin="normal" type="number" required  error={!!errors.numberOfCarSeats} helperText={errors.numberOfCarSeats}    InputProps={{
+                        startAdornment: (
+                            <AirlineSeatReclineNormalRoundedIcon  style={{ opacity: 0.6, marginRight: '10px' }} />
+                        ),
+                    }}/>
+        <TextField name="locationPrice" label="Prix de la location" value={car.locationPrice || ''} onChange={handleChange} fullWidth margin="normal" type="number"error={!!errors.locationPrice} helperText={errors.locationPrice}   InputProps={{
+                        startAdornment: (
+                            <PaidOutlinedIcon  style={{ opacity: 0.6  ,marginRight: '10px'}} />
+                        ),
+                    }}/>
         <TextField select label="Statut" name="statut" value={car.status || ''} onChange={handleChange} fullWidth margin="normal" required   error={!!errors.status}
-          helperText={errors.status}>
+          helperText={errors.status} InputProps={{
+                        startAdornment: (
+                            <CarCrashRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}>
           {Object.values(Status).map((status) => (
             <MenuItem key={status} value={status}>
               {status}
@@ -197,6 +225,11 @@ const EditCarForm = () => {
           onChange={handleChange}
           fullWidth
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <AddPhotoAlternateRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}
         />
 
         <TextField
@@ -209,9 +242,9 @@ const EditCarForm = () => {
           margin="normal"
           placeholder="Kilométrage"
         />
-        <Button type="submit" variant="contained" color="primary" style={{marginTop: '20px'}}>sauvegarder</Button>
+        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>sauvegarder</Button>
         <Link to="/car">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
+          <Button variant="contained"  style={{ marginLeft: '10px', marginTop: '20px' ,backgroundColor: ' #C50000',}}>
             Annuler
           </Button>
         </Link>

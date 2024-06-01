@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, TextField, MenuItem, Typography } from '@mui/material';
+import EventNoteRoundedIcon from '@mui/icons-material/EventNoteRounded';
+import ChecklistRoundedIcon from '@mui/icons-material/ChecklistRounded';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+
 
 const EventType = {
   OIL_CHANGE: 'Changement d\'huile',
@@ -125,6 +130,12 @@ const AddEventForm = () => {
           margin="normal"
           error={!!errors.eventType}
           helperText={errors.eventType}
+          placeholder=" note"
+          InputProps={{
+                        startAdornment: (
+                            <ChecklistRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         >
           {Object.values(EventType).map((type) => (
             <MenuItem key={type} value={type}>{type}</MenuItem>
@@ -136,6 +147,13 @@ const AddEventForm = () => {
           onChange={handleNoteChange}
           fullWidth
           margin="normal"
+          placeholder=" note"
+
+          InputProps={{
+                        startAdornment: (
+                            <EventNoteRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <TextField
           label="Date"
@@ -147,6 +165,11 @@ const AddEventForm = () => {
           InputLabelProps={{ shrink: true }}
           error={!!errors.date}
           helperText={errors.date}
+          InputProps={{
+                        startAdornment: (
+                            <DateRangeRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         
         <TextField
@@ -158,6 +181,11 @@ const AddEventForm = () => {
   margin="normal"
   error={!!errors.selectedCar}
   helperText={errors.selectedCar}
+  InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
 >
   {cars.map((car) => (
     <MenuItem key={car._id} value={car._id}>
@@ -168,11 +196,11 @@ const AddEventForm = () => {
 
 
         
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained" style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
           Ajouter l'événement
         </Button>
         <Link to="/event">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained"  style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
             Annuler
           </Button>
         </Link>

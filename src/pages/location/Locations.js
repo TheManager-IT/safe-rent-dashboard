@@ -87,10 +87,10 @@ const Locations = () => {
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13} >
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Locations
+        Liste Des Locations
         </Typography>
         <Link to="/addlocationform">
-          <Button variant="contained" style={{ backgroundColor: '#222831', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddLocation}>
+          <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddLocation}>
             Ajouter location
           </Button>
         </Link>
@@ -144,7 +144,7 @@ const Locations = () => {
                   <TableCell>
                     <Link to={`/editlocationform/${location._id}`}>
                       <IconButton variant="contained" color="primary">
-                      <EditIcon />                      </IconButton>
+                      <EditIcon  style={{ color: 'rgba(12,192,70,1)' }} />                      </IconButton>
                     </Link>
                   </TableCell>
                   <TableCell>

@@ -42,7 +42,6 @@ const CarDetail = () => {
     return new Date(date).toLocaleDateString('fr-FR', options);
   };
   const [carr, setCarr] = useState({ images: [] });
-
     // Pagination states for locations, charges, and events
     const [locationsPage, setLocationsPage] = useState(0);
     const [chargesPage, setChargesPage] = useState(0);
@@ -289,16 +288,20 @@ const CarDetail = () => {
 <Link to={`/editCar/${car._id}`}>
   <Button
     onClick={() => handleEdit(car._id)}
-    variant="contained"
-    color="info"
+    variant="outlined"
+   
     startIcon={<EditIcon />}
     sx={{
       width:'190px',
       mr: 2,
-      //borderRadius: '10px', // Arrondir les bords
+      color: 'rgb(38 ,50, 56 )', // Couleur du texte
+      borderColor: 'rgb(38 ,50, 56 )', // Couleur de la bordure
+     //backgroundColor: 'rgb(108,151,187)',
       '&:hover': {
-        color: 'rgb(24, 119, 242)',
-        backgroundColor: ' rgb(232, 232, 232)',
+       //backgroundColor: ' rgb(38 ,50, 56)',
+      // backgroundColor: 'rgb(38 ,50, 56)',
+      borderColor: 'rgb(38 ,50, 56 )',
+      //borderColor: 'rgb(108,151,187)', // Couleur de la bordure au survol
 
       },
     }}
@@ -306,47 +309,50 @@ const CarDetail = () => {
     Modifier
   </Button>
 </Link>
-          <Button variant="outlined" color="error" onClick={() => handleDelete(car._id)}  startIcon={<DeleteIcon />}
-            sx={{
-      width:'190px',
-      mr: 2,
-      //borderRadius: '10px', // Arrondir les bords
-      '&:hover': {
-        color: '#C50000',
-        backgroundColor: ' rgb(232, 232, 232)',
-
-      },
-    }}
-          >
-            Supprimer
-          </Button>
+        
+         <Button
+  variant="outlined"
+  onClick={() => handleDelete(car._id)}
+  startIcon={<DeleteIcon />}
+  sx={{
+    width: '190px',
+    mr: 2,
+    color: '#C50000', // Couleur du texte
+    borderColor: '#C50000', // Couleur de la bordure
+    '&:hover': {
+      backgroundColor: 'rgb(232, 232, 232)',
+      borderColor: '#C50000', // Couleur de la bordure au survol
+    },
+  }}
+>
+  Supprimer
+</Button>
           <br/>
 <br/>
-          <Button  variant="outlined" color="info" startIcon={<TroubleshootSharpIcon  />}   sx={{
-      width:'190px',
+<Link to={`/predict`}>
+          <Button  variant="contained"  startIcon={<TroubleshootSharpIcon  />}   sx={{
+      width:'398px',
       mr: 2,
       //borderRadius: '10px', // Arrondir les bords
+      backgroundColor: 'rgb(108,151,187)',
       '&:hover': {
        color: '#333',
-      
        backgroundColor: ' rgb(232, 232, 232)', // Changer la couleur de la bordure au survol
-
-      },
-    }}>
-            Diagnostic
+      },}}> Diagnostic
           </Button>
-            <Button variant="contained" color="info" onClick={generatePDF} startIcon={<PictureAsPdfRoundedIcon/>}   sx={{
-      width:'190px',
+          <br/>
+          <br/>
+            <Button variant="contained"  onClick={generatePDF} startIcon={<PictureAsPdfRoundedIcon/>}   sx={{
+      width:'398px',
       mr: 2,
-      //borderRadius: '10px', // Arrondir les bords
+      backgroundColor: 'rgb(108,151,187)',
       '&:hover': {
-        color: 'rgb(24, 119, 242)',
-        backgroundColor: ' rgb(255, 255, 255)',
-
+        color: '#333',
+       backgroundColor: ' rgb(232, 232, 232)', // Changer la couleur de la bordure au survol
       },
-    }}>
-           Génerer rapport PDF
-          </Button>
+    }}> Génerer rapport PDF
+</Button>
+</Link>
       
 
       </Box>
@@ -412,7 +418,7 @@ const CarDetail = () => {
           </Table>
             </TableContainer>
 
-            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}> <b>charges </b></Typography>      
+            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2,  color:'#263238 '}}> <b>charges </b></Typography>      
         <TableContainer>
           <Table>
             <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
@@ -452,7 +458,7 @@ const CarDetail = () => {
              
              <PDFDownloadLink document={<MyDocument />} fileName={`${car.registrationPlate}-${car.model.modelName}.pdf`}>
                 {({ blob, url, loading, error }) =>
-                  loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2 }}/>
+                  loading ? 'Chargement du PDF...' : <GetAppRoundedIcon sx={{ mr: 2 ,ml:2,mt:1,  color:' #65B741 ', fontSize: '30px' }}/>
                 }
               </PDFDownloadLink>
               

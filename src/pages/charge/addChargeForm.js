@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Container, TextField, Typography, MenuItem } from '@mui/material';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 
 
 const AddChargeForm = () => {
@@ -120,6 +124,11 @@ const AddChargeForm = () => {
           InputLabelProps={{ shrink: true }}
           error={!!errors.date}
           helperText={errors.date}
+          InputProps={{
+                        startAdornment: (
+                            <DateRangeRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <TextField
           label="Description"
@@ -127,8 +136,15 @@ const AddChargeForm = () => {
           onChange={handleDescriptionChange}
           fullWidth
           margin="normal"
+          InputProps={{
+                        startAdornment: (
+                            <DescriptionRoundedIcon  style={{ opacity: 0.6  ,marginRight: '10px'}} />
+                        ),
+                    }}
           error={!!errors.description}
           helperText={errors.description}
+          
+                   
         />
         <TextField
           label="Coût"
@@ -139,6 +155,11 @@ const AddChargeForm = () => {
           margin="normal"
           error={!!errors.cost}
           helperText={errors.cost}
+          InputProps={{
+                        startAdornment: (
+                            <PaidOutlinedIcon  style={{ opacity: 0.6  ,marginRight: '10px'}} />
+                        ),
+                    }}
         />
         <TextField
           select
@@ -149,6 +170,11 @@ const AddChargeForm = () => {
           margin="normal"
           error={!!errors.selectedCar}
           helperText={errors.selectedCar}
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
         >
           {cars.map((car) => (
             <MenuItem key={car._id} value={car._id}>
@@ -156,11 +182,11 @@ const AddChargeForm = () => {
             </MenuItem>
           ))}
         </TextField>
-        <Button type="submit" variant="contained" color="primary">
+        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
           Ajouter la charge
         </Button>
         <Link to="/charge">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px' }}>
+          <Button variant="contained" style={{ marginLeft: '10px' ,marginTop: '20px',backgroundColor: ' #C50000',}}>
             Annuler
           </Button>
         </Link>

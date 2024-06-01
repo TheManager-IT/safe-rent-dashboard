@@ -89,10 +89,10 @@ const Clients = () => {
     <Container className="blue-container">
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Clients
+        Liste Des Clients
         </Typography>
         <Link to="/addClient">
-        <Button variant="contained" style={{ backgroundColor: 'rgb(33, 43, 54)', color: 'white', padding: '6px 16px' }} startIcon={<AddIcon />} onClick={handleAddClient}>
+        <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white', padding: '6px 16px' }} startIcon={<AddIcon />} onClick={handleAddClient}>
           Ajouter client
         </Button>
         </Link>
@@ -140,9 +140,9 @@ const Clients = () => {
                   <TableCell>{client.address}</TableCell>
                   <TableCell>
                     <Link to={`/client/${client._id}`}>
-                      <IconButton variant="contained" color="primary">
+                      <IconButton variant="contained">
                       {/*<MoreHorizOutlinedIcon/>*/}
-                      <DescriptionOutlinedIcon/>
+                      <DescriptionOutlinedIcon    style={{ color: 'rgba(108,151,187,1)' }}/>
                       </IconButton>
                     </Link>
                    
@@ -150,7 +150,7 @@ const Clients = () => {
                   <TableCell>
                   {/* component={Link} to={`/editClient/${client._id}`}  */}
                     <IconButton color="primary" component={Link} to={`/editClient/${client._id}`}>
-                      <EditIcon />
+                      <EditIcon  style={{ color: 'rgba(12,192,70,1)' }}/>
                     </IconButton>
                   </TableCell>
                   <TableCell>

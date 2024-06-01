@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Container, TextField, MenuItem, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import AirlineSeatReclineNormalRoundedIcon from '@mui/icons-material/AirlineSeatReclineNormalRounded';
+import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
+import CarCrashRoundedIcon from '@mui/icons-material/CarCrashRounded';
+import AddPhotoAlternateRoundedIcon from '@mui/icons-material/AddPhotoAlternateRounded';
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
+
 
 function AddCarForm() {
   const [car, setCar] = useState({
@@ -176,6 +183,11 @@ function AddCarForm() {
           placeholder="Imatriculation"
           required
           fullWidth
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
           margin="normal"
           error={!!errors.registrationPlate}
           helperText={errors.registrationPlate}
@@ -190,6 +202,11 @@ function AddCarForm() {
           required
           margin="normal"
           fullWidth
+          InputProps={{
+                        startAdornment: (
+                            <DirectionsCarRoundedIcon style={{ opacity: 0.6,marginRight: '10px' }} />
+                        ),
+                    }}
           error={!!errors.model}
           helperText={errors.model}
         >
@@ -217,12 +234,19 @@ function AddCarForm() {
           value={car.numberOfCarSeats}
           onChange={handleChange}
           type="number"
-          placeholder="Nombre de places"
+          placeholder=" Nombre de places"
           required
           fullWidth
           margin="normal"
           error={!!errors.numberOfCarSeats}
           helperText={errors.numberOfCarSeats}
+
+          InputProps={{
+                        startAdornment: (
+                            <AirlineSeatReclineNormalRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}
+
         />
         <TextField
           label="Prix de la location"
@@ -230,11 +254,16 @@ function AddCarForm() {
           value={car.locationPrice}
           onChange={handleChange}
           type="number"
-          placeholder="Prix de la location"
+          placeholder=" Prix de la location"
           fullWidth
           margin="normal"
           error={!!errors.locationPrice}
           helperText={errors.locationPrice}
+          InputProps={{
+                        startAdornment: (
+                            <PaidOutlinedIcon  style={{ opacity: 0.6  ,marginRight: '10px'}} />
+                        ),
+                    }}
         />
         <TextField
           select
@@ -247,6 +276,11 @@ function AddCarForm() {
           required
           error={!!errors.status}
           helperText={errors.status}
+          InputProps={{
+                        startAdornment: (
+                            <CarCrashRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}
         >
           {Object.values(Status).map((status) => (
             <MenuItem key={status} value={status}>
@@ -261,6 +295,12 @@ function AddCarForm() {
           onChange={handleChange}
           fullWidth
           margin="normal"
+
+          InputProps={{
+                        startAdornment: (
+                            <AddPhotoAlternateRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <TextField
           label="Kilométrage"
@@ -270,17 +310,31 @@ function AddCarForm() {
           type="number"
           fullWidth
           margin="normal"
-          placeholder="Kilométrage"
+          placeholder=" Kilométrage"
+          InputProps={{
+                        startAdornment: (
+                            <AirlineSeatReclineNormalRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                        ),
+                    }}
         />
         <br />
-        <Button type="submit" variant="contained" color="primary" style={{ marginTop: '20px' }}>
+        <div     style={{  //marginTop: '20px' ,textAlign: 'center'
+           
+          
+           }}>
+        <Button type="submit" variant="contained"  style={{ marginTop: '20px' ,
+        backgroundColor: ' rgb(108,151,187)',}}>
         Ajouter Voiture
         </Button>
         <Link to="/car">
-          <Button variant="contained" color="secondary" style={{ marginLeft: '10px', marginTop: '20px' }}>
+          <Button variant="contained"  style={{ marginLeft: '10px', marginTop: '20px' ,
+           backgroundColor: ' #C50000',
+          
+           }}>
             Annuler
           </Button>
         </Link>
+        </div>
        
       </form>
     </Container>

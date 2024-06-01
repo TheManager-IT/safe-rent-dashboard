@@ -77,21 +77,22 @@ const Charges = () => {
   );
 
   return (
-    <Container>
+    <Container className="blue-container">
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
         <Typography variant="h4" sx={{ mb: 2 }}>
-          Charges
+        Liste Des  Charges
         </Typography>
         <Link to="/addCharge">
           <Button
             variant="contained"
-            style={{ backgroundColor: '#222831', color: 'white' }}
+            style={{ backgroundColor: '#263238', color: 'white' ,padding: '6px 16px'}}
             startIcon={<AddIcon />}
           >
             Ajouter charge
           </Button>
         </Link>
       </Stack>
+      <div className="search">
       <OutlinedInput
         type="text"
         placeholder="Rechercher charge..."
@@ -103,7 +104,7 @@ const Charges = () => {
           </InputAdornment>
         }
       />
-      
+      </div>
       <Card>
         <TableContainer sx={{ overflow: 'unset' }}>
           <Table sx={{ minWidth: 800 }}>
@@ -130,7 +131,7 @@ const Charges = () => {
                   </TableCell>
                   <TableCell>
                     <IconButton component={Link} to={`/editcharge/${charge._id}`} color="primary">
-                      <EditIcon />
+                      <EditIcon style={{ color: 'rgba(12,192,70,1)' }} />
                     </IconButton>
                   </TableCell>
                   <TableCell>
