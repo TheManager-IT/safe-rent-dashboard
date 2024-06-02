@@ -37,7 +37,14 @@ const EditLocationForm = () => {
         throw new Error('Failed to fetch location');
       }
       const data = await response.json();
-      setLocation(data);
+      //setLocation(data);
+      setLocation({
+        ...data, // Met à jour l'état location avec les valeurs récupérées
+        StartDateLocation: data.StartDateLocation.substring(0, 10), // Assurez-vous que la valeur de la date est au format AAAA-MM-JJ
+        EndDateLocation: data.EndDateLocation.substring(0, 10), // Assurez-vous que la valeur de la date est au format AAAA-MM-JJ
+      });
+      setSelectedCar(data.voiture);
+      setSelectedClient(data.client);
     } catch (error) {
       console.error('Error fetching location:', error);
       //setError('Erreur lors du chargement du location');
@@ -81,9 +88,9 @@ const EditLocationForm = () => {
   };
 
   const extractErrorMessage = (errorString) => {
-    const regex = /La voiture est déjà réservée pour cette période\.$/;
+    const regex = /La voiture est déjà réservée pour cette période\./;
     const match = errorString.match(regex);
-    return match ? match[0] : 'Erreur inconnue lors de l\'ajout de la location.';
+    return match ? match[0] : errorString; // Retourne l'erreur complète si la regex ne correspond pas
   };
 
   const handleSubmit = async (e) => {

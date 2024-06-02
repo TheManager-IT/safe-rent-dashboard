@@ -44,7 +44,15 @@ const EditEventForm = () => {
       try {
         const eventResponse = await fetch(`http://localhost:3000/v1/api/evenement/get/${id}`);
         const eventData = await eventResponse.json();
-        setEvent(eventData);
+        //setEvent(eventData);
+ // Convertir la date récupérée en format ISO (AAAA-MM-JJ)
+ const formattedDate = new Date(eventData.date).toISOString().split('T')[0];
+      
+ setEvent({
+   ...eventData,
+   date: formattedDate
+ });
+
   
         const carResponse = await fetch(`http://localhost:3000/v1/api/voiture/get/${eventData.voiture}`);
         const carData = await carResponse.json();

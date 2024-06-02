@@ -34,7 +34,16 @@ const EditChargeForm = () => {
       try {
         const chargeResponse = await fetch(`http://localhost:3000/v1/api/charges/get/${id}`);
         const chargeData = await chargeResponse.json();
-        setCharge(chargeData);
+        //setCharge(chargeData);
+
+        // Convertir la date récupérée en format ISO (AAAA-MM-JJ)
+      const formattedDate = new Date(chargeData.date).toISOString().split('T')[0];
+      
+      setCharge({
+        ...chargeData,
+        date: formattedDate
+      });
+
         const carResponse = await fetch(`http://localhost:3000/v1/api/voiture/get/${chargeData.voiture}`);
         const carData = await carResponse.json();
         setCarInfo({ model: carData.model, registrationPlate: carData.registrationPlate });
