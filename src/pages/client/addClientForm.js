@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { Button, Container, TextField, Typography, Alert } from '@mui/material';
 import { Link } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email'; // Importez l'icône Email
 import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
@@ -10,6 +10,7 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import ContactEmergencyRoundedIcon from '@mui/icons-material/ContactEmergencyRounded';
 import CreditCardRoundedIcon from '@mui/icons-material/CreditCardRounded';
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
+
 function AddClientForm() {
     const [client, setClient] = useState({
         name: '',
@@ -118,7 +119,16 @@ function AddClientForm() {
                 body: formData
             });
 
-            if (!response.ok) throw new Error('Network response was not ok.');
+            //if (!response.ok) throw new Error('Network response was not ok.');
+            const data = await response.json();
+
+      if (!response.ok) {
+        // Si la réponse n'est pas ok, afficher le message d'erreur renvoyé par le serveur
+        if (data.error === 'Le client existe déjà.') {
+          throw new Error('Le client existe déjà.');
+        }
+        throw new Error(data.error || 'Failed to add car');
+      }
 
             alert('Client added successfully!');
         {/*window.location.href = '/client';*/}
@@ -136,7 +146,8 @@ function AddClientForm() {
                 images: []
             });
         } catch (error) {
-            alert('Failed to add client: ' + error.message);
+            //alert('Failed to add client: ' + error.message);
+            setErrors({ ...errors, serverError: 'Échec de l\'ajout de la voiture : ' + error.message });
         }
     };
 
@@ -146,6 +157,9 @@ function AddClientForm() {
                 Ajouter Client
             </Typography>
             <form onSubmit={handleSubmit}>
+                 {errors.serverError && (
+                    <Alert severity="error">{errors.serverError}</Alert>
+                )}
                 <TextField
                     name="name"
                     value={client.name}

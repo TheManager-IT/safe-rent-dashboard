@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, TextField, MenuItem, Typography } from '@mui/material';
+import { Button, Container, TextField, MenuItem, Typography, Alert  } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AirlineSeatReclineNormalRoundedIcon from '@mui/icons-material/AirlineSeatReclineNormalRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
@@ -53,7 +53,8 @@ function AddCarForm() {
     //brand: '',
     numberOfCarSeats: '',
     locationPrice: '',
-    status: ''
+    status: '',
+    serverError: ''
   });
 
   const handleChange = (e) => {
@@ -144,9 +145,20 @@ function AddCarForm() {
         body: formData
       });
   
-      if (!response.ok) {
+     /* if (!response.ok) {
         throw new Error('Network response was not ok.');
-      }
+      }*/
+
+       const data = await response.json();
+            if (!response.ok) {
+                if (data.error === 'La voiture existe déjà.') {
+                    // Affichage du message "La voiture existe déjà." dans le composant
+                    setErrors({ ...errors, serverError: 'La voiture existe déjà.' });
+                } else {
+                    throw new Error(data.error || 'Failed to add car');
+                }
+            }
+      
   
       // Réinitialisation du formulaire après envoi réussi
       setCar({
@@ -175,6 +187,9 @@ function AddCarForm() {
         Ajouter Voiture
       </Typography>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
+       {errors.serverError && (
+                    <Alert severity="error">{errors.serverError}</Alert>
+                )}
         <TextField
           label="Imatriculation"
           name="registrationPlate"

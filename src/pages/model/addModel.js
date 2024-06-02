@@ -36,8 +36,11 @@ const AddModel = () => {
         body: JSON.stringify({ modelName, brand }),
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error('Failed to add model');
+        // Si la réponse n'est pas ok, afficher le message d'erreur renvoyé par le serveur
+        throw new Error(data.error || 'Failed to add model');
       }
 
       console.log('Model added successfully!');
@@ -47,7 +50,8 @@ const AddModel = () => {
       setError('');
     } catch (error) {
       console.error('Error adding model:', error);
-      setError('Erreur lors de l\'ajout du modèle');
+      //setError('Erreur lors de l\'ajout du modèle');
+      setError(error.message);
     }
   };
 

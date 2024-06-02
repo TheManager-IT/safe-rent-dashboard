@@ -175,7 +175,7 @@ const EditCarForm = () => {
           select
           label="Modele"
           name="model"
-          value={car.model}
+          value={car.model || ''}
           onChange={handleChange}
           placeholder="Modele"
           required
