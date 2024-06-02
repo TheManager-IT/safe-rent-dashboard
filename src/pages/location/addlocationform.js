@@ -23,7 +23,7 @@ const AddLocationForm = () => {
   const [selectedCar, setSelectedCar] = useState('');
   const [selectedClient, setSelectedClient] = useState('');
   const [errors, setErrors] = useState({});
-
+  const [serverError, setServerError] = useState('');
   useEffect(() => {
     const fetchVoitures = async () => {
       const response = await fetch('http://localhost:3000/v1/api/voiture');
@@ -108,8 +108,15 @@ startDate.setHours(0, 0, 0, 0);
       //if (!response.ok) throw new Error('Network response was not ok.');
       if (!response.ok) {
         const errorData = await response.json();
-        const errorMessage = extractErrorMessage(errorData.error);
-        throw new Error(errorMessage); // Lève une erreur avec le message d'erreur renvoyé par le serveur
+        const errorMessage = errorData.error || 'Erreur inconnue lors de l\'ajout de la location.';
+        if (errorMessage === 'Des événements sont planifiés pour cette voiture pendant les dates de location.') {
+          // Afficher l'erreur à l'utilisateur
+          setServerError(errorMessage);
+        } else {
+          // Autres erreurs
+          throw new Error(errorMessage);
+        }
+        return;
       }
      
       setLocation({
