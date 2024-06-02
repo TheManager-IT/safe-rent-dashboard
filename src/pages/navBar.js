@@ -69,15 +69,6 @@ const Navbar = () => {
             Charges voiture
           </Link>
         </li>
-
-
-        {/*<li>
-          <Link to="/predict">
-            <PaidOutlinedIcon  className="icon-right"/>
-            Diagnostic voiture
-          </Link>
-        </li>*/}
-
       </ul>
       <div className="sidebar-actions">
         <Link to="/login" className="btn btn-primary">

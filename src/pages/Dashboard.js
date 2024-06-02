@@ -3,6 +3,8 @@ import { Bar, Pie, Line } from 'react-chartjs-2';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 import carImage from '../images/icone/car.png';  
+import { Link } from 'react-router-dom';
+
 import UserImage from '../images/icone/iconUsers.png';
 import RentCar from '../images/icone/iconRentCar.png';
 import {
@@ -197,8 +199,8 @@ const Dashboard = () => {
               backgroundColor: 'rgba(70,12,192,1)',
               borderColor: 'rgba(70,12,192,1)',
               borderWidth: 2,
-              borderRadius: 15, // Bords arrondis des barres
-              barThickness: 20, // Épaisseur des barres
+              borderRadius: 15, 
+              barThickness: 20, 
             },
             {
               type: 'line',
@@ -207,7 +209,7 @@ const Dashboard = () => {
               backgroundColor: 'rgba(12,192,70,0.4)',
               borderColor: 'rgba(12,192,70,1)',
               borderWidth: 1,
-              fill: false, // Ne pas remplir sous la ligne
+              fill: false, 
             }
           ]
         });
@@ -341,6 +343,7 @@ const Dashboard = () => {
                 //backgroundColor: '#DBB5B5', 
                padding: '10px 0px 10px 30px' 
             }}>
+             
                 <div style={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -351,15 +354,17 @@ const Dashboard = () => {
                     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
                     padding: '25px'
                 }}>
+                 <Link to="/car">
                     <img 
                         src={carImage}
                         alt="Car" 
                         style={{ width: '70px', height: '70px', marginBottom: '10px' }} 
-                    />
+                    /></Link>
                     <div style={{ marginLeft:'40%', marginTop: '-20%', fontSize: '20px' }}>
                         {totalCarCount} <br/> Voitures
                     </div>
                 </div>
+
 
                 <div style={{
                     //display: 'flex',
@@ -373,16 +378,16 @@ const Dashboard = () => {
                     boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
                     padding: '25px'
                 }}>
+                <Link to="/client">
                     <img 
                         src={UserImage}
                         alt="User" 
                         style={{ width: '70px', height: '70px', marginBottom: '10px' }} 
-                    />
+                    /></Link>
                     <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
                         {totalClientCount} <br/> Clients
                     </div>
                 </div>
-
                 <div style={{
                 flexDirection: 'column',
                 marginLeft :'8%',
@@ -393,14 +398,14 @@ const Dashboard = () => {
                 boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', 
                 padding: '25px'
               }}>
+              <Link to="/locations">
                 <img src={RentCar} alt="RentCar" style={{ width: '70px', height: '70px', marginBottom: '10px' }} />
+                </Link>
                 <div style={{ marginLeft:'40%', marginTop: '-21%', fontSize: '20px' }}>
                   {totalLocationCount} <br/> Locations
                 </div>
               </div>
-
             </div>
-
             <div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-around', 
@@ -418,7 +423,6 @@ const Dashboard = () => {
                     <h3>Locations Mensuelles</h3>
                     <Bar data={monthlyLocationData} options={options} />
                 </div>
-
                 <div style={{ width: '600px', height: '400px', 
                  backgroundColor: 'rgba(255, 255, 255, 1)', 
                     borderRadius: '20px', 
@@ -428,23 +432,18 @@ const Dashboard = () => {
                   <h3>Prix de Location et Total des Locations</h3>
                   <Bar data={mixedData} options={options} />
                 </div>
-
                 {/*<div style={{ width: '600px', height: '400px' }}>
                     <h3>Prix de Location</h3>
                     <Bar data={locationPriceData} options={options} />
                 </div>*/}
             </div>
-
-
             <div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-around', 
                 alignItems: 'center', 
                 marginLeft:'-5%',
               //  backgroundColor: '#CAF4FF',
-                padding: '10px 0px 30px 0px' ,
-
-              
+                padding: '10px 0px 30px 0px' ,   
             }}>
             <div style={{ width: '600px', height: '400px',
             backgroundColor: 'rgba(255, 255, 255, 1)', 
@@ -455,7 +454,6 @@ const Dashboard = () => {
                     <h3>Revenus par Client</h3>
                     <Bar data={clientRevenueData} options={options} />
                   </div>
-
             <div style={{ width: '350px', height: '350px' ,  }}>
                     <h3>Répartition des Clients par Ville</h3>
                     <Pie data={clientCityData} options={options} />
@@ -492,7 +490,6 @@ const Dashboard = () => {
             </div>
 
 
-
             {/** 
                   <div style={{ width: '600px', height: '400px', margin: 'auto' }}>
                     <h3>Total des Locations</h3>
@@ -525,7 +522,6 @@ const Dashboard = () => {
                     borderRadius: '20px', 
                     boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,
-            
             }}>
             <h3>Événements Automobiles de la Semaine : Ne Manquez Pas Ces Événements !</h3>
                   <TableContainer sx={{ overflow: 'unset' }}>
