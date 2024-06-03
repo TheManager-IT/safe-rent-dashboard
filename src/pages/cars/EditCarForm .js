@@ -55,7 +55,7 @@ const EditCarForm = () => {
         model: data.model._id || '', // Assurez-vous que `model` est correctement assigné
         images: data.images || [],
         numberOfCarSeats: data.numberOfCarSeats || 0,
-        traveled: data.traveled || [{ mileage: '' }],
+        traveled: [{ mileage: data.traveled[0].mileage || '' }], 
         locationPrice: data.locationPrice || 0,
         status: data.status || ''
       });
@@ -261,7 +261,7 @@ const EditCarForm = () => {
         <TextField
           label="Kilométrage"
           name="traveled.mileage"
-          value={car.traveled.mileage}
+          value={car.traveled[0].mileage}
           onChange={handleChange}
           type="number"
           fullWidth

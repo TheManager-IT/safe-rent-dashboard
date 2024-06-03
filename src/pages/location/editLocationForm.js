@@ -25,9 +25,10 @@ const EditLocationForm = () => {
   const { id } = useParams(); // Utilisation de useParams pour obtenir l'ID de la location à modifier
 
   useEffect(() => {
-    fetchlocation();
     fetchVoitures();
     fetchClients();
+    fetchlocation();
+    
   }, [id]);
 
   const fetchlocation = async () => {
@@ -38,12 +39,16 @@ const EditLocationForm = () => {
       }
       const data = await response.json();
       //setLocation(data);
+      console.log('location data:', data);
       setLocation({
         ...data, // Met à jour l'état location avec les valeurs récupérées
         StartDateLocation: data.StartDateLocation.substring(0, 10), // Assurez-vous que la valeur de la date est au format AAAA-MM-JJ
         EndDateLocation: data.EndDateLocation.substring(0, 10), // Assurez-vous que la valeur de la date est au format AAAA-MM-JJ
       });
       setSelectedCar(data.voiture);
+      console.log('voiture data:', data.voiture);
+      console.log('client data:', data.client);
+      //const client = clients.find(client => client._id === data.client);
       setSelectedClient(data.client);
     } catch (error) {
       console.error('Error fetching location:', error);
