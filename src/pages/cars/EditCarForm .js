@@ -23,18 +23,44 @@ const EditCarForm = () => {
     status: ''
   });
   const [models, setModels] = useState([]);
-
-  useEffect(() => {
+  const { id } = useParams();
+  /*useEffect(() => {
     fetchModels();
-  }, []);
+  }, []);*/
+  useEffect(() => {
+    fetchCar();
+    fetchModels();
+   
+  }, [id]);
 
   const fetchModels = async () => {
     try {
       const response = await fetch('http://localhost:3000/v1/api/modele');
       const data = await response.json();
+      console.log('modele data:', data);
       setModels(data);
+     // setModels(data.model.modelName);
     } catch (error) {
       console.error('Error fetching models:', error);
+    }
+  };
+
+  const fetchCar = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/v1/api/voiture/get/${id}`);
+      const data = await response.json();
+      console.log('voiture data:', data);
+      setCar({
+        registrationPlate: data.registrationPlate || '',
+        model: data.model._id || '', // Assurez-vous que `model` est correctement assigné
+        images: data.images || [],
+        numberOfCarSeats: data.numberOfCarSeats || 0,
+        traveled: data.traveled || [{ mileage: '' }],
+        locationPrice: data.locationPrice || 0,
+        status: data.status || ''
+      });
+    } catch (error) {
+      console.error('Error fetching car:', error);
     }
   };
 
@@ -56,14 +82,14 @@ const EditCarForm = () => {
     BROKEN_DOWN: 'En panne'
   };
 
-  const { id } = useParams();
+ 
 
-  useEffect(() => {
+ /* useEffect(() => {
     fetch(`http://localhost:3000/v1/api/voiture/get/${id}`)
       .then(response => response.json())
       .then(data => setCar(data))
       .catch(error => console.error('Error fetching car:', error));
-  }, [id]);
+  }, [id]);*/
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;

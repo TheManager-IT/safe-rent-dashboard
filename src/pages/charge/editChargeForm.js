@@ -48,7 +48,7 @@ const EditChargeForm = () => {
         //setCarInfo({ model: carData.model, registrationPlate: carData.registrationPlate });
         console.log('Car data:', carData);
         setCarInfo({
-          model: carData.model.modelName, // Accédez à la propriété modelName de l'objet model
+          model: carData.model.modelName, 
           registrationPlate: carData.registrationPlate
         });
       } catch (error) {
