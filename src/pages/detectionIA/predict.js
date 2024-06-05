@@ -58,7 +58,6 @@ function App() {
                     variant="contained"
                     type="submit"
                     sx={{
-                              
                                 backgroundColor: ' rgb(108,151,187)',
                                 color: 'white',
                                 marginLeft: '10px'
@@ -79,8 +78,7 @@ function App() {
                         variant="contained"
                         color="secondary"
                         sx={{marginLeft: '10px'
-                        ,marginTop:'20px',
-                                    
+                        ,marginTop:'20px', 
                                 backgroundColor: '#C50000',
                                 color: 'white',
                                 '&:hover': {

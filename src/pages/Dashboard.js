@@ -333,7 +333,7 @@ const Dashboard = () => {
   return (
 <div  style={{ marginLeft: '0%' ,padding: '0px 0px 50px 200px'}} >
                 <div>
-                  <h2 style={{ marginLeft: '7%' }} >Salut, .. 👋</h2>
+                  <h2 style={{ marginLeft: '7%' }} >Salut, 👋</h2>
 
                   <div style={{
                 display: 'flex',

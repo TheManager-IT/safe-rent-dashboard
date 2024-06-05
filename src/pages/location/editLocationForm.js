@@ -242,6 +242,7 @@ const EditLocationForm = () => {
           getOptionLabel={(option) => `${option.name} ${option.firstName} - ${option.nationalID}`}
           renderInput={(params) => <TextField {...params} label="Client" fullWidth margin="normal" />}
           value={selectedClient}
+          //disabled
           onChange={handleClientChange}
           InputProps={{
                         startAdornment: (
