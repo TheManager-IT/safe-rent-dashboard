@@ -11,10 +11,6 @@ const EventType = {
   OIL_CHANGE: 'Changement d\'huile',
   TECHNICAL_INSPECTION: 'Inspection technique',
   INSURANCE: 'Assurance',
-  BIRTHDAY: 'Anniversaire',
-  CAR_WASH: 'Lavage de voiture',
-  INTERIOR_CLEANING: 'Nettoyage intérieur',
-  MAINTENANCE: 'Entretien',
   OTHER: 'Autre'
 };
 

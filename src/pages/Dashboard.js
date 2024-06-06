@@ -27,6 +27,7 @@ import {
   TableHead,
   TableRow,
   TablePagination,Card,
+  Box,
 } from '@mui/material';
 
 ChartJS.register(
@@ -165,7 +166,6 @@ const Dashboard = () => {
               data: counts,
               backgroundColor: 'rgba(144,202,249,0.7)',
               borderColor: 'rgba(144,202,249,1)',
-              
               borderWidth: 2,
               borderRadius: 5, // Bords arrondis des barres
               barThickness: 25, // Épaisseur des barres
@@ -188,7 +188,6 @@ const Dashboard = () => {
         const locationTotals = data.map(car => car.locationTotal);
         const totalCharges = data.map(car => car.chargeTotale);
         const eventCounts = data.map(car => car.evenements.length);
-
         setMixedData({
           labels: registrationPlates,
           datasets: [
@@ -223,10 +222,8 @@ const Dashboard = () => {
             borderWidth: 2,
             borderRadius: 15, // Bords arrondis des barres
             barThickness: 20, // Épaisseur des barres
-          
           }]
         });
-
         setLocationTotalData({
           labels: registrationPlates,
           datasets: [{
@@ -237,14 +234,11 @@ const Dashboard = () => {
             borderWidth: 1,
           }]
         });
-
-     
         // Calculating car status distribution
         const carStatus = data.reduce((acc, car) => {
           acc[car.status] = (acc[car.status] || 0) + 1;
           return acc;
         }, {});
-
         setCarStatusData({
           labels: Object.keys(carStatus),
           datasets: [{
@@ -258,7 +252,6 @@ const Dashboard = () => {
 
         // Fetching traveled data
         const traveled = data.map(car => car.traveled.reduce((total, distance) => total + distance, 0));
-
         setTraveledData({
           labels: registrationPlates,
           datasets: [{
@@ -283,7 +276,6 @@ const Dashboard = () => {
            barThickness: 35, // Épaisseur des barres
           }]
         });
-
         // Setting event counts data
         setEventCountsData({
           labels: registrationPlates,
@@ -294,8 +286,8 @@ const Dashboard = () => {
             borderColor: 'rgba(108,151,187,0.5)',
             
             borderWidth: 2,
-            borderRadius: 5, // Bords arrondis des barres
-            barThickness: 30, // Épaisseur des barres
+            borderRadius: 5, //Bords arrondis des barres
+            barThickness: 30, //Épaisseur des barres
           }]
         });
       })
@@ -307,22 +299,18 @@ const Dashboard = () => {
     plugins: {
       legend: {
         position: 'top',
-      },
-    },
+      },},
   };
-
   const formatDate = (date) => {
     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
     return new Date(date).toLocaleDateString('fr-FR', options);
   };
-
   const isWithinAWeek = (date) => {
     const today = new Date();
     const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000); // 7 jours plus tard
     const eventDate = new Date(date);
     return eventDate >= today && eventDate <= nextWeek;
   };
-
   const filteredEvents = events.filter(event =>
     //(event.voiture && event.voiture.toLowerCase().includes(searchTerm.toLowerCase())) ||
     event.eventType.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -410,8 +398,8 @@ const Dashboard = () => {
                 display: 'flex', 
                 justifyContent: 'space-around', 
                 alignItems: 'center', 
-               // backgroundColor: '#BFF6C3',
-                padding: '30px 0px 30px 0px' ,
+                // backgroundColor: '#BFF6C3',
+               padding: '30px 0px 30px 0px' ,
             }}>
                 <div style={{ width: '600px', height: '400px', 
                   backgroundColor: 'rgba(255, 255, 255, 1)', 
@@ -420,7 +408,7 @@ const Dashboard = () => {
                     padding: '20px 20px 10px 20px' ,
                    // padding: '25px'
                   }}>
-                    <h3>Locations Mensuelles</h3>
+                    <h3      style={{ color:'rgb(99, 115, 129)', }} >Locations Mensuelles</h3>
                     <Bar data={monthlyLocationData} options={options} />
                 </div>
                 <div style={{ width: '600px', height: '400px', 
@@ -429,7 +417,7 @@ const Dashboard = () => {
                     //boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,
                  }}>
-                  <h3>Prix de Location et Total des Locations</h3>
+                  <h3 style={{ color:'rgb(99, 115, 129)', }}>Prix de Location et Total des Locations</h3>
                   <Bar data={mixedData} options={options} />
                 </div>
                 {/*<div style={{ width: '600px', height: '400px' }}>
@@ -448,42 +436,39 @@ const Dashboard = () => {
             <div style={{ width: '600px', height: '400px',
             backgroundColor: 'rgba(255, 255, 255, 1)', 
                     borderRadius: '20px', 
-                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
+                   // boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)',
                     padding: '20px 20px 10px 20px' ,
             }}>
-                    <h3>Revenus par Client</h3>
+                    <h3 style={{ color:'rgb(99, 115, 129)', }}>Revenus par Client</h3>
                     <Bar data={clientRevenueData} options={options} />
                   </div>
             <div style={{ width: '350px', height: '350px' ,  }}>
-                    <h3>Répartition des Clients par Ville</h3>
+                    <h3 style={{ color:'rgb(99, 115, 129)', }}>Répartition des Clients par Ville</h3>
                     <Pie data={clientCityData} options={options} />
                   </div>
             </div>
-                
                 <div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-around', 
                 alignItems: 'center', 
                //backgroundColor: '#C7C8CC',
                 padding: '30px 0px 20px 10px' ,
-               
             }}>
              <div style={{ width: '600px', height: '400px', 
                  backgroundColor: 'rgba(255, 255, 255, 1)', 
                     borderRadius: '20px', 
-                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    //boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,
               }}>
-                    <h3>Nombre de Locations par Client</h3>
+                    <h3 style={{ color:'rgb(99, 115, 129)', }}>Nombre de Locations par Client</h3>
                     <Bar data={clientLocationData} options={options} />
                   </div>
-
               <div style={{ width: '600px', height: '400px',
                   backgroundColor: 'rgba(255, 255, 255, 1)', 
                     borderRadius: '20px', 
-                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                   // boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,  }}>
-                    <h3>Charges Totales pour chaque voiture</h3>
+                    <h3 style={{ color:'rgb(99, 115, 129)', }}>Charges Totales pour chaque voiture</h3>
                     <Bar data={totalChargesData} options={options} />
                   </div>
                 </div>
@@ -506,24 +491,20 @@ const Dashboard = () => {
                     <Pie data={carStatusData} options={options} />
                   </div>
             */}
-                
             <div style={{ 
                 display: 'flex', 
                 justifyContent: 'space-around', 
                 alignItems: 'center', 
                // backgroundColor: '#CAa4FF',
                 padding: '30px 0px 20px 80px' ,
-                
             }}>
-
-
-            <Card sx={{ width: '50%',
+            <Box sx={{ width: '50%',
               backgroundColor: 'rgba(255, 255, 255, 1)', 
                     borderRadius: '20px', 
-                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                   boxShadow: '0 0.5px 1px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,
             }}>
-            <h3>Événements Automobiles de la Semaine : Ne Manquez Pas Ces Événements !</h3>
+            <h3 style={{ color:'rgb(99, 115, 129)', }}>Événements Automobiles de la Semaine : Ne Manquez Pas Ces Événements !</h3>
                   <TableContainer sx={{ overflow: 'unset' }}>
                     <Table sx={{ minWidth: 500 }}>
                       <TableHead className="table-header">
@@ -536,7 +517,6 @@ const Dashboard = () => {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-          
               {filteredEvents.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((event) => (
                 <TableRow key={event._id} >
@@ -548,10 +528,8 @@ const Dashboard = () => {
                 </TableRow>
               ))}
             </TableBody>
-
                     </Table>
                   </TableContainer>
-                  
                   <TablePagination
                     component="div"
                     count={events.length} 
@@ -564,17 +542,14 @@ const Dashboard = () => {
                     }}
                     rowsPerPageOptions={[5, 10, 25]}
                   />
-                
-
-            </Card>
-
+            </Box>
             <div style={{ width: '600px', height: '400px',
             backgroundColor: 'rgba(255, 255, 255, 1)', 
                     borderRadius: '20px', 
-                    boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
+                    //boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,
               }}>
-                    <h3>Nombre d'Événements par Voiture</h3>
+                    <h3  style={{ color:'rgb(99, 115, 129)', }}>Nombre d'Événements par Voiture</h3>
                     <Bar data={eventCountsData} options={options} />
                   </div>
             </div>
@@ -582,5 +557,4 @@ const Dashboard = () => {
 </div>
   );
 };
-
 export default Dashboard;

@@ -18,6 +18,8 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            //Envoi de la requête de connexion 
+            //Le corps de la requête contient l'email et le mot de passe de l'utilisateur, sérialisés en une chaîne JSON.
             const response = await fetch('http://localhost:3000/v1/api/auth/login', {
                 method: 'POST',
                 headers: {
@@ -25,13 +27,14 @@ const LoginForm = () => {
                 },
                 body: JSON.stringify({ email, password }),
             });
-
+        //Gestion de la réponse :
             if (!response.ok) {
                 const errorMessage = await response.text();
                 setError(errorMessage);
                 return;
             }
-
+            //Traitement de la connexion réussie :
+            //Ce token est stocké dans le stockage local et est utilisé pour mettre à jour l'état d'authentification.
             const data = await response.json();
             localStorage.setItem('token', data.token);
             login(data.token);  // Mettez à jour l'état d'authentification

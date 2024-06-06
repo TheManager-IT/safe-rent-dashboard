@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, TextField, MenuItem, Typography, Alert  } from '@mui/material';
+import { Button, Container, TextField, MenuItem, Typography, Alert ,Card,Grid, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AirlineSeatReclineNormalRoundedIcon from '@mui/icons-material/AirlineSeatReclineNormalRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
@@ -182,8 +182,19 @@ function AddCarForm() {
   };
 
   return (
+    <Grid container spacing={3} justifyContent="center">
+    <Grid item>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 1)', 
+        borderRadius: '20px', 
+        padding: '20px 20px 50px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop:'15%',
+      }}>
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }} align="center">
+      <Typography variant="h4" sx={{ mb: 2 ,mt:2, color:'rgb(99, 115, 129)' }} align="center">
         Ajouter Voiture
       </Typography>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
@@ -338,7 +349,7 @@ function AddCarForm() {
           
            }}>
         <Button type="submit" variant="contained"  style={{ marginTop: '20px' ,
-        backgroundColor: ' rgb(108,151,187)',}}>
+        backgroundColor: ' rgb(108,151,187)', fontFamily: 'monospace'}}>
         Ajouter Voiture
         </Button>
         <Link to="/car">
@@ -353,6 +364,9 @@ function AddCarForm() {
        
       </form>
     </Container>
+    </Box>
+    </Grid>
+    </Grid>
   );
 }
 

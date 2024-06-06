@@ -259,8 +259,10 @@ const CarDetail = () => {
         ))}
         */}
 
-        <Box display="flex" justifyContent="space-between">
-      <Box flex="1" mr={2}>
+      <Box display="flex" justifyContent="space-between"  >
+      <Box flex="1" mr={0}    sx={{ 
+        //backgroundColor: '#eee',
+         padding:0, borderRadius: '10px 0px 0px 10px' }}>
         {car.images.length > 0 ? (
           <Carousel>
             {car.images.map((image, index) => (
@@ -273,7 +275,10 @@ const CarDetail = () => {
           <p>Pas d'images disponibles pour cette voiture.</p>
         )}
       </Box>
-      <Box flex="1">
+      
+      <Box flex="1" sx={{ 
+        backgroundColor: '#F6F5F2',
+         padding: 5, borderRadius: '0px 10px 10px 0px' }}>
         <Typography variant="h5" className="marginBottom"><b>Immatriculation:</b> {car.registrationPlate}</Typography>
         <Typography variant="h5" className="marginBottom"><b>Modèle:</b> {car.model?.modelName}</Typography>
         <Typography variant="h5" className="marginBottom"><b>Nombre De Places:</b> {car.numberOfCarSeats}  </Typography>
@@ -282,7 +287,6 @@ const CarDetail = () => {
         <Typography variant="h5" className="marginBottom" ><b>Location Totale:</b> {car.locationTotal} DT</Typography>
         <Typography variant="h5" className="marginBottom"><b>Charge Totale:</b> {car.chargeTotale} DT </Typography>
         <Typography variant="h5" className="marginBottom"><b>Statut:</b> {car.status}  </Typography>
-
 
 <br/>
 <Link to={`/editCar/${car._id}`}>
@@ -310,7 +314,7 @@ const CarDetail = () => {
   </Button>
 </Link>
         
-         <Button
+  <Button
   variant="outlined"
   onClick={() => handleDelete(car._id)}
   startIcon={<DeleteIcon />}
@@ -323,8 +327,7 @@ const CarDetail = () => {
       backgroundColor: 'rgb(232, 232, 232)',
       borderColor: '#C50000', // Couleur de la bordure au survol
     },
-  }}
->
+  }}>
   Supprimer
 </Button>
           <br/>
@@ -365,15 +368,14 @@ const CarDetail = () => {
         <TableContainer>
           <Table>
           <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
-  <TableRow>
-    <TableCell className='headTable'>Date De Début</TableCell>
-    <TableCell className='headTable'>Date De Fin</TableCell>
-    <TableCell className='headTable'>Nombre de jours</TableCell>
-    <TableCell className='headTable'>Prix ​​total</TableCell>
-    <TableCell className='headTable'>Client</TableCell>
-  </TableRow>
-</TableHead>
-
+          <TableRow>
+            <TableCell className='headTable'>Date De Début</TableCell>
+            <TableCell className='headTable'>Date De Fin</TableCell>
+            <TableCell className='headTable'>Nombre de jours</TableCell>
+            <TableCell className='headTable'>Prix ​​total</TableCell>
+            <TableCell className='headTable'>Client</TableCell>
+          </TableRow>
+        </TableHead>
             <TableBody>
               {car.locations.map((location, index) => (
                 <TableRow key={index}>
