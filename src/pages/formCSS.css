@@ -1,0 +1,45 @@
+.boxClass {
+    background-color: rgba(255, 255, 255, 1); 
+    border-radius: 20px; 
+    padding: 20px 20px 50px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15%;
+  }
+  
+  body {
+    font-family: monospace;
+  }
+  .customButtonsauvegarder{
+    font-family: monospace;
+    margin-Top: 20px;
+    background-Color: #6c97bb  ;
+   
+
+  }
+
+
+  .customButtonAnnuler {
+    font-family: monospace;
+    margin-left: 30px;
+    margin-top: 20px;
+    background-color: #C50000;
+    color: white; 
+    padding: 6px 12px; /* Optionnel: ajustez le padding si nécessaire */
+    border: none; /* Optionnel: retirez les bordures si nécessaire */
+    border-radius: 4px; /* Optionnel: ajoutez des bordures arrondies si nécessaire */
+    cursor: pointer; /* Optionnel: change le curseur pour pointer */
+  }
+ 
+  
+
+  /* TypographyStyles.css */
+.titre {
+    /*color: #263238 ;*/
+    color: #a63f20 ;
+    font-Weight: 'bold';
+    text-align: center; /* Pour centrer le texte */
+    /* Ajoutez d'autres styles si nécessaire */
+  }
+  

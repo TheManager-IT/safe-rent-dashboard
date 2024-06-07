@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Button, Container, TextField, MenuItem,Typography } from '@mui/material';
+import { Button, Container, TextField, MenuItem,Typography,Grid,Box } from '@mui/material';
 
 import AirlineSeatReclineNormalRoundedIcon from '@mui/icons-material/AirlineSeatReclineNormalRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
@@ -185,9 +185,21 @@ const EditCarForm = () => {
   };
 
   return (
+
+    <Grid container spacing={3} justifyContent="center">
+    <Grid item>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 1)', 
+        borderRadius: '20px', 
+        padding: '20px 20px 50px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop:'15%',
+      }}>
     <Container maxWidth="sm">
      
-      <Typography variant="h4" sx={{ mb: 2 }} align="center">
+      <Typography variant="h4" sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
       Edit Voiture
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -268,14 +280,17 @@ const EditCarForm = () => {
           margin="normal"
           placeholder="Kilométrage"
         />
-        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>sauvegarder</Button>
+        <Button type="submit" variant="contained"  style={{fontFamily: 'monospace',marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>sauvegarder</Button>
         <Link to="/car">
-          <Button variant="contained"  style={{ marginLeft: '10px', marginTop: '20px' ,backgroundColor: ' #C50000',}}>
+          <Button variant="contained"  style={{fontFamily: 'monospace', marginLeft: '10px', marginTop: '20px' ,backgroundColor: ' #C50000',}}>
             Annuler
           </Button>
         </Link>
       </form>
     </Container>
+       </Box>
+    </Grid>
+    </Grid>
   );
 };
 

@@ -250,7 +250,7 @@ const CarDetail = () => {
 
   return (
     <Container>
-      <Typography variant="h4" sx={{ mb: 2 , mt:2}}>
+      <Typography variant="h4" sx={{ mb: 2 , mt:2 , fontFamily: 'monospace',fontWeight: 'bold', color:'#455a64  '}}  >
         {car.model.modelName}
       </Typography>
       <div className="car-details-container">
@@ -259,12 +259,10 @@ const CarDetail = () => {
         ))}
         */}
 
-      <Box display="flex" justifyContent="space-between"  >
-      <Box flex="1" mr={0}    sx={{ 
-        //backgroundColor: '#eee',
-         padding:0, borderRadius: '10px 0px 0px 10px' }}>
+      <Box display="flex" justifyContent="space-between"  sx={{border: '1px solid rgba(69, 90, 100, 0.5)',padding:'10px 10px 10px 10px' ,borderRadius: '20px 20px 20px 20px'}}  >
+      <Box flex="1" ml={1} mt={2} >
         {car.images.length > 0 ? (
-          <Carousel>
+          <Carousel  sx={{ }}>
             {car.images.map((image, index) => (
               <div key={index}>
                 <img src={`http://localhost:3000/uploads/${image}`} alt={`Car Image ${index}`} />
@@ -277,8 +275,14 @@ const CarDetail = () => {
       </Box>
       
       <Box flex="1" sx={{ 
-        backgroundColor: '#F6F5F2',
-         padding: 5, borderRadius: '0px 10px 10px 0px' }}>
+        //backgroundColor: '#BDE9E7',
+         //color:'#455a64',
+         color:' #263238',
+        boxShadow: '0 0.5px 1px rgba(0, 0, 0, 0.2)',
+         
+        padding:'5px 20px 0px 80px',
+         
+          borderRadius: '10px 10px 10px 10px' }}>
         <Typography variant="h5" className="marginBottom"><b>Immatriculation:</b> {car.registrationPlate}</Typography>
         <Typography variant="h5" className="marginBottom"><b>Modèle:</b> {car.model?.modelName}</Typography>
         <Typography variant="h5" className="marginBottom"><b>Nombre De Places:</b> {car.numberOfCarSeats}  </Typography>
@@ -289,6 +293,11 @@ const CarDetail = () => {
         <Typography variant="h5" className="marginBottom"><b>Statut:</b> {car.status}  </Typography>
 
 <br/>
+
+<div  flex="1"
+      sx={{
+       
+      }}  >
 <Link to={`/editCar/${car._id}`}>
   <Button
     onClick={() => handleEdit(car._id)}
@@ -358,7 +367,7 @@ const CarDetail = () => {
 </Button>
 
       
-
+</div>
       </Box>
     
     </Box>

@@ -27,30 +27,7 @@ const Brands = () => {
     // Handle edit brand logic
   };
 
-  /*const handleDeleteBrand = (id) => {
-    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette marque ?");
-    if (confirmDelete) {
-      fetch(`http://localhost:3000/v1/api/marque/delete/${id}`, {
-        method: 'DELETE'
-      })
-        .then(response => {
-          if (response.ok) {
-            fetchBrands(); // Refetch brands after deletion
-          } else {
-            throw new Error('Failed to delete brand');
-          }
-        })
-        .catch(error => {
-          //console.error('Error deleting brand:', error);
-          setErrorMessage(error.message);
-          //alert(error.message);
-          console.error('Error deleting brand:', error);
-        const errorMessage = error.response?.data?.error || 'Failed to delete brand';
-        alert(errorMessage);
-         //alert("Impossible de supprimer la marque car elle est associée à des modèles");
-        });
-    }
-  };*/
+
 
   const handleDeleteBrand = async (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette marque ?");
@@ -83,11 +60,11 @@ const Brands = () => {
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}} >
           Liste des marques
         </Typography>
         <Link to="/AddBrand">
-          <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddBrand}>
+          <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white',fontFamily: 'monospace' }} startIcon={<AddIcon />} onClick={handleAddBrand}>
             Ajouter une marque
           </Button>
         </Link>

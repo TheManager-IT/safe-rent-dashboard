@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, TextField, Typography } from '@mui/material';
+import { Button, Container, TextField, Typography,Grid,Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import AlternateEmailRoundedIcon from '@mui/icons-material/AlternateEmailRounded';
 import PersonIcon from '@mui/icons-material/Person';
@@ -152,8 +152,19 @@ const EditClientForm = () => {
   };
 
   return (
+    <Grid container spacing={3} justifyContent="center">
+    <Grid item>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 1)', 
+        borderRadius: '20px', 
+        padding: '20px 20px 30px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop:'5%',
+      }}>
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }} align="center">
+      <Typography variant="h4" sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
         Edit Client
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -206,14 +217,15 @@ InputProps={{
                         ),
                     }}/>
         <br />
-        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>sauvegarder</Button>
+        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',fontFamily: 'monospace'}}>sauvegarder</Button>
         <Link to="/client">
-          <Button variant="contained"  style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000', }}>
+          <Button variant="contained"  style={{ marginLeft: '10px',marginTop:'20px', backgroundColor: ' #C50000',fontFamily: 'monospace' }}>
           Annuler
           </Button>
         </Link>
       </form>
     </Container>
+    </Box> </Grid></Grid>
   );
 };
 

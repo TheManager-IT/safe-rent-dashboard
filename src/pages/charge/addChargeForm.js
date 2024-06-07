@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Button, Container, TextField, Typography, MenuItem } from '@mui/material';
+import { Button, Container, TextField, Typography, MenuItem ,Box,Grid} from '@mui/material';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
@@ -109,8 +109,19 @@ const AddChargeForm = () => {
   };
 
   return (
+    <Grid container spacing={3} justifyContent="center">
+    <Grid item>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 1)', 
+        borderRadius: '20px', 
+        padding: '20px 20px 50px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop:'15%',
+      }}>
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }} align="center">
+      <Typography variant="h4"  sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
         Ajouter une charge
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -182,16 +193,18 @@ const AddChargeForm = () => {
             </MenuItem>
           ))}
         </TextField>
-        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)',}}>
+        <Button type="submit" variant="contained"  style={{marginTop: '20px', backgroundColor: ' rgb(108,151,187)', fontFamily: 'monospace'}}>
           Ajouter la charge
         </Button>
         <Link to="/charge">
-          <Button variant="contained" style={{ marginLeft: '10px' ,marginTop: '20px',backgroundColor: ' #C50000',}}>
+          <Button variant="contained" style={{ marginLeft: '10px' ,marginTop: '20px',backgroundColor: ' #C50000', fontFamily: 'monospace'}}>
             Annuler
           </Button>
         </Link>
       </form>
     </Container>
+    </Box>
+    </Grid></Grid>
   );
 };
 

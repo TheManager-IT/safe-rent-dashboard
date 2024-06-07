@@ -88,7 +88,7 @@ const Clients = () => {
   return (
     <Container className="blue-container">
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}}>
         Liste Des Clients
         </Typography>
         <Link to="/addClient">

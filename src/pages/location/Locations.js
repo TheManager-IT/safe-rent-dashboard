@@ -86,11 +86,11 @@ const Locations = () => {
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13} >
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}} >
         Liste Des Locations
         </Typography>
         <Link to="/addlocationform">
-          <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white' }} startIcon={<AddIcon />} onClick={handleAddLocation}>
+          <Button variant="contained" style={{ backgroundColor: '#263238', color: 'white',fontFamily: 'monospace' }} startIcon={<AddIcon />} onClick={handleAddLocation}>
             Ajouter location
           </Button>
         </Link>

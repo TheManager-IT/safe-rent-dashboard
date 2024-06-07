@@ -36,20 +36,6 @@ const Events = () => {
       .catch(error => console.error('Error fetching events:', error));
   }, []);
 
-  /*useEffect(() => {
-    // Trier les événements par date
-    const sortedEvents = events.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-    // Sélectionner l'événement le plus proche
-    const closestEvent = sortedEvents.find(event => new Date(event.date) >= new Date());
-
-    // Afficher une alerte pour l'événement le plus proche
-    if (closestEvent) {
-      const formattedDate = formatDate(closestEvent.date);
-      alert(`Prochain événement : ${closestEvent.eventType} le ${formattedDate}`);
-    }
-  }, [events]);*/
-  
   const handleEdit = (id) => {
     // Handle edit logic
   };
@@ -103,11 +89,11 @@ const Events = () => {
   return (
     <Container>
               <Stack  className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}} >
         Liste Des événements
         </Typography>
         <Link to="/addEvent">
-            <Button variant="contained"   style={{ backgroundColor: '#263238  ', color: 'white' }}
+            <Button variant="contained"   style={{ backgroundColor: '#263238  ', color: 'white' ,fontFamily: 'monospace'}}
   startIcon={<AddIcon />} onClick={handleAddEvent}>
               Ajouter événement
             </Button>

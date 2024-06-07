@@ -48,22 +48,6 @@ const Cars = () => {
     console.log('Edit car with id:', id);
   };
 
- /* const handleDelete = (id) => {
-    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
-    if (confirmDelete) {
-      fetch(`http://localhost:3000/v1/api/voiture/delete/${id}`, {
-        method: 'DELETE'
-      })
-      .then(response => {
-        if (response.ok) {
-          setCars(prevCars => prevCars.filter(car => car._id !== id));
-        } else {
-          throw new Error('Failed to delete car');
-        }
-      })
-      .catch(error => console.error('Error deleting car:', error));
-    }
-  };*/
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
@@ -100,13 +84,13 @@ const Cars = () => {
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}}  >
         Liste Des Voitures
         </Typography>
         <Link to="/addCar">
           <Button
             variant="contained"
-            style={{ backgroundColor: '#263238', color: 'white' }} 
+            style={{ backgroundColor: '#263238', color: 'white' ,fontFamily: 'monospace'}} 
             startIcon={<AddIcon />}
             onClick={handleAddCar}
           >

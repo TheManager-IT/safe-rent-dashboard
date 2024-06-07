@@ -204,7 +204,7 @@ const ClientDetail = () => {
       <Typography variant="h4" sx={{ mb: 2 }}>
         Détails du client
       </Typography>
-      <Box display="flex" justifyContent="space-between">
+      <Box display="flex" justifyContent="space-between"  sx={{border: '1px solid rgba(69, 90, 100, 0.5)',padding:'10px 10px 10px 10px' ,borderRadius: '20px 20px 20px 20px'}} >
       <Box flex="1" mr={2}>
         {client.images.length > 0 ? (
           <Carousel>
@@ -281,36 +281,13 @@ const ClientDetail = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       <div>
   
   
 
         <TableContainer>
 
-        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>Historique de location </b></Typography>      
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 ,color:'rgb(38 ,50, 56 )'}}><b>Historique de location </b></Typography>      
 
           <Table>
             <TableHead  sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
@@ -336,12 +313,16 @@ const ClientDetail = () => {
     </TableRow>
   ))}
 </TableBody>
+<TableRow>
+          <TableCell colSpan={6} style={{ textAlign: 'center' }}>
+            <Typography  sx={{ mb: 1, mt:1 ,fontWeight: 'bold', color:'#455a64  ', fontSize:'20x'}}><b>location Total Client:</b> {client.locationTotalClient}</Typography>
+          </TableCell>
+        </TableRow>
           </Table>
         </TableContainer>
 
         <Typography><b>locationTotalClient:</b> {client.locationTotalClient}</Typography>
       
-        
 
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Choisir les champs pour le  rapport PDF</DialogTitle>

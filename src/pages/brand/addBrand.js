@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Typography, TextField, Button,Box,Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 const AddBrand = () => {
@@ -35,8 +35,19 @@ const AddBrand = () => {
   };
 
   return (
+    <Grid container spacing={3} justifyContent="center">
+    <Grid item>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 1)', 
+        borderRadius: '20px', 
+        padding: '20px 20px 50px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop:'15%',
+      }}>
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }} align="center">
+      <Typography variant="h4" sx={{ mb: 5 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }}  align="center">
         Ajouter une marque
       </Typography>
       <form>
@@ -64,7 +75,7 @@ const AddBrand = () => {
           </Button>
         </Link>
       </form>
-    </Container>
+    </Container></Box></Grid></Grid>
   );
 };
 

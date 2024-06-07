@@ -194,9 +194,11 @@ function AddCarForm() {
         marginTop:'15%',
       }}>
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 ,mt:2, color:'rgb(99, 115, 129)' }} align="center">
+    <b>  <Typography variant="h4"  
+     
+       sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
         Ajouter Voiture
-      </Typography>
+      </Typography></b>
       <form onSubmit={handleSubmit} encType="multipart/form-data">
        {errors.serverError && (
                     <Alert severity="error">{errors.serverError}</Alert>
@@ -242,18 +244,8 @@ function AddCarForm() {
             </MenuItem>
           ))}
         </TextField>
-        {/*<TextField
-          label="Marque"
-          name="brand"
-          value={car.brand}
-          onChange={handleChange}
-          placeholder="Marque"
-          required
-          margin="normal"
-          fullWidth
-          error={!!errors.brand}
-          helperText={errors.brand}
-        />*/}
+       
+     
         <TextField
           label="Nombre de places"
           name="numberOfCarSeats"
@@ -339,12 +331,12 @@ function AddCarForm() {
           placeholder=" Kilométrage"
           InputProps={{
                         startAdornment: (
-                            <AirlineSeatReclineNormalRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' }} />
+                            <AirlineSeatReclineNormalRoundedIcon  style={{ opacity: 0.6 ,marginRight: '10px' ,}} />
                         ),
                     }}
         />
         <br />
-        <div     style={{  //marginTop: '20px' ,textAlign: 'center'
+        <div     style={{  
            
           
            }}>
@@ -354,8 +346,7 @@ function AddCarForm() {
         </Button>
         <Link to="/car">
           <Button variant="contained"  style={{ marginLeft: '10px', marginTop: '20px' ,
-           backgroundColor: ' #C50000',
-          
+           backgroundColor: ' #C50000',fontFamily: 'monospace'
            }}>
             Annuler
           </Button>

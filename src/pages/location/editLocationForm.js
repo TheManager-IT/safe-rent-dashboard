@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Typography, Container, TextField, MenuItem, Autocomplete } from '@mui/material';
+import { Button, Typography, Container, TextField, MenuItem, Autocomplete ,Grid,Box} from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
 import DateRangeRoundedIcon from '@mui/icons-material/DateRangeRounded';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
@@ -161,8 +161,19 @@ const EditLocationForm = () => {
   };
 
   return (
+    <Grid container spacing={3} justifyContent="center">
+    <Grid item>
+      <Box sx={{
+        backgroundColor: 'rgba(255, 255, 255, 1)', 
+        borderRadius: '20px', 
+        padding: '20px 20px 50px 20px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop:'15%',
+      }}>
     <Container maxWidth="sm">
-      <Typography variant="h4" sx={{ mb: 2 }} align="center">
+      <Typography variant="h4"  sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
         Modifier une location
       </Typography>
       <form onSubmit={handleSubmit}>
@@ -264,7 +275,7 @@ const EditLocationForm = () => {
           </Button>
         </Link>
       </form>
-    </Container>
+    </Container></Box></Grid></Grid>
   );
 };
 

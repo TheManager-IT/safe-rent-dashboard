@@ -37,27 +37,6 @@ const ModelList = () => {
     // Handle edit model logic
   };
 
-  /*const handleDeleteModel = (id) => {
-    const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer ce modèle ?");
-    if (confirmDelete) {
-      fetch(`http://localhost:3000/v1/api/modele/delete/${id}`, {
-        method: 'DELETE'
-      })
-        .then(response => {
-          if (response.ok) {
-            fetchModels(); // Refetch models after deletion
-          } else {
-            throw new Error('Failed to delete model');
-          }
-        })
-        .catch(error => {
-          console.error('Error deleting model:', error);
-          alert(error.message);
-          setError(error.message);
-        });
-    }
-  };*/
-
   const handleAddModel = () => {
     // Handle add model logic
   };
@@ -90,7 +69,7 @@ const ModelList = () => {
   return (
     <Container>
       <Stack className="Stack" direction="row" alignItems="center" justifyContent="space-between" mb={3} mt={13}>
-        <Typography variant="h4" sx={{ mb: 2 }}>
+        <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}}>
           Liste des modèles
         </Typography>
         <Link to="/addModel">

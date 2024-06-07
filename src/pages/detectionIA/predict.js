@@ -38,7 +38,7 @@ function App() {
 
     return (
         <Container maxWidth="sm" sx={{ marginTop: '40px' }}>
-            <Typography variant="h4" sx={{ mb: 2 }} align="center">
+            <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}} align="center">
                 Détection de  l’état de voiture
             </Typography>
             <form onSubmit={handleSubmit}>
@@ -60,7 +60,8 @@ function App() {
                     sx={{
                                 backgroundColor: ' rgb(108,151,187)',
                                 color: 'white',
-                                marginLeft: '10px'
+                                marginLeft: '10px',
+                                fontFamily: 'monospace'
                         ,marginTop:'20px',
                                 '&:hover': {
                                     backgroundColor: ' rgb(108,151,187)',
@@ -81,6 +82,7 @@ function App() {
                         ,marginTop:'20px', 
                                 backgroundColor: '#C50000',
                                 color: 'white',
+                                fontFamily: 'monospace',
                                 '&:hover': {
                                     backgroundColor:  '#C50000',
                                 // variant:"outlined",
