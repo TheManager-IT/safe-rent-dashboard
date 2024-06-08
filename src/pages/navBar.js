@@ -10,13 +10,13 @@ import ErrorIcon from '@mui/icons-material/Error';
 import CarRentalRoundedIcon from '@mui/icons-material/CarRentalRounded';
 import PaidOutlinedIcon from '@mui/icons-material/PaidOutlined';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
-import myImage from '../images/logo/logo rent.png';
+import myImage from '../images/logo/logosaferent__.png';
 const Navbar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-brand">
         <Link to="/">
-          <img src={myImage} alt="SAFE RENT" />
+          <img src={myImage} alt="SAFE RENT"  />
           
         </Link>
       </div>
@@ -73,7 +73,7 @@ const Navbar = () => {
       <div className="sidebar-actions">
         <Link to="/login" className="btn btn-primary">
           <LoginIcon />
-          Login
+          Se déconnecter
         </Link>
         <Link to="/404" className="btn btn-secondary">
           <ErrorIcon />

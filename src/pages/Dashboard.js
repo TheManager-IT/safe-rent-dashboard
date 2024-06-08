@@ -417,7 +417,7 @@ const Dashboard = () => {
                     //boxShadow: '0 1px 2px rgba(0, 0, 0, 0.2)', 
                     padding: '20px 20px 10px 20px' ,
                  }}>
-                  <h3 style={{ color:'rgb(99, 115, 129)', }}>Prix de Location et Total des Locations</h3>
+                  <h3 style={{ color:'rgb(99, 115, 129)', }}>Tarif de location et revenus par voiture</h3>
                   <Bar data={mixedData} options={options} />
                 </div>
                 {/*<div style={{ width: '600px', height: '400px' }}>
