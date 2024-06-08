@@ -31,8 +31,9 @@
 }
 
 .sidebar-brand img {
-  max-width: 100px;
-  margin-right: 10px;
+  max-width: 200px;
+  margin-right: 0px;
+  margin-top: 15%;
 }
 
 .sidebar-nav li {
