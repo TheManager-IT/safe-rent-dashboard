@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Container, Typography, Button, Checkbox, Dialog, DialogTitle, DialogContent, DialogActions,Box } from '@mui/material';
 import './CarDetail.css'; 
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,6 +12,7 @@ import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import GetAppRoundedIcon from '@mui/icons-material/GetAppRounded';
 import axios from 'axios';
+import video3D from '../../images/video3D.mp4';
 import {
   Table,
   TableBody,
@@ -25,6 +26,9 @@ const CarDetail = () => {
   const [car, setCar] = useState(null);
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const videoRef = useRef(null);
+  const navigate = useNavigate();
   const [fields, setFields] = useState({
     registrationPlate: true,
     model: true,
@@ -60,6 +64,12 @@ const CarDetail = () => {
       .then(data => setCar(data))
       .catch(error => console.error('Error fetching car details:', error));
   }, [id]);
+
+  useEffect(() => {
+    if (videoOpen && videoRef.current) {
+      videoRef.current.play();
+    }
+  }, [videoOpen]);
 
   /*const handleDelete = (id) => {
     const confirmDelete = window.confirm("Êtes-vous sûr de vouloir supprimer cette voiture ?");
@@ -247,6 +257,20 @@ const CarDetail = () => {
     console.log('Edit car with id:', id);
   };
 
+  const handleVideoClose = () => {
+    setVideoOpen(false);
+    navigate('/predict');
+  };
+
+  const handleVideoEnd = () => {
+    navigate('/predict');
+  };
+
+  const handleVideoStart = () => {
+    setVideoOpen(true);
+  };
+
+  
 
   return (
     <Container>
@@ -341,7 +365,7 @@ const CarDetail = () => {
 </Button>
           <br/>
 <br/>
-<Link to={`/predict`}>
+{/*<Link to={`/predict`}>
           <Button  variant="contained"  startIcon={<TroubleshootSharpIcon  />}   sx={{
       width:'398px',
       mr: 2,
@@ -352,9 +376,13 @@ const CarDetail = () => {
        backgroundColor: ' rgb(232, 232, 232)', // Changer la couleur de la bordure au survol
       },}}> Diagnostic
           </Button>
-          </Link>
+          </Link>*/}
+          <Button variant="contained" onClick={handleVideoStart} startIcon={<TroubleshootSharpIcon />} sx={{ width: '398px', mr: 2, backgroundColor: 'rgb(108,151,187)', '&:hover': { color: '#333', backgroundColor: 'rgb(232, 232, 232)' } }}>
+          Diagnostic
+              </Button>
           <br/>
           <br/>
+
             <Button variant="contained"  onClick={generatePDF} startIcon={<PictureAsPdfRoundedIcon/>}   sx={{
       width:'398px',
       mr: 2,
@@ -366,6 +394,19 @@ const CarDetail = () => {
     }}> Génerer rapport PDF
 </Button>
 
+<Dialog open={videoOpen} onClose={handleVideoClose} maxWidth="xl" fullWidth>
+          <DialogContent style={{ padding: 0 }}>
+            <video ref={videoRef} width="100%" height="100%" controls onEnded={handleVideoEnd}>
+              <source src={video3D} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+            <Box display="flex" justifyContent="center" m={2}>
+              <Button variant="contained" onClick={handleVideoClose} sx={{ mr: 2 }}>
+                Fermer la Vidéo
+              </Button>
+            </Box>
+          </DialogContent>
+        </Dialog>
       
 </div>
       </Box>
