@@ -200,7 +200,7 @@ const EditCarForm = () => {
     <Container maxWidth="sm">
      
       <Typography variant="h4" sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
-      Edit Voiture
+      Modifier Voiture
       </Typography>
       <form onSubmit={handleSubmit}>
   

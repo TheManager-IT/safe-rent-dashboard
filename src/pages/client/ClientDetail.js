@@ -287,9 +287,9 @@ const ClientDetail = () => {
 
         <TableContainer>
 
-        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 ,color:'rgb(38 ,50, 56 )'}}><b>Historique de location </b></Typography>      
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 ,color:'#263238'}}><b>Historique de location </b></Typography>      
 
-          <Table>
+          <Table   sx={{ marginTop: 0, marginBottom: 3}}>
             <TableHead  sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow >
                 <TableCell className='headTable'>Date De Début</TableCell>
@@ -321,8 +321,7 @@ const ClientDetail = () => {
           </Table>
         </TableContainer>
 
-        <Typography><b>locationTotalClient:</b> {client.locationTotalClient}</Typography>
-      
+       
 
         <Dialog open={open} onClose={handleClose}>
           <DialogTitle>Choisir les champs pour le  rapport PDF</DialogTitle>

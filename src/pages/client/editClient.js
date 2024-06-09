@@ -165,7 +165,7 @@ const EditClientForm = () => {
       }}>
     <Container maxWidth="sm">
       <Typography variant="h4" sx={{ mb: 2 ,mt:2, color:'#455a64    ',fontFamily: 'monospace',fontWeight: 'bold', }} align="center">
-        Edit Client
+        Modifier Client
       </Typography>
       <form onSubmit={handleSubmit}>
         <TextField name="name" label="Nom" value={client.name || ''} onChange={handleChange} fullWidth margin="normal" required error={!!errors.name} helperText={errors.name}    InputProps={{

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Typography, TextField, Button, Grid,Box } from '@mui/material';
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import { Link } from 'react-router-dom';
 
@@ -37,6 +37,17 @@ function App() {
     };
 
     return (
+        <Grid container spacing={3} justifyContent="center">
+        <Grid item>
+          <Box sx={{
+            backgroundColor: 'rgba(255, 255, 255, 1)', 
+            borderRadius: '20px', 
+            padding: '20px 20px 50px 20px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            marginTop:'15%',
+          }}>
         <Container maxWidth="sm" sx={{ marginTop: '40px' }}>
             <Typography variant="h4" sx={{ color:'#455a64', mb: 2 ,fontFamily: 'monospace',fontWeight: 'bold',}} align="center">
                 Détection de  l’état de voiture
@@ -105,7 +116,7 @@ function App() {
                     <img src={resultImage} alt="Voiture Extraite" style={{ display: 'block', margin: 'auto', marginTop: '10px' }} />
                 </div>
             )}
-        </Container>
+        </Container></Box></Grid></Grid>
     );
 }
 

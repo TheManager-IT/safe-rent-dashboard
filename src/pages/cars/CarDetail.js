@@ -373,9 +373,9 @@ const CarDetail = () => {
     </Box>
     
        <div>
-        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>locations </b></Typography>      
+        <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 ,color:'#263238'}}><b>locations </b></Typography>      
         <TableContainer>
-          <Table>
+          <Table  sx={{ marginTop: 1, marginBottom: 4}}>
           <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
           <TableRow>
             <TableCell className='headTable'>Date De Début</TableCell>
@@ -397,20 +397,13 @@ const CarDetail = () => {
               ))}
             </TableBody>
           </Table>
-          <TablePagination
-            component="div"
-            count={car.locations.length}
-            rowsPerPage={rowsPerPage}
-            page={locationsPage}
-            onPageChange={handleChangePage(setLocationsPage)}
-            rowsPerPageOptions={[rowsPerPage]}
-          />
+        
 
 
             </TableContainer>
-            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 }}><b>evenements</b></Typography>      
+            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2 ,color:'#263238'}}><b>evenements</b></Typography>      
         <TableContainer>
-          <Table>
+          <Table  sx={{ marginTop: 1, marginBottom: 4}}>
             <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow>
                 <TableCell className='headTable'>type d'événement </TableCell>
@@ -430,9 +423,9 @@ const CarDetail = () => {
           </Table>
             </TableContainer>
 
-            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2,  color:'#263238 '}}> <b>charges </b></Typography>      
+            <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2,  color:'#263238'}}> <b>charges </b></Typography>      
         <TableContainer>
-          <Table>
+          <Table sx={{ marginTop: 1, marginBottom: 4}}>
             <TableHead sx={{ backgroundColor: 'rgba(24, 119, 242, 0.08)' }}>
               <TableRow>
                 <TableCell className='headTable'>date </TableCell>
